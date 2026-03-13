@@ -1,6 +1,6 @@
 ---
 name: giggle-generation-music
-description: Use when the user wants to create, generate, or compose music—whether from text description, custom lyrics, or instrumental background music. Triggers: generate music, write a song, compose, create music, AI music, background music, instrumental, beats.
+description: "Use when the user wants to create, generate, or compose music—whether from text description, custom lyrics, or instrumental background music. Triggers: generate music, write a song, compose, create music, AI music, background music, instrumental, beats."
 version: "0.0.8"
 license: MIT
 author: storyclaw-official

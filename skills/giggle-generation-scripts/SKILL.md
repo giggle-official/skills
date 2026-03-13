@@ -1,6 +1,6 @@
 ---
 name: giggle-generation-scripts
-description: Generates Chinese script content based on narrative pacing and dialogue mechanisms common in Jiang Wen films. Use when the user asks to "generate script", "write script", "create scenes", "output dialogue draft", "revise script" or similar. Outputs story synopsis, character bios, scene outlines, scene scripts (with dialogue, action, staging), and can adjust era, character relations, conflict pacing, and endings per user request.
+description: "Generates Chinese script content based on narrative pacing and dialogue mechanisms common in Jiang Wen films. Use when the user asks to generate script, write script, create scenes, output dialogue draft, revise script or similar. Outputs story synopsis, character bios, scene outlines, scene scripts (with dialogue, action, staging), and can adjust era, character relations, conflict pacing, and endings per user request."
 version: "0.0.1"
 license: MIT
 ---
