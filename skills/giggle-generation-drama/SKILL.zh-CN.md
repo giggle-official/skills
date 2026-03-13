@@ -18,7 +18,7 @@ metadata:
           "pip": ["requests"]
         },
         "primaryEnv": "GIGGLE_API_KEY"
-      },
+      }
   }
 ---
 

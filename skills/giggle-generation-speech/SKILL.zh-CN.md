@@ -22,7 +22,7 @@ metadata:
           "writes": ["~/.openclaw/skills/giggle-generation-speech/logs/"],
           "cron": "用户发起语音生成时注册轮询任务（30秒间隔）"
         }
-      },
+      }
   }
 ---
 

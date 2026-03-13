@@ -22,7 +22,7 @@ metadata:
           "writes": ["~/.openclaw/skills/giggle-generation-speech/logs/"],
           "cron": "Registers polling job (30s interval) when user initiates speech generation"
         }
-      },
+      }
   }
 ---
 

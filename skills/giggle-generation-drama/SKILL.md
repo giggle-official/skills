@@ -18,7 +18,7 @@ metadata:
           "pip": ["requests"]
         },
         "primaryEnv": "GIGGLE_API_KEY"
-      },
+      }
   }
 ---
 
@@ -56,7 +56,7 @@ Supports three modes. **Ask the user to select a mode before starting the workfl
 | Mode | project_type | Description |
 |------|--------------|-------------|
 | **Episodes** | `director` | AI-directed short drama with storyboards and shot language |
-| **Narration** | `narration` | Narration-focused解説 video |
+| **Narration** | `narration` | Narration-focused video |
 | **Short Film** | `short-film` | Story and visuals balanced; cinematic short film |
 
 ## Main Workflow: execute_workflow

@@ -215,7 +215,6 @@ def parse_args():
     )
     parser.add_argument('--query', action='store_true', help='查询任务')
     parser.add_argument('--prompt', type=str, help='图像描述')
-    parser.add_argument('--api-key', type=str, help='API 密钥')
     parser.add_argument('--task-id', type=str, help='任务 ID')
     parser.add_argument('--reference-images', type=str, nargs='+',
                         help='参考图列表，支持 URL、base64 字符串、asset_id')
@@ -236,7 +235,7 @@ def parse_args():
 def main():
     args = parse_args()
 
-    api_key = args.api_key or os.getenv("GIGGLE_API_KEY")
+    api_key = os.getenv("GIGGLE_API_KEY")
     if not api_key:
         print("错误: 未找到 GIGGLE_API_KEY，请设置系统环境变量：", file=sys.stderr)
         print("  export GIGGLE_API_KEY=your_api_key", file=sys.stderr)

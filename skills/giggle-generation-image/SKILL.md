@@ -142,7 +142,7 @@ The image-to-image API's `reference_images` is an array of objects. Each element
   "prompt": "A cute orange cat sitting on the windowsill in the sun, realistic style",
   "reference_images": [
     {
-      "url": "https://assets.ggltest.com/private/test_ai_director/0ebc2ffa7512a58df5/9y91pxl0hju.thumb.jpg?Expires=1772409599000&Key-Pair-Id=K271ZF3SQS38SK&Signature=..."
+      "url": "https://assets.giggle.pro/private/example/image.jpg?Policy=EXAMPLE_POLICY&Key-Pair-Id=EXAMPLE_KEY_PAIR_ID&Signature=EXAMPLE_SIGNATURE"
     }
   ],
   "generate_count": 1,

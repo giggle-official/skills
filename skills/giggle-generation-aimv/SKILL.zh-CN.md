@@ -4,7 +4,7 @@ description: "当用户希望创建 AI 音乐视频（MV）时使用此技能—
 version: "0.0.2"
 license: MIT
 requires:
-  bins: [python3]
+  bins: ["python3 (>=3.6)"]
   env: [GIGGLE_API_KEY]
   pip: [requests]
 metadata:
@@ -13,12 +13,12 @@ metadata:
       {
         "emoji": "📂",
         "requires": {
-          "bins": ["python3"],
+          "bins": ["python3 (>=3.6)"],
           "env": ["GIGGLE_API_KEY"],
           "pip": ["requests"]
         },
         "primaryEnv": "GIGGLE_API_KEY"
-      },
+      }
   }
 ---
 
@@ -34,7 +34,7 @@ metadata:
 
 1. **网络请求** – 调用 Giggle.pro API 生成 MV
 
-**依赖要求**：`python3`、`GIGGLE_API_KEY`（系统环境变量）、pip 包：`requests`
+**依赖要求**：`python3 (>=3.6)`、`GIGGLE_API_KEY`（系统环境变量）、pip 包：`requests`
 
 ---
 
@@ -53,7 +53,7 @@ metadata:
    > 你好！在使用 MV 生成功能前，需要先配置 API Key。请前往 [Giggle.pro](https://giggle.pro/) 获取 API Key，然后在终端执行 `export GIGGLE_API_KEY=your_api_key`。
 3. 等待用户配置后再继续工作流
 
-## 三种音乐生成模式
+## 两种音乐生成模式
 
 | 模式 | music_generate_type | 必填参数 | 说明 |
 |------|---------------------|-----------------|-------------|
@@ -163,7 +163,7 @@ result = api.execute_workflow(
 
 ```json
 {
-  "project_id": "c0cb1f32-bb07-4449-add5-e42ccfca1ab6",
+  "project_id": "<your-project-id>",
   "music_generate_type": "prompt",
   "prompt": "A cheerful pop song",
   "vocal_gender": "female",
@@ -181,12 +181,12 @@ result = api.execute_workflow(
 
 ```json
 {
-  "project_id": "0ea74500-9178-4693-b581-342d5e17994c",
+  "project_id": "<your-project-id>",
   "music_generate_type": "custom",
   "lyrics": "Verse 1:\nStanding by the sea watching the sunset\nMemories rush in like waves\n\nChorus:\nLet the sea breeze blow away all worries\nIn this golden moment\nWe found each other\n",
   "style": "pop ballad",
   "title": "Seaside Memories",
-  "reference_image": "is45gnvumgd",
+  "reference_image": "<asset_id>",
   "scene_description": "A couple walking on the beach at dusk, long shadows, orange-red sky gradient",
   "aspect": "9:16",
   "subtitle_enabled": false
@@ -201,11 +201,11 @@ result = api.execute_workflow(
 {
   "code": 200,
   "msg": "success",
-  "uuid": "24052352-f231-495a-9581-3827c4eb0bdf",
+  "uuid": "<response-uuid>",
   "data": {
-    "project_id": "65cf262d-c4b1-4733-abf1-ec6a7bdb944a",
+    "project_id": "<your-project-id>",
     "video_asset": {
-      "asset_id": "ryco1asdmb",
+      "asset_id": "<asset_id>",
       "download_url": "https://assets.giggle.pro/private/...",
       "thumbnail_url": "https://assets.giggle.pro/private/...",
       "signed_url": "https://assets.giggle.pro/private/...",
@@ -238,7 +238,7 @@ https://assets.giggle.pro/private/ai_director/348e4956c7bd4f763b/qzjc7gwkpf.mp4
 **请求体**：
 ```json
 {
-  "project_id": "28b4f4f7-d219-4754-a78b-d9896cd16573"
+  "project_id": "<your-project-id>"
 }
 ```
 
@@ -247,9 +247,9 @@ https://assets.giggle.pro/private/ai_director/348e4956c7bd4f763b/qzjc7gwkpf.mp4
 {
   "code": 200,
   "msg": "success",
-  "uuid": "1440ba5f-ba1c-41f6-a92c-53337a7df1c2",
+  "uuid": "<response-uuid>",
   "data": {
-    "order_id": "2a93f1c1-9e4d-4d29-89d7-15deea4e3732",
+    "order_id": "<order-id>",
     "price": 580
   }
 }
@@ -261,7 +261,7 @@ https://assets.giggle.pro/private/ai_director/348e4956c7bd4f763b/qzjc7gwkpf.mp4
 
 ```json
 {
-  "project_id": "28b4f4f7-d219-4754-a78b-d9896cd16573",
+  "project_id": "<your-project-id>",
   "current_step": "shot"
 }
 ```
@@ -301,3 +301,14 @@ r = api.create_and_submit(
 ```
 
 失败时返回错误信息。
+
+## 常见问题排查
+
+| 场景 | 原因 | 解决方案 |
+|------|------|----------|
+| `401 Unauthorized` 或 "invalid API key" | `GIGGLE_API_KEY` 未设置、已过期或不正确 | 前往 [Giggle.pro](https://giggle.pro/) 账号设置确认 Key，重新执行 `export GIGGLE_API_KEY=your_api_key` |
+| `429 Too Many Requests` | 超出 API 速率限制 | 等待几分钟后重试；避免短时间内连续提交多个项目 |
+| 网络超时 / 连接错误 | 网络不稳定或 API 服务暂时不可用 | 脚本会自动重试最多 5 次（间隔 5 秒）；若仍失败请检查网络连接 |
+| `pay_status: pending` | 项目需要支付才能继续 | 工作流函数会自动处理支付；若手动操作，请调用支付接口并传入 `project_id` |
+| 任务步骤失败（`status: failed`） | 某个生成步骤（如 `music-generate`、`shot`）出错 | 使用重试接口：`{"project_id": "<your-project-id>", "current_step": "<failed-step>"}` 从失败步骤恢复 |
+| 工作流超时（超过 1 小时） | MV 生成耗时过长 | 使用 `project_id` 手动查询进度确认当前状态；若任务卡住请联系客服 |

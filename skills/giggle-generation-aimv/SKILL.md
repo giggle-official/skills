@@ -4,7 +4,7 @@ description: "Use when the user wants to create AI music videos (MV)—including
 version: "0.0.2"
 license: MIT
 requires:
-  bins: [python3]
+  bins: ["python3 (>=3.6)"]
   env: [GIGGLE_API_KEY]
   pip: [requests]
 metadata:
@@ -13,12 +13,12 @@ metadata:
       {
         "emoji": "📂",
         "requires": {
-          "bins": ["python3"],
+          "bins": ["python3 (>=3.6)"],
           "env": ["GIGGLE_API_KEY"],
           "pip": ["requests"]
         },
         "primaryEnv": "GIGGLE_API_KEY"
-      },
+      }
   }
 ---
 
@@ -34,7 +34,7 @@ Calls the MV trustee mode API to run the full MV generation workflow. **Project 
 
 1. **Network** – Calls Giggle.pro API for MV generation
 
-**Requirements**: `python3`, `GIGGLE_API_KEY` (system environment variable), pip packages: `requests`
+**Requirements**: `python3 (>=3.6)`, `GIGGLE_API_KEY` (system environment variable), pip packages: `requests`
 
 ---
 
@@ -53,7 +53,7 @@ Calls the MV trustee mode API to run the full MV generation workflow. **Project 
    > Hello! Before using the MV generation feature, you need to configure the API Key. Please go to [Giggle.pro](https://giggle.pro/) to get your API Key, then run `export GIGGLE_API_KEY=your_api_key` in the terminal.
 3. Wait for the user to configure before continuing the workflow
 
-## Three Music Generation Modes
+## Two Music Generation Modes
 
 | Mode | music_generate_type | Required params | Description |
 |------|---------------------|-----------------|-------------|
@@ -163,7 +163,7 @@ Submit endpoint (`/api/v1/trustee_mode/mv/submit`) request body:
 
 ```json
 {
-  "project_id": "c0cb1f32-bb07-4449-add5-e42ccfca1ab6",
+  "project_id": "<your-project-id>",
   "music_generate_type": "prompt",
   "prompt": "A cheerful pop song",
   "vocal_gender": "female",
@@ -181,12 +181,12 @@ Note: `reference_image` (asset_id) and `reference_image_url` (URL or base64) are
 
 ```json
 {
-  "project_id": "0ea74500-9178-4693-b581-342d5e17994c",
+  "project_id": "<your-project-id>",
   "music_generate_type": "custom",
   "lyrics": "Verse 1:\nStanding by the sea watching the sunset\nMemories rush in like waves\n\nChorus:\nLet the sea breeze blow away all worries\nIn this golden moment\nWe found each other\n",
   "style": "pop ballad",
   "title": "Seaside Memories",
-  "reference_image": "is45gnvumgd",
+  "reference_image": "<asset_id>",
   "scene_description": "A couple walking on the beach at dusk, long shadows, orange-red sky gradient",
   "aspect": "9:16",
   "subtitle_enabled": false
@@ -201,11 +201,11 @@ Query endpoint (`/api/v1/trustee_mode/mv/query`) response (all steps completed):
 {
   "code": 200,
   "msg": "success",
-  "uuid": "24052352-f231-495a-9581-3827c4eb0bdf",
+  "uuid": "<response-uuid>",
   "data": {
-    "project_id": "65cf262d-c4b1-4733-abf1-ec6a7bdb944a",
+    "project_id": "<your-project-id>",
     "video_asset": {
-      "asset_id": "ryco1asdmb",
+      "asset_id": "<asset_id>",
       "download_url": "https://assets.giggle.pro/private/...",
       "thumbnail_url": "https://assets.giggle.pro/private/...",
       "signed_url": "https://assets.giggle.pro/private/...",
@@ -238,7 +238,7 @@ Pay endpoint (`/api/v1/trustee_mode/mv/pay`):
 **Request body**:
 ```json
 {
-  "project_id": "28b4f4f7-d219-4754-a78b-d9896cd16573"
+  "project_id": "<your-project-id>"
 }
 ```
 
@@ -247,9 +247,9 @@ Pay endpoint (`/api/v1/trustee_mode/mv/pay`):
 {
   "code": 200,
   "msg": "success",
-  "uuid": "1440ba5f-ba1c-41f6-a92c-53337a7df1c2",
+  "uuid": "<response-uuid>",
   "data": {
-    "order_id": "2a93f1c1-9e4d-4d29-89d7-15deea4e3732",
+    "order_id": "<order-id>",
     "price": 580
   }
 }
@@ -261,7 +261,7 @@ When a step fails, guide the user to call the retry endpoint to resume from that
 
 ```json
 {
-  "project_id": "28b4f4f7-d219-4754-a78b-d9896cd16573",
+  "project_id": "<your-project-id>",
   "current_step": "shot"
 }
 ```
@@ -301,3 +301,14 @@ Success:
 ```
 
 Returns error message on failure.
+
+## Troubleshooting
+
+| Scenario | Cause | Solution |
+|----------|-------|----------|
+| `401 Unauthorized` or "invalid API key" | `GIGGLE_API_KEY` is missing, expired, or incorrect | Verify the key at [Giggle.pro](https://giggle.pro/) account settings and re-export: `export GIGGLE_API_KEY=your_api_key` |
+| `429 Too Many Requests` | API rate limit exceeded | Wait a few minutes and retry; avoid submitting multiple projects in rapid succession |
+| Network timeout / connection error | Unstable network or API service temporarily unavailable | The script auto-retries up to 5 times with 5-second intervals; check your network if it still fails |
+| `pay_status: pending` | The project requires payment before proceeding | The workflow function handles this automatically; if running manually, call the pay endpoint with the `project_id` |
+| Task step failed (`status: failed`) | A generation step (e.g. `music-generate`, `shot`) encountered an error | Use the retry endpoint: `{"project_id": "<your-project-id>", "current_step": "<failed-step>"}` to resume from the failed step |
+| Workflow timeout (> 1 hour) | MV generation took too long | Query progress manually with the `project_id` to check current status; contact support if the task is stuck |

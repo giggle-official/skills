@@ -27,7 +27,7 @@ metadata:
 
 Generates AI music via giggle.pro. Supports simplified and custom modes. Submit task → query when ready. No polling or Cron.
 
-**API Key**: Set system environment variable `GIGGLE_API_KEY`. See [SETUP.md](SETUP.md).
+**API Key**: Set system environment variable `GIGGLE_API_KEY`. Log in to [Giggle.pro](https://giggle.pro/) and obtain the API Key from account settings.
 
 > **Important**: **Never** pass `GIGGLE_API_KEY` in exec's `env` parameter. API Key is read from system environment variable.
 

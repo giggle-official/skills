@@ -322,7 +322,10 @@ class TrusteeModeAPI:
     def execute_workflow(self, diy_story: str, aspect: str, project_name: str,
                         video_duration: str = "auto", style_id: Optional[int] = None,
                         project_type: str = "director",
-                        character_info: Optional[list] = None) -> Dict[str, Any]:
+                        character_info: Optional[list] = None,
+                        video_first_model: str = "grok",
+                        video_second_model: str = "seedance15-pro",
+                        image_first_model: str = "seedream45") -> Dict[str, Any]:
         """
         执行完整工作流（一步完成：创建项目+提交任务 -> 查询进度 -> 支付 -> 等待完成）
         
@@ -375,9 +378,6 @@ class TrusteeModeAPI:
         # 步骤2：循环查询进度
         print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 步骤2: 开始查询进度...", file=sys.stderr)
         
-        video_first_model = "grok"
-        video_second_model = "seedance15-pro"
-        image_first_model = "seedream45"
         paid = False  # 标记是否已支付，避免重复支付
         max_retries = 5  # 最大重试次数
         retry_delay = 5  # 重试延迟（秒）
@@ -629,6 +629,12 @@ def main():
                                 help='项目类型: director（短剧模式）、narration（旁白模式）或 short-film（短片模式）（默认: director）')
     workflow_parser.add_argument('--character-info', dest='character_info',
                                 help='角色图片 JSON，格式: [{"name":"角色名","url":"图片URL"}]')
+    workflow_parser.add_argument('--video-first-model', default='grok', dest='video_first_model',
+                                help='视频首选模型（默认: grok）')
+    workflow_parser.add_argument('--video-second-model', default='seedance15-pro', dest='video_second_model',
+                                help='视频备选模型（默认: seedance15-pro）')
+    workflow_parser.add_argument('--image-first-model', default='seedream45', dest='image_first_model',
+                                help='图片首选模型（默认: seedream45）')
     
     args = parser.parse_args()
     
@@ -771,7 +777,10 @@ def main():
             video_duration=args.video_duration,
             style_id=args.style_id if hasattr(args, 'style_id') and args.style_id is not None else None,
             project_type=args.project_type,
-            character_info=character_info
+            character_info=character_info,
+            video_first_model=args.video_first_model,
+            video_second_model=args.video_second_model,
+            image_first_model=args.image_first_model
         )
         print_response(result, args.pretty)
 

@@ -205,7 +205,7 @@ def parse_args():
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument('--text', type=str, help='要合成的文本内容')
-    parser.add_argument('--voice-id', type=str, default='Calm_Woman', help='音色 ID')
+    parser.add_argument('--voice-id', type=str, required=False, help='音色 ID（使用 --list-voices 查看可用音色）')
     parser.add_argument('--emotion', type=str, help='情绪，如 joy、sad、neutral')
     parser.add_argument('--speed', type=float, default=1.0, help='语速倍率，默认 1')
     parser.add_argument('--list-voices', action='store_true', help='获取可用音色列表')
@@ -303,6 +303,10 @@ def main():
         # 3. 提交模式
         if not args.text:
             print("错误: 需要提供 --text 参数", file=sys.stderr)
+            sys.exit(1)
+
+        if not args.voice_id:
+            print("错误: 需要提供 --voice-id 参数，请先运行 --list-voices 查看可用音色", file=sys.stderr)
             sys.exit(1)
 
         result = client.submit(

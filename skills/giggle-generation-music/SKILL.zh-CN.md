@@ -27,7 +27,7 @@ metadata:
 
 通过 giggle.pro 平台生成 AI 音乐。支持简化模式和自定义模式。提交任务 → 需要时查询。无轮询、无 Cron。
 
-**API Key**：设置系统环境变量 `GIGGLE_API_KEY`。详见 [SETUP.md](SETUP.md)。
+**API Key**：设置系统环境变量 `GIGGLE_API_KEY`。登录 [Giggle.pro](https://giggle.pro/) 在账号设置中获取 API Key。
 
 > **重要**：**切勿**在 exec 的 `env` 参数中传递 `GIGGLE_API_KEY`。API Key 从系统环境变量读取。
 
