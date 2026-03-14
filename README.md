@@ -1,4 +1,4 @@
-# Storyclaw Skills
+# Giggle Official Skills
 
 English | [简体中文](./README.zh-CN.md)
 
@@ -8,13 +8,13 @@ Central repository for AI generation skills powered by [Giggle.pro](https://gigg
 
 ```bash
 # List skills from GitHub repository
-npx skills add storyclaw-official/storyclaw-skills --list --full-depth
+npx skills add https://github.com/giggle-official/skills --list --full-depth
 
 # Install a specific skill from GitHub repository
-npx skills add storyclaw-official/storyclaw-skills --full-depth --skill giggle-generation-image -y
+npx skills add https://github.com/giggle-official/skills --full-depth --skill giggle-generation-image -y
 
 # Install from GitHub repository
-npx skills add storyclaw-official/storyclaw-skills
+npx skills add https://github.com/giggle-official/skills
 
 # Local development (run in this repo directory)
 npx skills add . --list --full-depth
@@ -31,13 +31,13 @@ npx skills add . --list --full-depth
 
 | Name | Description | Documentation | Run command |
 |------|-------------|---------------|-------------|
-| giggle-generation-image | Text-to-image and image-to-image. Supports Seedream, Midjourney, Nano Banana. Customize aspect ratio and resolution. | [SKILL.md](./skills/giggle-generation-image/SKILL.md) | `npx skills add storyclaw-official/storyclaw-skills --full-depth --skill giggle-generation-image -y` |
-| giggle-generation-video | Text-to-video and image-to-video (start/end frame). Supports Grok, Sora2, Veo, Kling, etc. Customize model, duration, aspect ratio. | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add storyclaw-official/storyclaw-skills --full-depth --skill giggle-generation-video -y` |
-| giggle-generation-drama | Generate short films, drama, or narration videos from story. Supports episode, narration, and short-film modes. | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add storyclaw-official/storyclaw-skills --full-depth --skill giggle-generation-drama -y` |
-| giggle-generation-aimv | AI music videos (MV). Generate music from text prompts or custom lyrics, then create lyric videos with reference images. | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add storyclaw-official/storyclaw-skills --full-depth --skill giggle-generation-aimv -y` |
-| giggle-generation-music | Create AI music from text description, custom lyrics, or instrumental. Supports simplified, custom, and instrumental modes. | [SKILL.md](./skills/giggle-generation-music/SKILL.md) | `npx skills add storyclaw-official/storyclaw-skills --full-depth --skill giggle-generation-music -y` |
-| giggle-generation-speech | Text-to-speech via Giggle.pro. Multiple voices, emotions, and speaking rates. | [SKILL.md](./skills/giggle-generation-speech/SKILL.md) | `npx skills add storyclaw-official/storyclaw-skills --full-depth --skill giggle-generation-speech -y` |
-| giggle-generation-scripts | Jiang Wen–style Chinese screenplay generation: synopsis, character bios, scene outlines, scene scripts with dialogue and staging. | [SKILL.md](./skills/giggle-generation-scripts/SKILL.md) | `npx skills add storyclaw-official/storyclaw-skills --full-depth --skill giggle-generation-scripts -y` |
+| giggle-generation-image | Text-to-image and image-to-image. Supports Seedream, Midjourney, Nano Banana. Customize aspect ratio and resolution. | [SKILL.md](./skills/giggle-generation-image/SKILL.md) | `npx skills add https://github.com/giggle-official/skills --full-depth --skill giggle-generation-image -y` |
+| giggle-generation-video | Text-to-video and image-to-video (start/end frame). Supports Grok, Sora2, Veo, Kling, etc. Customize model, duration, aspect ratio. | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add https://github.com/giggle-official/skills --full-depth --skill giggle-generation-video -y` |
+| giggle-generation-drama | Generate short films, drama, or narration videos from story. Supports episode, narration, and short-film modes. | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add https://github.com/giggle-official/skills --full-depth --skill giggle-generation-drama -y` |
+| giggle-generation-aimv | AI music videos (MV). Generate music from text prompts or custom lyrics, then create lyric videos with reference images. | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add https://github.com/giggle-official/skills --full-depth --skill giggle-generation-aimv -y` |
+| giggle-generation-music | Create AI music from text description, custom lyrics, or instrumental. Supports simplified, custom, and instrumental modes. | [SKILL.md](./skills/giggle-generation-music/SKILL.md) | `npx skills add https://github.com/giggle-official/skills --full-depth --skill giggle-generation-music -y` |
+| giggle-generation-speech | Text-to-speech via Giggle.pro. Multiple voices, emotions, and speaking rates. | [SKILL.md](./skills/giggle-generation-speech/SKILL.md) | `npx skills add https://github.com/giggle-official/skills --full-depth --skill giggle-generation-speech -y` |
+| giggle-generation-scripts | Jiang Wen–style Chinese screenplay generation: synopsis, character bios, scene outlines, scene scripts with dialogue and staging. | [SKILL.md](./skills/giggle-generation-scripts/SKILL.md) | `npx skills add https://github.com/giggle-official/skills --full-depth --skill giggle-generation-scripts -y` |
 
 ## Quick verify
 
