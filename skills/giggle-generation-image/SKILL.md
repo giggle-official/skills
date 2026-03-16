@@ -3,8 +3,8 @@ name: giggle-generation-image
 description: "Supports text-to-image and image-to-image. Use when the user needs to create or generate images. Use cases: (1) Generate from text description, (2) Use reference images, (3) Customize model, aspect ratio, resolution. Triggers: generate image, draw, create image, AI art."
 version: "0.0.9"
 license: MIT
-author: storyclaw-official
-homepage: https://github.com/storyclaw-official/storyclaw-skills
+author: giggle-official
+homepage: https://github.com/giggle-official/skills
 requires:
   bins: [python3]
   env: [GIGGLE_API_KEY]
@@ -27,7 +27,7 @@ metadata:
 
 # Giggle Image Generation (Multi-Model)
 
-**Source**: [storyclaw-official/storyclaw-skills](https://github.com/storyclaw-official/storyclaw-skills) · API: [giggle.pro](https://giggle.pro/)
+**Source**: [giggle-official/skills](https://github.com/giggle-official/skills) · API: [giggle.pro](https://giggle.pro/)
 
 Generates AI images via giggle.pro's Generation API. Supports multiple models (Seedream, Midjourney, Nano Banana). Submit task → query when ready. No polling or Cron.
 

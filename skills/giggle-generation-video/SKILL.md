@@ -3,9 +3,9 @@ name: giggle-generation-video
 description: "Supports text-to-video and image-to-video (start/end frame). Use when the user needs to generate video, create short videos, or convert text to video. Use cases: (1) Generate video from text description, (2) Use reference images as start/end frame for image-to-video, (3) Customize model, aspect ratio, duration, resolution. Triggers: generate video, text-to-video, image-to-video, AI video."
 version: "0.0.7"
 license: MIT
-author: storyclaw-official
-homepage: https://github.com/storyclaw-official/storyclaw-skills
-repository: https://github.com/storyclaw-official/storyclaw-skills
+author: giggle-official
+homepage: https://github.com/giggle-official/skills
+repository: https://github.com/giggle-official/skills
 requires:
   bins: [python3]
   env: [GIGGLE_API_KEY]
@@ -33,7 +33,7 @@ metadata:
 
 # Giggle Video Generation
 
-**Source**: [storyclaw-official/storyclaw-skills](https://github.com/storyclaw-official/storyclaw-skills) · API: [giggle.pro](https://giggle.pro/)
+**Source**: [giggle-official/skills](https://github.com/giggle-official/skills) · API: [giggle.pro](https://giggle.pro/)
 
 Generates AI videos via giggle.pro's Generation API. Supports text-to-video and image-to-video. Submit task → query when ready. No polling, no Cron, no file writes—all operations via exec.
 

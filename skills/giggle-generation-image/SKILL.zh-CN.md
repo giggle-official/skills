@@ -3,8 +3,8 @@ name: giggle-generation-image
 description: "支持文生图和图生图。当用户需要创建或生成图像时使用。使用场景：(1) 根据文字描述生成，(2) 使用参考图生成，(3) 自定义模型、画幅比例、分辨率。触发词：生成图片、画画、创建图片、AI 艺术图"
 version: "0.0.9"
 license: MIT
-author: storyclaw-official
-homepage: https://github.com/storyclaw-official/storyclaw-skills
+author: giggle-official
+homepage: https://github.com/giggle-official/skills
 requires:
   bins: [python3]
   env: [GIGGLE_API_KEY]
@@ -27,7 +27,7 @@ metadata:
 
 # Giggle 图像生成（多模型）
 
-**来源**：[storyclaw-official/storyclaw-skills](https://github.com/storyclaw-official/storyclaw-skills) · API：[giggle.pro](https://giggle.pro/)
+**来源**：[giggle-official/skills](https://github.com/giggle-official/skills) · API：[giggle.pro](https://giggle.pro/)
 
 通过 giggle.pro 平台的 Generation API 生成 AI 图像，支持多种模型（Seedream、Midjourney、Nano Banana）。提交任务 → 需要时查询。无轮询、无 Cron。
 

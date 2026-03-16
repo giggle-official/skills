@@ -3,9 +3,9 @@ name: giggle-generation-video
 description: "支持文生视频和图生视频（首帧/尾帧）。当用户需要生成视频、制作短视频、文字转视频时使用。使用场景：(1) 根据文字描述生成视频，(2) 使用参考图作为首帧/尾帧生成视频，(3) 自定义模型、画幅比例、时长、分辨率。触发词：生成视频、文生视频、图生视频、AI 视频、text-to-video、image-to-video。"
 version: "0.0.7"
 license: MIT
-author: storyclaw-official
-homepage: https://github.com/storyclaw-official/storyclaw-skills
-repository: https://github.com/storyclaw-official/storyclaw-skills
+author: giggle-official
+homepage: https://github.com/giggle-official/skills
+repository: https://github.com/giggle-official/skills
 requires:
   bins: [python3]
   env: [GIGGLE_API_KEY]
@@ -33,7 +33,7 @@ metadata:
 
 # Giggle 视频生成
 
-**来源**：[storyclaw-official/storyclaw-skills](https://github.com/storyclaw-official/storyclaw-skills) · API：[giggle.pro](https://giggle.pro/)
+**来源**：[giggle-official/skills](https://github.com/giggle-official/skills) · API：[giggle.pro](https://giggle.pro/)
 
 通过 giggle.pro 平台的 Generation API 生成 AI 视频，支持文生视频和图生视频。提交任务 → 需要时查询。无轮询、无 Cron、无文件写入，所有操作通过 exec 执行。
 

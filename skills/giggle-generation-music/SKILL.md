@@ -3,8 +3,8 @@ name: giggle-generation-music
 description: "Use when the user wants to create, generate, or compose music—whether from text description, custom lyrics, or instrumental background music. Triggers: generate music, write a song, compose, create music, AI music, background music, instrumental, beats."
 version: "0.0.8"
 license: MIT
-author: storyclaw-official
-homepage: https://github.com/storyclaw-official/storyclaw-skills
+author: giggle-official
+homepage: https://github.com/giggle-official/skills
 requires:
   bins: [python3]
   env: [GIGGLE_API_KEY]
@@ -23,7 +23,7 @@ metadata:
 
 # Giggle Music
 
-**Source**: [storyclaw-official/storyclaw-skills](https://github.com/storyclaw-official/storyclaw-skills) · API: [giggle.pro](https://giggle.pro/)
+**Source**: [giggle-official/skills](https://github.com/giggle-official/skills) · API: [giggle.pro](https://giggle.pro/)
 
 Generates AI music via giggle.pro. Supports simplified and custom modes. Submit task → query when ready. No polling or Cron.
 
