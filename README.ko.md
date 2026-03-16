@@ -61,37 +61,37 @@ export GIGGLE_API_KEY=your_api_key
 ```yaml:skills-data
 skills:
   - name: giggle-generation-drama
-    description: 사용자가 비디오 생성, 단편 촬영, 사용 가능한 비디오 스타일 확인을 원할 때 사용. 트리거: 단편, 비디오 제작, AI 비디오, 스토리로 비디오 생성, 단편 드라마, 해설 비디오, 영화감 비디오.
+    description: "사용자가 비디오 생성, 단편 촬영, 사용 가능한 비디오 스타일 확인을 원할 때 사용. 트리거: 단편, 비디오 제작, AI 비디오, 스토리로 비디오 생성, 단편 드라마, 해설 비디오, 영화감 비디오."
     category: video
     version: "0.0.1"
     value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y"
   - name: giggle-generation-aimv
-    description: 사용자가 AI 뮤직 비디오(MV) 생성을 원할 때 사용. 텍스트 프롬프트로 음악 생성 또는 사용자 정의 가사 사용. 트리거: MV 생성, 뮤직 비디오, 가사 비디오, AI MV, 가사로 비디오 생성.
+    description: "사용자가 AI 뮤직 비디오(MV) 생성을 원할 때 사용. 텍스트 프롬프트로 음악 생성 또는 사용자 정의 가사 사용. 트리거: MV 생성, 뮤직 비디오, 가사 비디오, AI MV, 가사로 비디오 생성."
     category: video
     version: "0.0.1"
     value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y"
   - name: giggle-generation-image
-    description: 문생도와 도생도 지원. 사용자가 이미지 생성이 필요할 때 사용. (1) 텍스트 설명으로 생성, (2) 참조 이미지로 생성, (3) 모델, 화면 비율, 해상도 커스터마이즈. 트리거: 이미지 생성, AI 아트.
+    description: "문생도와 도생도 지원. 사용자가 이미지 생성이 필요할 때 사용. (1) 텍스트 설명으로 생성, (2) 참조 이미지로 생성, (3) 모델, 화면 비율, 해상도 커스터마이즈. 트리거: 이미지 생성, AI 아트."
     category: image
     version: "0.0.1"
     value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y"
   - name: giggle-generation-music
-    description: 사용자가 음악 생성, 작곡을 원할 때 사용. 텍스트 설명, 사용자 정의 가사, 순수 악기 BGM 모두 지원. 트리거: 음악 생성, 작곡, AI 음악, BGM, 가사 음악, beats 제작.
+    description: "사용자가 음악 생성, 작곡을 원할 때 사용. 텍스트 설명, 사용자 정의 가사, 순수 악기 BGM 모두 지원. 트리거: 음악 생성, 작곡, AI 음악, BGM, 가사 음악, beats 제작."
     category: music
     version: "0.0.1"
     value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y"
   - name: giggle-generation-scripts
-    description: 강문 영화의 내러티브 진행과 대사 메커니즘에 기반해 중국어 스크립트 생성. "스크립트 생성", "분장 작성", "대본", "극본 수정" 등 의도에 사용. 줄거리, 인물 소개, 분장 개요, 대사·연출 포함 분장 극본 출력. 시대 배경, 인물 관계, 갈등 리듬, 결말 조정 가능.
+    description: "강문 영화의 내러티브 진행과 대사 메커니즘에 기반해 중국어 스크립트 생성. 스크립트 생성, 분장 작성, 대본, 극본 수정 등 의도에 사용. 줄거리, 인물 소개, 분장 개요, 대사·연출 포함 분장 극본 출력. 시대 배경, 인물 관계, 갈등 리듬, 결말 조정 가능."
     category: script
     version: "0.0.1"
     value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-scripts -y"
   - name: giggle-generation-speech
-    description: 사용자가 음성 생성, 더빙, 텍스트 음성 변환을 원할 때 사용. Giggle.pro 문전음 API로 텍스트를 AI 음성으로 합성. 트리거: 음성 생성, 문전음, TTS, 더빙, 합성 음성.
+    description: "사용자가 음성 생성, 더빙, 텍스트 음성 변환을 원할 때 사용. Giggle.pro 문전음 API로 텍스트를 AI 음성으로 합성. 트리거: 음성 생성, 문전음, TTS, 더빙, 합성 음성."
     category: voice
     version: "0.0.1"
     value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-speech -y"
   - name: giggle-generation-video
-    description: 문생비디오와 도생비디오(시작/종료 프레임) 지원. 사용자가 비디오 생성, 숏폼 제작, 문전비디오가 필요할 때 사용. (1) 텍스트 설명으로 비디오 생성, (2) 참조 이미지를 시작/종료 프레임으로 비디오 생성, (3) 모델, 화면 비율, 길이, 해상도 커스터마이즈. 트리거: 비디오 생성, 문생비디오, 도생비디오, AI 비디오, text-to-video, image-to-video.
+    description: "문생비디오와 도생비디오(시작/종료 프레임) 지원. 사용자가 비디오 생성, 숏폼 제작, 문전비디오가 필요할 때 사용. (1) 텍스트 설명으로 비디오 생성, (2) 참조 이미지를 시작/종료 프레임으로 비디오 생성, (3) 모델, 화면 비율, 길이, 해상도 커스터마이즈. 트리거: 비디오 생성, 문생비디오, 도생비디오, AI 비디오, text-to-video, image-to-video."
     category: video
     version: "0.0.1"
     value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y"
