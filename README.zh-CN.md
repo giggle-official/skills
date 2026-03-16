@@ -1,6 +1,6 @@
 # Giggle Official Skills
 
-[English](./README.md) | 简体中文
+[English](./README.md) | 简体中文 | [日本語](./README.ja.md) | [한국어](./README.ko.md) | [繁體中文](./README.zh-TW.md)
 
 基于 [Giggle.pro](https://giggle.pro/) 的 AI 生成技能库，涵盖图像、视频、音乐、语音、剧本等。
 
