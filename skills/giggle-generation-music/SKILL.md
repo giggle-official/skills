@@ -1,7 +1,7 @@
 ---
 name: giggle-generation-music
 description: "Use when the user wants to create, generate, or compose music—whether from text description, custom lyrics, or instrumental background music. Triggers: generate music, write a song, compose, create music, AI music, background music, instrumental, beats."
-version: "0.0.8"
+version: "0.0.10"
 license: MIT
 author: giggle-official
 homepage: https://github.com/giggle-official/skills

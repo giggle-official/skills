@@ -1,7 +1,7 @@
 ---
 name: giggle-generation-speech
 description: "当用户希望生成语音、配音或文字转音频时使用此技能。通过 Giggle.pro 文转音 API 将文本合成为 AI 语音。触发词：生成语音、文转音、文字转语音、配音、TTS、朗读这段文字、把这段文字读出来、合成语音、我需要一段配音。"
-version: "0.0.1"
+version: "0.0.10"
 license: MIT
 requires:
   bins: [python3]

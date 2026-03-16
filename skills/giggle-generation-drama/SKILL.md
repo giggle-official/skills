@@ -1,7 +1,7 @@
 ---
 name: giggle-generation-drama
 description: "Use when the user wants to generate video, shoot short films, or view available video styles. Triggers: short film, make video, shoot short, AI video, generate video from story, short drama, narration video, cinematic video, available video styles."
-version: "0.0.2"
+version: "0.0.10"
 license: MIT
 requires:
   bins: [python3]

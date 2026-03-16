@@ -1,7 +1,7 @@
 ---
 name: giggle-generation-aimv
 description: "Use when the user wants to create AI music videos (MV)—including generating music from text prompts or using custom lyrics. Triggers: generate MV, music video, make video for this song, lyrics video, create MV, AI music video, music+video, generate video from lyrics."
-version: "0.0.2"
+version: "0.0.10"
 license: MIT
 requires:
   bins: ["python3 (>=3.6)"]

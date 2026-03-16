@@ -1,7 +1,7 @@
 ---
 name: giggle-generation-video
 description: "Supports text-to-video and image-to-video (start/end frame). Use when the user needs to generate video, create short videos, or convert text to video. Use cases: (1) Generate video from text description, (2) Use reference images as start/end frame for image-to-video, (3) Customize model, aspect ratio, duration, resolution. Triggers: generate video, text-to-video, image-to-video, AI video."
-version: "0.0.7"
+version: "0.0.10"
 license: MIT
 author: giggle-official
 homepage: https://github.com/giggle-official/skills

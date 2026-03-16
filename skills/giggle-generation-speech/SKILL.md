@@ -1,7 +1,7 @@
 ---
 name: giggle-generation-speech
 description: "Use when the user wants to generate speech, voiceover, or text-to-audio. Converts text to AI voice via Giggle.pro TTS API. Triggers: generate speech, text-to-speech, TTS, voiceover, read this text aloud, synthesize speech."
-version: "0.0.1"
+version: "0.0.10"
 license: MIT
 requires:
   bins: [python3]
