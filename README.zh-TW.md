@@ -60,39 +60,39 @@ export GIGGLE_API_KEY=your_api_key
 
 ```yaml:skills-data
 skills:
-  - name: giggle-generation-drama
+  - name: "短片"
+    value: "giggle-generation-drama"
     description: "當使用者希望生成影片、拍攝短片或查看可用影片風格時使用此技能。觸發詞：短片、製作影片、拍短片、AI 影片、根據故事生成影片、拍影片、我有故事想法、短劇、解說影片、電影感影片、有哪些影片風格。"
     category: video
     version: "0.0.1"
-    value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y"
-  - name: giggle-generation-aimv
+  - name: "音樂MV"
+    value: "giggle-generation-aimv"
     description: "當使用者希望建立 AI 音樂影片（MV）時使用此技能——包括根據文字提示生成音樂或使用自訂歌詞。觸發詞：生成 MV、音樂影片、為這首歌做影片、歌詞影片、建立 MV、AI 音樂影片、音樂+影片、根據歌詞生成影片。"
     category: video
     version: "0.0.1"
-    value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y"
-  - name: giggle-generation-image
+  - name: "圖片生成"
+    value: "giggle-generation-image"
     description: "支援文生圖和圖生圖。當使用者需要建立或生成圖像時使用。使用情境：(1) 根據文字描述生成、(2) 使用參考圖生成、(3) 自訂模型、畫幅比例、解析度。觸發詞：生成圖片、畫畫、建立圖片、AI 藝術圖。"
     category: image
     version: "0.0.1"
-    value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y"
-  - name: giggle-generation-music
+  - name: "音樂生成"
+    value: "giggle-generation-music"
     description: "當使用者希望建立、生成或創作音樂時使用此技能——無論是文字描述、自訂歌詞，還是純樂器背景音樂。觸發詞：生成音樂、寫歌、創作歌曲、製作音樂、做一首歌、AI 音樂、背景音樂、為我作曲、帶歌詞的音樂、純音樂、做 beats。"
     category: music
     version: "0.0.1"
-    value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y"
-  - name: giggle-generation-scripts
+  - name: "劇本生成"
+    value: "giggle-generation-scripts"
     description: "基於姜文電影常見的敘事推進與對白機制生成中文劇本內容。用於使用者提出生成劇本、寫劇本、做分場、出對白稿、改劇本或同類意圖時，包括：根據題材輸出故事梗概、人物小傳、分場大綱、分場劇本（含對白、動作、場面調度提示），並可按使用者要求調整時代背景、人物關係、衝突節奏與結局走向。"
     category: script
     version: "0.0.1"
-    value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-scripts -y"
-  - name: giggle-generation-speech
+  - name: "配音"
+    value: "giggle-generation-speech"
     description: "當使用者希望生成語音、配音或文字轉音訊時使用此技能。透過 Giggle.pro 文轉音 API 將文字合成為 AI 語音。觸發詞：生成語音、文轉音、文字轉語音、配音、TTS、朗讀這段文字、把這段文字讀出來、合成語音、我需要一段配音。"
     category: voice
     version: "0.0.1"
-    value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-speech -y"
-  - name: giggle-generation-video
+  - name: "影片生成"
+    value: "giggle-generation-video"
     description: "支援文生影片和圖生影片（首幀/尾幀）。當使用者需要生成影片、製作短片、文字轉影片時使用。使用情境：(1) 根據文字描述生成影片、(2) 使用參考圖作為首幀/尾幀生成影片、(3) 自訂模型、畫幅比例、時長、解析度。觸發詞：生成影片、文生影片、圖生影片、AI 影片、text-to-video、image-to-video。"
     category: video
     version: "0.0.1"
-    value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y"
 ```

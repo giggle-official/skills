@@ -60,39 +60,39 @@ export GIGGLE_API_KEY=your_api_key
 
 ```yaml:skills-data
 skills:
-  - name: giggle-generation-drama
+  - name: "短編ドラマ"
+    value: "giggle-generation-drama"
     description: "ユーザーが動画の生成、ショートフィルムの撮影、または利用可能な動画スタイルの確認を希望する際に使用。トリガーワード：ショートフィルム、動画制作、AI動画、ストーリーからの動画生成、短編ドラマ、解説動画、映画風動画。"
     category: video
     version: "0.0.1"
-    value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y"
-  - name: giggle-generation-aimv
+  - name: "音楽MV"
+    value: "giggle-generation-aimv"
     description: "ユーザーが AI ミュージックビデオ（MV）の作成を希望する際に使用。テキストプロンプトから音楽を生成するか、カスタム歌詞を使用。トリガーワード：MV生成、ミュージックビデオ、歌詞動画、AI MV、歌詞から動画生成。"
     category: video
     version: "0.0.1"
-    value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y"
-  - name: giggle-generation-image
+  - name: "画像生成"
+    value: "giggle-generation-image"
     description: "文生図と図生図をサポート。ユーザーが画像の作成・生成を必要とする際に使用。(1) テキスト説明から生成、(2) 参考画像から生成、(3) モデル、アスペクト比、解像度のカスタマイズ。トリガーワード：画像生成、AIアート。"
     category: image
     version: "0.0.1"
-    value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y"
-  - name: giggle-generation-music
+  - name: "音楽生成"
+    value: "giggle-generation-music"
     description: "ユーザーが音楽の作成、生成、作曲を希望する際に使用。テキスト説明、カスタム歌詞、インストゥルメンタル BGM のいずれにも対応。トリガーワード：音楽生成、作曲、AI音楽、BGM、歌詞付き音楽、beats 制作。"
     category: music
     version: "0.0.1"
-    value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y"
-  - name: giggle-generation-scripts
+  - name: "脚本生成"
+    value: "giggle-generation-scripts"
     description: "姜文映画のナラティブ推進と台本の仕組みに基づき中国語脚本を生成。脚本生成、分場作成、台本、剧本修正などの意図の際に使用。あらすじ、人物紹介、分場アウトライン、台本と演技・演出を含む分場脚本を出力。時代背景、人物関係、衝突リズム、結末の調整に対応。"
     category: script
     version: "0.0.1"
-    value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-scripts -y"
-  - name: giggle-generation-speech
+  - name: "音声・吹替"
+    value: "giggle-generation-speech"
     description: "ユーザーが音声生成、吹替、テキスト読み上げを希望する際に使用。Giggle.pro 文転音 API でテキストを AI 音声に合成。トリガーワード：音声生成、文転音、TTS、吹替、合成音声。"
     category: voice
     version: "0.0.1"
-    value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-speech -y"
-  - name: giggle-generation-video
+  - name: "動画生成"
+    value: "giggle-generation-video"
     description: "文生動画と図生動画（初フレーム/終フレーム）をサポート。ユーザーが動画生成、ショート動画制作、文転動画を必要とする際に使用。(1) テキスト説明から動画生成、(2) 参考画像を初/終フレームとして動画生成、(3) モデル、アスペクト比、長さ、解像度のカスタマイズ。トリガーワード：動画生成、文生動画、図生動画、AI動画、text-to-video、image-to-video。"
     category: video
     version: "0.0.1"
-    value: "npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y"
 ```
