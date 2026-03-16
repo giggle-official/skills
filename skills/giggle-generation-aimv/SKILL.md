@@ -36,6 +36,8 @@ Calls the MV trustee mode API to run the full MV generation workflow. **Project 
 
 **Requirements**: `python3 (>=3.6)`, `GIGGLE_API_KEY` (system environment variable), pip packages: `requests`
 
+> **No Retry on Error**: If script execution encounters an error, **do not retry**. Report the error to the user directly and stop.
+
 ---
 
 ## Required Setup Before First Use

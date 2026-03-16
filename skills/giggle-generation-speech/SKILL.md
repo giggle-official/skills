@@ -48,6 +48,8 @@ Synthesizes text into AI voice/voiceover via giggle.pro. Supports multiple voice
 
 > **No inline Python**: All commands must be executed via the `exec` tool. **Never** use heredoc inline code.
 
+> **No Retry on Error**: If script execution encounters an error, **do not retry**. Report the error to the user directly and stop.
+
 ## Execution Flow (Phase 1 Submit + Phase 2 Cron + Phase 3 Sync Fallback)
 
 Speech generation typically takes 10–30 seconds. Uses "fast submit + Cron poll + sync fallback" three-phase architecture.

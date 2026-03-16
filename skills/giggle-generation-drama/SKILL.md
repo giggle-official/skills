@@ -32,6 +32,8 @@ metadata:
 
 **Requirements**: `python3`, `GIGGLE_API_KEY` (system environment variable), pip packages: `requests`
 
+> **No Retry on Error**: If script execution encounters an error, **do not retry**. Report the error to the user directly and stop.
+
 ---
 
 ## Required Setup Before First Use

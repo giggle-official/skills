@@ -11,6 +11,8 @@ license: MIT
 
 Organizes text with "high-density conflict + black humor + subtext-heavy dialogue + narrative reversals". Does not copy specific film scenes or lines.
 
+> **No Retry on Error**: If script execution encounters an error, **do not retry**. Report the error to the user directly and stop.
+
 ## Input Collection
 
 Prioritize collecting:

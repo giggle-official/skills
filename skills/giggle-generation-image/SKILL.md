@@ -35,6 +35,8 @@ Generates AI images via giggle.pro's Generation API. Supports multiple models (S
 
 > **No inline Python**: All commands must be executed via the `exec` tool. **Never** use `python3 << 'EOF'` or heredoc inline code.
 
+> **No Retry on Error**: If script execution encounters an error, **do not retry**. Report the error to the user directly and stop.
+
 ## Supported Models
 
 | Model | Description |

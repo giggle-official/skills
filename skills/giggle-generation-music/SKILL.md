@@ -31,6 +31,8 @@ Generates AI music via giggle.pro. Supports simplified and custom modes. Submit 
 
 > **Important**: **Never** pass `GIGGLE_API_KEY` in exec's `env` parameter. API Key is read from system environment variable.
 
+> **No Retry on Error**: If script execution encounters an error, **do not retry**. Report the error to the user directly and stop.
+
 ---
 
 ## Interaction Guide

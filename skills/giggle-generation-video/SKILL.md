@@ -49,6 +49,8 @@ Generates AI videos via giggle.pro's Generation API. Supports text-to-video and 
 
 Set `GIGGLE_API_KEY` before use. The script will prompt if not configured.
 
+> **No Retry on Error**: If script execution encounters an error, **do not retry**. Report the error to the user directly and stop.
+
 ---
 
 ## Supported Models
