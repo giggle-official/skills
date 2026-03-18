@@ -19,8 +19,6 @@ metadata:
     primaryEnv: GIGGLE_API_KEY
 ---
 
-[简体中文](./SKILL.zh-CN.md) | English
-
 # Giggle Music
 
 **Source**: [giggle-official/skills](https://github.com/giggle-official/skills) · API: [giggle.pro](https://giggle.pro/)

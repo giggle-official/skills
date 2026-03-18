@@ -29,8 +29,6 @@ metadata:
   }
 ---
 
-[简体中文](./SKILL.zh-CN.md) | English
-
 # Giggle Video Generation
 
 **Source**: [giggle-official/skills](https://github.com/giggle-official/skills) · API: [giggle.pro](https://giggle.pro/)

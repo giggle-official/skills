@@ -26,8 +26,6 @@ metadata:
   }
 ---
 
-[简体中文](./SKILL.zh-CN.md) | English
-
 # Text-to-Audio
 
 Synthesizes text into AI voice/voiceover via giggle.pro. Supports multiple voice tones, emotions, and speaking rates.

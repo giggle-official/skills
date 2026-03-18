@@ -5,8 +5,6 @@ version: "0.0.10"
 license: MIT
 ---
 
-[简体中文](./SKILL.zh-CN.md) | English
-
 # Giggle Generation Scripts
 
 Organizes text with "high-density conflict + black humor + subtext-heavy dialogue + narrative reversals". Does not copy specific film scenes or lines.

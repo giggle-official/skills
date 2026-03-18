@@ -1,0 +1,3 @@
+# giggle-voice-clone 依赖包
+
+requests>=2.31.0

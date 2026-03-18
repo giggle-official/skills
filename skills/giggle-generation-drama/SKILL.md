@@ -22,8 +22,6 @@ metadata:
   }
 ---
 
-[简体中文](./SKILL.zh-CN.md) | English
-
 ## ⚠️ Review Before Installing
 
 **Please review before installing.** This skill will:

@@ -22,8 +22,6 @@ metadata:
   }
 ---
 
-[简体中文](./SKILL.zh-CN.md) | English
-
 # MV Trustee Mode API Skill
 
 Calls the MV trustee mode API to run the full MV generation workflow. **Project creation and task submission are merged into one step in the script**—call `execute_workflow` once only; never call create and submit separately.
