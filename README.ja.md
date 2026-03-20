@@ -2,7 +2,7 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md) | 日本語 | [한국어](./README.ko.md) | [繁體中文](./README.zh-TW.md)
 
-[Giggle.pro](https://giggle.pro/) をベースにした AI 生成スキルライブラリ。画像、動画、音楽、音声、脚本などをカバーしています。
+[Giggle.pro](https://giggle.pro/) をベースにした AI 生成スキルライブラリ。画像、動画、音楽、音声、ボイスクローン、脚本などをカバーしています。
 
 ## `npx skills add` でインストール
 
@@ -22,7 +22,7 @@ npx skills add . --list --full-depth
 
 ## 特徴
 
-- 🎨 **マルチモーダル AI**：画像、動画、音楽、音声、脚本の生成を一括で対応。
+- 🎨 **マルチモーダル AI**：画像、動画、音楽、音声、ボイスクローン、脚本の生成を一括で対応。
 - 🎬 **動画制作**：文生動画、画像生動画、ショートフィルム、短編ドラマ、MV の全フローをサポート。
 - 📝 **ストーリーと脚本**：姜文風のナラティブスタイルで、分場アウトラインと台本を生成。
 - 🔐 **ローカル優先**：スキルはローカルで実行。API Key はシステム環境変数 `GIGGLE_API_KEY` から読み取り。
@@ -37,6 +37,7 @@ npx skills add . --list --full-depth
 | giggle-generation-aimv | AI ミュージックビデオ（MV）。テキストプロンプトやカスタム歌詞から音楽を生成し、参考画像と組み合わせて歌詞動画を作成。 | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y` |
 | giggle-generation-music | テキスト説明、カスタム歌詞、またはインストゥルメンタルから AI 音楽を作成。簡易、カスタム、インストゥルメンタルの 3 モードに対応。 | [SKILL.md](./skills/giggle-generation-music/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y` |
 | giggle-generation-speech | Giggle.pro の文転音でテキストを AI 音声に合成。複数の音色、感情、話速に対応。 | [SKILL.md](./skills/giggle-generation-speech/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-speech -y` |
+| giggle-voice-clone | ボイスクローン。参考音声 URL から声をクローンし、その声でテキストを合成。 | [SKILL.md](./skills/giggle-voice-clone/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-voice-clone -y` |
 | giggle-generation-scripts | 姜文風中国語脚本生成：あらすじ、人物紹介、分場アウトライン、台本と場面演出を含む分場脚本。 | [SKILL.md](./skills/giggle-generation-scripts/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-scripts -y` |
 
 ## クイック検証
@@ -88,6 +89,11 @@ skills:
   - name: "音声・吹替"
     value: "giggle-generation-speech"
     description: "ユーザーが音声生成、吹替、テキスト読み上げを希望する際に使用。Giggle.pro 文転音 API でテキストを AI 音声に合成。トリガーワード：音声生成、文転音、TTS、吹替、合成音声。"
+    category: voice
+    version: "0.0.1"
+  - name: "ボイスクローン"
+    value: "giggle-voice-clone"
+    description: "ユーザーが音声サンプルから声をクローンする際に使用。参考音声 URL を voice-clone に渡し、その声でテキストを合成。トリガーワード：ボイスクローン、声のクローン、音声から声をクローン。"
     category: voice
     version: "0.0.1"
   - name: "動画生成"

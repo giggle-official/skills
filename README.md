@@ -2,7 +2,7 @@
 
 English | [简体中文](./README.zh-CN.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | [繁體中文](./README.zh-TW.md)
 
-Central repository for AI generation skills powered by [Giggle.pro](https://giggle.pro/), including image, video, music, speech, scripts, and more.
+Central repository for AI generation skills powered by [Giggle.pro](https://giggle.pro/), including image, video, music, speech, voice clone, scripts, and more.
 
 ## Install with `npx skills add`
 
@@ -22,7 +22,7 @@ npx skills add . --list --full-depth
 
 ## Highlights
 
-- 🎨 **Multi-modal AI**: Image, video, music, speech, and script generation in one place.
+- 🎨 **Multi-modal AI**: Image, video, music, speech, voice clone, and script generation in one place.
 - 🎬 **Video production**: Text-to-video, image-to-video, short films, drama, and MV workflows.
 - 📝 **Story & script**: Jiang Wen–style screenplay generation with scene outlines and dialogue.
 - 🔐 **Local-first**: Skills run on your machine; API key from system environment variable `GIGGLE_API_KEY`.
@@ -37,6 +37,7 @@ npx skills add . --list --full-depth
 | giggle-generation-aimv | AI music videos (MV). Generate music from text prompts or custom lyrics, then create lyric videos with reference images. | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y` |
 | giggle-generation-music | Create AI music from text description, custom lyrics, or instrumental. Supports simplified, custom, and instrumental modes. | [SKILL.md](./skills/giggle-generation-music/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y` |
 | giggle-generation-speech | Text-to-speech via Giggle.pro. Multiple voices, emotions, and speaking rates. | [SKILL.md](./skills/giggle-generation-speech/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-speech -y` |
+| giggle-voice-clone | Clone voice from audio URL. Submit reference audio, get cloned voice, then synthesize text with it. | [SKILL.md](./skills/giggle-voice-clone/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-voice-clone -y` |
 | giggle-generation-scripts | Jiang Wen–style Chinese screenplay generation: synopsis, character bios, scene outlines, scene scripts with dialogue and staging. | [SKILL.md](./skills/giggle-generation-scripts/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-scripts -y` |
 
 ## Quick verify
@@ -88,6 +89,11 @@ skills:
   - name: "Voice"
     value: "giggle-generation-speech"
     description: "Use when the user wants to generate speech, voice-over, or text-to-audio. Synthesizes text into AI speech via Giggle.pro TTS API. Triggers: generate speech, text-to-speech, TTS, voice-over, read this text, synthesize speech, I need voice-over."
+    category: voice
+    version: "0.0.1"
+  - name: "Voice Clone"
+    value: "giggle-voice-clone"
+    description: "Use when the user wants to clone a voice from an audio sample. Pass reference audio URL to voice-clone, then synthesizes text with that voice via Giggle.pro. Triggers: voice clone, clone my voice, clone voice from audio."
     category: voice
     version: "0.0.1"
   - name: "Video generation"

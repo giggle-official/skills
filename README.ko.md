@@ -2,7 +2,7 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md) | [日本語](./README.ja.md) | 한국어 | [繁體中文](./README.zh-TW.md)
 
-[Giggle.pro](https://giggle.pro/) 기반 AI 생성 스킬 라이브러리. 이미지, 비디오, 음악, 음성, 스크립트 등을 포함합니다.
+[Giggle.pro](https://giggle.pro/) 기반 AI 생성 스킬 라이브러리. 이미지, 비디오, 음악, 음성, 음성 클론, 스크립트 등을 포함합니다.
 
 ## `npx skills add`로 설치
 
@@ -22,7 +22,7 @@ npx skills add . --list --full-depth
 
 ## 특징
 
-- 🎨 **멀티모달 AI**: 이미지, 비디오, 음악, 음성, 스크립트 생성을 한 곳에서 처리.
+- 🎨 **멀티모달 AI**: 이미지, 비디오, 음악, 음성, 음성 클론, 스크립트 생성을 한 곳에서 처리.
 - 🎬 **비디오 제작**: 문생비디오, 도생비디오, 단편, 드라마, MV 전체 워크플로 지원.
 - 📝 **스토리와 스크립트**: 강문식 내러티브 스타일로 분장 개요와 대본 생성.
 - 🔐 **로컬 우선**: 스킬은 로컬에서 실행되며, API Key는 시스템 환경 변수 `GIGGLE_API_KEY`에서 읽습니다.
@@ -37,6 +37,7 @@ npx skills add . --list --full-depth
 | giggle-generation-aimv | AI 뮤직 비디오(MV). 텍스트 프롬프트나 사용자 정의 가사로 음악 생성 후 참조 이미지로 가사 비디오 제작. | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y` |
 | giggle-generation-music | 텍스트 설명, 사용자 정의 가사 또는 순수 악기로 AI 음악 생성. 간소화, 사용자 정의, 순수 악기 세 가지 모드 지원. | [SKILL.md](./skills/giggle-generation-music/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y` |
 | giggle-generation-speech | Giggle.pro 문전음을 통해 텍스트를 AI 음성으로 합성. 다양한 음색, 감정, 말속도 지원. | [SKILL.md](./skills/giggle-generation-speech/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-speech -y` |
+| giggle-voice-clone | 음성 클론. 참조 오디오 URL에서 음성을 클론하고 해당 음성으로 텍스트 합성. | [SKILL.md](./skills/giggle-voice-clone/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-voice-clone -y` |
 | giggle-generation-scripts | 강문식 중국어 스크립트 생성: 줄거리, 인물 소개, 분장 개요, 대사와 연출 포함 분장 극본. | [SKILL.md](./skills/giggle-generation-scripts/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-scripts -y` |
 
 ## 빠른 검증
@@ -88,6 +89,11 @@ skills:
   - name: "음성・더빙"
     value: "giggle-generation-speech"
     description: "사용자가 음성 생성, 더빙, 텍스트 음성 변환을 원할 때 사용. Giggle.pro 문전음 API로 텍스트를 AI 음성으로 합성. 트리거: 음성 생성, 문전음, TTS, 더빙, 합성 음성."
+    category: voice
+    version: "0.0.1"
+  - name: "음성 클론"
+    value: "giggle-voice-clone"
+    description: "사용자가 오디오 샘플에서 음성을 클론할 때 사용. 참조 오디오 URL을 voice-clone에 전달한 후 해당 음성으로 텍스트 합성. 트리거: 음성 클론, 내 음성 클론, 오디오에서 음성 클론."
     category: voice
     version: "0.0.1"
   - name: "비디오 생성"

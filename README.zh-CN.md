@@ -2,7 +2,7 @@
 
 [English](./README.md) | 简体中文 | [日本語](./README.ja.md) | [한국어](./README.ko.md) | [繁體中文](./README.zh-TW.md)
 
-基于 [Giggle.pro](https://giggle.pro/) 的 AI 生成技能库，涵盖图像、视频、音乐、语音、剧本等。
+基于 [Giggle.pro](https://giggle.pro/) 的 AI 生成技能库，涵盖图像、视频、音乐、语音、声音克隆、剧本等。
 
 ## 使用 `npx skills add` 安装
 
@@ -22,7 +22,7 @@ npx skills add . --list --full-depth
 
 ## 特色
 
-- 🎨 **多模态 AI**：图像、视频、音乐、语音、剧本生成一站搞定。
+- 🎨 **多模态 AI**：图像、视频、音乐、语音、声音克隆、剧本生成一站搞定。
 - 🎬 **视频创作**：文生视频、图生视频、短片、短剧、MV 全流程支持。
 - 📝 **故事与剧本**：姜文式叙事风格，分场大纲与对白剧本生成。
 - 🔐 **本地优先**：技能在本地运行，API Key 从系统环境变量 `GIGGLE_API_KEY` 读取。
@@ -38,6 +38,7 @@ npx skills add . --list --full-depth
 | giggle-generation-aimv    | AI 音乐视频（MV）。根据文字描述或自定义歌词生成音乐，再结合参考图生成歌词视频。                 | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md)    | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y`    |
 | giggle-generation-music   | 根据文字描述、自定义歌词或纯乐器创建 AI 音乐。支持简化、自定义、纯音乐三种模式。                 | [SKILL.md](./skills/giggle-generation-music/SKILL.md)   | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y`   |
 | giggle-generation-speech  | 通过 Giggle.pro 文转音，将文本合成为 AI 语音。支持多种音色、情绪与语速。               | [SKILL.md](./skills/giggle-generation-speech/SKILL.md)  | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-speech -y`  |
+| giggle-voice-clone        | 声音克隆。从参考音频 URL 克隆声音，再用克隆音色合成文本。                               | [SKILL.md](./skills/giggle-voice-clone/SKILL.md)        | `npx skills add giggle-official/skills --full-depth --skill giggle-voice-clone -y`        |
 | giggle-generation-scripts | 姜文式中文剧本生成：故事梗概、人物小传、分场大纲、含对白与场面调度的分场剧本。                    | [SKILL.md](./skills/giggle-generation-scripts/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-scripts -y` |
 
 
@@ -90,6 +91,11 @@ skills:
   - name: "配音"
     value: "giggle-generation-speech"
     description: "当用户希望生成语音、配音或文字转音频时使用此技能。通过 Giggle.pro 文转音 API 将文本合成为 AI 语音。触发词：生成语音、文转音、文字转语音、配音、TTS、朗读这段文字、把这段文字读出来、合成语音、我需要一段配音。"
+    category: voice
+    version: "0.0.1"
+  - name: "声音克隆"
+    value: "giggle-voice-clone"
+    description: "当用户希望从音频样本克隆声音时使用此技能。传入参考音频 URL 至 voice-clone，再用克隆音色合成文本。触发词：声音克隆、复刻声音、克隆声音、克隆我的声音、从音频克隆声音。"
     category: voice
     version: "0.0.1"
   - name: "视频生成"
