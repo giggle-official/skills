@@ -42,10 +42,7 @@ SUPPORTED_MODELS = ("seedream45", "midjourney", "nano-banana-2", "nano-banana-2-
 
 
 def to_view_url(url: str) -> str:
-    """将下载 URL 转换为在线查看 URL"""
-    url = url.replace("&response-content-disposition=attachment", "")
-    url = url.replace("?response-content-disposition=attachment&", "?")
-    url = url.replace("?response-content-disposition=attachment", "")
+    """Normalize URL for forwarding to user; keep query params as returned by API (including response-content-disposition=attachment)."""
     url = url.replace("~", "%7E")
     return url
 

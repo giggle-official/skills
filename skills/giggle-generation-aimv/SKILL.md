@@ -226,7 +226,7 @@ Note: When `pay_status` is `pending`, call the pay endpoint. When all `steps` ar
 ```
 https://assets.giggle.pro/private/ai_director/348e4956c7bd4f763b/qzjc7gwkpf.mp4?Policy=...&Key-Pair-Id=...&Signature=...&response-content-disposition=attachment
 ```
-Wrong (unsigned URL only):
+Do not strip `response-content-disposition=attachment` or other query params from the URL. Wrong (unsigned URL only):
 ```
 https://assets.giggle.pro/private/ai_director/348e4956c7bd4f763b/qzjc7gwkpf.mp4
 ```

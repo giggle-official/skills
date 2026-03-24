@@ -113,7 +113,7 @@ python3 scripts/giggle_music_api.py --query --task-id <task_id>
 | Plain text with error | Forward to user as-is |
 | JSON `{"status": "processing", "task_id": "..."}` | Tell user "Still in progress, please ask again in a moment" |
 
-**Link return rule**: Audio links in stdout must be **full signed URLs** (with Policy, Key-Pair-Id, Signature query params). Correct: `https://assets.giggle.pro/...?Policy=...&Key-Pair-Id=...&Signature=...`. Keep as-is when forwarding.
+**Link return rule**: Audio links in stdout must be **full signed URLs** (with Policy, Key-Pair-Id, Signature query params). **Do not strip** `response-content-disposition=attachment` when the API returns it; forward links as-is (script only encodes `~` → `%7E`).
 
 ---
 

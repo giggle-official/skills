@@ -165,7 +165,7 @@ The script calls `GET /api/v1/project/preset_tones` and displays voice_id, name,
 
 ## Link Return Rule
 
-Audio links returned to the user must be **full signed URLs** (with Policy, Key-Pair-Id, Signature query params). Correct: `https://assets.giggle.pro/...?Policy=...&Key-Pair-Id=...&Signature=...`. Wrong: do not return unsigned URLs with only the base path (no query params). The script handles `~` encoding to `%7E`; keep as-is when forwarding.
+Audio links returned to the user must be **full signed URLs** (with Policy, Key-Pair-Id, Signature query params). **Do not strip** `response-content-disposition=attachment` when the API returns it. The script only normalizes `~` → `%7E`; forward URLs as-is otherwise.
 
 ---
 

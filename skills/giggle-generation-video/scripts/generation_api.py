@@ -62,10 +62,7 @@ SUPPORTED_RESOLUTIONS = ("480p", "720p", "1080p")
 
 
 def to_view_url(url: str) -> str:
-    """将下载 URL 转换为在线查看 URL"""
-    url = url.replace("&response-content-disposition=attachment", "")
-    url = url.replace("?response-content-disposition=attachment&", "?")
-    url = url.replace("?response-content-disposition=attachment", "")
+    """Normalize URL for forwarding; keep query params as returned by API (including response-content-disposition=attachment)."""
     url = url.replace("~", "%7E")
     return url
 

@@ -20,10 +20,7 @@ class TaskStatus:
 
 
 def to_view_url(url: str) -> str:
-    """Convert download URL to streaming URL, preserving full signature params"""
-    url = url.replace("&response-content-disposition=attachment", "")
-    url = url.replace("?response-content-disposition=attachment&", "?")
-    url = url.replace("?response-content-disposition=attachment", "")
+    """Normalize URL for user; keep API query params including response-content-disposition=attachment."""
     url = url.replace("~", "%7E")
     return url
 

@@ -79,7 +79,7 @@ Optional parameters:
 
 ## Link Return Rule
 
-Audio links returned to the user must be **full signed URLs** (with Policy, Key-Pair-Id, Signature query params). Correct: `https://assets.giggle.pro/...?Policy=...&Key-Pair-Id=...&Signature=...`. The script handles this; keep URLs as-is when forwarding to user.
+Audio links returned to the user must be **full signed URLs** (with Policy, Key-Pair-Id, Signature query params). **Do not strip** `response-content-disposition=attachment` when the API returns it. The script only normalizes `~` → `%7E`; keep URLs as-is when forwarding.
 
 ---
 

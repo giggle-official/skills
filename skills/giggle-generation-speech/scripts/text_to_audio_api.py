@@ -180,12 +180,7 @@ class TextToAudioAPI:
         if not urls:
             return ""
         url = urls[0]
-        # 在线收听：去掉 attachment，编码 ~
-        view_url = url.replace("&response-content-disposition=attachment", "")
-        view_url = view_url.replace("?response-content-disposition=attachment&", "?")
-        view_url = view_url.replace("?response-content-disposition=attachment", "")
-        view_url = view_url.replace("~", "%7E")
-        return view_url
+        return url.replace("~", "%7E")
 
 
 def load_api_key() -> str:

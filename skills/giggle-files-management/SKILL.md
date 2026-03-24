@@ -99,7 +99,7 @@ Any file type accepted by S3 (images, videos, audio, documents, archives, etc.).
 
 ## Link Return Rule
 
-URLs returned to the user must be **full signed URLs** when applicable. The script outputs `download_url` with Policy, Key-Pair-Id, Signature query params. Keep URLs as-is when forwarding to user.
+URLs returned to the user must be **full signed URLs** when applicable. Do not strip `response-content-disposition=attachment` or other query params. Keep script output as-is when forwarding.
 
 ---
 

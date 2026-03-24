@@ -237,4 +237,4 @@ multiSelect: false
 
 Submit task → store task_id → inform user. When user asks for status, run query and forward stdout to user.
 
-**Link return rule**: Image links in results must be **full signed URLs** (with Policy, Key-Pair-Id, Signature query params). Correct: `https://assets.giggle.pro/...?Policy=...&Key-Pair-Id=...&Signature=...`. Wrong: do not return unsigned URLs with only the base path (no query params).
+**Link return rule**: Image links in results must be **full signed URLs** (with Policy, Key-Pair-Id, Signature query params). **Do not strip or omit** `&response-content-disposition=attachment` when the API returns it — forward links **as-is** so downloads behave correctly. Correct: `https://assets.giggle.pro/...?Policy=...&Key-Pair-Id=...&Signature=...&response-content-disposition=attachment` (order of query params may vary). Wrong: unsigned URLs with only the base path, or URLs with `response-content-disposition=attachment` removed.

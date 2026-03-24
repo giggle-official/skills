@@ -222,7 +222,7 @@ Return the **full signed URL** to the user (`data.video_asset.download_url`), e.
 https://assets.giggle.pro/private/ai_director/348e4956c7bd4f763b/qzjc7gwkpf.mp4?Policy=...&Key-Pair-Id=...&Signature=...&response-content-disposition=attachment
 ```
 
-Do not return unsigned URLs without query params, e.g.:
+Do not strip `response-content-disposition=attachment` or other query params from `download_url`. Do not return unsigned URLs without query params, e.g.:
 
 ```
 https://assets.giggle.pro/private/ai_director/348e4956c7bd4f763b/qzjc7gwkpf.mp4

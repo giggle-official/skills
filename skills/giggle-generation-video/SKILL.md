@@ -153,7 +153,7 @@ python3 scripts/generation_api.py --query --task-id <task_id>
 | Plain text with error | Forward to user as-is |
 | JSON `{"status": "processing", "task_id": "..."}` | Tell user "Still in progress, please ask again in a moment" |
 
-**Link return rule**: Video links in results must be **full signed URLs** (with Policy, Key-Pair-Id, Signature query params). Keep as-is when forwarding.
+**Link return rule**: Video links in results must be **full signed URLs** (with Policy, Key-Pair-Id, Signature query params). **Do not strip** `response-content-disposition=attachment` when the API returns it; forward as-is (script only encodes `~` → `%7E`).
 
 ---
 
