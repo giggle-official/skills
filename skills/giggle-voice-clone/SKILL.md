@@ -1,6 +1,6 @@
 ---
 name: giggle-voice-clone
-description: "Use when the user wants to clone a voice from an audio sample. Pass reference audio URL to voice-clone, then synthesizes text with that voice via Giggle.pro. Before the blocking script run, tell the user clone is in progress; after it returns, forward URLs immediately—user need not ask for progress. Triggers: voice clone, clone my voice, 声音克隆, 复刻声音, 克隆声音, clone voice from audio."
+description: "Use when the user wants to clone a voice from an audio sample. Pass reference audio URL to voice-clone, then synthesizes text with that voice via Giggle.pro. Before the blocking script run, tell the user clone is in progress; after it returns, forward URLs immediately—user need not ask for progress. Triggers: voice clone, clone my voice, clone voice from audio."
 version: "0.0.1"
 license: MIT
 requires:
@@ -24,7 +24,7 @@ metadata:
 
 # Voice Clone
 
-Clones a voice from a reference audio URL via giggle.pro. Flow: submit voice-clone with `file.url` directly → script polls until completed. Returns full signed audio URLs. **Tell the user before the long-running exec** that generation is in progress and you will return as soon as the script finishes (see「持续输出进度」).
+Clones a voice from a reference audio URL via giggle.pro. Flow: submit voice-clone with `file.url` directly → script polls until completed. Returns full signed audio URLs. **Tell the user before the long-running exec** that generation is in progress and you will return as soon as the script finishes (see **Continuous progress updates**).
 
 **API Key**: Set system environment variable `GIGGLE_API_KEY`. The script will prompt if not configured.
 
@@ -40,13 +40,13 @@ Voice cloning typically takes 1–3 minutes. The script submits voice-clone with
 
 ---
 
-## 持续输出进度（默认行为，无需用户写在提示词里）
+## Continuous progress updates (default; user need not put this in their prompt)
 
-脚本会在一次 exec 内阻塞轮询（最长见 `--max-wait`，默认 180 秒）。用户**不必**写「随时输出进度」：
+The script blocks inside one `exec`, polling until done (see `--max-wait`, default 180s). The user does **not** need to ask for progress:
 
-1. **运行脚本前**必须用中文说明：任务已启动，预计 1–3 分钟，**正在等待服务端完成**，完成后立即转发链接或错误；**不要**静默执行长命令。
-2. **脚本返回后**立刻转发 stdout（成功链接或失败原因），不要等用户追问。
-3. **例外**：用户明确说不用事前说明时，可仅从执行前一句极简提示开始。
+1. **Before running the script**, you **must** tell the user: task started, expect ~1–3 minutes, **waiting on the server**, you will forward links or errors as soon as it finishes—**do not** run a long command with zero preamble.
+2. **As soon as the script returns**, forward stdout (success links or failure)—do not wait for the user to ask.
+3. **Exception**: If the user says they do not want a preamble, a single minimal line before exec is enough.
 
 ---
 
@@ -62,7 +62,7 @@ Voice cloning typically takes 1–3 minutes. The script submits voice-clone with
 
 ### Step 2: Run Full Flow
 
-**Before** the command below, send the user the short「持续输出进度」message above.
+**Before** the command below, send the user the short **Continuous progress updates** message above.
 
 ```bash
 python3 scripts/voice_clone_api.py \
@@ -112,9 +112,9 @@ Audio links returned to the user must be **full signed URLs** (with Policy, Key-
 
 **When the user initiates voice clone**:
 
-1. Ask: "请提供要克隆的音频链接（需可公网访问）"
-2. Ask: "请为这次克隆起一个唯一的 voice_id（如 my_voice_001），不能与已有克隆重复"
-3. Ask: "请提供要合成的文本内容"
-4. After user provides all three, run the script and forward the output
+1. Ask: "Please provide a publicly accessible URL to the reference audio to clone."
+2. Ask: "Please choose a unique `voice_id` for this clone (e.g. my_voice_001); it must not duplicate an existing clone."
+3. Ask: "Please provide the text to synthesize with the cloned voice."
+4. After the user provides all three, run the script and forward the output.
 
-**If voice_id duplicate**: "该 voice_id 已被使用，请换一个唯一的名称后重试。"
+**If voice_id duplicate**: "That voice_id is already in use—please pick another unique id and try again."

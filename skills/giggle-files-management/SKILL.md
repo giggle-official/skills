@@ -46,9 +46,9 @@ Upload local files to the Giggle asset service. Returns a **public URL** for pre
 
 Upload is synchronous. Run the script with file path; it returns JSON on success.
 
-## 持续反馈（默认行为）
+## Continuous user feedback (default)
 
-大文件上传可能耗时数秒至更久。用户**不必**写「随时告诉我进度」：**执行上传命令前**先发一句简短说明（如「正在上传，请稍候」），**成功后立即**把返回的 URL 发给用户，避免长时间无消息。
+Large uploads may take seconds or longer. The user does **not** need to ask for updates: **before** the upload command, send one short line (e.g. “Uploading, one moment…”); **right after success**, send the returned URLs—avoid long silence.
 
 ### Step 1: Run Upload
 

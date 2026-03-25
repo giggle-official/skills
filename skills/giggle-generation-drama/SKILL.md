@@ -63,9 +63,9 @@ Supports three modes. **Ask the user to select a mode before starting the workfl
 
 Use `execute_workflow` to run the full workflow: submit + poll + auto-pay (if needed) + wait for completion. Call once and wait for return.
 
-### 持续输出进度（与下方 Usage Flow 第 4 步一致）
+### Continuous progress updates (aligned with Usage Flow step 4 below)
 
-单次调用会长时间阻塞。用户**不必**在提示词里写「随时输出进度」：**调用前**说明已启动、将等到有结果再汇报；**返回后**立刻转发链接或错误（详见下方 Step 4）。
+One call blocks for a long time. The user does **not** need to ask for progress in their prompt: **before** the call, say the job is running and you will report when there is a result; **after** return, immediately forward the link or error (see Step 4 below).
 
 1. Submit task
 2. Poll progress every 3 seconds
@@ -116,7 +116,7 @@ execute_workflow(
 2. **If the user wants to pick a style**: Call `get_styles()` for the style list; show ID, name, category, description; wait for choice before continuing.
 3. **If the user provides character image URLs**: Build `character_info` array with `name` and `url` per character.
 4. **Run workflow**:
-   - **Before** calling `execute_workflow()`, send a short message to the user: task started, internal polling until completion, typical wait (minutes to tens of minutes), no need to repeatedly ask you to check—**you will report as soon as it returns** (用户不必在提示词里写「随时输出进度」也应做到：有始有终、不静默消失).
+   - **Before** calling `execute_workflow()`, send a short message to the user: task started, internal polling until completion, typical wait (minutes to tens of minutes), no need to nag—**you will report as soon as it returns**. Same idea as **Continuous progress updates**: clear start, clear finish, no vanishing silently.
    - Call `execute_workflow()` with story, aspect ratio, project name.
    - Set `project_type` per chosen mode; pass `video_duration` if specified (else `"auto"`); pass `style_id` if chosen; pass `character_info` if provided.
    - **Call once and wait** — the function handles create, submit, poll, pay, and completion; returns download link or error. **Immediately** after return, forward success (full signed URL) or failure to the user.

@@ -33,7 +33,7 @@ metadata:
 
 **Source**: [giggle-official/skills](https://github.com/giggle-official/skills) · API: [giggle.pro](https://giggle.pro/)
 
-Generates AI videos via giggle.pro's Generation API. Supports text-to-video and image-to-video. Submit task → **agent proactively polls** with `--query` until done (see「持续输出进度」). No Cron, no file writes—all operations via exec.
+Generates AI videos via giggle.pro's Generation API. Supports text-to-video and image-to-video. Submit task → **agent proactively polls** with `--query` until done (see **Continuous progress updates**). No Cron, no file writes—all operations via exec.
 
 ---
 
@@ -93,23 +93,23 @@ Video generation is asynchronous (typically 60–300 seconds). **Submit** a task
 
 ---
 
-## 持续输出进度（默认行为，无需用户写在提示词里）
+## Continuous progress updates (default; user need not put this in their prompt)
 
-用户**不必**再说「随时输出进度」「不要等我催才查」之类话；按本 skill 执行即视为默认要求：
+Following this skill **is** the default for progress reporting. The user does **not** need to say things like “keep me posted” or “don’t wait for me to ask.”
 
-1. **提交后立刻**用简短中文告知：已提交、`task_id`、预计等待量级（如 1–5 分钟或更长）。
-2. **主动轮询**：提交成功后，**每隔约 15–30 秒**执行一次 `--query`（同一任务内持续执行，**不要**等用户追问「好了吗」再查）。
-3. **每次查询后立刻**向用户发一条进度说明（例如：仍在处理中 / 排队中 / 第 N 次查询）；若 stdout 为 `processing` 等 JSON，用自然语言转述，勿静默。
-4. **终态**：`completed` 则按下文规则转发完整视频链接；`failed` / `error` 则说明原因；若已超过合理上限（例如 **20 分钟**）仍非终态，说明情况并给出 `task_id`，建议用户稍后让你再查或重试。
-5. **例外**：仅当用户**明确**表示「不用轮询」「我自己问进度」时，可改为只提交 + 告知 `task_id`，之后仅在用户询问时查询。
+1. **Right after submit**, briefly tell them: submitted, `task_id`, and expected wait (e.g. 1–5 minutes or longer).
+2. **Poll proactively**: After submit, run `--query` about every **15–30 seconds** for the same task—**do not** wait until they ask if it is ready.
+3. **After every query**, send a short progress line (e.g. still processing / queued / check #N). If stdout is JSON such as `processing`, paraphrase in natural language—**do not** go silent.
+4. **Terminal states**: On `completed`, forward full video links per below. On `failed` / `error`, explain. If still non-terminal after a reasonable cap (e.g. **20 minutes**), explain, give `task_id`, and suggest checking again later or retrying.
+5. **Exception**: Only if the user **explicitly** says “don’t poll” or “I’ll ask myself,” submit once + give `task_id`, then query only when they ask.
 
-> 这样即使用户提示词里不写进度相关句子，也应持续汇报直到完成或明确失败/超时。
+> Even if the user’s prompt says nothing about progress, keep reporting until success, clear failure, or timeout.
 
 ---
 
 ### Step 1: Submit Task
 
-**First send a message to the user**: 已提交视频生成任务，将每隔一段时间自动查询进度并在有更新时告知，无需反复催促；并给出 `task_id`（在拿到 JSON 后）。
+**First send a message to the user**: Video generation is submitted; you will query progress on a schedule and report updates—no need to nag. Include `task_id` once you have it from the JSON response.
 
 ```bash
 # Text-to-video (default grok-fast)
@@ -165,9 +165,9 @@ Between queries, use a short `sleep` (e.g. 15–30 seconds) in the shell, or sep
 
 | stdout pattern | Action |
 |----------------|--------|
-| Plain text with video links (视频已就绪) | Forward to user as-is; **stop** polling this task |
+| Plain text with video links (e.g. ready message) | Forward to user as-is; **stop** polling this task |
 | Plain text with error | Forward to user as-is; **stop** polling this task |
-| JSON `{"status": "processing", "task_id": "..."}` (or similar non-terminal) | Tell user current status + that you will check again shortly; **continue** polling per "持续输出进度" |
+| JSON `{"status": "processing", "task_id": "..."}` (or similar non-terminal) | Tell user current status + that you will check again shortly; **continue** polling per **Continuous progress updates** |
 
 If the user asks about progress **while** you are already polling, answer with the latest known status (run an extra `--query` if needed).
 
@@ -227,4 +227,4 @@ Options: 16:9 - Landscape (recommended) / 9:16 - Portrait / 1:1 - Square
 
 ### Step 5: Execute and Display
 
-Follow the flow: send message → Step 1 submit → Step 2 **主动轮询查询**直至终态，每次查询后向用户说明进度。Forward exec stdout to the user as-is where appropriate (especially final links and errors).
+Follow the flow: send message → Step 1 submit → Step 2 **proactive polling** until a terminal state, with a short user-facing update after each query. Forward exec stdout to the user as-is where appropriate (especially final links and errors).

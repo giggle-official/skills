@@ -90,7 +90,7 @@ Half a silver note stub slips from the accountant's sleeve; Ma Zouri sees it but
 
 ### Dialogue Technique (must follow)
 
-- Characters never answer directly; use反问, analogy, topic shifts
+- Characters never answer directly; use rhetorical questions, analogy, topic shifts
 - Discuss life-and-death matters in everyday tone ("tea's cold" = "you're dead")
 - Each exchange is a power contest: answering = blocking, deflecting = dodging, counter-question = strike
 - In three-person scenes, the third character's lines pace the conflict
@@ -129,7 +129,7 @@ Every scene must have at least one relational shift: probe→threat, ally→susp
 - Two-person: back-and-forth without pause; three-person: like passing a ball, third can interrupt anytime
 - Allow interruption; mark cut-off lines with "—"
 - At least one interruption per scene (B starts before A finishes)
-- Short lines (5–15 chars) mainly; occasional long line to reset rhythm
+- Short lines (roughly 5–15 words or one breath) mainly; occasional long line to reset rhythm
 - Forbidden: each person delivers a long monologue in turn (that's speechifying, not dialogue)
 
 ### Information Density (two layers per scene)
@@ -142,11 +142,11 @@ Every scene must have at least one relational shift: probe→threat, ally→susp
 
 ### Word Precision
 
-- After each line: can you cut one character? Cut it.
-- Can you replace with a more precise word? "这位大爷" vs "这位爷" are two different people; "走" vs "滚" are two attitudes
+- After each line: can you cut one word? Cut it.
+- Can you replace with a more precise word? Small wording shifts change identity and attitude (e.g. formal vs familiar address; walk vs get lost).
 - Lines should "taste" when spoken: use punchy words, avoid formal and cliché phrases
 - Prefer verbs: specific action over abstract description ("He slaps chopsticks on the table" beats "He's angry")
-- Forbidden: literary tone ("岁月如歌"), broadcaster tone ("让我们共同见证"), internet slang ("绝绝子", "yyds")
+- Forbidden: purple prose, broadcaster / announcer tone, trendy internet slang that breaks period voice
 
 ### Other Style Requirements
 

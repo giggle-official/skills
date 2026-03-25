@@ -83,13 +83,13 @@ Calls the MV trustee mode API to run the full MV generation workflow. **Project 
 
 Use `execute_workflow` to run the full workflow—**call once and wait**. Internally: create project + submit task (merged) → poll progress (every 3 sec) → detect and pay pending items → wait for completion (max 1 hour).
 
-## 持续输出进度（默认行为，无需用户写在提示词里）
+## Continuous progress updates (default; user need not put this in their prompt)
 
-单次 `execute_workflow` 调用会长时间阻塞，中间往往无法插入多条消息。用户**不必**在提示词里写「随时输出进度」：
+A single `execute_workflow` call blocks for a long time; you often cannot send multiple messages mid-flight. The user does **not** need to ask for progress in their prompt:
 
-1. **调用 `execute_workflow()` 之前**，用中文说明：MV 任务已启动，内部会轮询直至完成（通常数分钟至更久，最长约 1 小时），**有结果后会立刻汇报**，请勿以为需要反复催促。
-2. **函数返回后**立即转发成功（完整签名 `download_url`）或失败信息，**不要**静默结束。
-3. **例外**：用户明确说只要结果、不要事前说明时，可仅在返回后汇报。
+1. **Before** calling `execute_workflow()`, tell the user: MV job started, the client polls internally until done (often minutes, up to ~1 hour), **you will report as soon as it returns**—they should not feel they must nag.
+2. **Immediately after** the function returns, forward success (full signed `download_url`) or failure—**do not** end silently.
+3. **Exception**: If the user only wants the result with no preamble, you may report only after return.
 
 **Important**:
 - Never call `create_project` and `submit_mv_task` separately—always use `execute_workflow` or `create_and_submit`

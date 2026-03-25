@@ -27,7 +27,7 @@ metadata:
 
 **Source**: [giggle-official/skills](https://github.com/giggle-official/skills) · API: [giggle.pro](https://giggle.pro/)
 
-Generates AI images via giggle.pro's Generation API. Supports multiple models (Seedream, Midjourney, Nano Banana). Submit task → **agent proactively polls** with `--query` until done (see「持续输出进度」). No Cron.
+Generates AI images via giggle.pro's Generation API. Supports multiple models (Seedream, Midjourney, Nano Banana). Submit task → **agent proactively polls** with `--query` until done (see **Continuous progress updates**). No Cron.
 
 **API Key**: Set system environment variable `GIGGLE_API_KEY`. The script will prompt if not configured.
 
@@ -54,15 +54,15 @@ Image generation is asynchronous (typically 30–120 seconds). **Submit** a task
 
 ---
 
-## 持续输出进度（默认行为，无需用户写在提示词里）
+## Continuous progress updates (default; user need not put this in their prompt)
 
-用户**不必**再说「随时输出进度」「不要等我催才查」；按本 skill 执行即默认要求：
+Following this skill **is** the default. The user does **not** need to ask for progress explicitly.
 
-1. **提交后立刻**简短告知：已提交、`task_id`、预计约 30 秒–2 分钟。
-2. **主动轮询**：每隔约 **15–30 秒**执行一次 `--query`，**不要**等用户追问。
-3. **每次查询后立刻**向用户说明进度；`processing`/`pending` 等用自然语言转述并说明会继续查询。
-4. **终态**：成功则转发完整图片链接；失败则说明原因；超过合理上限（例如 **15 分钟**）仍非终态，说明情况并给出 `task_id`。
-5. **例外**：用户**明确**说「不用轮询」「我自己问」时，可只提交 + 告知 `task_id`。
+1. **Right after submit**, briefly tell them: submitted, `task_id`, expect roughly 30 seconds–2 minutes.
+2. **Poll proactively**: Run `--query` about every **15–30 seconds**—**do not** wait for the user to ask.
+3. **After every query**, report status; for `processing` / `pending` JSON, paraphrase and say you will keep checking.
+4. **Terminal states**: Forward full image links on success; explain failures; if still non-terminal after ~**15 minutes**, explain and give `task_id`.
+5. **Exception**: If the user **explicitly** says “don’t poll” or “I’ll ask myself,” submit once + give `task_id` only.
 
 ---
 
@@ -104,7 +104,7 @@ Response example:
 giggle-generation-image task_id: xxx (submitted: YYYY-MM-DD HH:mm)
 ```
 
-**Tell the user**: 图片任务已提交，将自动查询进度并在有结果时立即告知，无需反复问「好了吗」。
+**Tell the user**: Image task submitted; you will poll automatically and report as soon as there is a result—no need to repeatedly ask if it is ready.
 
 ---
 
@@ -119,7 +119,7 @@ python3 scripts/generation_api.py --query --task-id <task_id>
 **Behavior**:
 - **completed**: Output image links for user → **stop** polling
 - **failed/error**: Output error message → **stop** polling
-- **processing/pending**: JSON in stdout → tell user status + 将继续查询 → **continue** polling
+- **processing/pending**: JSON in stdout → tell user status + that you will keep checking → **continue** polling
 
 If the user asks while you are polling, answer with the latest status.
 
@@ -251,6 +251,6 @@ multiSelect: false
 
 ### Step 4: Execute and Display
 
-Submit task → store task_id → inform user → **主动轮询 `--query`** 直至终态，每次查询后向用户说明进度；终态时转发 stdout 中的链接或错误。
+Submit task → store task_id → inform user → **proactively poll `--query`** until terminal state, with a short update after each query; on terminal state, forward links or errors from stdout.
 
 **Link return rule**: Image links in results must be **full signed URLs** (with Policy, Key-Pair-Id, Signature query params). **Do not strip or omit** `&response-content-disposition=attachment` when the API returns it — forward links **as-is** so downloads behave correctly. Correct: `https://assets.giggle.pro/...?Policy=...&Key-Pair-Id=...&Signature=...&response-content-disposition=attachment` (order of query params may vary). Wrong: unsigned URLs with only the base path, or URLs with `response-content-disposition=attachment` removed.

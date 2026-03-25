@@ -56,14 +56,14 @@ Speech generation typically takes 10–30 seconds. Uses "fast submit + Cron poll
 
 ---
 
-## 持续输出进度（默认行为，无需用户写在提示词里）
+## Continuous progress updates (default; user need not put this in their prompt)
 
-用户**不必**在提示词里写「随时输出进度」「不要等我催才查」。执行本 skill 时应：
+The user does **not** need to say “keep me posted” or “don’t wait for me to ask.” When following this skill:
 
-1. **Phase 1 提交后**已告知「结果将自动送达」—保持该预期；不要让用户以为必须主动追问。
-2. **进入 Phase 3 同步等待前**，必须先发一条简短说明：正在等待合成完成（通常 10–30 秒，本阶段最长约 2 分钟），完成后立即转发音频链接，**请勿静默长时间无回复**。
-3. **Phase 2 Cron**：处理中（stdout 为 JSON）时，**不要**完全消失；从第 2 次 JSON 轮询起，**每隔一次** Cron 触发可向用户发一句极简进度（如「语音仍在生成中」），避免数分钟无任何反馈；**终态**（非 JSON 或空 stdout 规则见下表）必须转发或按表移除 Cron。
-4. **例外**：用户明确说「不用提醒进度」时，可仅在完成或失败时回复。
+1. After **Phase 1** you already said results will arrive automatically—keep that expectation; do not imply they must chase you.
+2. **Before Phase 3 sync wait**, you **must** send a short line: waiting for synthesis (usually 10–30s, up to ~2 minutes in this phase), audio link will follow when ready—**do not** go silent for a long stretch.
+3. **Phase 2 Cron**: While processing (stdout is JSON), do not disappear; from the **2nd** JSON poll onward, on **every other** Cron tick you may send one minimal line (e.g. “Speech still generating…”) so minutes pass without zero feedback. On **terminal** outcomes, follow the table below (forward or remove Cron).
+4. **Exception**: If the user explicitly says “no progress pings,” reply only on completion or failure.
 
 ---
 
@@ -85,7 +85,7 @@ python3 scripts/text_to_audio_api.py --list-voices
 
 ### Phase 1: Submit Task (exec completes in ~10 seconds)
 
-**First send a message to the user**: 语音任务已提交，通常 10–30 秒内完成；**将自动查询并在就绪后立即发送链接**，无需反复催促进度。
+**First send a message to the user**: Speech task submitted; usually finishes in 10–30 seconds. **You will query automatically and send the link as soon as it is ready**—no need to nag for progress.
 
 ```bash
 # Must specify user-selected voice and emotion
@@ -129,7 +129,7 @@ Use the `cron` tool to register the polling job. **Strictly follow the parameter
     },
     "payload": {
       "kind": "systemEvent",
-      "text": "Speech task poll: exec python3 scripts/text_to_audio_api.py --query --task-id <full task_id>, handle stdout per Cron logic. If stdout is non-JSON plain text, forward to user and remove Cron. If stdout is JSON (still processing), keep Cron; from the 2nd JSON poll onward, alternate: every other poll send user one brief line (e.g. 语音仍在生成中). If stdout is empty, remove Cron immediately, do not send message."
+      "text": "Speech task poll: exec python3 scripts/text_to_audio_api.py --query --task-id <full task_id>, handle stdout per Cron logic. If stdout is non-JSON plain text, forward to user and remove Cron. If stdout is JSON (still processing), keep Cron; from the 2nd JSON poll onward, alternate: every other poll send user one brief line (e.g. Speech still generating…). If stdout is empty, remove Cron immediately, do not send message."
     },
     "sessionTarget": "main"
   }
@@ -142,7 +142,7 @@ Use the `cron` tool to register the polling job. **Strictly follow the parameter
 |----------------|--------|
 | Non-empty plain text (not starting with `{`) | **Forward to user as-is**, **remove Cron** |
 | stdout empty | Already pushed, **remove Cron immediately, do not send message** |
-| JSON (starts with `{`, has `"status"` field) | Keep Cron; per「持续输出进度」, from 2nd JSON poll onward send a brief line every other poll |
+| JSON (starts with `{`, has `"status"` field) | Keep Cron; per **Continuous progress updates**, from 2nd JSON poll onward send a brief line every other poll |
 
 ---
 
@@ -150,7 +150,7 @@ Use the `cron` tool to register the polling job. **Strictly follow the parameter
 
 **Execute this step whether or not Cron registration succeeded.**
 
-**Immediately before this exec**, send the user a short line: 正在同步等待合成结果（通常很快，最长约 2 分钟），请稍候。
+**Immediately before this exec**, send the user a short line: Waiting for synthesis (usually quick, up to ~2 minutes)—please wait.
 
 ```bash
 python3 scripts/text_to_audio_api.py --query --task-id <task_id> --poll --max-wait 120
@@ -186,7 +186,7 @@ Audio links returned to the user must be **full signed URLs** (with Policy, Key-
 
 **When the user initiates a new speech generation request**, **must run Phase 1 to submit a new task**. Do not reuse old task_id from memory.
 
-**For the in-flight task**, follow Phases 2–3 and「持续输出进度」—do not wait for the user to ask. **For an older task**, query that `task_id` when the user asks (or poll if they want updates).
+**For the in-flight task**, follow Phases 2–3 and **Continuous progress updates**—do not wait for the user to ask. **For an older task**, query that `task_id` when the user asks (or poll if they want updates).
 
 ---
 

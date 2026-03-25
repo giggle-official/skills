@@ -23,7 +23,7 @@ metadata:
 
 **Source**: [giggle-official/skills](https://github.com/giggle-official/skills) · API: [giggle.pro](https://giggle.pro/)
 
-Generates AI music via giggle.pro. Supports simplified and custom modes. Submit task → **agent proactively polls** with `--query` until done (see「持续输出进度」). No Cron.
+Generates AI music via giggle.pro. Supports simplified and custom modes. Submit task → **agent proactively polls** with `--query` until done (see **Continuous progress updates**). No Cron.
 
 **API Key**: Set system environment variable `GIGGLE_API_KEY`. Log in to [Giggle.pro](https://giggle.pro/) and obtain the API Key from account settings.
 
@@ -62,21 +62,21 @@ Music generation is asynchronous (typically 1–3 minutes). **Submit** a task to
 
 ---
 
-## 持续输出进度（默认行为，无需用户写在提示词里）
+## Continuous progress updates (default; user need not put this in their prompt)
 
-用户**不必**再说「随时输出进度」「不要等我催才查」；按本 skill 执行即默认要求：
+Following this skill **is** the default. The user does **not** need to ask for progress explicitly.
 
-1. **提交后立刻**简短告知：已提交、`task_id`、预计 1–3 分钟量级。
-2. **主动轮询**：每隔约 **15–30 秒**执行一次 `--query`，**不要**等用户追问。
-3. **每次查询后立刻**向用户说明进度；若为 `processing` 等 JSON，用自然语言转述并说明会继续查询。
-4. **终态**：成功则转发完整音频链接；失败则说明原因；超过合理上限（例如 **25 分钟**）仍非终态，说明情况并给出 `task_id`。
-5. **例外**：用户**明确**说「不用轮询」「我自己问」时，可只提交 + 告知 `task_id`。
+1. **Right after submit**, briefly tell them: submitted, `task_id`, expect on the order of 1–3 minutes.
+2. **Poll proactively**: Run `--query` about every **15–30 seconds**—**do not** wait for the user to ask.
+3. **After every query**, report status in natural language; for `processing` JSON, paraphrase and say you will keep checking.
+4. **Terminal states**: Forward full audio links on success; explain failures; if still non-terminal after ~**25 minutes**, explain and give `task_id`.
+5. **Exception**: If the user **explicitly** says “don’t poll” or “I’ll ask myself,” submit once + give `task_id` only.
 
 ---
 
 ### Step 1: Submit Task
 
-**First send a message to the user**: 已提交音乐生成，将自动每隔一段时间查询进度并在有更新时告知，无需反复催促；并给出 `task_id`（在拿到 JSON 后）。
+**First send a message to the user**: Music generation is submitted; you will poll on a schedule and report updates—no need to nag. Include `task_id` from the JSON response.
 
 #### A: Simplified Mode
 ```bash
@@ -123,9 +123,9 @@ Between queries, use `sleep` in shell or separate invocations with delay—**do 
 
 | stdout pattern | Action |
 |----------------|--------|
-| Plain text with music links (🎶 音乐已就绪) | Forward to user as-is; **stop** polling |
+| Plain text with music links (e.g. ready message) | Forward to user as-is; **stop** polling |
 | Plain text with error | Forward to user as-is; **stop** polling |
-| JSON `{"status": "processing", "task_id": "..."}` (non-terminal) | Tell user current status + 将继续查询; **continue** polling |
+| JSON `{"status": "processing", "task_id": "..."}` (non-terminal) | Tell user current status + that you will keep checking; **continue** polling |
 
 If the user asks while you are polling, answer with the latest status (extra `--query` if needed).
 
