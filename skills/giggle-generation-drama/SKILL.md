@@ -69,10 +69,13 @@ Use `execute_workflow` to run the full workflow: submit + poll + auto-pay (if ne
 
 `execute_workflow` **blocks**: submit, pay if needed, and poll (~every 3s) are all **inside** the Python call (up to **~1 hour**). You cannot send per-poll chat between ticks.
 
-1. **Before** the call, tell the user the **short drama / narration / short-film pipeline** is starting, that it often takes **minutes to tens of minutes**, and that you will message again **as soon as the function returns**—they should not need to ping you.
-2. **Start the call** without waiting for them to ask “any update?”
-3. **When the call returns**, immediately forward the **full signed video URL** on success or a clear error; if the API exposes **`project_id`**, include it on failure/timeout so they can follow up or retry steps.
-4. **Non-blocking path** (`create_and_submit` only): if the user prefers, you can submit and hand back ids—then only query when they ask.
+1. **Before the call**, inform the user that the **short drama/narration/short film production process** is in progress, typically taking **a few minutes to tens of minutes**, and that a message will be sent again immediately after **function is restored**—the user does not need to contact you proactively.
+
+2. **Initiate the call**, without waiting for the user to ask "Any progress?", proactively push the current progress to the user every 10 seconds, showing which step is currently being done.
+
+3. **After the call is restored**, immediately forward the **complete signed video URL** upon success or a clear error; if the API exposes **`project_id`**, also provide this information upon failure/timeout for the user's subsequent operations or retry.
+
+4. **Non-blocking path** (`create_and_submit` only): If the user wishes, you can submit and return the ID—then query it only when the user inquires.
 
 ### Function Signature
 
