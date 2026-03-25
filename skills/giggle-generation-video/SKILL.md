@@ -1,6 +1,6 @@
 ---
 name: giggle-generation-video
-description: "Supports text-to-video and image-to-video (start/end frame). Use when the user needs to generate video, create short videos, or convert text to video. Use cases: (1) Generate video from text description, (2) Use reference images as start/end frame for image-to-video, (3) Customize model, aspect ratio, duration, resolution. Triggers: generate video, text-to-video, image-to-video, AI video."
+description: "Supports text-to-video and image-to-video (start/end frame). Use when the user needs to generate video, create short videos, or convert text to video. After submit, proactively poll task status every ~15–30s and message the user each time until completed/failed/timeout—do not wait for the user to ask for progress. Use cases: (1) Generate video from text description, (2) Use reference images as start/end frame for image-to-video, (3) Customize model, aspect ratio, duration, resolution. Triggers: generate video, text-to-video, image-to-video, AI video."
 version: "0.0.10"
 license: MIT
 author: giggle-official
@@ -33,7 +33,7 @@ metadata:
 
 **Source**: [giggle-official/skills](https://github.com/giggle-official/skills) · API: [giggle.pro](https://giggle.pro/)
 
-Generates AI videos via giggle.pro's Generation API. Supports text-to-video and image-to-video. Submit task → query when ready. No polling, no Cron, no file writes—all operations via exec.
+Generates AI videos via giggle.pro's Generation API. Supports text-to-video and image-to-video. Submit task → **agent proactively polls** with `--query` until done (see「持续输出进度」). No Cron, no file writes—all operations via exec.
 
 ---
 
@@ -89,13 +89,27 @@ Each frame parameter can only use one of these methods.
 
 ## Execution Flow: Submit and Query
 
-Video generation is asynchronous (typically 60–300 seconds). **Submit** a task to get `task_id`, then **query** when the user wants to check status. All commands run via `exec`; API key from system env.
+Video generation is asynchronous (typically 60–300 seconds). **Submit** a task to get `task_id`, then **query** until the task reaches a terminal state. All commands run via `exec`; API key from system env.
+
+---
+
+## 持续输出进度（默认行为，无需用户写在提示词里）
+
+用户**不必**再说「随时输出进度」「不要等我催才查」之类话；按本 skill 执行即视为默认要求：
+
+1. **提交后立刻**用简短中文告知：已提交、`task_id`、预计等待量级（如 1–5 分钟或更长）。
+2. **主动轮询**：提交成功后，**每隔约 15–30 秒**执行一次 `--query`（同一任务内持续执行，**不要**等用户追问「好了吗」再查）。
+3. **每次查询后立刻**向用户发一条进度说明（例如：仍在处理中 / 排队中 / 第 N 次查询）；若 stdout 为 `processing` 等 JSON，用自然语言转述，勿静默。
+4. **终态**：`completed` 则按下文规则转发完整视频链接；`failed` / `error` 则说明原因；若已超过合理上限（例如 **20 分钟**）仍非终态，说明情况并给出 `task_id`，建议用户稍后让你再查或重试。
+5. **例外**：仅当用户**明确**表示「不用轮询」「我自己问进度」时，可改为只提交 + 告知 `task_id`，之后仅在用户询问时查询。
+
+> 这样即使用户提示词里不写进度相关句子，也应持续汇报直到完成或明确失败/超时。
 
 ---
 
 ### Step 1: Submit Task
 
-**First send a message to the user**: "Video generation submitted. Usually takes 1–5 minutes. You can ask me about the progress anytime."
+**First send a message to the user**: 已提交视频生成任务，将每隔一段时间自动查询进度并在有更新时告知，无需反复催促；并给出 `task_id`（在拿到 JSON 后）。
 
 ```bash
 # Text-to-video (default grok-fast)
@@ -137,21 +151,25 @@ giggle-generation-video task_id: xxx (submitted: YYYY-MM-DD HH:mm)
 
 ---
 
-### Step 2: Query When User Asks
+### Step 2: Query Until Done (default: proactive polling)
 
-When the user asks about video progress (e.g. "is my video ready?", "progress?"), run:
+After each submit for the **current** task, **repeatedly** run (every ~15–30s until terminal state or timeout), **without waiting for the user to ask**:
 
 ```bash
 python3 scripts/generation_api.py --query --task-id <task_id>
 ```
 
+Between queries, use a short `sleep` (e.g. 15–30 seconds) in the shell, or separate tool invocations with delay—**do not go silent**; summarize each result to the user.
+
 **Output handling**:
 
 | stdout pattern | Action |
 |----------------|--------|
-| Plain text with video links (视频已就绪) | Forward to user as-is |
-| Plain text with error | Forward to user as-is |
-| JSON `{"status": "processing", "task_id": "..."}` | Tell user "Still in progress, please ask again in a moment" |
+| Plain text with video links (视频已就绪) | Forward to user as-is; **stop** polling this task |
+| Plain text with error | Forward to user as-is; **stop** polling this task |
+| JSON `{"status": "processing", "task_id": "..."}` (or similar non-terminal) | Tell user current status + that you will check again shortly; **continue** polling per "持续输出进度" |
+
+If the user asks about progress **while** you are already polling, answer with the latest known status (run an extra `--query` if needed).
 
 **Link return rule**: Video links in results must be **full signed URLs** (with Policy, Key-Pair-Id, Signature query params). **Do not strip** `response-content-disposition=attachment` when the API returns it; forward as-is (script only encodes `~` → `%7E`).
 
@@ -161,7 +179,7 @@ python3 scripts/generation_api.py --query --task-id <task_id>
 
 **When the user initiates a new video generation request**, **must run Step 1 to submit a new task**. Do not reuse old task_id from memory.
 
-**Only when the user explicitly asks about a previous task's progress** should you query the old task_id from memory.
+**For the in-flight task**, use proactive polling as above. **For an older task** (user refers to a previous video / previous `task_id`), query that `task_id` when they ask, or poll it if they want continuous updates on that specific task.
 
 ---
 
@@ -209,4 +227,4 @@ Options: 16:9 - Landscape (recommended) / 9:16 - Portrait / 1:1 - Square
 
 ### Step 5: Execute and Display
 
-Follow the flow: send message → Step 1 submit → user asks → Step 2 query. Forward exec stdout to the user as-is.
+Follow the flow: send message → Step 1 submit → Step 2 **主动轮询查询**直至终态，每次查询后向用户说明进度。Forward exec stdout to the user as-is where appropriate (especially final links and errors).

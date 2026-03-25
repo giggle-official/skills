@@ -1,6 +1,6 @@
 ---
 name: giggle-generation-music
-description: "Use when the user wants to create, generate, or compose music—whether from text description, custom lyrics, or instrumental background music. Triggers: generate music, write a song, compose, create music, AI music, background music, instrumental, beats."
+description: "Use when the user wants to create, generate, or compose music—whether from text description, custom lyrics, or instrumental background music. After submit, proactively poll task status every ~15–30s and message the user each time until completed/failed/timeout—do not wait for the user to ask for progress. Triggers: generate music, write a song, compose, create music, AI music, background music, instrumental, beats."
 version: "0.0.10"
 license: MIT
 author: giggle-official
@@ -23,7 +23,7 @@ metadata:
 
 **Source**: [giggle-official/skills](https://github.com/giggle-official/skills) · API: [giggle.pro](https://giggle.pro/)
 
-Generates AI music via giggle.pro. Supports simplified and custom modes. Submit task → query when ready. No polling or Cron.
+Generates AI music via giggle.pro. Supports simplified and custom modes. Submit task → **agent proactively polls** with `--query` until done (see「持续输出进度」). No Cron.
 
 **API Key**: Set system environment variable `GIGGLE_API_KEY`. Log in to [Giggle.pro](https://giggle.pro/) and obtain the API Key from account settings.
 
@@ -58,13 +58,25 @@ Options: AI compose (describe style) / Use my lyrics / Instrumental
 
 ## Execution Flow: Submit and Query
 
-Music generation is asynchronous (typically 1–3 minutes). **Submit** a task to get `task_id`, then **query** when the user wants to check status.
+Music generation is asynchronous (typically 1–3 minutes). **Submit** a task to get `task_id`, then **query** until the task reaches a terminal state.
+
+---
+
+## 持续输出进度（默认行为，无需用户写在提示词里）
+
+用户**不必**再说「随时输出进度」「不要等我催才查」；按本 skill 执行即默认要求：
+
+1. **提交后立刻**简短告知：已提交、`task_id`、预计 1–3 分钟量级。
+2. **主动轮询**：每隔约 **15–30 秒**执行一次 `--query`，**不要**等用户追问。
+3. **每次查询后立刻**向用户说明进度；若为 `processing` 等 JSON，用自然语言转述并说明会继续查询。
+4. **终态**：成功则转发完整音频链接；失败则说明原因；超过合理上限（例如 **25 分钟**）仍非终态，说明情况并给出 `task_id`。
+5. **例外**：用户**明确**说「不用轮询」「我自己问」时，可只提交 + 告知 `task_id`。
 
 ---
 
 ### Step 1: Submit Task
 
-**First send a message to the user**: "Music generation submitted. Usually takes 1–3 minutes. You can ask me about the progress anytime."
+**First send a message to the user**: 已提交音乐生成，将自动每隔一段时间查询进度并在有更新时告知，无需反复催促；并给出 `task_id`（在拿到 JSON 后）。
 
 #### A: Simplified Mode
 ```bash
@@ -97,21 +109,25 @@ giggle-generation-music task_id: xxx (submitted: YYYY-MM-DD HH:mm)
 
 ---
 
-### Step 2: Query When User Asks
+### Step 2: Query Until Done (default: proactive polling)
 
-When the user asks about music progress (e.g. "is my music ready?", "progress?"), run:
+After each submit for the **current** task, **repeatedly** run (every ~15–30s until terminal or timeout), **without waiting for the user to ask**:
 
 ```bash
 python3 scripts/giggle_music_api.py --query --task-id <task_id>
 ```
 
+Between queries, use `sleep` in shell or separate invocations with delay—**do not go silent**; summarize each result to the user.
+
 **Output handling**:
 
 | stdout pattern | Action |
 |----------------|--------|
-| Plain text with music links (🎶 音乐已就绪) | Forward to user as-is |
-| Plain text with error | Forward to user as-is |
-| JSON `{"status": "processing", "task_id": "..."}` | Tell user "Still in progress, please ask again in a moment" |
+| Plain text with music links (🎶 音乐已就绪) | Forward to user as-is; **stop** polling |
+| Plain text with error | Forward to user as-is; **stop** polling |
+| JSON `{"status": "processing", "task_id": "..."}` (non-terminal) | Tell user current status + 将继续查询; **continue** polling |
+
+If the user asks while you are polling, answer with the latest status (extra `--query` if needed).
 
 **Link return rule**: Audio links in stdout must be **full signed URLs** (with Policy, Key-Pair-Id, Signature query params). **Do not strip** `response-content-disposition=attachment` when the API returns it; forward links as-is (script only encodes `~` → `%7E`).
 
@@ -119,9 +135,11 @@ python3 scripts/giggle_music_api.py --query --task-id <task_id>
 
 ## Recovery
 
-When the user asks about previous music progress:
+**In-flight task**: use proactive polling as above.
 
-1. **task_id in memory** → Run `--query --task-id xxx` directly. **Do not resubmit**
+When the user asks about **previous** music (older `task_id`):
+
+1. **task_id in memory** → Run `--query --task-id xxx` directly. **Do not resubmit**; poll until done if they want continuous updates on that task.
 2. **No task_id in memory** → Tell the user, ask if they want to regenerate
 
 ---

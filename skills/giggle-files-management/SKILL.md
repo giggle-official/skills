@@ -1,6 +1,6 @@
 ---
 name: giggle-files-management
-description: "Use when the user wants to upload, share, or host a file. Uploads local files to Giggle asset service and returns public/download URLs. Use for sending images, documents, videos, or any file to the user. Triggers: upload file, share file, host file, send image, I need to share a file."
+description: "Use when the user wants to upload, share, or host a file. Uploads local files to Giggle asset service and returns public/download URLs. Say briefly that upload is starting before the command; share URLs as soon as the script returns. Triggers: upload file, share file, host file, send image, I need to share a file."
 version: "0.2.0"
 license: MIT
 homepage: https://giggle.pro
@@ -45,6 +45,10 @@ Upload local files to the Giggle asset service. Returns a **public URL** for pre
 ## Execution Flow
 
 Upload is synchronous. Run the script with file path; it returns JSON on success.
+
+## 持续反馈（默认行为）
+
+大文件上传可能耗时数秒至更久。用户**不必**写「随时告诉我进度」：**执行上传命令前**先发一句简短说明（如「正在上传，请稍候」），**成功后立即**把返回的 URL 发给用户，避免长时间无消息。
 
 ### Step 1: Run Upload
 

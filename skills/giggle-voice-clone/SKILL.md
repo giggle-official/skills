@@ -1,6 +1,6 @@
 ---
 name: giggle-voice-clone
-description: "Use when the user wants to clone a voice from an audio sample. Pass reference audio URL to voice-clone, then synthesizes text with that voice via Giggle.pro. Triggers: voice clone, clone my voice, 声音克隆, 复刻声音, 克隆声音, clone voice from audio."
+description: "Use when the user wants to clone a voice from an audio sample. Pass reference audio URL to voice-clone, then synthesizes text with that voice via Giggle.pro. Before the blocking script run, tell the user clone is in progress; after it returns, forward URLs immediately—user need not ask for progress. Triggers: voice clone, clone my voice, 声音克隆, 复刻声音, 克隆声音, clone voice from audio."
 version: "0.0.1"
 license: MIT
 requires:
@@ -24,7 +24,7 @@ metadata:
 
 # Voice Clone
 
-Clones a voice from a reference audio URL via giggle.pro. Flow: submit voice-clone with `file.url` directly → poll until completed. Returns full signed audio URLs.
+Clones a voice from a reference audio URL via giggle.pro. Flow: submit voice-clone with `file.url` directly → script polls until completed. Returns full signed audio URLs. **Tell the user before the long-running exec** that generation is in progress and you will return as soon as the script finishes (see「持续输出进度」).
 
 **API Key**: Set system environment variable `GIGGLE_API_KEY`. The script will prompt if not configured.
 
@@ -40,6 +40,16 @@ Voice cloning typically takes 1–3 minutes. The script submits voice-clone with
 
 ---
 
+## 持续输出进度（默认行为，无需用户写在提示词里）
+
+脚本会在一次 exec 内阻塞轮询（最长见 `--max-wait`，默认 180 秒）。用户**不必**写「随时输出进度」：
+
+1. **运行脚本前**必须用中文说明：任务已启动，预计 1–3 分钟，**正在等待服务端完成**，完成后立即转发链接或错误；**不要**静默执行长命令。
+2. **脚本返回后**立刻转发 stdout（成功链接或失败原因），不要等用户追问。
+3. **例外**：用户明确说不用事前说明时，可仅从执行前一句极简提示开始。
+
+---
+
 ### Step 1: Guide User to Provide Requirements
 
 **Before running, you must collect:**
@@ -51,6 +61,8 @@ Voice cloning typically takes 1–3 minutes. The script submits voice-clone with
 ---
 
 ### Step 2: Run Full Flow
+
+**Before** the command below, send the user the short「持续输出进度」message above.
 
 ```bash
 python3 scripts/voice_clone_api.py \

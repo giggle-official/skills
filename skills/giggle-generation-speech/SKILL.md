@@ -1,6 +1,6 @@
 ---
 name: giggle-generation-speech
-description: "Use when the user wants to generate speech, voiceover, or text-to-audio. Converts text to AI voice via Giggle.pro TTS API. Triggers: generate speech, text-to-speech, TTS, voiceover, read this text aloud, synthesize speech."
+description: "Use when the user wants to generate speech, voiceover, or text-to-audio. Converts text to AI voice via Giggle.pro TTS API. Keep the user informed until audio is ready: message before long waits, use Cron/sync poll so the user need not ask for progress. Triggers: generate speech, text-to-speech, TTS, voiceover, read this text aloud, synthesize speech."
 version: "0.0.10"
 license: MIT
 requires:
@@ -56,6 +56,17 @@ Speech generation typically takes 10–30 seconds. Uses "fast submit + Cron poll
 
 ---
 
+## 持续输出进度（默认行为，无需用户写在提示词里）
+
+用户**不必**在提示词里写「随时输出进度」「不要等我催才查」。执行本 skill 时应：
+
+1. **Phase 1 提交后**已告知「结果将自动送达」—保持该预期；不要让用户以为必须主动追问。
+2. **进入 Phase 3 同步等待前**，必须先发一条简短说明：正在等待合成完成（通常 10–30 秒，本阶段最长约 2 分钟），完成后立即转发音频链接，**请勿静默长时间无回复**。
+3. **Phase 2 Cron**：处理中（stdout 为 JSON）时，**不要**完全消失；从第 2 次 JSON 轮询起，**每隔一次** Cron 触发可向用户发一句极简进度（如「语音仍在生成中」），避免数分钟无任何反馈；**终态**（非 JSON 或空 stdout 规则见下表）必须转发或按表移除 Cron。
+4. **例外**：用户明确说「不用提醒进度」时，可仅在完成或失败时回复。
+
+---
+
 ### Phase 0: Guide User to Select Voice and Emotion (required)
 
 **Before submitting, you must guide the user to select voice and emotion. Do not use defaults.**
@@ -74,7 +85,7 @@ python3 scripts/text_to_audio_api.py --list-voices
 
 ### Phase 1: Submit Task (exec completes in ~10 seconds)
 
-**First send a message to the user**: "Speech generation in progress, usually takes 10–30 seconds. Results will be sent automatically."
+**First send a message to the user**: 语音任务已提交，通常 10–30 秒内完成；**将自动查询并在就绪后立即发送链接**，无需反复催促进度。
 
 ```bash
 # Must specify user-selected voice and emotion
@@ -118,7 +129,7 @@ Use the `cron` tool to register the polling job. **Strictly follow the parameter
     },
     "payload": {
       "kind": "systemEvent",
-      "text": "Speech task poll: exec python3 scripts/text_to_audio_api.py --query --task-id <full task_id>, handle stdout per Cron logic. If stdout is non-JSON plain text, forward to user and remove Cron. If stdout is JSON, do not send message, keep waiting. If stdout is empty, remove Cron immediately."
+      "text": "Speech task poll: exec python3 scripts/text_to_audio_api.py --query --task-id <full task_id>, handle stdout per Cron logic. If stdout is non-JSON plain text, forward to user and remove Cron. If stdout is JSON (still processing), keep Cron; from the 2nd JSON poll onward, alternate: every other poll send user one brief line (e.g. 语音仍在生成中). If stdout is empty, remove Cron immediately, do not send message."
     },
     "sessionTarget": "main"
   }
@@ -131,13 +142,15 @@ Use the `cron` tool to register the polling job. **Strictly follow the parameter
 |----------------|--------|
 | Non-empty plain text (not starting with `{`) | **Forward to user as-is**, **remove Cron** |
 | stdout empty | Already pushed, **remove Cron immediately, do not send message** |
-| JSON (starts with `{`, has `"status"` field) | Do not send message, do not remove Cron, keep waiting |
+| JSON (starts with `{`, has `"status"` field) | Keep Cron; per「持续输出进度」, from 2nd JSON poll onward send a brief line every other poll |
 
 ---
 
 ### Phase 3: Sync Wait (optimistic path, fallback when Cron hasn't fired)
 
 **Execute this step whether or not Cron registration succeeded.**
+
+**Immediately before this exec**, send the user a short line: 正在同步等待合成结果（通常很快，最长约 2 分钟），请稍候。
 
 ```bash
 python3 scripts/text_to_audio_api.py --query --task-id <task_id> --poll --max-wait 120
@@ -173,7 +186,7 @@ Audio links returned to the user must be **full signed URLs** (with Policy, Key-
 
 **When the user initiates a new speech generation request**, **must run Phase 1 to submit a new task**. Do not reuse old task_id from memory.
 
-**Only when the user explicitly asks about a previous task's progress** should you query the old task_id from memory.
+**For the in-flight task**, follow Phases 2–3 and「持续输出进度」—do not wait for the user to ask. **For an older task**, query that `task_id` when the user asks (or poll if they want updates).
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: giggle-generation-aimv
-description: "Use when the user wants to create AI music videos (MV)—including generating music from text prompts or using custom lyrics. Triggers: generate MV, music video, make video for this song, lyrics video, create MV, AI music video, music+video, generate video from lyrics."
+description: "Use when the user wants to create AI music videos (MV)—including generating music from text prompts or using custom lyrics. Before blocking on execute_workflow, tell the user the MV pipeline is running until completion; after return, immediately forward the result—user need not ask for progress. Triggers: generate MV, music video, make video for this song, lyrics video, create MV, AI music video, music+video, generate video from lyrics."
 version: "0.0.10"
 license: MIT
 requires:
@@ -82,6 +82,14 @@ Calls the MV trustee mode API to run the full MV generation workflow. **Project 
 ## Workflow Function
 
 Use `execute_workflow` to run the full workflow—**call once and wait**. Internally: create project + submit task (merged) → poll progress (every 3 sec) → detect and pay pending items → wait for completion (max 1 hour).
+
+## 持续输出进度（默认行为，无需用户写在提示词里）
+
+单次 `execute_workflow` 调用会长时间阻塞，中间往往无法插入多条消息。用户**不必**在提示词里写「随时输出进度」：
+
+1. **调用 `execute_workflow()` 之前**，用中文说明：MV 任务已启动，内部会轮询直至完成（通常数分钟至更久，最长约 1 小时），**有结果后会立刻汇报**，请勿以为需要反复催促。
+2. **函数返回后**立即转发成功（完整签名 `download_url`）或失败信息，**不要**静默结束。
+3. **例外**：用户明确说只要结果、不要事前说明时，可仅在返回后汇报。
 
 **Important**:
 - Never call `create_project` and `submit_mv_task` separately—always use `execute_workflow` or `create_and_submit`
