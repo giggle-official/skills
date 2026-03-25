@@ -42,7 +42,7 @@ Calls the MV trustee mode API to run the full MV generation workflow. **Project 
 
 **Before performing any operation, confirm the user has configured the API Key.**
 
-**API Key**: Log in to [Giggle.pro](https://giggle.pro/) and obtain the API Key from account settings.
+**API Key**: Log in to [giggle.pro](https://giggle.pro/). On the **main site**, use the **left sidebar** → **API Key** (**API 密钥**) section to create or copy your key.
 
 **Configuration**: Set system environment variable `GIGGLE_API_KEY`
 - `export GIGGLE_API_KEY=your_api_key`
@@ -50,7 +50,7 @@ Calls the MV trustee mode API to run the full MV generation workflow. **Project 
 **Verification steps**:
 1. Confirm the user has configured `GIGGLE_API_KEY` in system environment
 2. If not configured, **guide the user**:
-   > Hello! Before using the MV generation feature, you need to configure the API Key. Please go to [Giggle.pro](https://giggle.pro/) to get your API Key, then run `export GIGGLE_API_KEY=your_api_key` in the terminal.
+   > Open [giggle.pro](https://giggle.pro/) while logged in → **left sidebar** → **API Key** / **API 密钥** → copy your key, then run `export GIGGLE_API_KEY=your_api_key` in the terminal.
 3. Wait for the user to configure before continuing the workflow
 
 ## Two Music Generation Modes
@@ -315,7 +315,7 @@ Returns error message on failure.
 
 | Scenario | Cause | Solution |
 |----------|-------|----------|
-| `401 Unauthorized` or "invalid API key" | `GIGGLE_API_KEY` is missing, expired, or incorrect | Verify the key at [Giggle.pro](https://giggle.pro/) account settings and re-export: `export GIGGLE_API_KEY=your_api_key` |
+| `401 Unauthorized` or "invalid API key" | `GIGGLE_API_KEY` is missing, expired, or incorrect | Re-copy the key from [giggle.pro](https://giggle.pro/) → **left sidebar** → **API Key** / **API 密钥**, then re-export: `export GIGGLE_API_KEY=your_api_key` |
 | `429 Too Many Requests` | API rate limit exceeded | Wait a few minutes and retry; avoid submitting multiple projects in rapid succession |
 | Network timeout / connection error | Unstable network or API service temporarily unavailable | The script auto-retries up to 5 times with 5-second intervals; check your network if it still fails |
 | `pay_status: pending` | The project requires payment before proceeding | The workflow function handles this automatically; if running manually, call the pay endpoint with the `project_id` |

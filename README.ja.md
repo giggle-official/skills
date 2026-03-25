@@ -51,7 +51,7 @@ python3 scripts/text_to_audio_api.py --list-voices
 
 ## Giggle API Key（必須）
 
-[Giggle.pro](https://giggle.pro/) で API Key を取得し、システム環境変数に設定してください：
+[Giggle.pro](https://giggle.pro/) にログインし、**左サイドバー**の **API Key**（**API 密钥**）からキーを作成またはコピーして、システム環境変数に設定してください：
 
 ```bash
 export GIGGLE_API_KEY=your_api_key

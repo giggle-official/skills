@@ -26,7 +26,7 @@ metadata:
 
 Clones a voice from a reference audio URL via giggle.pro. Flow: submit voice-clone with `file.url` directly → script polls until completed. Returns full signed audio URLs. **Tell the user before the long-running exec** that generation is in progress and you will return as soon as the script finishes (see **Continuous progress updates**).
 
-**API Key**: Set system environment variable `GIGGLE_API_KEY`. The script will prompt if not configured.
+**API Key**: Set system environment variable `GIGGLE_API_KEY`. Obtain it at [giggle.pro](https://giggle.pro/) while logged in: **left sidebar** → **API Key** (**API 密钥**). The script will prompt if not configured.
 
 > **No inline Python**: All commands must be executed via the `exec` tool. **Never** use heredoc inline code.
 

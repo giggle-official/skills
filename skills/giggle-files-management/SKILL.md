@@ -22,7 +22,7 @@ metadata:
 
 Upload local files to the Giggle asset service. Returns a **public URL** for preview and a **download URL** for direct download.
 
-**API Key**: Set system environment variable `GIGGLE_API_KEY` (same as other Giggle skills).
+**API Key**: Set system environment variable `GIGGLE_API_KEY` (same as other Giggle skills). Get the key at [giggle.pro](https://giggle.pro/) while logged in: **left sidebar** → **API Key** (**API 密钥**).
 
 > **Important**: **Never** pass `GIGGLE_API_KEY` in exec's `env` parameter. API Key is read from system environment variable.
 

@@ -42,10 +42,10 @@ Generates AI videos via giggle.pro's Generation API. Supports text-to-video and 
 | Requirement | Value |
 |-------------|-------|
 | **Binary** | `python3` |
-| **Environment** | `GIGGLE_API_KEY` (required; obtain from https://giggle.pro/) |
+| **Environment** | `GIGGLE_API_KEY` (required; see below) |
 | **Pip** | `requests` |
 
-Set `GIGGLE_API_KEY` before use. The script will prompt if not configured.
+**Where to get `GIGGLE_API_KEY`:** Open [giggle.pro](https://giggle.pro/) while **logged in** → **left sidebar** → **API Key** (**API 密钥**) → create or copy your key. Then `export GIGGLE_API_KEY=your_api_key`. The script will prompt if not configured.
 
 > **No Retry on Error**: If script execution encounters an error, **do not retry**. Report the error to the user directly and stop.
 

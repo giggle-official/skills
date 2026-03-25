@@ -51,7 +51,7 @@ python3 scripts/text_to_audio_api.py --list-voices
 
 ## Giggle API Key (required)
 
-Get your API key from [Giggle.pro](https://giggle.pro/) and set system environment variable:
+Log in to [giggle.pro](https://giggle.pro/). On the **main site**, open the **left sidebar** → **API Key** (**API 密钥**) to create or copy your key. Then set the system environment variable:
 
 ```bash
 export GIGGLE_API_KEY=your_api_key

@@ -29,7 +29,7 @@ metadata:
 
 Generates AI images via giggle.pro's Generation API. Supports multiple models (Seedream, Midjourney, Nano Banana). Submit task → **agent proactively polls** with `--query` until done (see **Continuous progress updates**). No Cron.
 
-**API Key**: Set system environment variable `GIGGLE_API_KEY`. The script will prompt if not configured.
+**API Key**: Set system environment variable `GIGGLE_API_KEY`. Obtain the key at [giggle.pro](https://giggle.pro/) while logged in: **left sidebar** → **API Key** (**API 密钥**). The script will prompt if not configured.
 
 > **No inline Python**: All commands must be executed via the `exec` tool. **Never** use `python3 << 'EOF'` or heredoc inline code.
 

@@ -38,7 +38,7 @@ metadata:
 
 Before performing any operation, confirm the user has configured the API Key to avoid workflow failure due to auth errors.
 
-- **API Key**: Log in to [Giggle.pro](https://giggle.pro/) and obtain the API Key from account settings.
+- **API Key**: Log in to [Giggle.pro](https://giggle.pro/). On the **main site**, open the **left sidebar** and go to **API Key** (**API 密钥**) — create or copy your key there. **Do not** rely on vague “account settings” alone; the sidebar **API Key** block is the intended entry point.
 - **Configuration**: Set system environment variable `GIGGLE_API_KEY`
   - `export GIGGLE_API_KEY=your_api_key`
 
@@ -46,7 +46,7 @@ Before performing any operation, confirm the user has configured the API Key to 
 
 1. Confirm the user has configured `GIGGLE_API_KEY` in system environment.
 2. If not configured, **guide the user**:
-   > Hello! Before using the video generation feature, you need to configure the API Key. Please go to [Giggle.pro](https://giggle.pro/) to get your API Key, then run `export GIGGLE_API_KEY=your_api_key` in the terminal.
+   > Open [giggle.pro](https://giggle.pro/) while logged in → **left sidebar** → **API Key** / **API 密钥** → create or copy your key, then run `export GIGGLE_API_KEY=your_api_key` in the terminal.
 3. Wait for the user to configure before continuing the workflow.
 
 ## Generation Modes

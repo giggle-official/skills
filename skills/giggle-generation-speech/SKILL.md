@@ -42,7 +42,7 @@ Synthesizes text into AI voice/voiceover via giggle.pro. Supports multiple voice
 
 ---
 
-**API Key**: Set system environment variable `GIGGLE_API_KEY`. The script will prompt if not configured.
+**API Key**: Set system environment variable `GIGGLE_API_KEY`. Obtain it at [giggle.pro](https://giggle.pro/) while logged in: **left sidebar** → **API Key** (**API 密钥**). The script will prompt if not configured.
 
 > **No inline Python**: All commands must be executed via the `exec` tool. **Never** use heredoc inline code.
 
