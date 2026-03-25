@@ -1,6 +1,6 @@
 ---
 name: giggle-generation-video
-description: "Supports text-to-video and image-to-video conversion (start frame/end frame). Suitable for users who need to convert text to video or images to video."
+description: "Supports text-to-video and image-to-video conversion (start frame/end frame). Trigger words: text-to-video, image-to-video."
 version: "0.0.10"
 license: MIT
 author: giggle-official

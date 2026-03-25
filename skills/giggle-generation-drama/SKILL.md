@@ -1,6 +1,6 @@
 ---
 name: giggle-generation-drama
-description: "Used when users want to generate videos, shoot short films, or view available video styles. Triggers: Short film, Make video, Shoot short film, AI video, Generate video from story, Short drama, Narrated video, Cinematic video, Available video styles"
+description: "Use this feature when users want to generate videos, shoot short films, or view available video styles. Triggering keywords: short film, make video, shoot short film, short video, AI video, generate video from story, short drama, narrated video, cinematic video, available video styles."
 version: "0.0.10"
 license: MIT
 requires:
