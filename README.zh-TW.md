@@ -32,8 +32,8 @@ npx skills add . --list --full-depth
 | 名稱 | 說明 | 文件 | 安裝指令 |
 |------|------|------|----------|
 | giggle-generation-image | 文生圖與圖生圖。支援 Seedream、Midjourney、Nano Banana。可自訂畫幅比例與解析度。 | [SKILL.md](./skills/giggle-generation-image/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y` |
-| giggle-generation-video | 文生影片與圖生影片（首幀/尾幀）。支援 Grok、Sora2、Veo、Kling 等。可自訂模型、時長、畫幅比例。 | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y` |
-| giggle-generation-drama | 根據故事生成短片、短劇或解說影片。支援劇集、解說、短片三種模式。 | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y` |
+| giggle-generation-video | 支援文字轉影片與圖片轉影片（首幀/尾幀）。適合需要將文字或圖片轉成影片的使用者。 | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y` |
+| giggle-generation-drama | 適用於想生成影片、拍攝短片或查看可用影片風格的使用者。觸發詞：短片、製作影片、拍短片、AI 影片、依故事生成影片、短劇、旁白影片、電影感影片、可用影片風格 | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y` |
 | giggle-generation-aimv | AI 音樂影片（MV）。根據文字描述或自訂歌詞生成音樂，再結合參考圖生成歌詞影片。 | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y` |
 | giggle-generation-music | 根據文字描述、自訂歌詞或純樂器建立 AI 音樂。支援簡化、自訂、純音樂三種模式。 | [SKILL.md](./skills/giggle-generation-music/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y` |
 | giggle-generation-speech | 透過 Giggle.pro 文轉音，將文字合成為 AI 語音。支援多種音色、情緒與語速。 | [SKILL.md](./skills/giggle-generation-speech/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-speech -y` |
@@ -63,7 +63,7 @@ export GIGGLE_API_KEY=your_api_key
 skills:
   - name: "短片"
     value: "giggle-generation-drama"
-    description: "當使用者希望生成影片、拍攝短片或查看可用影片風格時使用此技能。觸發詞：短片、製作影片、拍短片、AI 影片、根據故事生成影片、拍影片、我有故事想法、短劇、解說影片、電影感影片、有哪些影片風格。"
+    description: "適用於想生成影片、拍攝短片或查看可用影片風格的使用者。觸發詞：短片、製作影片、拍短片、AI 影片、依故事生成影片、短劇、旁白影片、電影感影片、可用影片風格"
     category: video
     version: "0.0.1"
   - name: "音樂MV"
@@ -98,7 +98,7 @@ skills:
     version: "0.0.1"
   - name: "影片生成"
     value: "giggle-generation-video"
-    description: "支援文生影片和圖生影片（首幀/尾幀）。當使用者需要生成影片、製作短片、文字轉影片時使用。使用情境：(1) 根據文字描述生成影片、(2) 使用參考圖作為首幀/尾幀生成影片、(3) 自訂模型、畫幅比例、時長、解析度。觸發詞：生成影片、文生影片、圖生影片、AI 影片、text-to-video、image-to-video。"
+    description: "支援文字轉影片與圖片轉影片（首幀/尾幀）。適合需要將文字或圖片轉成影片的使用者。"
     category: video
     version: "0.0.1"
 ```

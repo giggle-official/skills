@@ -32,8 +32,8 @@ npx skills add . --list --full-depth
 | Name | Description | Documentation | Run command |
 |------|-------------|---------------|-------------|
 | giggle-generation-image | Text-to-image and image-to-image. Supports Seedream, Midjourney, Nano Banana. Customize aspect ratio and resolution. | [SKILL.md](./skills/giggle-generation-image/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y` |
-| giggle-generation-video | Text-to-video and image-to-video (start/end frame). Supports Grok, Sora2, Veo, Kling, etc. Customize model, duration, aspect ratio. | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y` |
-| giggle-generation-drama | Generate short films, drama, or narration videos from story. Supports episode, narration, and short-film modes. | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y` |
+| giggle-generation-video | Supports text-to-video and image-to-video conversion (start frame/end frame). Suitable for users who need to convert text to video or images to video. | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y` |
+| giggle-generation-drama | Used when users want to generate videos, shoot short films, or view available video styles. Triggers: Short film, Make video, Shoot short film, AI video, Generate video from story, Short drama, Narrated video, Cinematic video, Available video styles | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y` |
 | giggle-generation-aimv | AI music videos (MV). Generate music from text prompts or custom lyrics, then create lyric videos with reference images. | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y` |
 | giggle-generation-music | Create AI music from text description, custom lyrics, or instrumental. Supports simplified, custom, and instrumental modes. | [SKILL.md](./skills/giggle-generation-music/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y` |
 | giggle-generation-speech | Text-to-speech via Giggle.pro. Multiple voices, emotions, and speaking rates. | [SKILL.md](./skills/giggle-generation-speech/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-speech -y` |
@@ -63,7 +63,7 @@ All skills read `GIGGLE_API_KEY` from system environment.
 skills:
   - name: "Drama"
     value: "giggle-generation-drama"
-    description: "Use when the user wants to generate videos, shoot short films, or see available video styles. Triggers: short film, make video, shoot short, AI video, generate video from story, shoot video, I have a story idea, drama, narration video, cinematic video, what video styles are available."
+    description: "Used when users want to generate videos, shoot short films, or view available video styles. Triggers: Short film, Make video, Shoot short film, AI video, Generate video from story, Short drama, Narrated video, Cinematic video, Available video styles"
     category: video
     version: "0.0.1"
   - name: "Music MV"
@@ -98,7 +98,7 @@ skills:
     version: "0.0.1"
   - name: "Video generation"
     value: "giggle-generation-video"
-    description: "Text-to-video and image-to-video (start/end frame). Use when the user needs to generate video, make short video, or text-to-video. Use cases: (1) generate video from text description, (2) generate video using reference image as start/end frame, (3) customize model, aspect ratio, duration, resolution. Triggers: generate video, text-to-video, image-to-video, AI video."
+    description: "Supports text-to-video and image-to-video conversion (start frame/end frame). Suitable for users who need to convert text to video or images to video."
     category: video
     version: "0.0.1"
 ```

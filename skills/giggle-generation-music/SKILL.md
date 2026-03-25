@@ -64,13 +64,13 @@ Music generation is asynchronous (typically 1–3 minutes). **Submit** a task to
 
 ## Continuous progress updates (default; user need not put this in their prompt)
 
-Following this skill **is** the default. The user does **not** need to ask for progress explicitly.
+Music generation usually takes **~1–3 minutes**. The user does **not** need to ask you to check progress.
 
-1. **Right after submit**, briefly tell them: submitted, `task_id`, expect on the order of 1–3 minutes.
-2. **Poll proactively**: Run `--query` about every **15–30 seconds**—**do not** wait for the user to ask.
-3. **After every query**, report status in natural language; for `processing` JSON, paraphrase and say you will keep checking.
-4. **Terminal states**: Forward full audio links on success; explain failures; if still non-terminal after ~**25 minutes**, explain and give `task_id`.
-5. **Exception**: If the user **explicitly** says “don’t poll” or “I’ll ask myself,” submit once + give `task_id` only.
+1. **Right after submit**, say you submitted, give `task_id`, and expect ~1–3 minutes (longer if the service is busy).
+2. **Poll proactively**: run `--query` about every **15–30 seconds** until terminal—**do not** wait for the user to ask.
+3. **After each query**, report status; for `processing` JSON, paraphrase and say you will keep checking—**do not** go silent.
+4. **When done**: forward full **signed audio** links on success; explain failures. If still non-terminal after **~25 minutes**, explain, give `task_id`, and suggest retry or follow-up.
+5. **If the user explicitly opts out** of polling, submit once + `task_id`, then query only when they ask.
 
 ---
 

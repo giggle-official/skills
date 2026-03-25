@@ -1,6 +1,6 @@
 ---
 name: giggle-generation-drama
-description: "Use when the user wants to generate video, shoot short films, or view available video styles. Before execute_workflow, tell the user the task is running until completion; after return, immediately forward the result—user need not ask for progress. Triggers: short film, make video, shoot short, AI video, generate video from story, short drama, narration video, cinematic video, available video styles."
+description: "Used when users want to generate videos, shoot short films, or view available video styles. Triggers: Short film, Make video, Shoot short film, AI video, Generate video from story, Short drama, Narrated video, Cinematic video, Available video styles"
 version: "0.0.10"
 license: MIT
 requires:
@@ -63,15 +63,16 @@ Supports three modes. **Ask the user to select a mode before starting the workfl
 
 Use `execute_workflow` to run the full workflow: submit + poll + auto-pay (if needed) + wait for completion. Call once and wait for return.
 
-### Continuous progress updates (aligned with Usage Flow step 4 below)
+**Inside the function (for your mental model):** submit task → poll about every 3 seconds → detect pending payment and auto-pay if needed → wait for completion (max ~1 hour) → return video download link or error.
 
-One call blocks for a long time. The user does **not** need to ask for progress in their prompt: **before** the call, say the job is running and you will report when there is a result; **after** return, immediately forward the link or error (see Step 4 below).
+### Continuous progress updates (blocking workflow)
 
-1. Submit task
-2. Poll progress every 3 seconds
-3. Detect pending payment and auto-pay (if needed)
-4. Wait for completion (max 1 hour)
-5. Return video download link or error
+`execute_workflow` **blocks**: submit, pay if needed, and poll (~every 3s) are all **inside** the Python call (up to **~1 hour**). You cannot send per-poll chat between ticks.
+
+1. **Before** the call, tell the user the **short drama / narration / short-film pipeline** is starting, that it often takes **minutes to tens of minutes**, and that you will message again **as soon as the function returns**—they should not need to ping you.
+2. **Start the call** without waiting for them to ask “any update?”
+3. **When the call returns**, immediately forward the **full signed video URL** on success or a clear error; if the API exposes **`project_id`**, include it on failure/timeout so they can follow up or retry steps.
+4. **Non-blocking path** (`create_and_submit` only): if the user prefers, you can submit and hand back ids—then only query when they ask.
 
 ### Function Signature
 
@@ -116,7 +117,7 @@ execute_workflow(
 2. **If the user wants to pick a style**: Call `get_styles()` for the style list; show ID, name, category, description; wait for choice before continuing.
 3. **If the user provides character image URLs**: Build `character_info` array with `name` and `url` per character.
 4. **Run workflow**:
-   - **Before** calling `execute_workflow()`, send a short message to the user: task started, internal polling until completion, typical wait (minutes to tens of minutes), no need to nag—**you will report as soon as it returns**. Same idea as **Continuous progress updates**: clear start, clear finish, no vanishing silently.
+   - **Before** calling `execute_workflow()`, follow **Continuous progress updates** above: brief start message, realistic ETA—**you will report as soon as it returns**.
    - Call `execute_workflow()` with story, aspect ratio, project name.
    - Set `project_type` per chosen mode; pass `video_duration` if specified (else `"auto"`); pass `style_id` if chosen; pass `character_info` if provided.
    - **Call once and wait** — the function handles create, submit, poll, pay, and completion; returns download link or error. **Immediately** after return, forward success (full signed URL) or failure to the user.

@@ -1,6 +1,6 @@
 ---
 name: giggle-generation-video
-description: "Supports text-to-video and image-to-video (start/end frame). Use when the user needs to generate video, create short videos, or convert text to video. After submit, proactively poll task status every ~15–30s and message the user each time until completed/failed/timeout—do not wait for the user to ask for progress. Use cases: (1) Generate video from text description, (2) Use reference images as start/end frame for image-to-video, (3) Customize model, aspect ratio, duration, resolution. Triggers: generate video, text-to-video, image-to-video, AI video."
+description: "Supports text-to-video and image-to-video conversion (start frame/end frame). Suitable for users who need to convert text to video or images to video."
 version: "0.0.10"
 license: MIT
 author: giggle-official
@@ -95,15 +95,13 @@ Video generation is asynchronous (typically 60–300 seconds). **Submit** a task
 
 ## Continuous progress updates (default; user need not put this in their prompt)
 
-Following this skill **is** the default for progress reporting. The user does **not** need to say things like “keep me posted” or “don’t wait for me to ask.”
+Video jobs are usually **~1–5+ minutes** (sometimes longer). The user does **not** need to ask you to check progress.
 
-1. **Right after submit**, briefly tell them: submitted, `task_id`, and expected wait (e.g. 1–5 minutes or longer).
-2. **Poll proactively**: After submit, run `--query` about every **15–30 seconds** for the same task—**do not** wait until they ask if it is ready.
-3. **After every query**, send a short progress line (e.g. still processing / queued / check #N). If stdout is JSON such as `processing`, paraphrase in natural language—**do not** go silent.
-4. **Terminal states**: On `completed`, forward full video links per below. On `failed` / `error`, explain. If still non-terminal after a reasonable cap (e.g. **20 minutes**), explain, give `task_id`, and suggest checking again later or retrying.
-5. **Exception**: Only if the user **explicitly** says “don’t poll” or “I’ll ask myself,” submit once + give `task_id`, then query only when they ask.
-
-> Even if the user’s prompt says nothing about progress, keep reporting until success, clear failure, or timeout.
+1. **Right after submit**, say you submitted, give `task_id`, and give a **realistic** wait range for the model/load (not a generic “1–3 minutes” if the pipeline is often slower).
+2. **Poll proactively**: run `--query` about every **15–30 seconds** until a terminal state—**do not** wait for the user to ask.
+3. **After each query**, briefly report status in natural language; if stdout is non-terminal JSON (`processing`, etc.), paraphrase and say you will check again—**do not** go silent.
+4. **When done**: forward full **signed video** links on success; explain failures clearly. If still non-terminal after **~20 minutes** (adjust if the user/model context suggests longer is normal), stop blind polling, explain, keep `task_id`, and suggest retry or a later manual check.
+5. **If the user explicitly opts out** of polling (“don’t poll”, “I’ll ask”), submit once, give `task_id`, and only `--query` when they ask.
 
 ---
 
@@ -167,7 +165,7 @@ Between queries, use a short `sleep` (e.g. 15–30 seconds) in the shell, or sep
 |----------------|--------|
 | Plain text with video links (e.g. ready message) | Forward to user as-is; **stop** polling this task |
 | Plain text with error | Forward to user as-is; **stop** polling this task |
-| JSON `{"status": "processing", "task_id": "..."}` (or similar non-terminal) | Tell user current status + that you will check again shortly; **continue** polling per **Continuous progress updates** |
+| JSON `{"status": "processing", "task_id": "..."}` (or similar non-terminal) | Tell user current status + that you will check again shortly; **continue** polling per this section |
 
 If the user asks about progress **while** you are already polling, answer with the latest known status (run an extra `--query` if needed).
 

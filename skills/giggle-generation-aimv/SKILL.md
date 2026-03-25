@@ -83,13 +83,14 @@ Calls the MV trustee mode API to run the full MV generation workflow. **Project 
 
 Use `execute_workflow` to run the full workflow—**call once and wait**. Internally: create project + submit task (merged) → poll progress (every 3 sec) → detect and pay pending items → wait for completion (max 1 hour).
 
-## Continuous progress updates (default; user need not put this in their prompt)
+## Continuous progress updates (blocking MV workflow)
 
-A single `execute_workflow` call blocks for a long time; you often cannot send multiple messages mid-flight. The user does **not** need to ask for progress in their prompt:
+`execute_workflow` **blocks** for the full MV pipeline: create/submit (merged), poll (~every 3s), pay if needed, up to **~1 hour**. You do not run shell `--query` yourself.
 
-1. **Before** calling `execute_workflow()`, tell the user: MV job started, the client polls internally until done (often minutes, up to ~1 hour), **you will report as soon as it returns**—they should not feel they must nag.
-2. **Immediately after** the function returns, forward success (full signed `download_url`) or failure—**do not** end silently.
-3. **Exception**: If the user only wants the result with no preamble, you may report only after return.
+1. **Before** the call, tell the user the **MV job** is running, that it usually takes **minutes** and can approach **~1 hour**, and you will report **when the function returns**.
+2. **Invoke** `execute_workflow` without waiting for the user to ask for a status check first.
+3. **After return**, forward the **full signed `download_url` / `video_asset`** on success or the error payload in plain language; include **`project_id`** when useful for support or manual pay/query.
+4. **`create_and_submit` only**: if they only want ids up front, use that path and query later when they ask.
 
 **Important**:
 - Never call `create_project` and `submit_mv_task` separately—always use `execute_workflow` or `create_and_submit`

@@ -32,8 +32,8 @@ npx skills add . --list --full-depth
 | 名前 | 説明 | ドキュメント | インストールコマンド |
 |------|------|------|----------|
 | giggle-generation-image | 文生図と図生図。Seedream、Midjourney、Nano Banana に対応。アスペクト比と解像度をカスタマイズ可能。 | [SKILL.md](./skills/giggle-generation-image/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y` |
-| giggle-generation-video | 文生動画と図生動画（初フレーム/終フレーム）。Grok、Sora2、Veo、Kling などに対応。モデル、長さ、アスペクト比をカスタマイズ可能。 | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y` |
-| giggle-generation-drama | ストーリーからショートフィルム、短編ドラマ、解説動画を生成。エピソード、解説、ショートフィルムの 3 モードに対応。 | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y` |
+| giggle-generation-video | テキスト→動画、画像→動画の変換（開始フレーム/終了フレーム）に対応。テキストや画像から動画が必要なユーザー向け。 | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y` |
+| giggle-generation-drama | 動画の生成、短編映画の撮影、利用可能な動画スタイルの確認などに使用。トリガー例：ショートフィルム、動画を作る、短編を撮る、AI 動画、ストーリーから動画、短編ドラマ、ナレーション動画、シネマティック動画、利用可能な動画スタイル | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y` |
 | giggle-generation-aimv | AI ミュージックビデオ（MV）。テキストプロンプトやカスタム歌詞から音楽を生成し、参考画像と組み合わせて歌詞動画を作成。 | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y` |
 | giggle-generation-music | テキスト説明、カスタム歌詞、またはインストゥルメンタルから AI 音楽を作成。簡易、カスタム、インストゥルメンタルの 3 モードに対応。 | [SKILL.md](./skills/giggle-generation-music/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y` |
 | giggle-generation-speech | Giggle.pro の文転音でテキストを AI 音声に合成。複数の音色、感情、話速に対応。 | [SKILL.md](./skills/giggle-generation-speech/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-speech -y` |
@@ -63,7 +63,7 @@ export GIGGLE_API_KEY=your_api_key
 skills:
   - name: "短編ドラマ"
     value: "giggle-generation-drama"
-    description: "ユーザーが動画の生成、ショートフィルムの撮影、または利用可能な動画スタイルの確認を希望する際に使用。トリガーワード：ショートフィルム、動画制作、AI動画、ストーリーからの動画生成、短編ドラマ、解説動画、映画風動画。"
+    description: "動画の生成、短編映画の撮影、利用可能な動画スタイルの確認などに使用。トリガー例：ショートフィルム、動画を作る、短編を撮る、AI 動画、ストーリーから動画、短編ドラマ、ナレーション動画、シネマティック動画、利用可能な動画スタイル"
     category: video
     version: "0.0.1"
   - name: "音楽MV"
@@ -98,7 +98,7 @@ skills:
     version: "0.0.1"
   - name: "動画生成"
     value: "giggle-generation-video"
-    description: "文生動画と図生動画（初フレーム/終フレーム）をサポート。ユーザーが動画生成、ショート動画制作、文転動画を必要とする際に使用。(1) テキスト説明から動画生成、(2) 参考画像を初/終フレームとして動画生成、(3) モデル、アスペクト比、長さ、解像度のカスタマイズ。トリガーワード：動画生成、文生動画、図生動画、AI動画、text-to-video、image-to-video。"
+    description: "テキスト→動画、画像→動画の変換（開始フレーム/終了フレーム）に対応。テキストや画像から動画が必要なユーザー向け。"
     category: video
     version: "0.0.1"
 ```

@@ -46,9 +46,13 @@ Upload local files to the Giggle asset service. Returns a **public URL** for pre
 
 Upload is synchronous. Run the script with file path; it returns JSON on success.
 
-## Continuous user feedback (default)
+## Continuous user feedback (upload is synchronous)
 
-Large uploads may take seconds or longer. The user does **not** need to ask for updates: **before** the upload command, send one short line (e.g. “Uploading, one moment…”); **right after success**, send the returned URLs—avoid long silence.
+There is **no** task id or `--query` loop. Upload is one shell call.
+
+1. **Before** `upload.sh`, send a short line (e.g. “Uploading…”) for **large** files or slow links; small files can skip if obvious.
+2. **Right after** the script returns, send **`public_url` / `download_url`** (or the error JSON) in natural language—**do not** go silent on success or failure.
+3. If the user says they **don’t** want an “uploading…” message, skip the preamble and only return URLs/errors.
 
 ### Step 1: Run Upload
 

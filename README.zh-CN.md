@@ -33,8 +33,8 @@ npx skills add . --list --full-depth
 | 名称                        | 说明                                                         | 文档                                                      | 安装命令                                                                                      |
 | ------------------------- | ---------------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | giggle-generation-image   | 文生图与图生图。支持 Seedream、Midjourney、Nano Banana。可自定义画幅比例与分辨率。   | [SKILL.md](./skills/giggle-generation-image/SKILL.md)   | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y`   |
-| giggle-generation-video   | 文生视频与图生视频（首帧/尾帧）。支持 Grok、Sora2、Veo、Kling 等。可自定义模型、时长、画幅比例。 | [SKILL.md](./skills/giggle-generation-video/SKILL.md)   | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y`   |
-| giggle-generation-drama   | 根据故事生成短片、短剧或解说视频。支持剧集、解说、短片三种模式。                           | [SKILL.md](./skills/giggle-generation-drama/SKILL.md)   | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y`   |
+| giggle-generation-video   | 支持文生视频与图生视频（首帧/尾帧）。适合需要将文本或图片转为视频的用户。 | [SKILL.md](./skills/giggle-generation-video/SKILL.md)   | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y`   |
+| giggle-generation-drama   | 适用于希望生成视频、拍摄短片或查看可用视频风格的用户。触发词：短片、制作视频、拍短片、AI 视频、根据故事生成视频、短剧、解说视频、电影感视频、可用视频风格 | [SKILL.md](./skills/giggle-generation-drama/SKILL.md)   | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y`   |
 | giggle-generation-aimv    | AI 音乐视频（MV）。根据文字描述或自定义歌词生成音乐，再结合参考图生成歌词视频。                 | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md)    | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y`    |
 | giggle-generation-music   | 根据文字描述、自定义歌词或纯乐器创建 AI 音乐。支持简化、自定义、纯音乐三种模式。                 | [SKILL.md](./skills/giggle-generation-music/SKILL.md)   | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y`   |
 | giggle-generation-speech  | 通过 Giggle.pro 文转音，将文本合成为 AI 语音。支持多种音色、情绪与语速。               | [SKILL.md](./skills/giggle-generation-speech/SKILL.md)  | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-speech -y`  |
@@ -65,7 +65,7 @@ export GIGGLE_API_KEY=your_api_key
 skills:
   - name: "短片"
     value: "giggle-generation-drama"
-    description: "当用户希望生成视频、拍摄短片或查看可用视频风格时使用此技能。触发词：短片、制作视频、拍短片、AI视频、根据故事生成视频、拍视频、我有故事想法、短剧、解说视频、电影感视频、有哪些视频风格。"
+    description: "适用于希望生成视频、拍摄短片或查看可用视频风格的用户。触发词：短片、制作视频、拍短片、AI 视频、根据故事生成视频、短剧、解说视频、电影感视频、可用视频风格"
     category: video
     version: "0.0.1"
   - name: "音乐MV"
@@ -100,7 +100,7 @@ skills:
     version: "0.0.1"
   - name: "视频生成"
     value: "giggle-generation-video"
-    description: "支持文生视频和图生视频（首帧/尾帧）。当用户需要生成视频、制作短视频、文字转视频时使用。使用场景：(1) 根据文字描述生成视频，(2) 使用参考图作为首帧/尾帧生成视频，(3) 自定义模型、画幅比例、时长、分辨率。触发词：生成视频、文生视频、图生视频、AI 视频、text-to-video、image-to-video。"
+    description: "支持文生视频与图生视频（首帧/尾帧）。适合需要将文本或图片转为视频的用户。"
     category: video
     version: "0.0.1"
 ```

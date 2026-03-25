@@ -42,11 +42,12 @@ Voice cloning typically takes 1–3 minutes. The script submits voice-clone with
 
 ## Continuous progress updates (default; user need not put this in their prompt)
 
-The script blocks inside one `exec`, polling until done (see `--max-wait`, default 180s). The user does **not** need to ask for progress:
+One **`exec`** runs the whole flow: submit + poll until done (**`--max-wait`**, default **180s**). There is no separate `--query` loop for you to run.
 
-1. **Before running the script**, you **must** tell the user: task started, expect ~1–3 minutes, **waiting on the server**, you will forward links or errors as soon as it finishes—**do not** run a long command with zero preamble.
-2. **As soon as the script returns**, forward stdout (success links or failure)—do not wait for the user to ask.
-3. **Exception**: If the user says they do not want a preamble, a single minimal line before exec is enough.
+1. **Before** the script, tell the user cloning/synthesis **started**, typical wait **~1–3 minutes**, and you will paste **signed audio** links or errors when the command finishes—**never** start a long run with zero message.
+2. **Do not wait** for the user to say “check status” before launching the script after that preamble.
+3. **When the script exits**, immediately forward stdout (URLs or errors) in natural language; on **timeout** at `--max-wait`, explain and suggest retry or a different sample/`voice_id`.
+4. **If the user wants zero preamble**, use one minimal line only, then run the script.
 
 ---
 
@@ -62,7 +63,7 @@ The script blocks inside one `exec`, polling until done (see `--max-wait`, defau
 
 ### Step 2: Run Full Flow
 
-**Before** the command below, send the user the short **Continuous progress updates** message above.
+**Before** the command below, send the user the short preamble described above.
 
 ```bash
 python3 scripts/voice_clone_api.py \

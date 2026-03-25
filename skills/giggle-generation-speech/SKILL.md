@@ -58,12 +58,13 @@ Speech generation typically takes 10–30 seconds. Uses "fast submit + Cron poll
 
 ## Continuous progress updates (default; user need not put this in their prompt)
 
-The user does **not** need to say “keep me posted” or “don’t wait for me to ask.” When following this skill:
+TTS is usually **10–30 seconds**; Phase 3 sync wait can run up to **`--max-wait` (default 120s)**. The user does **not** need to nag for progress.
 
-1. After **Phase 1** you already said results will arrive automatically—keep that expectation; do not imply they must chase you.
-2. **Before Phase 3 sync wait**, you **must** send a short line: waiting for synthesis (usually 10–30s, up to ~2 minutes in this phase), audio link will follow when ready—**do not** go silent for a long stretch.
-3. **Phase 2 Cron**: While processing (stdout is JSON), do not disappear; from the **2nd** JSON poll onward, on **every other** Cron tick you may send one minimal line (e.g. “Speech still generating…”) so minutes pass without zero feedback. On **terminal** outcomes, follow the table below (forward or remove Cron).
-4. **Exception**: If the user explicitly says “no progress pings,” reply only on completion or failure.
+1. **After Phase 1 submit**, say the task is submitted, give `task_id`, and set expectation: **usually 10–30s**, may need up to ~2 minutes on slow runs.
+2. **Keep polling without being asked**: register **Cron ~30s** for `--query`, and always run **Phase 3** `--query --poll` as fallback—**do not** wait for the user to say “check now.”
+3. **On each poll** (Cron or `--query`): if still JSON/`processing`, paraphrase and say you are still waiting; from the **2nd** JSON poll onward, on **every other** Cron tick you may send one minimal line (e.g. “Still generating…”) so the thread is not dead silent.
+4. **When done**: forward full **signed audio** links (plain-text success from script); on failure, forward the error. If nothing completes after **~15 minutes** of wall-clock retries/Cron, explain, give `task_id`, remove Cron, suggest retry.
+5. **If the user explicitly opts out** of Cron pings, skip Cron but still run `--query` when they ask; Phase 3 `--poll` can remain your primary path if appropriate.
 
 ---
 
@@ -142,7 +143,7 @@ Use the `cron` tool to register the polling job. **Strictly follow the parameter
 |----------------|--------|
 | Non-empty plain text (not starting with `{`) | **Forward to user as-is**, **remove Cron** |
 | stdout empty | Already pushed, **remove Cron immediately, do not send message** |
-| JSON (starts with `{`, has `"status"` field) | Keep Cron; per **Continuous progress updates**, from 2nd JSON poll onward send a brief line every other poll |
+| JSON (starts with `{`, has `"status"` field) | Keep Cron; per this section, from 2nd JSON poll onward send a brief line every other poll |
 
 ---
 
@@ -186,7 +187,7 @@ Audio links returned to the user must be **full signed URLs** (with Policy, Key-
 
 **When the user initiates a new speech generation request**, **must run Phase 1 to submit a new task**. Do not reuse old task_id from memory.
 
-**For the in-flight task**, follow Phases 2–3 and **Continuous progress updates**—do not wait for the user to ask. **For an older task**, query that `task_id` when the user asks (or poll if they want updates).
+**For the in-flight task**, follow Phases 2–3 and this section—do not wait for the user to ask. **For an older task**, query that `task_id` when the user asks (or poll if they want updates).
 
 ---
 
