@@ -1,7 +1,7 @@
 ---
 name: x2c-socialposter
-description: "通过 X2C Open API 管理社交媒体发布和互动。适用场景：(1) 发布文本/媒体帖子到 TikTok、Instagram、Facebook、YouTube、LinkedIn、Twitter 等。(2) 定时发布帖子。(3) 管理帖子评论和回复。(4) 上传媒体文件获取 CDN 链接。(5) 查看发布历史和已绑定账号状态。触发词：发布社交媒体、发帖、社交媒体、定时发布、上传媒体、社交账号、评论帖子。"
-version: "0.0.1"
+description: "通过 X2C Open API 管理社交媒体发布和互动。适用场景：(1) 发布文本/媒体帖子到 TikTok、Instagram、Facebook、YouTube、LinkedIn、Twitter 等 13+ 个平台。(2) 定时发布。(3) 管理评论和回复。(4) 上传媒体文件（最大 5GB）获取 CDN 链接。(5) 查看发布历史和已绑定账号。触发词：发布社交媒体、发帖、社交媒体、定时发布、上传媒体、社交账号、评论帖子。"
+version: "0.1.0"
 license: MIT
 author: storyclaw-official
 homepage: https://github.com/storyclaw-official/skills
@@ -31,11 +31,11 @@ metadata:
 
 English | [简体中文](./SKILL.zh-CN.md)
 
-# X2C Social Poster
+# X2C Social Poster（社交媒体发布器）
 
 **来源**: [storyclaw-official/skills](https://github.com/storyclaw-official/skills) · 控制台: [x2creel.ai](https://www.x2creel.ai/)
 
-通过 X2C Open API 发布帖子、管理评论和上传媒体到社交平台。支持 13+ 个平台，包括 TikTok、Instagram、YouTube、Facebook、LinkedIn、Twitter 等。
+通过 X2C Open API 发布帖子、管理评论和上传媒体到 13+ 个社交平台。支持智能上传（大文件自动使用预签名 URL）、平台规则校验、本地文件一步到位发布。
 
 ---
 
@@ -47,75 +47,111 @@ English | [简体中文](./SKILL.zh-CN.md)
 | **环境变量** | `X2C_API_KEY`（必需；从 [X2C 控制台](https://www.x2creel.ai/) 获取） |
 | **Pip 依赖** | `requests` |
 
-使用前请设置 `X2C_API_KEY`。脚本会在未配置时提示。
-
 ---
 
 ## 首次使用引导
 
-**当用户首次调用此技能时，请按以下步骤依次引导：**
-
 ### 步骤 0：检查 API Key
-
-运行以下命令检查 `X2C_API_KEY` 是否已设置：
 
 ```bash
 python3 scripts/x2c_social.py --action check-key
 ```
 
-- 如果已设置 → 进入步骤 1。
-- 如果未设置 → 引导用户完成配置：
+- 已设置 → 进入步骤 1
+- 未设置 → 引导用户：
 
 ```
 🔑 X2C API Key 尚未配置，让我们来设置：
 
-1. 访问 https://www.x2creel.ai/social-accounts
-2. 创建 X2C 账号（如果还没有）
-3. 绑定你的社交媒体账号（TikTok、Instagram 等）
-4. 进入 Dashboard → Developer API Key
-5. 复制你的 X2C Open API Key
-6. 将 API Key 粘贴到对话框中
-
-提供 Key 后，我会帮你保存并验证。
+1. 访问 https://www.x2creel.ai/social-accounts 注册/登录账号
+2. 点击「Link Account」绑定你的社交媒体账号（TikTok、Instagram 等）
+3. 在同一页面下方找到「Developer API Key」区域，点击「Get API Key」获取密钥
+4. 复制你的 X2C Open API Key，粘贴到对话框中
 ```
 
-用户提供 Key 后，保存到环境变量并通过 `social/status` 确认。
-
 ### 步骤 1：验证已绑定账号
-
-API Key 配置完成后，始终先检查已绑定的账号：
 
 ```bash
 python3 scripts/x2c_social.py --action status
 ```
 
-向用户展示已绑定的平台。如果没有绑定任何账号，引导用户：
+---
 
-```
-⚠️ 尚未绑定任何社交账号。
+## 各平台发帖要求速查表
 
-请访问 https://www.x2creel.ai/social-accounts 绑定你的社交媒体账号，完成后再回来操作。
-```
+**发布前务必检查目标平台的要求，提前引导用户提供必要信息。**
+
+| 平台 | 标识 | 需要媒体 | 文字上限 | 最大媒体数 | 支持格式 | 关键限制 |
+|------|------|:---:|---:|:---:|---|---|
+| YouTube | `youtube` | ✅ (视频) | 标题:100 描述:5,000 | 1 视频 | MP4, MOV, AVI, WMV | `--title` 必需（缺失时自动截取帖子文本前 100 字符）。默认可见性 = public。 |
+| Instagram | `instagram` | ✅ | 2,200 | 10 (轮播) | JPEG, PNG, MP4 | 必须 Business/Creator 账号。不支持纯文本。最多 5 个 hashtag、3 个 @提及。 |
+| TikTok | `tiktok` | ✅ | 2,200 | 1 视频或 35 图 | MP4, JPG, JPEG, WEBP | 图片与视频不可混合。**不支持 PNG**。文本无换行。AI 内容须 `--ai-generated`。 |
+| X (Twitter) | `twitter` | ❌ | 280 | 4 图或 1 视频 | JPEG, PNG, GIF, MP4 | 图片与视频不可混合。需 BYO API keys。超 280 字用 `longPost`。 |
+| Facebook | `facebook` | ❌ | 63,206 | 10+ | JPEG, PNG, MP4 | 必须是 Page（非个人账号）。 |
+| LinkedIn | `linkedin` | ❌ | 3,000 | 9 | JPEG, PNG, GIF, MP4 | 个人或公司页面。 |
+| Pinterest | `pinterest` | ✅ | 500 | 5 (轮播) | JPEG, PNG | 需要图片。视频帖需 `--thumbnail`。 |
+| Reddit | `reddit` | ❌ | 标题:300 正文:40,000 | 1 | JPEG, PNG, GIF, MP4 | `--title` 必需。`--subreddit` 必需。 |
+| GMB | `gmb` | ❌ | 1,500 | 1 | JPEG, PNG, MP4 | 已验证商家。文本不可含电话号码。 |
+| Bluesky | `bluesky` | ❌ | 300 | 4 | JPEG, PNG, MP4 | 含链接在内 300 字符。 |
+| Threads | `threads` | ❌ | 500 | 10 (轮播) | JPEG, PNG, MP4 | 关联 Instagram 账号。 |
+| Snapchat | `snapchat` | ✅ | 160 | 1 | JPEG, PNG, MP4 | 仅支持 1 个媒体。 |
+| Telegram | `telegram` | ❌ | 4,096 | 1 | JPEG, PNG, GIF, MP4 | 需 Bot + Channel/Group。 |
+
+### ⚠️ 多平台同时发布注意事项
+
+同时发布到多个平台时，内容保护按顺序执行——**最短的字符限制会覆盖所有平台**（比如同时发 Twitter + LinkedIn，280 字符限制会截断所有平台的文本）。如需不同平台用不同文本，请**分开发布**。
+
+### 平台专属参数
+
+| 参数 | 适用平台 | 说明 |
+|------|----------|------|
+| `--title` | YouTube, Reddit | 帖子/视频标题（必需）。YouTube 缺失时自动从帖子文本截取前 100 字符。 |
+| `--subreddit` | Reddit | 目标 subreddit，不含 `r/`（必需） |
+| `--visibility` | YouTube, TikTok | YouTube: `public`/`unlisted`/`private`；TikTok: `PUBLIC_TO_EVERYONE` 等 |
+| `--thumbnail` | Pinterest | 视频封面 URL（视频帖必需） |
+| `--ai-generated` | TikTok | 标记为 AI 生成内容（AI 内容建议使用） |
 
 ---
 
-## 支持的平台
+## 媒体上传
 
-| 平台 | 标识 | 备注 |
-|------|------|------|
-| TikTok | `tiktok` | 需要视频 |
-| Instagram | `instagram` | 支持图片/视频 |
-| Facebook | `facebook` | 文本、图片、视频 |
-| YouTube | `youtube` | 需要视频 |
-| LinkedIn | `linkedin` | 文本、图片、视频 |
-| Twitter / X | `twitter` | 文本、图片、视频 |
-| Threads | `threads` | 文本、图片 |
-| Pinterest | `pinterest` | 需要图片 |
-| Reddit | `reddit` | 文本、图片、视频 |
-| Bluesky | `bluesky` | 文本、图片 |
-| Telegram | `telegram` | 文本、图片、视频 |
-| Snapchat | `snapchat` | 图片/视频 |
-| Google 商家 | `gmb` | 文本、图片 |
+脚本使用**智能上传** —— 根据文件大小自动选择最佳方式：
+
+| 方式 | 文件大小 | 上限 | 工作原理 |
+|------|----------|------|----------|
+| **直接上传** | ≤ 50MB | ~50MB | 一步 multipart 上传 |
+| **预签名 URL** | > 50MB | **5GB** | 获取 S3 预签名 URL → PUT 直传 S3 |
+
+用户无需关心选择哪种方式，脚本自动处理。
+
+### 单独上传
+
+```bash
+# 小文件 → 直接上传
+python3 scripts/x2c_social.py --action upload --file /path/to/image.jpg
+
+# 大文件 → 自动预签名上传
+python3 scripts/x2c_social.py --action upload --file /path/to/large_video.mp4 --folder videos
+```
+
+### 一步到位发布本地文件
+
+发布时传入本地文件，脚本**自动上传**后发布：
+
+```bash
+# 75MB 视频 → 自动预签名上传 → 发布
+python3 scripts/x2c_social.py --action publish \
+  --platforms tiktok instagram \
+  --post "快来看！🎬" \
+  --media-files /path/to/large_video.mp4
+```
+
+输出流程：
+```json
+{"status": "uploading", "file": "large_video.mp4", "size_mb": 75.2, "method": "presigned"}
+{"status": "uploaded", "file": "large_video.mp4", "url": "https://v.arkfs.co/...", "method": "presigned"}
+{"success": true, "data": {"id": "post_abc123", "postIds": [...]}}
+```
 
 ---
 
@@ -130,63 +166,70 @@ python3 scripts/x2c_social.py --action status
 ### 2. 发布帖子
 
 ```bash
-# 纯文本帖子
+# 纯文本（适用于：twitter, facebook, linkedin, reddit, gmb, bluesky, threads, telegram）
+python3 scripts/x2c_social.py --action publish \
+  --platforms twitter facebook \
+  --post "Hello world! 🚀"
+
+# 带本地文件 — 自动上传（任意大小，最大 5GB）
 python3 scripts/x2c_social.py --action publish \
   --platforms tiktok instagram \
-  --post "来看看我们的最新动态！🚀"
+  --post "看这个！🎬" \
+  --media-files /path/to/video.mp4
 
-# 带远程媒体 URL 的帖子
+# 带远程 URL
 python3 scripts/x2c_social.py --action publish \
   --platforms tiktok instagram \
   --post "看这个！🎬" \
   --media-urls "https://example.com/video.mp4"
 
-# 带本地文件的帖子（自动上传到 S3，然后发布——一步到位！）
+# YouTube — 必须提供标题
 python3 scripts/x2c_social.py --action publish \
-  --platforms tiktok instagram \
-  --post "看这个！🎬" \
-  --media-files "/path/to/video.mp4"
+  --platforms youtube \
+  --post "视频描述" \
+  --title "我的 YouTube 视频" \
+  --visibility public \
+  --media-files /path/to/video.mp4
 
-# 混合本地文件和远程 URL
+# Reddit — 必须提供标题和 subreddit
 python3 scripts/x2c_social.py --action publish \
-  --platforms tiktok instagram \
-  --post "双媒体帖子！🎬" \
-  --media-files "/path/to/local.mp4" \
-  --media-urls "https://example.com/remote.jpg"
+  --platforms reddit \
+  --post "帖子正文" \
+  --title "讨论：2026年的AI" \
+  --subreddit technology
 
-# 带本地文件的定时发布
+# TikTok — 标记 AI 内容
+python3 scripts/x2c_social.py --action publish \
+  --platforms tiktok \
+  --post "AI 生成内容" \
+  --ai-generated \
+  --media-files /path/to/ai_video.mp4
+
+# 定时发布
 python3 scripts/x2c_social.py --action publish \
   --platforms tiktok instagram \
   --post "即将上线！⏰" \
-  --media-files "/path/to/video.mp4" \
+  --media-files /path/to/video.mp4 \
   --schedule "2026-04-01T12:00:00Z"
 
-# 帖子中链接缩短
+# 缩短链接
 python3 scripts/x2c_social.py --action publish \
   --platforms twitter linkedin \
   --post "阅读我们的博客：https://example.com/very-long-url" \
   --shorten-links
 ```
 
-> **一步到位发布**：使用 `--media-files` 传入本地文件路径时，脚本会自动将文件上传到 S3，然后用返回的 CDN URL 发布。也可以直接在 `--media-urls` 中传入本地路径，脚本会自动检测并上传。无需单独运行上传命令。
-
 ### 3. 查看发布历史
 
 ```bash
-# 所有平台
 python3 scripts/x2c_social.py --action posts
-
-# 按平台筛选
 python3 scripts/x2c_social.py --action posts --platform tiktok
 ```
 
 ### 4. 删除帖子
 
 ```bash
-# 从特定平台删除
 python3 scripts/x2c_social.py --action delete-post --post-id post_abc123
-
-# 从所有平台批量删除
 python3 scripts/x2c_social.py --action delete-post --post-id post_abc123 --bulk
 ```
 
@@ -194,99 +237,32 @@ python3 scripts/x2c_social.py --action delete-post --post-id post_abc123 --bulk
 
 ```bash
 python3 scripts/x2c_social.py --action comment \
-  --post-id post_abc123 \
-  --platforms tiktok \
-  --comment "内容真棒！🔥"
+  --post-id post_abc123 --platforms tiktok --comment "太棒了！🔥"
 ```
 
 ### 6. 获取评论
 
 ```bash
-python3 scripts/x2c_social.py --action comments \
-  --post-id post_abc123 \
-  --platform tiktok
+python3 scripts/x2c_social.py --action comments --post-id post_abc123 --platform tiktok
 ```
 
 ### 7. 回复评论
 
 ```bash
 python3 scripts/x2c_social.py --action reply \
-  --comment-id comment_xyz \
-  --platforms tiktok \
-  --comment "感谢观看！"
+  --comment-id comment_xyz --platforms tiktok --comment "感谢！"
 ```
 
 ### 8. 删除评论
 
 ```bash
-python3 scripts/x2c_social.py --action delete-comment \
-  --comment-id comment_xyz
+python3 scripts/x2c_social.py --action delete-comment --comment-id comment_xyz
 ```
 
-### 9. 上传媒体
+### 9. 单独上传媒体
 
 ```bash
-python3 scripts/x2c_social.py --action upload \
-  --file /path/to/video.mp4 \
-  --folder my-videos
-```
-
-返回永久 CDN URL，可用于 `--media-urls` 发布帖子。
-
----
-
-## 执行流程：一步到位发布本地媒体
-
-发布本地文件时，脚本自动处理全部流程：
-
-```
-用户运行 publish 并传入 --media-files /path/to/video.mp4
-  ↓
-脚本检测到本地文件路径（非 http/https）
-  ↓
-自动通过 media/upload 上传文件到 S3
-  ↓
-获取 CDN URL（https://v.arkfs.co/...）
-  ↓
-将 CDN URL 注入 media_urls
-  ↓
-调用 social/publish 发布帖子
-  ↓
-返回发布结果给用户
-```
-
-**示例 — 一条命令，完整流程：**
-
-```bash
-python3 scripts/x2c_social.py --action publish \
-  --platforms tiktok instagram \
-  --post "快来看！🎬" \
-  --media-files /path/to/video.mp4
-```
-
-脚本会输出上传进度，然后是最终发布结果：
-
-```json
-{"status": "uploading", "file": "video.mp4", "message": "Uploading video.mp4 to S3..."}
-{"status": "uploaded", "file": "video.mp4", "url": "https://v.arkfs.co/.../video.mp4"}
-{
-  "success": true,
-  "data": {
-    "id": "post_abc123",
-    "postIds": [
-      {"platform": "tiktok", "id": "7123456789", "status": "success"},
-      {"platform": "instagram", "id": "17898765432", "status": "success"}
-    ]
-  }
-}
-```
-
-### 单独上传（可选）
-
-你仍然可以单独上传文件以获取 CDN URL 供后续使用：
-
-```bash
-python3 scripts/x2c_social.py --action upload --file /path/to/video.mp4 --folder my-videos
+python3 scripts/x2c_social.py --action upload --file /path/to/file.mp4 --folder videos
 ```
 
 ---
@@ -295,36 +271,40 @@ python3 scripts/x2c_social.py --action upload --file /path/to/video.mp4 --folder
 
 | 参数 | 是否必需 | 描述 |
 |------|----------|------|
-| `--action` | ✅ | 要执行的操作（见命令列表） |
+| `--action` | ✅ | 要执行的操作 |
 | `--post` | 发布时需要 | 帖子文本内容 |
 | `--platforms` | 发布时需要 | 空格分隔的目标平台 |
-| `--platform` | 筛选时使用 | 单个平台筛选 |
-| `--media-urls` | ❌ | 远程 URL 或本地路径（本地文件自动上传） |
-| `--media-files` | ❌ | 本地文件路径，自动上传并附加 |
+| `--platform` | 筛选时 | 单个平台筛选 |
+| `--media-urls` | ❌ | 远程 URL 或本地路径（自动上传） |
+| `--media-files` | ❌ | 本地文件路径，自动上传 |
 | `--schedule` | ❌ | ISO 8601 格式的定时发布时间 |
 | `--shorten-links` | ❌ | 缩短帖子中的链接 |
-| `--post-id` | 帖子操作时 | Ayrshare 帖子 ID |
-| `--comment-id` | 评论操作时 | 评论 ID |
-| `--comment` | 评论/回复时 | 评论或回复文本 |
+| `--title` | YouTube/Reddit | 帖子/视频标题 |
+| `--subreddit` | Reddit | 目标 subreddit（不含 `r/`） |
+| `--visibility` | YouTube/TikTok | 可见性设置 |
+| `--thumbnail` | Pinterest | 视频封面 URL |
+| `--ai-generated` | TikTok | 标记为 AI 生成内容 |
+| `--post-id` | 帖子操作 | Ayrshare 帖子 ID |
+| `--comment-id` | 评论操作 | 评论 ID |
+| `--comment` | 评论/回复 | 评论或回复文本 |
 | `--bulk` | ❌ | 从所有平台删除 |
-| `--file` | 上传时需要 | 本地文件路径 |
+| `--file` | 上传时 | 本地文件路径 |
 | `--folder` | ❌ | 上传子文件夹（默认：`uploads`） |
 
 ---
 
 ## 交互引导
 
-**当用户请求模糊时，按以下步骤引导。如果用户已提供足够信息，直接执行命令。**
+**当用户请求模糊时，按以下步骤引导。如果信息充分，直接执行。**
 
 ### 步骤 1：新手检查
 
-始终先执行首次使用引导。在任何操作前验证 API Key 和已绑定账号。
+始终先执行首次使用引导，验证 API Key 和已绑定账号。
 
 ### 步骤 2：确认意图
 
 ```
 你想做什么？
-选项：
   📝 发布帖子
   📊 查看发布历史
   💬 管理评论
@@ -332,25 +312,31 @@ python3 scripts/x2c_social.py --action upload --file /path/to/video.mp4 --folder
   🔗 查看已绑定账号
 ```
 
-### 步骤 3：发布帖子 — 收集信息
+### 步骤 3：发布帖子 — 按平台智能引导
 
-```
-问题："你想发布到哪些平台？"
-→ 仅显示用户已绑定的平台。
+1. **问目标平台** → 仅显示已绑定的平台。
 
-问题："帖子内容是什么？"
-→ 接受文本输入。
+2. **根据平台要求主动询问必填项**：
+   - YouTube → 询问 `--title` 和 `--visibility`
+   - Reddit → 询问 `--title` 和 `--subreddit`
+   - Instagram/TikTok/Pinterest/Snapchat → 提醒必须附带媒体
+   - TikTok + AI 内容 → 建议使用 `--ai-generated`
 
-问题："需要附带媒体（图片/视频）吗？"
-→ 如果是，接受本地文件路径或远程 URL。本地文件会自动上传——无需额外步骤。
+3. **询问帖子内容** → 检查文字长度是否超过平台限制。
 
-问题："立即发布还是定时发布？"
-→ 如果定时，收集 ISO 8601 格式的时间。
-```
+4. **询问媒体** → 接受本地文件或远程 URL。本地文件自动上传（任意大小）。
+
+5. **询问定时** → 立即发布还是定时。
 
 ### 步骤 4：执行并展示
 
-运行相应命令并将结果展示给用户。对于发布操作，清晰展示每个平台的状态（成功/失败）。
+脚本会：
+1. 自动上传本地文件（智能选择上传方式）
+2. 校验平台规则
+3. 构建平台专属 options
+4. 发布并返回每个平台的结果
+
+清晰展示结果，高亮显示每个平台的成功/失败状态。
 
 ---
 
@@ -358,8 +344,8 @@ python3 scripts/x2c_social.py --action upload --file /path/to/video.mp4 --folder
 
 | 状态码 | 含义 | 处理方式 |
 |--------|------|----------|
-| 400 | 参数缺失或无效 | 检查并修正参数 |
-| 401 | API Key 无效 | 引导用户验证/重置 API Key |
+| 400 | 参数缺失或无效 | 检查平台要求并修正 |
+| 401 | API Key 无效 | 引导用户验证/重置 Key |
 | 500 | 服务器错误 | 重试或通知用户 |
 
-发生错误时，显示清晰的错误信息并建议纠正措施。
+脚本还会在调用 API 前进行**客户端校验**：文字长度、媒体必需检查、必填项（title/subreddit）、媒体数量限制等。致命错误会阻止发布，警告会显示但不阻止。

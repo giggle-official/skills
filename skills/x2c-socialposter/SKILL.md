@@ -1,7 +1,7 @@
 ---
 name: x2c-socialposter
-description: "Social media publishing and engagement management via X2C Open API. Use when the user needs to publish posts to social media, check linked accounts, manage comments, or upload media. Use cases: (1) Publish text/media posts to TikTok, Instagram, Facebook, YouTube, LinkedIn, Twitter, etc. (2) Schedule posts for future publishing. (3) Manage comments and replies on posts. (4) Upload media files and get CDN links. (5) View post history and linked account status. Triggers: post to social media, publish post, social media, schedule post, social publish, upload media, social accounts, comment on post."
-version: "0.0.1"
+description: "Social media publishing and engagement management via X2C Open API. Use when the user needs to publish posts to social media, check linked accounts, manage comments, or upload media. Use cases: (1) Publish text/media posts to TikTok, Instagram, Facebook, YouTube, LinkedIn, Twitter, etc. (2) Schedule posts for future publishing. (3) Manage comments and replies on posts. (4) Upload media files (up to 5GB) and get CDN links. (5) View post history and linked account status. Triggers: post to social media, publish post, social media, schedule post, social publish, upload media, social accounts, comment on post."
+version: "0.1.0"
 license: MIT
 author: storyclaw-official
 homepage: https://github.com/storyclaw-official/skills
@@ -35,7 +35,7 @@ metadata:
 
 **Source**: [storyclaw-official/skills](https://github.com/storyclaw-official/skills) · Dashboard: [x2creel.ai](https://www.x2creel.ai/)
 
-Publish posts, manage comments, and upload media to social platforms via X2C Open API. Supports 13+ platforms including TikTok, Instagram, YouTube, Facebook, LinkedIn, Twitter, and more.
+Publish posts, manage comments, and upload media to 13+ social platforms via X2C Open API. Features smart upload (auto-selects pre-signed URL for large files), per-platform validation, and one-step publish with local files.
 
 ---
 
@@ -57,65 +57,116 @@ Set `X2C_API_KEY` before use. The script will prompt if not configured.
 
 ### Step 0: Check API Key
 
-Run the following to check if `X2C_API_KEY` is already set:
-
 ```bash
 python3 scripts/x2c_social.py --action check-key
 ```
 
 - If the key is set → proceed to Step 1.
-- If the key is NOT set → guide the user through setup:
+- If the key is NOT set → guide the user:
 
 ```
 🔑 X2C API Key is not configured yet. Let's set it up:
 
-1. Go to https://www.x2creel.ai/social-accounts
-2. Create your X2C account (if you don't have one)
-3. Link your social media accounts (TikTok, Instagram, etc.)
-4. Go to Dashboard → Developer API Key
-5. Copy your X2C Open API Key
-6. Paste your API key here in the chat
+1. Go to https://www.x2creel.ai/social-accounts and sign up / log in
+2. Click "Link Account" to connect your social media accounts (TikTok, Instagram, etc.)
+3. On the same page, scroll down to "Developer API Key" section and click "Get API Key"
+4. Copy your X2C Open API Key and paste it here
 
 Once you provide the key, I'll save it for you.
 ```
 
-After the user provides the key, save it to the environment and confirm with a `social/status` check.
-
 ### Step 1: Verify Linked Accounts
-
-Once the API key is configured, always check linked accounts first:
 
 ```bash
 python3 scripts/x2c_social.py --action status
 ```
 
-Display the linked platforms to the user. If no accounts are linked, guide them:
+Display the linked platforms. If none are linked:
 
 ```
 ⚠️ No social accounts linked yet.
-
-Please visit https://www.x2creel.ai/social-accounts to link your social media accounts, then come back and try again.
+Please visit https://www.x2creel.ai/social-accounts to link your accounts.
 ```
 
 ---
 
-## Supported Platforms
+## Platform Requirements Quick Reference
 
-| Platform | Key | Notes |
-|----------|-----|-------|
-| TikTok | `tiktok` | Video required |
-| Instagram | `instagram` | Image/video supported |
-| Facebook | `facebook` | Text, image, video |
-| YouTube | `youtube` | Video required |
-| LinkedIn | `linkedin` | Text, image, video |
-| Twitter / X | `twitter` | Text, image, video |
-| Threads | `threads` | Text, image |
-| Pinterest | `pinterest` | Image required |
-| Reddit | `reddit` | Text, image, video |
-| Bluesky | `bluesky` | Text, image |
-| Telegram | `telegram` | Text, image, video |
-| Snapchat | `snapchat` | Image/video |
-| Google My Business | `gmb` | Text, image |
+**Before publishing, always check the target platform's requirements and guide the user accordingly.**
+
+| Platform | ID | Media Required | Text Limit | Max Media | Supported Types | Key Constraints |
+|----------|-----|:---:|---:|:---:|---|---|
+| YouTube | `youtube` | ✅ (video) | title:100 desc:5,000 | 1 video | MP4, MOV, AVI, WMV | `--title` required (auto-gen if missing, max 100 chars). Default visibility = public. |
+| Instagram | `instagram` | ✅ | 2,200 | 10 (carousel) | JPEG, PNG, MP4 | Must be Business/Creator. No text-only. Max 5 hashtags, 3 @mentions. |
+| TikTok | `tiktok` | ✅ | 2,200 | 1 video or 35 images | MP4, JPG, JPEG, WEBP | Images & video can't mix. **No PNG**. No `\n` in text. AI content must mark `--ai-generated`. |
+| X (Twitter) | `twitter` | ❌ | 280 | 4 images or 1 video | JPEG, PNG, GIF, MP4 | Images and videos can't mix. BYO API keys required. Use `longPost` for >280 chars. |
+| Facebook | `facebook` | ❌ | 63,206 | 10+ | JPEG, PNG, MP4 | Must be a Page (not personal). |
+| LinkedIn | `linkedin` | ❌ | 3,000 | 9 | JPEG, PNG, GIF, MP4 | Personal or Company page. |
+| Pinterest | `pinterest` | ✅ | 500 | 5 (carousel) | JPEG, PNG | Image required. Video requires `--thumbnail`. |
+| Reddit | `reddit` | ❌ | title:300 post:40,000 | 1 | JPEG, PNG, GIF, MP4 | `--title` required. `--subreddit` required. |
+| GMB | `gmb` | ❌ | 1,500 | 1 | JPEG, PNG, MP4 | Verified business. No phone numbers in text. |
+| Bluesky | `bluesky` | ❌ | 300 | 4 | JPEG, PNG, MP4 | 300 chars including links. |
+| Threads | `threads` | ❌ | 500 | 10 (carousel) | JPEG, PNG, MP4 | Linked to Instagram account. |
+| Snapchat | `snapchat` | ✅ | 160 | 1 | JPEG, PNG, MP4 | Exactly 1 media item. |
+| Telegram | `telegram` | ❌ | 4,096 | 1 | JPEG, PNG, GIF, MP4 | Bot + Channel/Group. |
+
+### ⚠️ Multi-Platform Posting Caveat
+
+When posting to multiple platforms simultaneously, content guards apply sequentially — the **shortest character limit wins** and will truncate for all platforms. If you need different text per platform, make **separate publish calls**.
+
+### Platform-Specific Parameters
+
+When publishing to these platforms, the script **automatically validates and builds platform options**:
+
+| Parameter | Platforms | Description |
+|-----------|-----------|-------------|
+| `--title` | YouTube, Reddit | Post/video title (required). YouTube auto-generates from post text if missing (max 100 chars). |
+| `--subreddit` | Reddit | Target subreddit without `r/` (required) |
+| `--visibility` | YouTube, TikTok | `public`/`unlisted`/`private` (YT), `PUBLIC_TO_EVERYONE`/`SELF_ONLY` etc. (TT) |
+| `--thumbnail` | Pinterest | Thumbnail URL for video pins (required for video) |
+| `--ai-generated` | TikTok | Mark content as AI-generated (recommended for AI content) |
+
+---
+
+## Media Upload
+
+The script uses **smart upload** — automatically selects the best method based on file size:
+
+| Method | File Size | Limit | How It Works |
+|--------|-----------|-------|-------------|
+| **Direct upload** | ≤ 50MB | ~50MB | One-step multipart upload |
+| **Pre-signed URL** | > 50MB | **5GB** | Gets S3 pre-signed URL → PUT directly to S3 |
+
+This is handled automatically — the user just provides a file path and the script picks the right method.
+
+### Standalone Upload
+
+```bash
+# Small file → direct upload
+python3 scripts/x2c_social.py --action upload --file /path/to/image.jpg
+
+# Large file → auto pre-signed upload
+python3 scripts/x2c_social.py --action upload --file /path/to/large_video.mp4 --folder videos
+```
+
+### One-Step Publish with Local Files
+
+When publishing, local files are **auto-uploaded** before publishing — no separate upload step needed:
+
+```bash
+# 75MB video → auto pre-signed upload → publish
+python3 scripts/x2c_social.py --action publish \
+  --platforms tiktok instagram \
+  --post "Check this out! 🎬" \
+  --media-files /path/to/large_video.mp4
+```
+
+Output flow:
+```json
+{"status": "uploading", "file": "large_video.mp4", "size_mb": 75.2, "method": "presigned", "message": "..."}
+{"status": "uploaded", "file": "large_video.mp4", "url": "https://v.arkfs.co/.../large_video.mp4", "method": "presigned"}
+{"success": true, "data": {"id": "post_abc123", "postIds": [...]}}
+```
 
 ---
 
@@ -130,63 +181,77 @@ python3 scripts/x2c_social.py --action status
 ### 2. Publish Post
 
 ```bash
-# Text-only post
+# Text-only (works for: twitter, facebook, linkedin, reddit, gmb, bluesky, threads, telegram)
+python3 scripts/x2c_social.py --action publish \
+  --platforms twitter facebook \
+  --post "Hello world! 🚀"
+
+# With local file — auto-uploaded (any size up to 5GB)
 python3 scripts/x2c_social.py --action publish \
   --platforms tiktok instagram \
-  --post "Check out our latest update! 🚀"
+  --post "Watch this! 🎬" \
+  --media-files /path/to/video.mp4
 
-# Post with remote media URL
+# With remote URL
 python3 scripts/x2c_social.py --action publish \
   --platforms tiktok instagram \
   --post "Watch this! 🎬" \
   --media-urls "https://example.com/video.mp4"
 
-# Post with local file (auto-uploads to S3, then publishes — one step!)
+# Mix local + remote
 python3 scripts/x2c_social.py --action publish \
-  --platforms tiktok instagram \
-  --post "Watch this! 🎬" \
-  --media-files "/path/to/video.mp4"
+  --platforms facebook \
+  --post "Double media! 🎬" \
+  --media-files /local/video.mp4 \
+  --media-urls "https://cdn.example.com/image.jpg"
 
-# Mix local files and remote URLs
+# YouTube — title required
 python3 scripts/x2c_social.py --action publish \
-  --platforms tiktok instagram \
-  --post "Dual media post! 🎬" \
-  --media-files "/path/to/local.mp4" \
-  --media-urls "https://example.com/remote.jpg"
+  --platforms youtube \
+  --post "Video description here" \
+  --title "My YouTube Video" \
+  --visibility public \
+  --media-files /path/to/video.mp4
 
-# Scheduled post with local file
+# Reddit — title + subreddit required
+python3 scripts/x2c_social.py --action publish \
+  --platforms reddit \
+  --post "Post body text" \
+  --title "Discussion: AI in 2026" \
+  --subreddit technology
+
+# TikTok — mark AI content
+python3 scripts/x2c_social.py --action publish \
+  --platforms tiktok \
+  --post "AI generated content" \
+  --ai-generated \
+  --media-files /path/to/ai_video.mp4
+
+# Scheduled post
 python3 scripts/x2c_social.py --action publish \
   --platforms tiktok instagram \
   --post "Coming soon! ⏰" \
-  --media-files "/path/to/video.mp4" \
+  --media-files /path/to/video.mp4 \
   --schedule "2026-04-01T12:00:00Z"
 
-# Post with link shortening
+# Shorten links
 python3 scripts/x2c_social.py --action publish \
   --platforms twitter linkedin \
   --post "Read our blog: https://example.com/very-long-url" \
   --shorten-links
 ```
 
-> **One-step publish**: When using `--media-files` with local file paths, the script automatically uploads each file to S3 first, then uses the returned CDN URLs to publish. You can also pass local paths directly to `--media-urls` — they are auto-detected and uploaded. No need to run upload separately.
-
 ### 3. Get Post History
 
 ```bash
-# All platforms
 python3 scripts/x2c_social.py --action posts
-
-# Filter by platform
 python3 scripts/x2c_social.py --action posts --platform tiktok
 ```
 
 ### 4. Delete Post
 
 ```bash
-# Delete from specific platforms
 python3 scripts/x2c_social.py --action delete-post --post-id post_abc123
-
-# Bulk delete from all platforms
 python3 scripts/x2c_social.py --action delete-post --post-id post_abc123 --bulk
 ```
 
@@ -194,99 +259,32 @@ python3 scripts/x2c_social.py --action delete-post --post-id post_abc123 --bulk
 
 ```bash
 python3 scripts/x2c_social.py --action comment \
-  --post-id post_abc123 \
-  --platforms tiktok \
-  --comment "Great content! 🔥"
+  --post-id post_abc123 --platforms tiktok --comment "Great! 🔥"
 ```
 
 ### 6. Get Comments
 
 ```bash
-python3 scripts/x2c_social.py --action comments \
-  --post-id post_abc123 \
-  --platform tiktok
+python3 scripts/x2c_social.py --action comments --post-id post_abc123 --platform tiktok
 ```
 
 ### 7. Reply to Comment
 
 ```bash
 python3 scripts/x2c_social.py --action reply \
-  --comment-id comment_xyz \
-  --platforms tiktok \
-  --comment "Thanks for watching!"
+  --comment-id comment_xyz --platforms tiktok --comment "Thanks!"
 ```
 
 ### 8. Delete Comment
 
 ```bash
-python3 scripts/x2c_social.py --action delete-comment \
-  --comment-id comment_xyz
+python3 scripts/x2c_social.py --action delete-comment --comment-id comment_xyz
 ```
 
-### 9. Upload Media
+### 9. Upload Media (standalone)
 
 ```bash
-python3 scripts/x2c_social.py --action upload \
-  --file /path/to/video.mp4 \
-  --folder my-videos
-```
-
-Returns a permanent CDN URL that can be used in `--media-urls` for publishing.
-
----
-
-## Execution Flow: One-Step Publish with Local Media
-
-When publishing with local files, the script handles everything automatically:
-
-```
-User runs publish with --media-files /path/to/video.mp4
-  ↓
-Script detects local file path (not http/https)
-  ↓
-Auto-uploads file to S3 via media/upload
-  ↓
-Receives CDN URL (https://v.arkfs.co/...)
-  ↓
-Injects CDN URL into media_urls
-  ↓
-Calls social/publish with the CDN URL
-  ↓
-Returns publish result to user
-```
-
-**Example — single command, full flow:**
-
-```bash
-python3 scripts/x2c_social.py --action publish \
-  --platforms tiktok instagram \
-  --post "Check this out! 🎬" \
-  --media-files /path/to/video.mp4
-```
-
-The script will output upload progress, then the final publish result:
-
-```json
-{"status": "uploading", "file": "video.mp4", "message": "Uploading video.mp4 to S3..."}
-{"status": "uploaded", "file": "video.mp4", "url": "https://v.arkfs.co/.../video.mp4"}
-{
-  "success": true,
-  "data": {
-    "id": "post_abc123",
-    "postIds": [
-      {"platform": "tiktok", "id": "7123456789", "status": "success"},
-      {"platform": "instagram", "id": "17898765432", "status": "success"}
-    ]
-  }
-}
-```
-
-### Standalone Upload (optional)
-
-You can still upload files independently to get a CDN URL for later use:
-
-```bash
-python3 scripts/x2c_social.py --action upload --file /path/to/video.mp4 --folder my-videos
+python3 scripts/x2c_social.py --action upload --file /path/to/file.mp4 --folder videos
 ```
 
 ---
@@ -295,14 +293,19 @@ python3 scripts/x2c_social.py --action upload --file /path/to/video.mp4 --folder
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
-| `--action` | ✅ | Action to perform (see Commands) |
+| `--action` | ✅ | Action to perform |
 | `--post` | for publish | Post text content |
 | `--platforms` | for publish | Space-separated target platforms |
 | `--platform` | for filtering | Single platform filter |
-| `--media-urls` | ❌ | Remote URLs or local paths (local files auto-uploaded) |
+| `--media-urls` | ❌ | Remote URLs or local paths (auto-uploaded) |
 | `--media-files` | ❌ | Local file paths to auto-upload and attach |
 | `--schedule` | ❌ | ISO 8601 date for scheduled posting |
 | `--shorten-links` | ❌ | Shorten URLs in post text |
+| `--title` | YouTube, Reddit | Post/video title |
+| `--subreddit` | Reddit | Target subreddit (without `r/`) |
+| `--visibility` | YouTube, TikTok | Post visibility setting |
+| `--thumbnail` | Pinterest | Video thumbnail URL |
+| `--ai-generated` | TikTok | Mark as AI-generated content |
 | `--post-id` | for post ops | Ayrshare post ID |
 | `--comment-id` | for comment ops | Comment ID |
 | `--comment` | for comment/reply | Comment or reply text |
@@ -318,7 +321,7 @@ python3 scripts/x2c_social.py --action upload --file /path/to/video.mp4 --folder
 
 ### Step 1: Onboarding Check
 
-Always run the First-Time Setup Guide first. Verify API key and linked accounts before any operation.
+Always run the First-Time Setup Guide first. Verify API key and linked accounts.
 
 ### Step 2: Determine Intent
 
@@ -332,25 +335,31 @@ Options:
   🔗 Check linked accounts
 ```
 
-### Step 3: For Publishing — Collect Info
+### Step 3: For Publishing — Platform-Aware Guidance
 
-```
-Question: "Which platforms do you want to post to?"
-→ Show only the user's linked platforms from status check.
+1. **Ask which platforms** → show only linked platforms from `status` check.
 
-Question: "What's your post content?"
-→ Accept text input.
+2. **Check platform requirements** and proactively ask for required fields:
+   - YouTube → ask for `--title` and `--visibility`
+   - Reddit → ask for `--title` and `--subreddit`
+   - Instagram/TikTok/Pinterest/Snapchat → remind media is required
+   - TikTok with AI content → suggest `--ai-generated`
 
-Question: "Do you want to attach any media (images/videos)?"
-→ If yes, accept local file paths OR remote URLs. Local files are auto-uploaded — no extra step needed.
+3. **Ask for post content** → check text length against platform limits.
 
-Question: "Schedule for later or publish now?"
-→ If schedule, collect ISO 8601 datetime.
-```
+4. **Ask about media** → accept local files or remote URLs. Local files auto-upload (any size).
+
+5. **Ask about scheduling** → publish now or schedule for later.
 
 ### Step 4: Execute and Display
 
-Run the appropriate command and forward the result to the user. For publish actions, display the per-platform status (success/failure) clearly.
+Run the command. The script will:
+1. Auto-upload local files (smart method selection)
+2. Validate against platform requirements
+3. Build platform-specific options
+4. Publish and return per-platform results
+
+Display results clearly, highlighting any per-platform success/failure.
 
 ---
 
@@ -358,8 +367,14 @@ Run the appropriate command and forward the result to the user. For publish acti
 
 | Code | Meaning | Action |
 |------|---------|--------|
-| 400 | Missing/invalid parameters | Check and fix parameters |
-| 401 | Invalid API key | Guide user to verify/reset API key |
+| 400 | Missing/invalid parameters | Check platform requirements and fix |
+| 401 | Invalid API key | Guide user to verify/reset key |
 | 500 | Server error | Retry or inform user |
 
-When an error occurs, display a clear message and suggest corrective action.
+The script also performs **client-side validation** before calling the API:
+- Text length per platform
+- Media required check
+- Required fields (title, subreddit)
+- Media count limits (Snapchat = 1)
+
+Fatal validation errors block the publish. Warnings are displayed but don't block.
