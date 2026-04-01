@@ -319,7 +319,7 @@ class TrusteeModeAPI:
             print(f"请求失败: {e}")
             return {"code": -1, "msg": str(e)}
     
-    def execute_workflow(self, diy_story: str, aspect: str, project_name: str,
+    def execute_workflow(self, diy_story: str, aspect: str, project_name: str, language: str,
                         video_duration: str = "auto", style_id: Optional[int] = None,
                         project_type: str = "director",
                         character_info: Optional[list] = None,
@@ -333,6 +333,7 @@ class TrusteeModeAPI:
             diy_story: 故事创意内容
             aspect: 视频宽高比 (16:9/9:16)
             project_name: 项目名称
+            language: 生成语言，仅允许 zh 或 en（须与故事/用户对话主导语言一致）
             video_duration: 视频时长 (auto/30/60/120/180/240/300)，默认为"auto"
             style_id: 风格ID（可选）
             project_type: 项目类型 (director/narration/short-film)，默认为"director"（短剧模式）
@@ -341,11 +342,17 @@ class TrusteeModeAPI:
         Returns:
             包含下载链接的响应数据，或失败信息
         """
+        if language not in ("zh", "en"):
+            return {
+                "code": -1,
+                "msg": "language 必须为 zh 或 en",
+                "data": None
+            }
+
         start_time = datetime.now()
         timeout = timedelta(hours=1)  # 固定超时时间为1小时
         query_interval = 3  # 固定查询间隔为3秒
-        language = "zh"  # 固定语言为中文
-        
+
         # 步骤1：创建项目并提交任务（合并为一步）
         print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 步骤1: 创建项目并提交任务...", file=sys.stderr)
         create_submit_result = self._create_and_submit(
@@ -623,6 +630,8 @@ def main():
                                 choices=['auto', '30', '60', '120', '180', '240', '300'],
                                 help='视频时长: auto/30/60/120/180/240/300（默认: auto）')
     workflow_parser.add_argument('--project-name', required=True, dest='project_name', help='项目名称')
+    workflow_parser.add_argument('--language', required=True, choices=['zh', 'en'],
+                                help='生成语言：zh 中文 / en 英文（须与故事或用户对话主导语言一致）')
     workflow_parser.add_argument('--style-id', type=int, help='风格ID（可选）')
     workflow_parser.add_argument('--project-type', default='director', dest='project_type',
                                 choices=['director', 'narration', 'short-film'],
@@ -774,6 +783,7 @@ def main():
             diy_story=args.diy_story,
             aspect=args.aspect,
             project_name=args.project_name,
+            language=args.language,
             video_duration=args.video_duration,
             style_id=args.style_id if hasattr(args, 'style_id') and args.style_id is not None else None,
             project_type=args.project_type,

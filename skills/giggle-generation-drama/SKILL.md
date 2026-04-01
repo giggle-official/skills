@@ -1,7 +1,7 @@
 ---
 name: giggle-generation-drama
 description: "Use this feature when users want to generate videos, shoot short films, or view available video styles. Triggering keywords: short film, make video, shoot short film, short video, AI video, generate video from story, short drama, narrated video, cinematic video, available video styles."
-version: "0.0.10"
+version: "0.0.11"
 license: MIT
 requires:
   bins: [python3]
@@ -84,12 +84,23 @@ execute_workflow(
     diy_story: str,                           # Story/script content (required)
     aspect: str,                              # Aspect ratio: 16:9 or 9:16 (required)
     project_name: str,                        # Project name (required)
+    language: str,                            # zh or en (required)—see "Language" below
     video_duration: str = "auto",             # Duration, default "auto" (optional)
     style_id: Optional[int] = None,          # Style ID (optional)
     project_type: str = "director",           # Mode, default "director" (optional)
     character_info: Optional[List[Dict]] = None  # Character images (optional)
 )
 ```
+
+### Language (`language`, required)
+
+Must be **`zh`** or **`en`**. Set it from the **dominant language of the user’s story/prompt and the current dialogue**:
+
+- User writes or dictates the story **mainly in Chinese** (or your conversation with them is **mainly Chinese**) → `language="zh"`.
+- User writes or dictates the story **mainly in English** (or the conversation is **mainly English**) → `language="en"`.
+- **Mixed story**: choose the language of the **majority of the script body**; if evenly mixed, prefer the language the user used for **the latest explicit instructions**.
+
+This value is passed to the Giggle API as the generation language; it must **not** be omitted or guessed without matching the content.
 
 ### Parameter Description
 
@@ -98,6 +109,7 @@ execute_workflow(
 | diy_story | yes | Story or script content |
 | aspect | yes | Aspect ratio: `16:9` or `9:16` |
 | project_name | yes | Project name |
+| language | yes | `zh` (Chinese) or `en` (English)—aligned with story/dialogue (see above) |
 | video_duration | no | `auto`, `30`, `60`, `120`, `180`, `240`, `300`; default `"auto"` |
 | style_id | no | Style ID; omit if not specified |
 | project_type | no | `director` / `narration` / `short-film`; default `"director"` |
@@ -119,9 +131,10 @@ execute_workflow(
 
 2. **If the user wants to pick a style**: Call `get_styles()` for the style list; show ID, name, category, description; wait for choice before continuing.
 3. **If the user provides character image URLs**: Build `character_info` array with `name` and `url` per character.
-4. **Run workflow**:
+4. **Set `language` (`zh` / `en`)** per **Language** section from the story and ongoing dialogue—**required before** `execute_workflow`.
+5. **Run workflow**:
    - **Before** calling `execute_workflow()`, follow **Continuous progress updates** above: brief start message, realistic ETA—**you will report as soon as it returns**.
-   - Call `execute_workflow()` with story, aspect ratio, project name.
+   - Call `execute_workflow()` with story, aspect ratio, project name, **and `language`**.
    - Set `project_type` per chosen mode; pass `video_duration` if specified (else `"auto"`); pass `style_id` if chosen; pass `character_info` if provided.
    - **Call once and wait** — the function handles create, submit, poll, pay, and completion; returns download link or error. **Immediately** after return, forward success (full signed URL) or failure to the user.
 
@@ -142,7 +155,8 @@ api = TrusteeModeAPI()
 result = api.execute_workflow(
     diy_story="An adventure story...",
     aspect="16:9",
-    project_name="My Video Project"
+    project_name="My Video Project",
+    language="en",
 )
 # result contains download URL or error
 ```
@@ -154,6 +168,7 @@ result = api.execute_workflow(
     diy_story="An adventure story...",
     aspect="16:9",
     project_name="My Video Project",
+    language="en",
     video_duration="60"
 )
 ```
@@ -165,6 +180,7 @@ result = api.execute_workflow(
     diy_story="An adventure story...",
     aspect="16:9",
     project_name="My Video Project",
+    language="en",
     video_duration="60",
     style_id=142
 )
@@ -177,6 +193,7 @@ result = api.execute_workflow(
     diy_story="Today we'll talk about AI development...",
     aspect="16:9",
     project_name="Narration Video",
+    language="en",
     project_type="narration"
 )
 ```
@@ -188,6 +205,7 @@ result = api.execute_workflow(
     diy_story="Sunset. An old fisherman rows home alone. The sea glows red...",
     aspect="16:9",
     project_name="Short Film",
+    language="en",
     project_type="short-film"
 )
 ```
@@ -199,6 +217,7 @@ result = api.execute_workflow(
     diy_story="Xiao Ming and Xiao Hong meet in the park, they smile at each other...",
     aspect="16:9",
     project_name="Custom Character Video",
+    language="zh",
     character_info=[
         {"name": "Xiao Ming", "url": "https://xxx/xiaoming.jpg"},
         {"name": "Xiao Hong", "url": "https://xxx/xiaohong.jpg"}
