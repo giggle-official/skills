@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "agent_id": "news-to-video-monetizer",
+  "agent_id": "",
 
   "content": {
     "niches": [],
@@ -20,8 +20,8 @@
     },
     "available_options": {
       "mode": {
-        "short_video": {"label": "短视频", "episodes": 1, "description": "单集短视频，适合热点快讯"},
-        "short_drama": {"label": "短剧", "episodes": 10, "description": "多集短剧，适合深度话题"}
+        "short_video": {"label": "短视频", "episodes": 1},
+        "short_drama": {"label": "短剧", "episodes": 10}
       },
       "duration": {
         "60": {"label": "60秒", "credits": 299, "price_usd": 2.99},
@@ -30,8 +30,8 @@
         "300": {"label": "300秒", "credits": 999, "price_usd": 9.99}
       },
       "ratio": {
-        "9:16": {"label": "竖屏(9:16)", "description": "适合抖音、快手、视频号"},
-        "16:9": {"label": "横屏(16:9)", "description": "适合YouTube、B站"}
+        "9:16": {"label": "竖屏(9:16)"},
+        "16:9": {"label": "横屏(16:9)"}
       },
       "style": [
         {"id": "3D古风", "label": "3D古风"},
@@ -67,11 +67,7 @@
   "pipeline": {
     "default_topics_count": 3,
     "dedup_ttl_days": 15,
-    "auto_publish": true,
-    "retry_policy": {
-      "max_retries": 0,
-      "note": "视频制作失败不自动重试，每次都扣积分"
-    }
+    "auto_publish": true
   },
 
   "task_system": {
@@ -88,7 +84,6 @@
   },
 
   "revenue": {
-    "description": "账户级收益，独立于 Task，通过 wallet API 获取",
     "apis": {
       "balance": "wallet/balance",
       "transactions": "wallet/transactions"

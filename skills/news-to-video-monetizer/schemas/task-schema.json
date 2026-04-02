@@ -1,64 +1,15 @@
 {
   "$schema": "task-lifecycle-v2",
   "version": "2.1.0",
-  "description": "一次执行 = 一个 Task，5 节点生命周期追踪。收益为账户级，不绑定 Task。",
-
+  "description": "一次执行 = 一个 Task，5 节点生命周期。收益为账户级，不绑定 Task。",
   "task_id_format": "TASK-{YYYYMMDD}-{SEQ:3}",
-  "task_id_example": "TASK-20260402-001",
-
   "lifecycle_nodes": [
-    {
-      "node": 1,
-      "key": "collection",
-      "label": "采集",
-      "description": "抓取热点素材，记录来源平台和原始数据量",
-      "output_fields": ["sources_scanned", "raw_topics_count", "platforms"]
-    },
-    {
-      "node": 2,
-      "key": "filtering",
-      "label": "筛选",
-      "description": "关键词匹配、语义去重、热度排序，选出最佳话题",
-      "output_fields": ["matched_topics", "selected_topic", "virality_score", "dedup_check"]
-    },
-    {
-      "node": 3,
-      "key": "production",
-      "label": "制作",
-      "description": "AI 编剧 + 角色创建 + 分镜渲染 + 视频合成",
-      "output_fields": ["script_title", "characters", "shots_count", "video_url", "x2c_project_id", "costs"]
-    },
-    {
-      "node": 4,
-      "key": "publishing",
-      "label": "发布",
-      "description": "发布到 X2C 平台，使用 video_asset.thumbnailUrl 作为封面",
-      "output_fields": ["publish_project_id", "tag_id", "cover_url"]
-    },
-    {
-      "node": 5,
-      "key": "audit",
-      "label": "审核",
-      "description": "X2C 平台审核。approved = 获得流量分成资格。Task 到此结束。",
-      "output_fields": ["review_status", "monetization_eligible"]
-    }
+    {"node": 1, "key": "collection", "label": "采集"},
+    {"node": 2, "key": "filtering", "label": "筛选"},
+    {"node": 3, "key": "production", "label": "制作"},
+    {"node": 4, "key": "publishing", "label": "发布"},
+    {"node": 5, "key": "audit", "label": "审核"}
   ],
-
   "node_statuses": ["pending", "running", "completed", "failed"],
-  "task_statuses": ["created", "running", "completed", "failed"],
-
-  "retention_policy": {
-    "completed_ttl_days": 30,
-    "failed_ttl_days": 7,
-    "archive_before_delete": true
-  },
-
-  "revenue_note": "收益为账户级数据（wallet/balance + wallet/transactions），不绑定到单个 Task。",
-
-  "design_decisions": {
-    "no_local_video": "视频存储在 X2C 云端，本地只保存 Task 元数据",
-    "no_auto_retry": "视频制作失败不自动重试（每次扣积分），报告用户后等指令",
-    "cover_from_api": "封面图使用 video_asset.thumbnailUrl 或 storyboard_shots[0].imageUrl",
-    "auto_publish": "制作完成后自动发布，无需手动确认（除非 draft mode）"
-  }
+  "task_statuses": ["created", "running", "completed", "failed"]
 }
