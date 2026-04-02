@@ -1,0 +1,108 @@
+{
+  "version": "1.0.0",
+  "agent_id": "news-to-video-monetizer",
+
+  "content": {
+    "niches": [],
+    "keywords": [],
+    "exclude_keywords": [],
+    "target_audience": "",
+    "language": "zh-CN"
+  },
+
+  "video_production": {
+    "defaults": {
+      "mode": "short_video",
+      "duration": 60,
+      "ratio": "9:16",
+      "style": "",
+      "category": ""
+    },
+    "available_options": {
+      "mode": {
+        "short_video": {"label": "短视频", "episodes": 1, "description": "单集短视频，适合热点快讯"},
+        "short_drama": {"label": "短剧", "episodes": 10, "description": "多集短剧，适合深度话题"}
+      },
+      "duration": {
+        "60": {"label": "60秒", "credits": 299, "price_usd": 2.99},
+        "120": {"label": "120秒", "credits": 599, "price_usd": 5.99},
+        "180": {"label": "180秒", "credits": 799, "price_usd": 7.99},
+        "300": {"label": "300秒", "credits": 999, "price_usd": 9.99}
+      },
+      "ratio": {
+        "9:16": {"label": "竖屏(9:16)", "description": "适合抖音、快手、视频号"},
+        "16:9": {"label": "横屏(16:9)", "description": "适合YouTube、B站"}
+      },
+      "style": [
+        {"id": "3D古风", "label": "3D古风"},
+        {"id": "2D漫剧", "label": "2D漫剧"},
+        {"id": "吉卜力", "label": "吉卜力"},
+        {"id": "皮克斯", "label": "皮克斯"},
+        {"id": "写实风格", "label": "写实"},
+        {"id": "二次元", "label": "二次元"},
+        {"id": "国风水墨", "label": "国风水墨"}
+      ],
+      "category": {
+        "zh": [
+          {"id": "玄幻异能", "label": "玄幻异能"},
+          {"id": "悬疑惊悚", "label": "悬疑惊悚"},
+          {"id": "科幻末世", "label": "科幻末世"},
+          {"id": "都市复仇", "label": "都市复仇"},
+          {"id": "热门综合", "label": "热门综合"},
+          {"id": "霸总甜宠", "label": "霸总甜宠"},
+          {"id": "仙侠古装", "label": "仙侠古装"}
+        ],
+        "en": [
+          {"id": "Werewolf & Shifter", "label": "Werewolf & Shifter"},
+          {"id": "Suspense & Horror", "label": "Suspense & Horror"},
+          {"id": "Power & Revenge", "label": "Power & Revenge"},
+          {"id": "Sweet & CEO", "label": "Sweet & CEO"},
+          {"id": "Magic & Fantasy", "label": "Magic & Fantasy"},
+          {"id": "AI Drama Lab", "label": "AI Drama Lab"}
+        ]
+      }
+    }
+  },
+
+  "pipeline": {
+    "default_topics_count": 3,
+    "dedup_ttl_days": 15,
+    "auto_publish": true,
+    "retry_policy": {
+      "max_retries": 0,
+      "note": "视频制作失败不自动重试，每次都扣积分"
+    }
+  },
+
+  "task_system": {
+    "id_format": "TASK-{YYYYMMDD}-{SEQ:3}",
+    "storage_dir": "tasks/",
+    "lifecycle_nodes": ["collection", "filtering", "production", "publishing", "audit"],
+    "retention": {
+      "completed_ttl_days": 30,
+      "failed_ttl_days": 7,
+      "archive_before_delete": true,
+      "archive_dir": "tasks/archive/"
+    },
+    "local_video_storage": false
+  },
+
+  "revenue": {
+    "description": "账户级收益，独立于 Task，通过 wallet API 获取",
+    "apis": {
+      "balance": "wallet/balance",
+      "transactions": "wallet/transactions"
+    }
+  },
+
+  "sources": {
+    "platforms": ["douyin", "weibo", "toutiao", "zhihu", "bilibili", "baidu", "kuaishou"],
+    "min_virality_score": 50
+  },
+
+  "x2c": {
+    "api_key": "",
+    "email": "",
+    "user_id": ""
+  }
+}
