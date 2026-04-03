@@ -1,6 +1,6 @@
 ---
 name: giggle-generation-aimv-30
-description: "Use when the user wants a 30-second AI music video (AIMV)—same pipeline as standard AIMV but fixed 30s output via project type aimv-30. Triggers: 30 second MV, 30s AIMV, 30秒音乐视频, 30秒MV, short AIMV, 半分钟MV; also prompt/custom lyrics flows like giggle-generation-aimv."
+description: "Use when the user wants a 30-second AI music video (AIMV)—same pipeline as standard AIMV but fixed 30s output via project type aimv-30. Triggers: 30 second MV, 30s AIMV, 30-second music video, half-minute MV, short AIMV; prompt- or custom-lyrics flows same as giggle-generation-aimv."
 version: "0.0.1"
 license: MIT
 requires:
@@ -22,15 +22,15 @@ metadata:
   }
 ---
 
-# 30 秒 AIMV Trustee Mode（`aimv-30`）
+# 30-Second AIMV Trustee Mode (`aimv-30`)
 
-与 **giggle-generation-aimv** 的流程完全相同：`execute_workflow` 一次、提交/轮询/支付/等待完成均一致。**唯一区别**：创建项目时 API `type` 为 **`aimv-30`**（30 秒 AIMV 产品线），不再是 `mv`。
+The flow matches **giggle-generation-aimv** exactly: one `execute_workflow` call, same submit / poll / pay / wait-to-complete behavior. **Only difference**: project creation uses API `type` **`aimv-30`** (30-second AIMV product line) instead of `mv`.
 
 ## ⚠️ Review Before Installing
 
 **Please review before installing.** This skill will:
 
-1. **Network** – Calls Giggle.pro API for 30-second AIMV generation
+1. **Network** – Calls the Giggle.pro API for 30-second AIMV generation
 
 **Requirements**: `python3 (>=3.6)`, `GIGGLE_API_KEY` (system environment variable), pip packages: `requests`
 
@@ -40,62 +40,67 @@ metadata:
 
 ## Required Setup Before First Use
 
-**Before performing any operation, confirm the user has configured the API Key.**
+**Before performing any operation, confirm the user has configured the API key.**
 
-**API Key**: Log in to [Giggle.pro](https://giggle.pro/). On the **main site**, use the **left sidebar** → **API Key** (**API 密钥**) section to create or copy your key.
+**API key**: Log in to [Giggle.pro](https://giggle.pro/). On the main site, open the **left sidebar** → **API Key** (may also appear as **API 密钥**) and create or copy your key.
 
-**Configuration**: Set system environment variable `GIGGLE_API_KEY`
+**Configuration**: Set the system environment variable `GIGGLE_API_KEY`:
+
 - `export GIGGLE_API_KEY=your_api_key`
 
 **Verification steps**:
-1. Confirm the user has configured `GIGGLE_API_KEY` in system environment
-2. If not configured, **guide the user**:
-   > Open [giggle.pro](https://giggle.pro/) while logged in → **left sidebar** → **API Key** / **API 密钥** → copy your key, then run `export GIGGLE_API_KEY=your_api_key` in the terminal.
-3. Wait for the user to configure before continuing the workflow
+
+1. Confirm `GIGGLE_API_KEY` is set in the environment.
+2. If missing, **tell the user**:
+   > While logged in at [giggle.pro](https://giggle.pro/) → **left sidebar** → **API Key** → copy the key, then run `export GIGGLE_API_KEY=your_api_key` in the terminal.
+3. Do not continue the workflow until the key is configured.
 
 ## Two Music Generation Modes
 
 | Mode | music_generate_type | Required params | Description |
 |------|---------------------|-----------------|-------------|
-| **Prompt** | `prompt` | prompt, vocal_gender | Describe music in text |
-| **Custom** | `custom` | lyrics, style, title | Provide lyrics, style, and title |
+| **Prompt** | `prompt` | prompt, vocal_gender | Describe the music in text |
+| **Custom** | `custom` | lyrics, style, title | Supply lyrics, style, and title |
 
 ### Shared Parameters (All Modes, Required)
 
-- **reference_image** or **reference_image_url**: Reference image—provide at least one (asset_id or download URL). Also supports base64 image, e.g. `"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="`. For base64: pass the raw Base64 string directly; do not add the data:image/xxx;base64 prefix.
-- **aspect**: Aspect ratio, `16:9` or `9:16`
-- **scene_description**: Visual scene description, **default empty**—only set when the user explicitly mentions the scene (max 200 chars)
-- **subtitle_enabled**: Enable subtitles, **default false**
+- **reference_image** or **reference_image_url**: Reference image—provide at least one (asset ID or download URL). Base64 is supported, e.g. `"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="`. For base64, pass the raw string only; do **not** prefix with `data:image/...;base64,`.
+- **aspect**: `16:9` or `9:16`
+- **scene_description**: Visual scene text, **defaults to empty**—set only when the user explicitly asks for a scene (max ~200 characters per product rules)
+- **subtitle_enabled**: Subtitles, **default false**
 
 ### Mode-Specific Parameters
 
 **Prompt mode**:
+
 - `prompt`: Music description (required)
-- `vocal_gender`: Vocal gender — `male` / `female` / `auto` (optional, default `auto`)
+- `vocal_gender`: `male` / `female` / `auto` (optional, default `auto`)
 - `instrumental`: Instrumental only (optional, default false)
 
 **Custom mode**:
-- `lyrics`: Lyrics content (required)
-- `style`: Music style (required)
+
+- `lyrics`: Lyrics body (required)
+- `style`: Musical style (required)
 - `title`: Song title (required)
 
 ## Workflow Function
 
-Use `execute_workflow` to run the full workflow—**call once and wait**. Internally: create project (**`type`: `aimv-30`**) + submit task (merged) → poll progress (every 3 sec) → detect and pay pending items → wait for completion (max 1 hour).
+Use `execute_workflow` for the full workflow—**call once and wait**. Internally: create project (**`type`: `aimv-30`**) + submit task (merged) → poll (~every 3s) → pay when needed → wait up to ~1 hour.
 
-## Continuous progress updates (blocking MV workflow)
+## Continuous progress updates (blocking AIMV workflow)
 
-`execute_workflow` **blocks** for the full pipeline: create/submit (merged), poll (~every 3s), pay if needed, up to **~1 hour**. You do not run shell `--query` yourself.
+`execute_workflow` **blocks** for the whole pipeline. Do not run ad-hoc shell `--query` loops yourself.
 
-1. **Before** the call, tell the user the **30s AIMV job** is running, that it usually takes **minutes** and can approach **~1 hour**, and you will report **when the function returns**.
-2. **Invoke** `execute_workflow` without waiting for the user to ask for a status check first.
-3. **After return**, forward the **full signed `download_url` / `video_asset`** on success or the error payload in plain language; include **`project_id`** when useful for support or manual pay/query.
-4. **`create_and_submit` only**: if they only want ids up front, use that path and query later when they ask.
+1. **Before** the call, say the **30s AIMV job** is running, it may take **minutes** and up to **~1 hour**, and you will message again **when the call returns**.
+2. **Invoke** `execute_workflow` without making the user ask for progress first.
+3. **After return**, on success forward the **full signed `download_url` / `video_asset`**; on failure, plain-language error details and **`project_id`** if useful for support or manual pay/query.
+4. **`create_and_submit` only**: if the user only wants IDs first, use that path and query when they follow up.
 
 **Important**:
-- Never call `create_project` and `submit_mv_task` separately—always use `execute_workflow` or `create_and_submit`
-- After calling, just wait for the function to return; all intermediate steps are automatic
-- For **non–30s** or open-duration AIMV, use skill **giggle-generation-aimv** instead
+
+- Never split `create_project` and `submit_mv_task` manually—use `execute_workflow` or `create_and_submit`.
+- After calling, wait for return; intermediate steps are handled inside the script.
+- For **non–30-second** / standard-duration AIMV, use skill **giggle-generation-aimv**.
 
 ### Function Signature
 
@@ -123,15 +128,16 @@ execute_workflow(
 
 ### Parameter Extraction Rules
 
-1. **reference_image and reference_image_url**: At least one required. Use `reference_image` for asset_id; use `reference_image_url` for image URL or base64.
-2. **scene_description**: Default empty—only fill when the user explicitly mentions "scene", "visual description", or "visual style".
-3. **subtitle_enabled**: Default False—only set True when the user explicitly requests subtitles.
-4. **aspect**: Use `9:16` when the user mentions portrait/vertical/9:16; otherwise default `16:9`.
-5. **Mode selection**: "Describe music / use prompt" → prompt; "Here are my lyrics / lyrics are" → custom;
+1. **reference_image** and **reference_image_url**: At least one. Use `reference_image` for asset ID; `reference_image_url` for URL or base64.
+2. **scene_description**: Leave empty unless the user clearly asks for scene / visual description / visual style.
+3. **subtitle_enabled**: Default false; set true only if the user explicitly wants subtitles.
+4. **aspect**: Use `9:16` for portrait / vertical; otherwise default `16:9`.
+5. **Mode**: User describes the music → `prompt`; user supplies lyrics → `custom`.
 
 ### Examples
 
 **Prompt mode**:
+
 ```python
 api = MVTrusteeAPI()
 result = api.execute_workflow(
@@ -145,6 +151,7 @@ result = api.execute_workflow(
 ```
 
 **Custom mode** (user provides lyrics):
+
 ```python
 result = api.execute_workflow(
     music_generate_type="custom",
@@ -157,7 +164,8 @@ result = api.execute_workflow(
 )
 ```
 
-**With scene description** (when user explicitly describes the scene):
+**With scene description** (user explicitly describes visuals):
+
 ```python
 result = api.execute_workflow(
     music_generate_type="prompt",
@@ -171,7 +179,7 @@ result = api.execute_workflow(
 
 ### Submit Task API Request Example (Prompt Mode)
 
-Submit endpoint (`/api/v1/trustee_mode/mv/submit`) request body (unchanged from standard AIMV; project was created with `type: aimv-30`):
+Submit endpoint (`/api/v1/trustee_mode/mv/submit`) body—same shape as standard AIMV; the project was already created with `type: aimv-30`.
 
 ```json
 {
@@ -187,7 +195,7 @@ Submit endpoint (`/api/v1/trustee_mode/mv/submit`) request body (unchanged from 
 }
 ```
 
-Note: `reference_image` (asset_id) and `reference_image_url` (URL or base64) are mutually exclusive.
+Note: `reference_image` (asset ID) and `reference_image_url` (URL or base64) are mutually exclusive.
 
 **Custom mode**:
 
@@ -207,7 +215,7 @@ Note: `reference_image` (asset_id) and `reference_image_url` (URL or base64) are
 
 ### Query Progress API Response Example
 
-Query endpoint (`/api/v1/trustee_mode/mv/query`) response (all steps completed):
+Query endpoint (`/api/v1/trustee_mode/mv/query`) when all steps are done:
 
 ```json
 {
@@ -234,11 +242,14 @@ Query endpoint (`/api/v1/trustee_mode/mv/query`) response (all steps completed):
 }
 ```
 
-Note: When `pay_status` is `pending`, call the pay endpoint. When all `steps` are done, `video_asset.download_url` will have a value—return the full signed URL. Correct format:
+Note: If `pay_status` is `pending`, pay via the pay endpoint. When steps finish, `video_asset.download_url` is populated—return the **complete** signed URL, e.g.:
+
 ```
 https://assets.giggle.pro/private/ai_director/348e4956c7bd4f763b/qzjc7gwkpf.mp4?Policy=...&Key-Pair-Id=...&Signature=...&response-content-disposition=attachment
 ```
-Do not strip `response-content-disposition=attachment` or other query params from the URL. Wrong (unsigned URL only):
+
+Do not strip `response-content-disposition=attachment` or other query parameters. Incorrect (unsigned base URL only):
+
 ```
 https://assets.giggle.pro/private/ai_director/348e4956c7bd4f763b/qzjc7gwkpf.mp4
 ```
@@ -248,6 +259,7 @@ https://assets.giggle.pro/private/ai_director/348e4956c7bd4f763b/qzjc7gwkpf.mp4
 Pay endpoint (`/api/v1/trustee_mode/mv/pay`):
 
 **Request body**:
+
 ```json
 {
   "project_id": "<your-project-id>"
@@ -255,6 +267,7 @@ Pay endpoint (`/api/v1/trustee_mode/mv/pay`):
 ```
 
 **Response**:
+
 ```json
 {
   "code": 200,
@@ -269,7 +282,7 @@ Pay endpoint (`/api/v1/trustee_mode/mv/pay`):
 
 ### Retry API Request Example
 
-When a step fails, guide the user to call the retry endpoint to resume from that step:
+If a step fails, the user may call the retry endpoint with the failed step name:
 
 ```json
 {
@@ -278,11 +291,11 @@ When a step fails, guide the user to call the retry endpoint to resume from that
 }
 ```
 
-Note: `current_step` is the step name to retry (e.g. `music-generate`, `storyboard`, `shot`, `editor`).
+`current_step` is the step to resume from (e.g. `music-generate`, `storyboard`, `shot`, `editor`).
 
 ### create_and_submit (Optional)
 
-If you only need to create the project and submit the task without waiting for completion, use `create_and_submit`. **Never** call `create_project` and `submit_mv_task` separately:
+To create and submit **without** waiting for completion, use `create_and_submit`. **Do not** call `create_project` and `submit_mv_task` as two separate manual steps:
 
 ```python
 api = MVTrusteeAPI()
@@ -293,12 +306,13 @@ r = api.create_and_submit(
     reference_image_url="https://...",
     prompt="Upbeat pop"
 )
-# Returns project_id for manual query/pay later
+# Returns project_id for later manual query/pay
 ```
 
 ### Return Value
 
 Success:
+
 ```json
 {
     "code": 200,
@@ -312,15 +326,15 @@ Success:
 }
 ```
 
-Returns error message on failure.
+On failure, an error message is returned (shape depends on API).
 
 ## Troubleshooting
 
 | Scenario | Cause | Solution |
 |----------|-------|----------|
-| `401 Unauthorized` or "invalid API key" | `GIGGLE_API_KEY` is missing, expired, or incorrect | Re-copy the key from [giggle.pro](https://giggle.pro/) → **left sidebar** → **API Key** / **API 密钥**, then re-export: `export GIGGLE_API_KEY=your_api_key` |
-| `429 Too Many Requests` | API rate limit exceeded | Wait a few minutes and retry; avoid submitting multiple projects in rapid succession |
-| Network timeout / connection error | Unstable network or API service temporarily unavailable | The script auto-retries up to 5 times with 5-second intervals; check your network if it still fails |
-| `pay_status: pending` | The project requires payment before proceeding | The workflow function handles this automatically; if running manually, call the pay endpoint with the `project_id` |
-| Task step failed (`status: failed`) | A generation step (e.g. `music-generate`, `shot`) encountered an error | Use the retry endpoint: `{"project_id": "<your-project-id>", "current_step": "<failed-step>"}` to resume from the failed step |
-| Workflow timeout (> 1 hour) | Generation took too long | Query progress manually with the `project_id` to check current status; contact support if the task is stuck |
+| `401 Unauthorized` or invalid API key | Missing, expired, or wrong `GIGGLE_API_KEY` | Copy the key again from [giggle.pro](https://giggle.pro/) → **left sidebar** → **API Key**, then `export GIGGLE_API_KEY=...` |
+| `429 Too Many Requests` | Rate limited | Wait and retry; avoid bursty parallel submissions |
+| Network timeout / connection error | Network or transient API outage | The script retries some network errors (bounded); verify connectivity |
+| `pay_status: pending` | Payment required | Handled inside `execute_workflow`; if debugging manually, call pay with `project_id` |
+| Task step failed (`status: failed`) | A pipeline step errored | Retry with `current_step` set to the failed step name |
+| Workflow timeout (> 1 hour) | Job ran too long | Query by `project_id`; contact support if stuck |
