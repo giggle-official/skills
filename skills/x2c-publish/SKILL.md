@@ -1,6 +1,7 @@
 ---
 name: x2c-publish
-description: {"en":"X2C Distribution & Wallet API - Publish video to X2C platform, manage assets (balance, claim X2C, swap to USDC, withdraw, transactions).","zh":"X2C Distribution & Wallet API - 发布视频到X2C平台 + 资产管理（余额、领取X2C、兑换USDC、提现、交易）。","ja":"X2C配給・ウォレットAPI - 動画公開、資産管理（残高、X2C請求、USDC交換、出金）。"}
+description: "X2C Distribution & Wallet API - Publish video to X2C platform, manage assets (balance, claim X2C, swap to USDC, withdraw, transactions)."
+version: "0.0.1"
 ---
 
 # X2c-Publish - X2C Distribution API
