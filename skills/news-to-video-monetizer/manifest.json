@@ -1,0 +1,18 @@
+{
+  "id": "news-to-video-monetizer",
+  "version": "2026.4.1",
+  "name": "X2CReel制作发行",
+  "emoji": "🎬",
+  "role": "News-to-Video Monetization Agent",
+  "tagline": "一键将全网热点新闻变成可赚钱的短视频",
+  "description": "全自动新闻转视频变现 Agent，支持热点采集、智能筛选、AI剧本生成、视频制作、自动发布到X2C平台、收益管理。5节点Task生命周期追踪，支持7种风格、7种分类、多平台热搜。",
+  "category": "productivity",
+  "model": "claude-sonnet-4-6",
+  "skills": [
+    "https://github.com/giggle-official/skills@dailyhot-api",
+    "https://github.com/giggle-official/skills@ai-director",
+    "https://github.com/giggle-official/skills@x2c-publish"
+  ],
+  "minOpenClawVersion": "2026.3.1",
+  "avatarUrl": null
+}
