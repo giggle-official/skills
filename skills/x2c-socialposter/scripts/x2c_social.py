@@ -66,7 +66,7 @@ PLATFORM_RULES = {
         "max_videos": 1,
         "max_media": 4,
         "supported_types": ["JPEG", "PNG", "GIF", "MP4"],
-        "notes": "Images and videos cannot be mixed. X API keys are configured once in X2C Dashboard (auto-injected by gateway — no extra setup needed here).",
+        "notes": "Images and videos cannot be mixed. No X/Twitter API keys required — just link your X account via OAuth in the X2C Dashboard.",
     },
     "instagram": {
         "name": "Instagram",
