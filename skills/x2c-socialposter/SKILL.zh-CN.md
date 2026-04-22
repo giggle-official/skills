@@ -87,7 +87,7 @@ python3 scripts/x2c_social.py --action status
 | YouTube | `youtube` | ✅ (视频) | 标题:100 描述:5,000 | 1 视频 | MP4, MOV, AVI, WMV | 标题缺失时自动截取正文前 100 字符。默认可见性 = public。 |
 | Instagram | `instagram` | ✅ | 2,200 | 10 (轮播) | JPEG, PNG, MP4 | 必须 Business/Creator 账号。不支持纯文字。最多 5 个 hashtag、3 个 @提及。 |
 | TikTok | `tiktok` | ✅ | 2,200 | 1 视频或 35 图 | MP4, JPG, JPEG, WEBP | 图片与视频不可混合。**不支持 PNG**。文本无换行。AI 内容须 `--ai-generated`。 |
-| X (Twitter) | `twitter` | ❌ | 280 | 4 图或 1 视频 | JPEG, PNG, GIF, MP4 | 图片与视频不可混合。需 BYO API keys。 |
+| X (Twitter) | `twitter` | ❌ | 280 | 4 图或 1 视频 | JPEG, PNG, GIF, MP4 | 图片与视频不可混合。X API Key 在 X2C 控制台绑定账号时**一次性配置**，之后由 gateway 自动注入，skill 调用时无需额外操作。 |
 | Facebook | `facebook` | ❌ | 63,206 | 10+ | JPEG, PNG, MP4 | 必须是 Page（非个人账号）。 |
 | LinkedIn | `linkedin` | ❌ | 3,000 | 9 | JPEG, PNG, GIF, MP4 | 个人或公司页面。 |
 | Pinterest | `pinterest` | ✅ | 500 | 5 (轮播) | JPEG, PNG | 需要图片。视频帖需 `--thumbnail`。 |
