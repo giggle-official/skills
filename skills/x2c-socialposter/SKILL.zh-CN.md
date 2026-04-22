@@ -63,16 +63,31 @@ python3 scripts/x2c_social.py --action check-key
 ```
 🔑 X2C API Key 尚未配置，让我们来设置：
 
-1. 访问 https://x2cpool.com 注册/登录账号
-2. 点击「Link Account」绑定社交媒体账号
-3. 进入 Developer → API Keys，创建新密钥
-4. 复制密钥并粘贴到对话框中
+1. 访问 https://x2creel.ai 注册/登录账号
+2. 点击右上角头像 → 个人中心（User Center）
+3. 进入「社交账号管理（Social Account Management）」
+4. 点击「Link Account」，按提示完成各平台授权（X、TikTok、Instagram 等）
+5. 完成绑定后，进入 Developer → API Keys，创建新密钥
+6. 将密钥粘贴到对话框，我来帮你保存
 ```
 
 ### 步骤 1：验证已绑定账号
 
 ```bash
 python3 scripts/x2c_social.py --action status
+```
+
+如果没有已绑定账号，引导用户完成绑定：
+```
+⚠️ 尚未绑定任何社交账号，按以下步骤完成绑定：
+
+1. 登录 https://x2creel.ai
+2. 点击右上角头像 → 个人中心（User Center）
+3. 进入「社交账号管理（Social Account Management）」
+4. 点击对应平台旁的「Link Account」，完成 OAuth 授权：
+   • X（Twitter）：OAuth 登录即可，无需提供任何 API Key
+   • TikTok / Instagram / YouTube 等：按 OAuth 提示操作
+5. 绑定完成后告诉我，我来确认连接状态
 ```
 
 显示已绑定的平台后，**主动提问**：
