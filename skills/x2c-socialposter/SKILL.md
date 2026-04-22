@@ -93,7 +93,7 @@ After showing linked accounts, **proactively offer**:
 | YouTube | `youtube` | ✅ (video) | title:100 desc:5,000 | 1 video | MP4, MOV, AVI, WMV | `--title` auto-generated if missing (max 100 chars). Default visibility = public. |
 | Instagram | `instagram` | ✅ | 2,200 | 10 (carousel) | JPEG, PNG, MP4 | Must be Business/Creator. No text-only. Max 5 hashtags, 3 @mentions. |
 | TikTok | `tiktok` | ✅ | 2,200 | 1 video or 35 images | MP4, JPG, JPEG, WEBP | Images & video can't mix. **No PNG**. No `\n` in text. AI content must mark `--ai-generated`. |
-| X (Twitter) | `twitter` | ❌ | 280 | 4 images or 1 video | JPEG, PNG, GIF, MP4 | Images and videos can't mix. BYO API keys required. |
+| X (Twitter) | `twitter` | ❌ | 280 | 4 images or 1 video | JPEG, PNG, GIF, MP4 | Images and videos can't mix. X API keys are set up **once** in X2C Dashboard when linking the account — automatically injected per request, no extra setup needed in this skill. |
 | Facebook | `facebook` | ❌ | 63,206 | 10+ | JPEG, PNG, MP4 | Must be a Page (not personal). |
 | LinkedIn | `linkedin` | ❌ | 3,000 | 9 | JPEG, PNG, GIF, MP4 | Personal or Company page. |
 | Pinterest | `pinterest` | ✅ | 500 | 5 (carousel) | JPEG, PNG | Image required. Video requires `--thumbnail`. |
