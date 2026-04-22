@@ -63,10 +63,11 @@ python3 scripts/x2c_social.py --action check-key
 ```
 🔑 X2C API Key is not configured yet. Let's set it up:
 
-1. Go to https://x2cpool.com and sign up / log in
-2. Click "Link Account" to connect your social media accounts
-3. Go to Developer → API Keys, create a new key
-4. Paste the key here and I'll save it for you
+1. Go to https://x2creel.ai and sign up / log in
+2. Click your avatar → User Center → Social Account Management
+3. Click "Link Account" to authorize each social platform (X, TikTok, Instagram, etc.)
+4. Go to Developer → API Keys, create a new key
+5. Paste the key here and I'll save it for you
 ```
 
 ### Step 1: Verify Linked Accounts
@@ -75,10 +76,17 @@ python3 scripts/x2c_social.py --action check-key
 python3 scripts/x2c_social.py --action status
 ```
 
-If no accounts are linked:
+If no accounts are linked, guide the user:
 ```
-⚠️ No social accounts linked yet.
-Please visit https://x2cpool.com to link your accounts.
+⚠️ No social accounts linked yet. Here's how to link them:
+
+1. Log in at https://x2creel.ai
+2. Click your avatar (top-right) → User Center
+3. Go to Social Account Management
+4. Click "Link Account" next to each platform you want to use
+   • X (Twitter): OAuth login — no API keys needed
+   • TikTok / Instagram / YouTube / etc.: follow the OAuth prompts
+5. Once linked, come back and I'll verify the connection.
 ```
 
 After showing linked accounts, **proactively offer**:
