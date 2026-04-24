@@ -1,57 +1,57 @@
-# Poster & Illustration Cases｜海报与插画（46条）
+# Poster & Illustration Cases (46 cases)
 
-## 目录
-- [Case 1: Boston Spring 2026 City Poster](#case-1) — 城市宣传海报
-- [Case 2: Vintage Amalfi Travel Poster](#case-2) — 复古旅行海报
-- [Case 3: Chengdu Food Map Illustration](#case-3) — 成都美食地图
-- [Case 4: Chinese Minimalist S-Shaped Poster](#case-4) — 新中式极简S型海报
-- [Case 5: 2026 Spring Guangzhou City Poster](#case-5) — 广州春节宣传海报
-- [Case 7: Doodle Sketch AI Builder](#case-7) — 涂鸦速写风
-- [Case 8: Futuristic Mandala Illustration](#case-8) — 未来曼陀罗
-- [Case 9: Super Famicom Poster Style](#case-9) — 超任游戏海报
-- [Case 10: Browser Game Ad Creative Poster](#case-10) — 游戏广告海报
-- [Case 11: Surreal Koi Nebula Illustration](#case-11) — 超现实锦鲤星云
-- [Case 12: Ink-Curve Guangzhou Aesthetics Poster](#case-12) — 墨色曲线广州美学
-- [Case 13: Guangdong Super League Invitation Poster](#case-13) — 广东超级联赛邀请函
-- [Case 14: Spring 2026 Guangzhou Promo Poster](#case-14) — 广州春节宣传（简版）
-- [Case 15: Epic Silhouette World Poster](#case-15) — 史诗剪影世界海报
-- [Case 24: Spring Guangzhou City Poster](#case-24) — 广州城市海报变体
-- [Case 26: Qiongqi Eastern Aesthetics Poster](#case-26) — 穷奇东方美学海报
-- [Case 27: Guangzhou Paper-Cut City Poster](#case-27) — 广州剪纸城市海报
-- [Case 28: Extreme Perspective Typography Bridge](#case-28) — 极端透视排版
-- [Case 31: Dreamy Watercolor Editorial Illustration](#case-31) — 梦幻水彩插画
-- [Case 32: Science Encyclopedia Vertical Poster](#case-32) — 科普百科竖版
-- [Case 33: Journey to the West Chinese Comic](#case-33) — 连环画风格
-- [Case 34: Character Relationship Map Poster](#case-34) — 人物关系图海报
-- [Case 35: New Chinese Ink Landscape Poster](#case-35) — 新中式水墨山水
-- [Case 36: AI Builder Doodle Sketch](#case-36) — 涂鸦速写简版
-- [Case 38: Character Visual Vertical Poster](#case-38) — 角色竖版视觉海报
-- [Case 39: Science Encyclopedia Infographic](#case-39) — 科普信息图（详版）
-- [Case 40: Fictional Anime Movie Poster](#case-40) — 架空动漫电影海报
-- [Case 41: Product Ad Redesign](#case-41) — 产品广告重设计
-- [Case 42: Dark-Fantasy Guangzhou City Poster](#case-42) — 暗黑幻想广州海报
-- [Case 43: Backpropagation Diagram Poster](#case-43) — 反向传播图解
-- [Case 44: Barreleye Fish Anatomy Encyclopedia](#case-44) — 鱼类解剖图鉴
-- [Case 45: Science Fiction Movie Poster](#case-45) — 科幻电影海报
-- [Case 46: Refreshing Summer Udon Ad](#case-46) — 夏日乌冬广告
-- [Case 47: Handwritten Medical Prescription Sheet](#case-47) — 手写药方图
-- [Case 48: Silicon Valley 2026 Promo Poster](#case-48) — 硅谷宣传海报
-- [Case 49: Japanese Supermarket Sale Flyer](#case-49) — 日本超市特卖折页
-- [Case 50: Dark Epic Concept Poster](#case-50) — 暗黑史诗概念海报（通用）
-- [Case 51: Pilates Studio Ad Poster](#case-51) — 普拉提教室广告
-- [Case 52: 6-Block Fashion Campaign](#case-52) — 时尚大片
-- [Case 53: Sony A7 Exploded View Breakdown](#case-53) — 产品爆炸图
-- [Case 54: 1900 Istiklal Street Panorama](#case-54) — 360全景历史图
-- [Case 55: Ultra-Dense Information Design](#case-55) — 超密信息设计
-- [Case 55b: Chili Pork Cooking Flowchart](#case-55b) — 菜谱流程图
-- [Case 56: Cute Chinese Expeditionary Force Storyboard](#case-56) — 可爱历史故事
-- [Case 56b: Cinematic Infographic Concept Poster](#case-56b) — 电影感信息图海报
-- [Case 57: Theme Science Encyclopedia Card](#case-57) — 主题科普百科卡
+## Table of Contents
+- [Case 1: Boston Spring 2026 City Poster](#case-1)
+- [Case 2: Vintage Amalfi Travel Poster](#case-2)
+- [Case 3: Chengdu Food Map Illustration](#case-3)
+- [Case 4: Chinese Minimalist S-Shaped Poster](#case-4)
+- [Case 5: 2026 Spring Guangzhou City Poster](#case-5)
+- [Case 7: Doodle Sketch AI Builder](#case-7)
+- [Case 8: Futuristic Mandala Illustration](#case-8)
+- [Case 9: Super Famicom Poster Style](#case-9)
+- [Case 10: Browser Game Ad Creative Poster](#case-10)
+- [Case 11: Surreal Koi Nebula Illustration](#case-11)
+- [Case 12: Ink-Curve Guangzhou Aesthetics Poster](#case-12)
+- [Case 13: Guangdong Super League Invitation Poster](#case-13)
+- [Case 14: Spring 2026 Guangzhou Promo Poster](#case-14)
+- [Case 15: Epic Silhouette World Poster](#case-15)
+- [Case 24: Spring Guangzhou City Poster](#case-24)
+- [Case 26: Qiongqi Eastern Aesthetics Poster](#case-26)
+- [Case 27: Guangzhou Paper-Cut City Poster](#case-27)
+- [Case 28: Extreme Perspective Typography Bridge](#case-28)
+- [Case 31: Dreamy Watercolor Editorial Illustration](#case-31)
+- [Case 32: Science Encyclopedia Vertical Poster](#case-32)
+- [Case 33: Journey to the West Chinese Comic](#case-33)
+- [Case 34: Character Relationship Map Poster](#case-34)
+- [Case 35: New Chinese Ink Landscape Poster](#case-35)
+- [Case 36: AI Builder Doodle Sketch](#case-36)
+- [Case 38: Character Visual Vertical Poster](#case-38)
+- [Case 39: Science Encyclopedia Infographic](#case-39)
+- [Case 40: Fictional Anime Movie Poster](#case-40)
+- [Case 41: Product Ad Redesign](#case-41)
+- [Case 42: Dark-Fantasy Guangzhou City Poster](#case-42)
+- [Case 43: Backpropagation Diagram Poster](#case-43)
+- [Case 44: Barreleye Fish Anatomy Encyclopedia](#case-44)
+- [Case 45: Science Fiction Movie Poster](#case-45)
+- [Case 46: Refreshing Summer Udon Ad](#case-46)
+- [Case 47: Handwritten Medical Prescription Sheet](#case-47)
+- [Case 48: Silicon Valley 2026 Promo Poster](#case-48)
+- [Case 49: Japanese Supermarket Sale Flyer](#case-49)
+- [Case 50: Dark Epic Concept Poster](#case-50)
+- [Case 51: Pilates Studio Ad Poster](#case-51)
+- [Case 52: 6-Block Fashion Campaign](#case-52)
+- [Case 53: Sony A7 Exploded View Breakdown](#case-53)
+- [Case 54: 1900 Istiklal Street Panorama](#case-54)
+- [Case 55: Ultra-Dense Information Design](#case-55)
+- [Case 55b: Chili Pork Cooking Flowchart](#case-55b)
+- [Case 56: Cute Chinese Expeditionary Force Storyboard](#case-56)
+- [Case 56b: Cinematic Infographic Concept Poster](#case-56b)
+- [Case 57: Theme Science Encyclopedia Card](#case-57)
 
 ---
 
 ### Case 1
-**Boston Spring 2026 City Poster** — 波士顿春季城市海报
+**Boston Spring 2026 City Poster**
 
 ```
 A striking Spring 2026 city poster for Boston with an elegant celebratory mood and a bold contemporary design. On a clean off-white textured background with large areas of negative space, a miniature single sculler rows across the lower right corner of the image on a narrow ribbon of reflective water. The wake from the oar sweeps upward in a dynamic calligraphic curve, gradually transforming into the Charles River and then into a dreamlike hand-painted panorama of Boston. Inside this flowing river-shaped composition are iconic Boston elements: the Back Bay skyline, Beacon Hill brownstones, Acorn Street, Boston Public Garden, Swan Boats, Zakim Bridge, Fenway-inspired details, historic brick architecture, harbor ferries, and the city's waterfront atmosphere. Soft morning fog, golden spring light, subtle festive accents in crimson and gold, rich detail, layered depth, sophisticated city-poster aesthetics, fresh and refined, visually powerful but not overcrowded. Elegant typography in the lower left reads "SPRING 2026" with a vertical slogan "BOSTON, A CITY OF RIVER, MEMORY, AND INVENTION", text clear and beautifully composed, premium graphic design, 9:16
@@ -60,7 +60,7 @@ A striking Spring 2026 city poster for Boston with an elegant celebratory mood a
 ---
 
 ### Case 2
-**Vintage Amalfi Travel Poster** — 复古阿马尔菲旅行海报
+**Vintage Amalfi Travel Poster**
 
 ```
 Modern pencil illustration of Vintage travel poster illustration of the Amalfi Coast, Italy, panoramic coastal cliff road scene, classic 1960s white car driving along a curved seaside road, deep blue Mediterranean sea with small sailboats, colorful pastel hillside village, bright blue sky with soft clouds, lemon tree branches with vibrant yellow lemons framing the foreground, warm summer sunlight, bold vibrant colors, retro 1950s travel poster style, cinematic composition, high detail, screen print texture, graphic illustration. Hand-drawn style, illustration with loose strokes and defined contours. High-contrast color palette, maintaining chromatic harmony between background and elements. Contemporary and decorative aesthetic.
@@ -69,7 +69,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 3
-**Chengdu Food Map Illustration** — 成都美食手绘地图
+**Chengdu Food Map Illustration**
 
 ```
 一张手绘风格的城市美食地图，以成都为主题。画面以鸟瞰视角的手绘简化城市地图为底，标注主要道路和地标但不追求精确比例而是追求可爱的手绘感。地图上分布着 12 个美食地点的精致手绘小插画：春熙路的串串香（一把竹签插着各种食材冒着热气）、宽窄巷子的三大炮（三个糯米团子飞向铜盘）、建设路的蛋烘糕（金黄酥脆正在翻面）、玉林路的火锅（九宫格锅翻滚冒泡）等，每个插画约占地图的 5% 面积，旁边用手写体标注店名和一句推荐语"凌晨两点还在排队的那家"。地图边缘用手绘藤蔓和辣椒装饰形成边框。右下角有一个手绘指南针和图例说明。左上角标题"成都·吃货暴走地图"使用胖圆的手绘美术字配辣椒装饰。整体画风为水彩+彩铅混合的手绘质感，颜色以暖色系（辣椒红、姜黄、翠绿）为主，图片比例 1:1。
@@ -78,7 +78,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 4
-**Chinese Minimalist S-Shaped Poster** — 新中式极简撕纸S型海报
+**Chinese Minimalist S-Shaped Poster**
 
 ```
 极简新中式美学风格，画面以淡雅的灰白色为底，呈现出一种纸艺剪影般的立体感。
@@ -95,7 +95,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 5
-**2026 Spring Guangzhou City Poster** — 广州春节城市宣传海报
+**2026 Spring Guangzhou City Poster**
 
 ```
 一张充满新春喜庆氛围但不失高雅格调的 2026 城市宣传海报。
@@ -110,7 +110,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 7
-**Doodle Sketch AI Builder** — 涂鸦速写AI构建者
+**Doodle Sketch AI Builder**
 
 ```
 以涂鸦速写风表现【一个厉害的AI builder】，整体呈现快速勾勒、自由变形、即兴手绘与草稿式的视觉效果。线条随手、夸张、可粗细不一，略显凌乱但具有节奏和表现力，强调概括、夸张、趣味和随性，而不是严谨写实或精细刻画。  颜色采用粗糙、干刷感明显的块面表现，可保留不均匀的涂抹痕迹、刷痕、飞白与覆盖感，色彩根据【主题/主体】自动适配，但整体保持涂鸦式、速写式、概括式的表达。不要透明水彩晕染效果，不要细腻水彩过渡，不要纸纹理，不要柔和雾化，不要梦幻质感。  背景以留白为主，保持简洁、轻松、未完成感和设计感，可加入少量辅助性符号、箭头、记号、圈画、重复线、随手写的文字或其他涂鸦元素，以增强速写本或随笔式视觉语言，但不可过于拥挤，不可破坏主体和留白气质。  画面内容不需要预先写清楚，由【一个厉害的AI builder】自动推演并生成最适合的主体形象、动作、相关元素、符号或简化场景，整体保持统一的涂鸦速写风和夸张概括的表现方式，避免复杂写实背景和过度铺陈。 画面中需自然加入专属签名"BlanPlan"，作为画面的一部分，位置低调但清晰，可放在左下角、右下角或标题附近，风格需与整体版式统一，像作品署名或设计落款；签名字体精致、克制、高级，不可过大，不可破坏主体构图，不可显得突兀或廉价。
@@ -119,7 +119,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 8
-**Futuristic Mandala Illustration** — 近未来科幻曼陀罗
+**Futuristic Mandala Illustration**
 
 ```
 曼荼羅の近未来SF版を描いて
@@ -128,7 +128,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 9
-**Super Famicom Poster Style** — 超任游戏海报风格
+**Super Famicom Poster Style**
 
 ```
 小悪魔リリムリリィちゃんが　スーパーファミコンのゲームだったときのポスターを考えて
@@ -137,7 +137,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 10
-**Browser Game Ad Creative Poster** — 浏览器游戏广告创意海报
+**Browser Game Ad Creative Poster**
 
 ```
 以下の文字を必ず入れて、1:1のポスターを作成してください。書籍・講座・イベント告知に使える、プロの広告デザイナーが作ったような高品質な仕上がりにしてください。
@@ -149,7 +149,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 11
-**Surreal Koi Nebula Illustration** — 超现实锦鲤星云插画
+**Surreal Koi Nebula Illustration**
 
 ```
 一幅超现实主义数字插画风格，采用低角度仰拍视角。画面描绘了一条巨型彩色锦鲤遨游在梦幻般的星云中，四周环绕着色彩鲜艳的星云与气泡。画面中央还站着一个小人，背对观众，神情平静地仰望空中这条巨大的锦鲤，锦鲤头向下看着小人。整体画面呈现出强烈的大小对比，氛围空灵又梦幻。比例9:16
@@ -158,7 +158,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 12
-**Ink-Curve Guangzhou Aesthetics Poster** — 墨色曲线广州美学海报
+**Ink-Curve Guangzhou Aesthetics Poster**
 
 ```
 纯黑深邃底色，一条粗壮有力的墨色书法 S 型曲线自画面一端蜿蜒贯穿至另一端，构成整幅画面的视觉骨架与叙事动线。曲线上方是一只透明质感的画眉鸟，内部映射传统建筑叠影与蓝绿色光流；沿曲线错落分布广州地标与古典建筑序列，前景有白鹤与湖面，远景为层叠山峦。整体采用非线性透视、冷色调主导、暖色点缀，东方美学与现代意象交融，8K 超高清渲染，比例 9:16。
@@ -167,7 +167,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 13
-**Guangdong Super League Invitation Poster** — 广东超联邀请函海报
+**Guangdong Super League Invitation Poster**
 
 ```
 广东省城市足球超级联赛（粤超）邀请函海报设计，比例 9:16。S 型流动构图，以发光足球和动态能量流贯穿画面，沿动线融合广州塔、深圳平安金融中心、珠海渔女雕像、岭南建筑、佛山武术剪影、中山文化符号、潮汕英歌舞与清远山水。现代国潮高级海报风格，中国红主视觉，青蓝辅助，金色高光，带完整中文排版与电影级光影。
@@ -176,7 +176,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 14
-**Spring 2026 Guangzhou Promo Poster** — 广州春节宣传海报（精简版）
+**Spring 2026 Guangzhou Promo Poster** — Concise Version
 
 ```
 一张充满新春喜庆但高雅的 2026 广州城市宣传海报，9:16 竖版，双重曝光，S 型流动构图。纯白纹理背景，右下角微缩传统服饰人物挥舞长红绸，红绸变形成山脉河流，内部叠加广州全景：广州塔、珠江新城、珠江、游轮、古建筑与白云山。左下角排版 "SPRING 2026" 与竖排 "千年商都 魅力广州"。
@@ -185,7 +185,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 15
-**Epic Silhouette World Poster** — 史诗剪影世界海报
+**Epic Silhouette World Poster**
 
 ```
 收藏版史诗海报，人物侧脸剪影中生长出完整世界观与经典场景。整体偏电影海报加梦幻水彩插画风，安静、宏大、神圣、怀旧，带纸张颗粒、轻雾感、飞白刷痕与高级留白。
@@ -194,7 +194,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 24
-**Spring Guangzhou City Poster** — 广州城市宣传海报（变体）
+**Spring Guangzhou City Poster** — Variant
 
 ```
 一张充满新春喜庆氛围但不失高雅格调的 2026 城市宣传海报。
@@ -209,7 +209,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 26
-**Qiongqi Eastern Aesthetics Poster** — 穷奇东方美学海报
+**Qiongqi Eastern Aesthetics Poster**
 
 ```
 极简主义，新中式风格立体图形设计，图像下端有楷体中国文字："东方美学"，"2026/04/18"，署名 "CHINA"，和"@LIYUE"；
@@ -222,7 +222,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 27
-**Guangzhou Paper-Cut City Poster** — 广州剪纸城市海报
+**Guangzhou Paper-Cut City Poster**
 
 ```
 以珠江新城现代都市景观为灵感的剪纸艺术，通过精巧的镂空手法在一整幅纸上，立体刻画广州塔、东西双塔等地标建筑与繁华城景。
@@ -235,7 +235,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 28
-**Extreme Perspective Typography Bridge** — 极端透视排版海报
+**Extreme Perspective Typography Bridge**
 
 ```
 ①场景 跨海大桥的侧面，dramatic cinematic angle。 巨型 bold sans-serif 文字「___②文字内容 跨海大桥」painted onto the surface of ___③主体物 无，从靠近镜头的前端开始，沿表面向远端 progressively foreshortens 逐渐透视压缩，letterforms conform to surface curvature 贴合物体曲面，surface-integrated not floating。 文字部分区域被 无___④前景遮挡物 无___ occluded and hidden，在间隙中露出， 形成 depth-layering 纵深穿插效果。 Oversized bright yellow + sharp orange outline，extreme perspective distortion aligned to vanishing point。Cinematic lighting, motion blur, poster-grade dynamic integrated typography, modern advertising aesthetics。
@@ -244,7 +244,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 ---
 
 ### Case 31
-**Dreamy Watercolor Editorial Illustration** — 梦幻水彩编辑插画
+**Dreamy Watercolor Editorial Illustration**
 
 ```
 Ilustración en acuarela de estilo onírico de [sujeto], con estética impresionista ligera, pinceladas sueltas y lavados translúcidos en tonos [color1] y [color2]. Difuminado suave sobre textura de papel prensado en frío, iluminación delicada, composición limpia, enfoque minimalista, sensación de calma, ligereza y belleza efímera, alta calidad, estilo editorial.
@@ -253,7 +253,7 @@ Ilustración en acuarela de estilo onírico de [sujeto], con estética impresion
 ---
 
 ### Case 32
-**Science Encyclopedia Vertical Poster** — 科普百科竖版海报
+**Science Encyclopedia Vertical Poster**
 
 ```
 Generate a high-quality vertical science popularization encyclopedia image based on [Theme].
@@ -262,7 +262,7 @@ Generate a high-quality vertical science popularization encyclopedia image based
 ---
 
 ### Case 33
-**Journey to the West Chinese Comic** — 西游记中国连环画
+**Journey to the West Chinese Comic**
 
 ```
 以中国连环画（小人书）的风格帮我绘制大闹天空
@@ -271,7 +271,7 @@ Generate a high-quality vertical science popularization encyclopedia image based
 ---
 
 ### Case 34
-**Character Relationship Map Poster** — 人物关系图海报
+**Character Relationship Map Poster**
 
 ```
 请根据【主题】生成一张高设计感的人物关系图海报。
@@ -280,7 +280,7 @@ Generate a high-quality vertical science popularization encyclopedia image based
 ---
 
 ### Case 35
-**New Chinese Ink Landscape Poster** — 新中式水墨山水海报
+**New Chinese Ink Landscape Poster**
 
 ```
 新中式水墨山水海报，竖版9:16构图，东方极简美学风格，大面积留白，主题是春岚一叶红。
@@ -289,7 +289,7 @@ Generate a high-quality vertical science popularization encyclopedia image based
 ---
 
 ### Case 36
-**AI Builder Doodle Sketch** — 涂鸦速写AI构建者（简版）
+**AI Builder Doodle Sketch** — Simplified Version
 
 ```
 以涂鸦速写风表现【一个厉害的AI builder】。
@@ -298,7 +298,7 @@ Generate a high-quality vertical science popularization encyclopedia image based
 ---
 
 ### Case 38
-**Character Visual Vertical Poster** — 角色竖版视觉海报
+**Character Visual Vertical Poster**
 
 ```
 『神層37区 特級執行官 神巫サバト』この名称のキャラクターと世界観に合ったビジュアルイメージを、プロのデザイナーとして縦長のポスターイメージとして制作して
@@ -307,7 +307,7 @@ Generate a high-quality vertical science popularization encyclopedia image based
 ---
 
 ### Case 39
-**Science Encyclopedia Infographic** — 科普百科信息图（详版）
+**Science Encyclopedia Infographic** — Detailed Version
 
 ```
 请根据【主题】生成一张高质量竖版「科普百科图」。
@@ -334,7 +334,7 @@ Generate a high-quality vertical science popularization encyclopedia image based
 ---
 
 ### Case 40
-**Fictional Anime Movie Poster** — 架空动漫电影海报
+**Fictional Anime Movie Poster**
 
 ```
 架空のアニメ映画のポスターをGPT image2で作成。
@@ -343,7 +343,7 @@ Generate a high-quality vertical science popularization encyclopedia image based
 ---
 
 ### Case 41
-**Product Ad Redesign** — 产品广告重设计
+**Product Ad Redesign**
 
 ```
 この商品広告をプロのデザイナー目線でリデザインして。
@@ -353,7 +353,7 @@ Generate a high-quality vertical science popularization encyclopedia image based
 ---
 
 ### Case 42
-**Dark-Fantasy Guangzhou City Poster** — 暗黑幻想广州城市海报
+**Dark-Fantasy Guangzhou City Poster**
 
 ```
 平面插画,东方幻想风格高端城市海报设计,竖版9:16构图,整体采用对角线+S型流动构图,从左下向右上延展,画面以深邃黑色为背景,自上而下渐变至浓烈暗红色,形成强烈冷暖对比与空间纵深,背景带微弱星尘与颗粒质感。画面中央一条金色流动能量线条如火焰般蜿蜒贯穿,自底部向上延伸,具有流体质感、粒子光效与渐变高光,局部带细微能量碎屑与体积光。
@@ -370,7 +370,7 @@ Generate a high-quality vertical science popularization encyclopedia image based
 ---
 
 ### Case 43
-**Backpropagation Diagram Poster** — 反向传播算法图解
+**Backpropagation Diagram Poster**
 
 ```
 バックプロパゲーションについて詳しく図解して
@@ -379,7 +379,7 @@ Generate a high-quality vertical science popularization encyclopedia image based
 ---
 
 ### Case 44
-**Barreleye Fish Anatomy Encyclopedia** — 桶眼鱼解剖图鉴
+**Barreleye Fish Anatomy Encyclopedia**
 
 ```
 デメニギスの体の構造を解説するカラー図鑑のページ
@@ -388,7 +388,7 @@ Generate a high-quality vertical science popularization encyclopedia image based
 ---
 
 ### Case 45
-**Science Fiction Movie Poster** — 科幻电影海报
+**Science Fiction Movie Poster**
 
 ```
 Create a Science fiction movie poster
@@ -397,7 +397,7 @@ Create a Science fiction movie poster
 ---
 
 ### Case 46
-**Refreshing Summer Udon Ad** — 清爽夏日乌冬广告
+**Refreshing Summer Udon Ad**
 
 ```
 少し暑くなってきた今の時期に、さわやかにさっぱりしたい、みずみずしさ、みたいなところをもっと強く感じたい。冷たいうどんやナス、つゆを口に含んだ時の爽快感、みたいなものをもっと感じるように
@@ -406,7 +406,7 @@ Create a Science fiction movie poster
 ---
 
 ### Case 47
-**Handwritten Medical Prescription Sheet** — 手写药方图
+**Handwritten Medical Prescription Sheet**
 
 ```
 生成一张手写中/西医药方图
@@ -415,7 +415,7 @@ Create a Science fiction movie poster
 ---
 
 ### Case 48
-**Silicon Valley 2026 Promo Poster** — 硅谷2026宣传海报
+**Silicon Valley 2026 Promo Poster**
 
 ```
 A refined 2026 Silicon Valley city promotional poster with a futuristic yet elegant atmosphere.
@@ -434,7 +434,7 @@ In the lower-left corner, elegant typography reads "SILICON VALLEY 2026" with a 
 ---
 
 ### Case 49
-**Japanese Supermarket Sale Flyer** — 日本超市特卖折页
+**Japanese Supermarket Sale Flyer**
 
 ```
 『賑やかで魅力的なスーパーマーケットの折り込みチラシの画像。上部には「特売」の大きな文字と今週の日付。カラフルな商品写真(野菜・果物・牛肉・鮮魚)、赤枠の価格タグ、「超目玉商品」「家計応援」のキャッチ...』
@@ -443,7 +443,7 @@ In the lower-left corner, elegant typography reads "SILICON VALLEY 2026" with a 
 ---
 
 ### Case 50
-**Dark Epic Concept Poster** — 暗黑史诗概念海报（完整通用模板）
+**Dark Epic Concept Poster** — Complete Universal Template
 
 ```
 围绕【主题】自动生成一张顶级暗黑史诗概念海报 / 电影感信息图海报。
@@ -491,7 +491,7 @@ In the lower-left corner, elegant typography reads "SILICON VALLEY 2026" with a 
 ---
 
 ### Case 51
-**Pilates Studio Ad Poster** — 普拉提教室广告图
+**Pilates Studio Ad Poster**
 
 ```
 ピラティス教室の広告画像を作成したい テキストはよりユーザーが登録をするのに惹かれるような文言にし、画像内には女性がピラティスを実際に行っている様子を映して
@@ -500,7 +500,7 @@ In the lower-left corner, elegant typography reads "SILICON VALLEY 2026" with a 
 ---
 
 ### Case 52
-**6-Block Fashion Campaign Prompt Formula** — 时尚大片公式
+**6-Block Fashion Campaign Prompt Formula**
 
 ```
 Old money Hamptons editorial, tall blonde woman late 20s, serene elegant expression, wearing cream cashmere cable sweater, pleated beige tennis skirt, pearl earrings, Hermès silk scarf, leather flats, Slim Aarons photography style, medium format film photography, sitting on a white wooden porch of a Cape Cod house, golden hour light, ocean in the background
@@ -509,7 +509,7 @@ Old money Hamptons editorial, tall blonde woman late 20s, serene elegant express
 ---
 
 ### Case 53
-**Sony A7 Exploded View Breakdown** — 索尼A7产品爆炸图
+**Sony A7 Exploded View Breakdown**
 
 ```
 Descomposición detallada de una cámara de la marca Sony modelo A7 indicando todas sus piezas y con sus nombres.
@@ -518,7 +518,7 @@ Descomposición detallada de una cámara de la marca Sony modelo A7 indicando to
 ---
 
 ### Case 54
-**1900 Istiklal Street Panorama** — 1900年伊斯蒂克拉尔街360全景
+**1900 Istiklal Street Panorama**
 
 ```
 360 equirectangular image of Istiklal Street, Istanbul in 1900
@@ -527,7 +527,7 @@ Descomposición detallada de una cámara de la marca Sony modelo A7 indicando to
 ---
 
 ### Case 55
-**Ultra-Dense Information Design** — 超密信息设计
+**Ultra-Dense Information Design**
 
 ```
 Generate somthing super complex and info dense...
@@ -536,7 +536,7 @@ Generate somthing super complex and info dense...
 ---
 
 ### Case 55b
-**Chili Pork Cooking Flowchart** — 辣椒炒肉制作流程图
+**Chili Pork Cooking Flowchart**
 
 ```
 帮我制作辣椒炒肉这道菜的详细制作流程图,真实风格,适用于小红书图文比例
@@ -545,7 +545,7 @@ Generate somthing super complex and info dense...
 ---
 
 ### Case 56
-**Cute Chinese Expeditionary Force Storyboard** — 可爱风中国远征军历史故事
+**Cute Chinese Expeditionary Force Storyboard**
 
 ```
 用可爱的风格讲述中国远征军的历史故事
@@ -555,7 +555,7 @@ Generate somthing super complex and info dense...
 ---
 
 ### Case 56b
-**Cinematic Infographic Concept Poster** — 电影感信息图概念海报
+**Cinematic Infographic Concept Poster**
 
 ```
 请围绕【主题】自动生成一张顶级概念海报 / 信息图式电影海报。
@@ -598,7 +598,7 @@ Generate somthing super complex and info dense...
 ---
 
 ### Case 57
-**Theme Science Encyclopedia Card** — 主题科普百科卡
+**Theme Science Encyclopedia Card**
 
 ```
 请根据【主题】生成一张高质量竖版「科普百科图」。

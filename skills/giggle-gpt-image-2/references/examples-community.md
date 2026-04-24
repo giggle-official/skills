@@ -1,26 +1,26 @@
-# Comparison & Community Examples｜对比与社区案例（15条）
+# Comparison & Community Examples (15 cases)
 
-## 目录
-- [Case 5: Wooden Bookshelf Prompt Test](#case-5) — 书架计数测试
-- [Case 10: GPT-Image-2 Detail Showcase](#case-10) — 四季眼眸特写
-- [Case 16: A/B Test Signed Output](#case-16) — 4格漫画互动
-- [Case 23: Silhouette Universe Narrative Poster](#case-23) — 轮廓宇宙叙事海报
-- [Case 29: Lion Camel Ridge Dark Myth Scene](#case-29) — 狮驼岭暗黑神话场景
-- [Case 30: Counter-Strike x Terraria Screenshot Mashup](#case-30) — CS×泰拉瑞亚混搭截图
-- [Case 31: Pre-war Japan Lab Minecraft Screenshot](#case-31) — 战前日本研究所Minecraft截图
-- [Case 32: Forged Masterpiece Prompt Test](#case-32) — 名家真迹图片生成
-- [Case 33: Multi-Concept Battle Poster Set](#case-33) — 多概念对战海报组
-- [Case 34: Rust In-Game Screenshot](#case-34) — Rust游戏内截图
-- [Case 35: Sam Altman Bear Selfie](#case-35) — Sam Altman熊背自拍
-- [Case 36: Among Us Realistic Screenshot](#case-36) — Among Us写实截图
-- [Case 37: Retro Programming Museum Cartoon](#case-37) — 博物馆复古编程漫画
-- [Case 38: 14th-Dimension Projection Scene](#case-38) — 第14维度投影场景
-- [Case 39: Sam Altman Baseball Broadcast](#case-39) — Sam Altman棒球直播
+## Table of Contents
+- [Case 5: Wooden Bookshelf Prompt Test](#case-5)
+- [Case 10: GPT-Image-2 Detail Showcase](#case-10)
+- [Case 16: A/B Test Signed Output](#case-16)
+- [Case 23: Silhouette Universe Narrative Poster](#case-23)
+- [Case 29: Lion Camel Ridge Dark Myth Scene](#case-29)
+- [Case 30: Counter-Strike x Terraria Screenshot Mashup](#case-30)
+- [Case 31: Pre-war Japan Lab Minecraft Screenshot](#case-31)
+- [Case 32: Forged Masterpiece Prompt Test](#case-32)
+- [Case 33: Multi-Concept Battle Poster Set](#case-33)
+- [Case 34: Rust In-Game Screenshot](#case-34)
+- [Case 35: Sam Altman Bear Selfie](#case-35)
+- [Case 36: Among Us Realistic Screenshot](#case-36)
+- [Case 37: Retro Programming Museum Cartoon](#case-37)
+- [Case 38: 14th-Dimension Projection Scene](#case-38)
+- [Case 39: Sam Altman Baseball Broadcast](#case-39)
 
 ---
 
 ### Case 5
-**Wooden Bookshelf Prompt Test** — 书架计数能力测试
+**Wooden Bookshelf Prompt Test** — Counting Accuracy Test
 
 ```
 A wooden bookshelf consisting of three shelves: On the top shelf, there should be one book, on the second shelf, there should be three books, and on the bottom shelf, there should be seven books.
@@ -29,7 +29,7 @@ A wooden bookshelf consisting of three shelves: On the top shelf, there should b
 ---
 
 ### Case 10
-**GPT-Image-2 Detail Showcase** — 四季眼眸超写实特写
+**GPT-Image-2 Detail Showcase** — Four Seasons Eye Close-Up
 
 ```
 以眼部特写图片为基础，生成3:4的四屏构图超写实眼部特写，四屏按春夏秋冬上下排序。
@@ -48,7 +48,7 @@ A wooden bookshelf consisting of three shelves: On the top shelf, there should b
 ---
 
 ### Case 16
-**A/B Test Signed Output** — 4格漫画互动（先出剧情再绘制）
+**A/B Test Signed Output** — 4-Panel Comic with Plot-First Workflow
 
 ```
 私があなたをどんなふうに扱ってきたか、4 コマ漫画風に描いてください。まずは 800 字くらいのプロットをテキストで出して、私が「描いて」と言ったらプロットに沿った 4 コマ漫画を描いてください。
@@ -57,7 +57,7 @@ A wooden bookshelf consisting of three shelves: On the top shelf, there should b
 ---
 
 ### Case 23
-**Silhouette Universe Narrative Poster** — 轮廓宇宙叙事收藏版海报
+**Silhouette Universe Narrative Poster** — Collector's Edition
 
 ```
 请根据【主题：xxx】自动生成一张高审美的"轮廓宇宙 / 收藏版叙事海报"风格作品。不要将画面局限于固定器物或常见容器，不要优先默认瓶子、沙漏、玻璃罩、怀表之类的常规载体，而是由 AI 根据主题自行判断并选择一个最契合、最有象征意义、轮廓最强、最适合承载完整叙事世界的主轮廓载体。这个主轮廓可以是器物、建筑、门、塔、拱门、穹顶、楼梯井、长廊、雕像、侧脸、眼睛、手掌、头骨、羽翼、面具、镜面、王座、圆环、裂缝、光幕、阴影、几何结构、空间切面、舞台框景、抽象符号或其他更有创意与主题代表性的视觉轮廓，要求合理布局。优先选择最能放大主题气质、最能形成强烈视觉记忆点、最能体现史诗感、神秘感、诗意感或设计感的轮廓，而不是最安全、最普通、最常见的容器。
@@ -76,7 +76,7 @@ A wooden bookshelf consisting of three shelves: On the top shelf, there should b
 ---
 
 ### Case 29
-**Lion Camel Ridge Dark Myth Scene** — 西游记狮驼岭暗黑神话场景
+**Lion Camel Ridge Dark Myth Scene** — Journey to the West Dark Fantasy
 
 ```
 中式怪异，黑暗神秘风格融合中式美学，完美细节，多重管线渲染，完美建模。西游记背景，狮驼岭，千妖万怪，坐在左边巨大王座上的大象王重甲妖精，坐在中间巨大王座上的狮王重甲妖精，坐在右边巨大王座上大鹏鸟王重甲妖精。渺小的背对镜头孙悟空肩抗金箍棒步行前进，孙悟空身穿铠甲，近地仰拍镜头，长焦镜头，强烈阴影。极致细节刻画，多次修改，正确透视和主体线条，精致细节
@@ -85,7 +85,7 @@ A wooden bookshelf consisting of three shelves: On the top shelf, there should b
 ---
 
 ### Case 30
-**Counter-Strike x Terraria Screenshot Mashup** — CS×泰拉瑞亚跨次元截图
+**Counter-Strike x Terraria Screenshot Mashup**
 
 ```
 counter strike in game screenshot, mixed with Terraria
@@ -94,7 +94,7 @@ counter strike in game screenshot, mixed with Terraria
 ---
 
 ### Case 31
-**Pre-war Japan Lab Minecraft Screenshot** — 战前日本神秘研究所Minecraft截图
+**Pre-war Japan Lab Minecraft Screenshot**
 
 ```
 戦前日本の怪しげな研究所を探検しているマイクラのスクリーンショット画像を作成して
@@ -103,7 +103,7 @@ counter strike in game screenshot, mixed with Terraria
 ---
 
 ### Case 32
-**Forged Masterpiece Prompt Test** — 名家真迹图片生成测试
+**Forged Masterpiece Prompt Test** — Authentic Artwork Generation Test
 
 ```
 帮我生成xxxx真迹图片
@@ -112,7 +112,7 @@ counter strike in game screenshot, mixed with Terraria
 ---
 
 ### Case 33
-**Multi-Concept Battle Poster Set** — 多概念创意组合（游戏对战/专辑封面/人物关系图）
+**Multi-Concept Battle Poster Set** — Game Battle / Album Cover / Character Map
 
 ```
 1、生成不知火舞和貂蝉的游戏对战海报图
@@ -124,7 +124,7 @@ counter strike in game screenshot, mixed with Terraria
 ---
 
 ### Case 34
-**Rust In-Game Screenshot** — Rust游戏内截图
+**Rust In-Game Screenshot**
 
 ```
 an ingame screenshot of rust
@@ -133,7 +133,7 @@ an ingame screenshot of rust
 ---
 
 ### Case 35
-**Sam Altman Bear Selfie** — Sam Altman骑熊自拍（含背景移除）
+**Sam Altman Bear Selfie** — With Background Removal
 
 ```
 generate image: Selfie of Sam Altman riding a bear
@@ -144,7 +144,7 @@ Edit prompt: Remove the background make it transparent
 ---
 
 ### Case 36
-**Among Us Realistic Screenshot** — Among Us写实风格截图
+**Among Us Realistic Screenshot**
 
 ```
 AmongUsの精密な実際のゲーム画像を生成して
@@ -153,7 +153,7 @@ AmongUsの精密な実際のゲーム画像を生成して
 ---
 
 ### Case 37
-**Retro Programming Museum Cartoon** — 博物馆古法编程2D卡通画
+**Retro Programming Museum Cartoon**
 
 ```
 在计算机博物馆里,一个程序员在展厅中央,正在演示C语言编程,很多参观者在围观,屏幕上的代码清晰可见。旁边的牌子写着:古法编程,现场表演。2D卡通画风,16:9
@@ -162,7 +162,7 @@ AmongUsの精密な実際のゲーム画像を生成して
 ---
 
 ### Case 38
-**14th-Dimension Projection Scene** — 第14维度投影想象场景
+**14th-Dimension Projection Scene**
 
 ```
 A dusk shindig  with multiple fake imagination projections all aligned in the 14th dimensions
@@ -171,7 +171,7 @@ A dusk shindig  with multiple fake imagination projections all aligned in the 14
 ---
 
 ### Case 39
-**Sam Altman Baseball Broadcast** — Sam Altman棒球选手电视直播画面
+**Sam Altman Baseball Broadcast**
 
 ```
 サムアルトマンがメジャーリーガーでバットを構えている。よくあるようなテレビ画面の構図

@@ -1,270 +1,270 @@
-# GPT-Image-2 高质量提示词示例库
+# GPT-Image-2 High-Quality Prompt Template Library
 
-## 目录
-- [Portrait & Photography｜人像与摄影](#portrait--photography)
-- [Poster & Illustration｜海报与插画](#poster--illustration)
-- [Character Design｜角色设计](#character-design)
-- [UI & Social Media Mockup｜UI 与社媒样机](#ui--social-media-mockup)
-- [Creative Mix｜创意混搭](#creative-mix)
+## Table of Contents
+- [Portrait & Photography](#portrait--photography)
+- [Poster & Illustration](#poster--illustration)
+- [Character Design](#character-design)
+- [UI & Social Media Mockup](#ui--social-media-mockup)
+- [Creative Mix](#creative-mix)
 
 ---
 
 ## Portrait & Photography
 
-### 胶片感人像（写实）
-**适用：**网红照、时尚大片、偶像定妆照
+### Film Portrait (Realistic)
+**Best for:** Influencer shots, fashion editorials, idol promo photos
 
 ```
-35mm film photography with harsh convenience store fluorescent lighting mixed with colorful neon signs from outside, authentic film grain, high contrast, slight color cast, cinematic street editorial style, intimate medium shot, early 20s [描述人物特征], [服装描述], [姿态描述], intensely seductive playful gaze straight at the viewer, [背景描述], authentic 35mm film color grading, no plastic skin, no digital over-sharpening, no watermark, no text
+35mm film photography with harsh convenience store fluorescent lighting mixed with colorful neon signs from outside, authentic film grain, high contrast, slight color cast, cinematic street editorial style, intimate medium shot, early 20s [describe subject features], [outfit description], [pose description], intensely seductive playful gaze straight at the viewer, [background description], authentic 35mm film color grading, no plastic skin, no digital over-sharpening, no watermark, no text
 ```
 
-**关键参数：**
-- 光线类型：`fluorescent lighting` / `golden hour` / `soft window light` / `harsh direct flash`
-- 胶片风格：`Fujifilm Pro 400H` / `Kodak Portra` / `CCD camera aesthetic`
-- 人物描述越细越好：五官、肤色、妆容、发型、服装、姿势、表情
+**Key parameters:**
+- Lighting type: `fluorescent lighting` / `golden hour` / `soft window light` / `harsh direct flash`
+- Film stock: `Fujifilm Pro 400H` / `Kodak Portra` / `CCD camera aesthetic`
+- Subject description: the more detailed the better — facial features, skin tone, makeup, hair, outfit, pose, expression
 
-### 日系软调人像
+### Japanese Soft Airy Portrait
 ```
-Analog 35mm film photography, soft airy Japanese-style aesthetic, gentle diffused natural window light, slight overexposure, pastel tones, low contrast, soft highlights, minimal indoor setting near a window with white curtains, clean light-colored wall, [人物描述], standing naturally with relaxed posture, gentle soft smile, subtle stillness, focus on light, air, and quiet everyday mood, soft film grain, dreamy and understated atmosphere --ar 9:16
+Analog 35mm film photography, soft airy Japanese-style aesthetic, gentle diffused natural window light, slight overexposure, pastel tones, low contrast, soft highlights, minimal indoor setting near a window with white curtains, clean light-colored wall, [subject description], standing naturally with relaxed posture, gentle soft smile, subtle stillness, focus on light, air, and quiet everyday mood, soft film grain, dreamy and understated atmosphere --ar 9:16
 ```
 
-### 韩系偶像 3x3 九宫格
+### Korean Idol 3x3 Grid
 ```
 9:16 vertical, Korean idol portrait photoshoot, 3x3 grid (nine frames), same person in all images, consistent facial features and styling, soft black mist filter effect, lowered contrast, blooming highlights, subtle glow around light sources
 ```
 
-### CCD 复古快照风
+### CCD Retro Snapshot
 ```
-mobile phone photo, old CCD camera aesthetic, harsh flash, grainy, dim messy indoor lighting, candid snapshot feeling, slight motion blur, [人物描述], soft innocent look
+mobile phone photo, old CCD camera aesthetic, harsh flash, grainy, dim messy indoor lighting, candid snapshot feeling, slight motion blur, [subject description], soft innocent look
 ```
 
-### 软黑雾滤镜韩系写真
+### Soft Black Mist Korean Portrait
 ```
-9:16 vertical — Korean idol portrait photography, single subject, soft black mist filter effect, lowered contrast, gentle highlight bloom, subtle glow, soft diffusion, slightly faded blacks, minimal indoor setting near window, white curtains, clean light-toned background, [人物描述], natural minimal makeup, dewy realistic skin texture, outfit: [服装描述], hair: [发型描述], pose: [姿势描述], expression: soft cute smile, camera: close to mid-body framing, eye-level, lighting: diffused natural daylight, mood: cute yet subtly sensual, intimate, everyday softness
+9:16 vertical — Korean idol portrait photography, single subject, soft black mist filter effect, lowered contrast, gentle highlight bloom, subtle glow, soft diffusion, slightly faded blacks, minimal indoor setting near window, white curtains, clean light-toned background, [subject description], natural minimal makeup, dewy realistic skin texture, outfit: [outfit description], hair: [hair description], pose: [pose description], expression: soft cute smile, camera: close to mid-body framing, eye-level, lighting: diffused natural daylight, mood: cute yet subtly sensual, intimate, everyday softness
 ```
 
 ---
 
 ## Poster & Illustration
 
-### 城市宣传海报（双重曝光 S 型构图）
-**适用：**城市宣传、春节海报、旅游推广
+### City Promo Poster (Double Exposure S-Curve Composition)
+**Best for:** City branding, Spring Festival posters, tourism campaigns
 
 ```
-一张充满新春喜庆氛围但不失高雅格调的 [年份] 城市宣传海报。
-双重曝光，构图延续了S型的流动感；
-在纯白的纹理背景右下角，一个身穿传统服饰的微缩人物正在挥舞着一条长长的红色丝绸舞带，这条红绸在空中舞动，在向左上方飘动的过程中，奇幻地变形成了一条壮丽的山脉河流。
-在这条"河流"中，叠加了[城市名]的城市手绘图，景色尽在眼底，壮阔雄伟。
-[城市地标列举]，云雾环绕，仙气缥缈，色彩丰富，细节丰富，但因为大面积的留白，画面依然显得清新脱俗。
-左下角排版着"[年份]"和竖排的宣传语，整体寓意"[城市宣传语]"。
-文字排版优美，大方，字迹清晰完整，尺寸9:16。
+A striking [year] city promotional poster with an elegant celebratory mood.
+Double exposure, composition follows the flowing movement of an S-curve;
+On a pure white textured background, in the lower right corner, a miniature figure in traditional costume waves a long red silk ribbon. The ribbon flows through the air and magically transforms into a grand mountain-river landscape as it drifts toward the upper left.
+Inside this flowing "river," overlay a hand-drawn panorama of [city name], with iconic landmarks and sweeping scenery.
+[List city landmarks], surrounded by clouds and mist, rich colors, dense details, yet the large areas of white space keep the composition fresh and refined.
+In the lower left, elegant typography reads "[year]" and a vertical slogan conveying "[city tagline]".
+Beautiful, generous typography with clear, complete letterforms. Aspect ratio 9:16.
 ```
 
-### 暗黑史诗概念海报（通用模板）
-**适用：**电影海报、品牌主视觉、活动宣传
+### Dark Epic Concept Poster (Universal Template)
+**Best for:** Movie posters, brand hero visuals, event campaigns
 
 ```
-围绕【[主题]】自动生成一张顶级暗黑史诗概念海报。
-背景底层必须是极深、近乎吞噬一切的黑暗空间。
-一束从上方斜向切入的强烈体积光柱，作为第一视觉通道。
-中央偏右或光束终点位置的核心主体与承载结构。
-左下角高密度标题与信息锚点。
-【总风格】高预算电影海报气质，融合 cinematic matte painting、超写实摄影质感、极强明暗对比、厚重空间叙事。
-色彩：黑暗底色 + 单一主光 + 少量主题强调色。
-排版：80% 视觉，20% 文字，主标题简洁有气势。
-超高细节，电影级，印刷级，高端成片质感。
+Automatically generate a top-tier dark epic concept poster around [theme].
+The background must be an extremely deep, near-consuming dark space.
+A strong volumetric light beam slashes in diagonally from above as the primary visual channel.
+The core subject and its supporting structure are positioned center-right or at the beam's endpoint.
+High-density title and information anchor in the lower left.
+[Overall style] High-budget cinematic poster quality, blending cinematic matte painting, hyper-realistic photographic texture, extreme chiaroscuro contrast, and heavy spatial storytelling.
+Color: dark base + single dominant light + minimal thematic accent color.
+Typography: 80% visual, 20% text, main title concise and powerful.
+Ultra-high detail, cinematic grade, print grade, premium finish.
 ```
 
-### 科普百科信息图（通用模板）
-**适用：**科普内容、知识卡、图鉴
+### Science Encyclopedia Infographic (Universal Template)
+**Best for:** Science content, knowledge cards, illustrated guides
 
 ```
-请根据【[主题]】生成一张高质量竖版「科普百科图」。
-这张图不是普通海报，而是一张兼具"图鉴感、百科感、信息结构感、收藏感"的模块化科普信息图。
-整体风格参考高级博物图鉴、现代百科书页、生活方式知识卡和社交媒体高传播信息图的结合。
+Generate a high-quality vertical science encyclopedia infographic based on [theme].
+This is not a standard poster — it is a modular science infographic with the feel of an illustrated guide, an encyclopedia page, and a collectible knowledge card.
+Overall style references premium natural history atlases, modern encyclopedia layouts, lifestyle knowledge cards, and high-shareability social media infographics.
 
-画面包含：
-- 一个清晰漂亮的主题主视觉
-- 若干局部特征放大细节
-- 多个圆角模块化信息分区
-- 清楚的标题层级与重点标签
-- 简洁但丰富的百科内容
-- 可视化评分、要点总结或Top 5模块
+The image should include:
+- A clear, beautiful hero visual of the subject
+- Several zoomed-in detail views of key features
+- Multiple rounded-corner modular information sections
+- Clear title hierarchy and key labels
+- Concise but rich encyclopedia content
+- Visualized ratings, key takeaways, or a Top 5 module
 
-视觉要求：浅色干净背景，柔和配色，轻阴影，精致小图标，圆角信息框，整洁排版，信息密度高但不拥挤。
-```
-
-### 新中式水墨海报
-```
-新中式水墨山水海报，竖版9:16构图，东方极简美学风格，大面积留白，[主题/内容]，意境深远，诗意浓厚。
+Visual requirements: clean light background, soft color palette, subtle shadows, refined small icons, rounded info boxes, tidy layout, high information density without feeling crowded.
 ```
 
-### 轮廓宇宙叙事海报（高级收藏版）
+### New Chinese Ink Landscape Poster
 ```
-请根据【主题：[主题]】自动生成一张高审美的"轮廓宇宙/收藏版叙事海报"风格作品。
-AI 根据主题自行判断并选择一个最契合、最有象征意义的主轮廓载体（可以是建筑、门、塔、眼睛、手掌、面具等）。
-轮廓内部自动生成与主题强绑定的完整叙事世界，包括标志性场景、核心建筑、象征符号、角色关系或文明痕迹。
-风格融合收藏版电影海报构图、高级叙事型视觉设计、梦幻水彩质感与纸张印刷品气质。
-强调纸张颗粒感、边缘飞白、水彩刷痕、大面积留白与克制版式。
-色彩克制、低饱和、高级耐看。
+New Chinese ink landscape poster, vertical 9:16 composition, East Asian minimalist aesthetic, generous white space, [subject/content], deep artistic mood, rich poetic atmosphere.
 ```
 
-### 水彩梦幻插画（通用）
+### Silhouette Universe Narrative Poster (Collector's Edition)
 ```
-Ilustración en acuarela de estilo onírico de [主体], con estética impresionista ligera, pinceladas sueltas y lavados translúcidos en tonos [颜色1] y [颜色2]. Difuminado suave sobre textura de papel prensado en frío, iluminación delicada, composición limpia, enfoque minimalista, sensación de calma, ligereza y belleza efímera, alta calidad, estilo editorial.
+Automatically generate a high-aesthetic "Silhouette Universe / Collector's Edition Narrative Poster" based on [theme: [theme]].
+AI selects the most fitting, most symbolically resonant silhouette carrier for the theme (architecture, gate, tower, eye, palm, mask, etc.).
+Inside the silhouette, auto-generate a complete narrative world strongly tied to the theme, including iconic scenes, core architecture, symbolic motifs, character relationships, or traces of civilization.
+Style blends collector's edition movie poster composition, premium narrative visual design, dreamy watercolor texture, and the quality of a printed art piece.
+Emphasize paper grain, edge dry-brush marks, watercolor strokes, generous white space, and restrained typesetting.
+Muted, low-saturation, refined, enduring color palette.
 ```
-（水彩梦幻风插画，适合小红书/ins 风格图）
 
-### 产品广告海报（图生图优化）
+### Dreamy Watercolor Illustration (Universal)
 ```
-这商品广告由专业设计师重新设计。
-参考当前趋势，针对目标受众精心打磨。
-[品牌调性描述：高端/年轻/科技感等]
-[核心卖点视觉化要求]
-背景：[颜色/场景]
-光线：[柔和/戏剧性/产品摄影棚光]
-比例：[1:1/9:16/16:9]
+Ilustración en acuarela de estilo onírico de [subject], con estética impresionista ligera, pinceladas sueltas y lavados translúcidos en tonos [color 1] y [color 2]. Difuminado suave sobre textura de papel prensado en frío, iluminación delicada, composición limpia, enfoque minimalista, sensación de calma, ligereza y belleza efímera, alta calidad, estilo editorial.
+```
+(Dreamy watercolor illustration style — well suited for Xiaohongshu / Instagram aesthetics)
+
+### Product Ad Poster (Image-to-Image Optimized)
+```
+This product advertisement has been redesigned by a professional designer.
+Refined with current trends in mind, carefully tailored for the target audience.
+[Brand tone: premium / youthful / tech-forward, etc.]
+[Core selling point visualization requirements]
+Background: [color / scene]
+Lighting: [soft / dramatic / product studio light]
+Aspect ratio: [1:1 / 9:16 / 16:9]
 ```
 
 ---
 
 ## Character Design
 
-### 官方角色设定卡（三视图）
-**适用：**游戏角色设计、动漫人设、Cosplay 参考
+### Official Character Sheet (Three-View)
+**Best for:** Game character design, anime character sheets, cosplay reference
 
 ```
-基于[角色描述]，制作一份类似官方设定资料的角色资料卡。
-・包含三视图：正面、侧面和背面
-・添加角色面部表情的变化
-・分解并展示服装和装备的详细部分
-・添加色板
-・包含世界观设定的简要说明
-・总体上，使用有组织的布局（白色背景，插画风格）
-高分辨率、专业概念艺术风格
+Based on [character description], create a character reference card similar to official design materials.
+- Include three views: front, side, and back
+- Add facial expression variations
+- Break down and show detailed parts of the outfit and equipment
+- Include a color palette
+- Add a brief description of the world-setting
+- Use an organized layout overall (white background, illustration style)
+High resolution, professional concept art style
 ```
 
-### 机甲少女主视觉（电影感）
+### Mecha Girl Hero Visual (Cinematic)
 ```
-A mecha girl [年龄描述], [外貌描述], [发型描述], [装甲描述], [武器描述], standing [姿态+场景描述], [表情描述], [背景场景：废墟/海洋/城市等], moody low-key lighting, [光线描述], 35mm anamorphic lens, [构图描述], cinematic anime key visual, painterly digital illustration with crisp line art, [色调描述], film grain, high-contrast editorial poster aesthetic. Format 16:9.
+A mecha girl [age description], [appearance description], [hair description], [armor description], [weapon description], standing [pose + scene description], [expression description], [background scene: ruins / ocean / city, etc.], moody low-key lighting, [lighting description], 35mm anamorphic lens, [composition description], cinematic anime key visual, painterly digital illustration with crisp line art, [color palette description], film grain, high-contrast editorial poster aesthetic. Format 16:9.
 ```
 
-### 表情包/漫画角色系列
+### Emoji / Comic Character Series
 ```
-[角色描述]，[风格：Q版/写实/动漫]，[表情变化要求：愤怒/开心/惊讶/悲伤等多个表情]，[背景：透明/纯色]，统一画风，高分辨率，适合作为表情包使用
+[Character description], [style: chibi / realistic / anime], [expression variations: angry / happy / surprised / sad, etc.], [background: transparent / solid color], consistent art style, high resolution, suitable for use as sticker pack
 ```
 
 ---
 
 ## UI & Social Media Mockup
 
-### 平台截图（抖音/小红书/X）
-**适用：**社媒营销、创意内容、历史穿越梗
+### Platform Screenshot (TikTok / Xiaohongshu / X)
+**Best for:** Social media marketing, creative content, historical crossover gags
 
 ```
-9:16 的图片比例，生成一张[平台：抖音/小红书]截图，
-里面是[人物名]在[直播/发帖]，
-[具体内容描述：手持牌子/发布内容等]，
-[附加细节：界面元素、弹幕、点赞数等]
+9:16 aspect ratio, generate a [platform: TikTok / Xiaohongshu] screenshot,
+featuring [person name] in a [livestream / post],
+[specific content description: holding a sign / posting content, etc.],
+[additional details: UI elements, bullet comments, like counts, etc.]
 ```
 
-### 历史人物穿越社媒（创意梗）
+### Historical Figure Social Feed (Creative Crossover)
 ```
-"[历史人物]的[平台名]"，古今穿越幽默融合界面设计风格，
-画面模拟手机社交媒体界面，但内容全部是[历史朝代]场景，
-头像是[画风]的[人物]形象，
-用户名"[人物名+官方风格ID]"，
-发布内容"[符合人物特点的内容]"，
-配图为[画风]风格，
-点赞列表"[历史相关人物] 等[数量]人"，
-评论区"[对立人物]：[符合人设的评论]"，
-界面元素用[朝代]风格替代，状态栏显示"[朝代]移动 5G"和"[年份]"，
-配色为手机深色模式搭配[朝代]雅致色调
-```
-
-### UI 设计系统（单 prompt 生成）
-```
-用[风格：赛博朋克/极简/玻璃/未来感]风格帮我生成一套UI设计系统，
-包含网页、移动端、卡片、控件、按钮以及其它。
-[色彩描述]，[视觉特点描述]，视觉层次丰富，科技感极强
+"[Historical figure]'s [platform name]", humor-blended ancient-modern crossover interface design,
+screen simulates a mobile social media interface but with all content set in [historical dynasty] scenes,
+avatar is a [art style] portrait of [person],
+username "[person name + official-style ID]",
+post content "[content appropriate to the character's persona]",
+image in [art style] style,
+like list "[historically related figures] and [number] others",
+comments section "[rival figure]: [in-character comment]",
+interface elements replaced with [dynasty] style aesthetics, status bar shows "[dynasty] Mobile 5G" and "[year]",
+color scheme: dark mode UI paired with [dynasty] elegant tones
 ```
 
-### 3D 样机突破效果
+### UI Design System (Single Prompt Generation)
 ```
-创作一幅超逼真的 3D 插画，描绘一个略微倾斜的[平台：Twitter/X/App]个人资料页面，背景为简洁的[颜色]。
-界面必须与真实的[平台]截图相似，包含真实的布局、认证徽章、粉丝统计、个人资料横幅和帖子部分。
-[人物描述]从个人资料页面撕开的纸片中跃然而出，握着撕开的纸片边缘，纸屑四处飞溅，营造出强烈的 3D 突破效果。
-柔和的影棚灯光、电影级的阴影、景深、超高细节，逼真与微妙的皮克斯风格融合。
+Generate a complete UI design system in [style: cyberpunk / minimalist / glassmorphism / futuristic] style,
+including web, mobile, cards, controls, buttons, and more.
+[Color description], [visual characteristics], rich visual hierarchy, strong tech aesthetic
+```
+
+### 3D Breakout Mockup Effect
+```
+Create a hyper-realistic 3D illustration depicting a slightly tilted [platform: Twitter/X/App] profile page, with a clean [color] background.
+The interface must resemble a real [platform] screenshot, including authentic layout, verification badge, follower stats, profile banner, and posts section.
+[Subject description] bursts out through torn paper from the profile page, gripping the torn edges, paper scraps flying everywhere, creating a strong 3D breakout effect.
+Soft studio lighting, cinematic shadows, depth of field, ultra-high detail, realistic skin with a subtle Pixar-style blend.
 ```
 
 ---
 
 ## Creative Mix
 
-### 风格迁移（照片→特定画风）
+### Style Transfer (Photo → Specific Art Style)
 ```
-Show [描述或"the attached image"] as [目标风格]:
-- 动漫风: "a snapshot from an actual anime"
-- 赛博朋克: "in cyberpunk style with neon lights and rain"
-- 油画: "as an oil painting by [艺术家风格]"
-- 水墨: "in traditional Chinese ink painting style"
-- 像素游戏: "as a pixel art game screenshot"
-```
-
-### 游戏内截图风
-```
-[游戏名] in game screenshot, [额外描述/混搭：mixed with [另一个游戏名]]
+Show [description or "the attached image"] as [target style]:
+- Anime: "a snapshot from an actual anime"
+- Cyberpunk: "in cyberpunk style with neon lights and rain"
+- Oil painting: "as an oil painting by [artist style]"
+- Ink wash: "in traditional Chinese ink painting style"
+- Pixel game: "as a pixel art game screenshot"
 ```
 
-### 涂鸦速写风（人物/概念）
+### In-Game Screenshot Style
 ```
-以涂鸦速写风表现【[主题/人物]】，整体呈现快速勾勒、自由变形、即兴手绘与草稿式的视觉效果。
-线条随手、夸张、可粗细不一，略显凌乱但具有节奏和表现力，强调概括、夸张、趣味和随性。
-颜色采用粗糙、干刷感明显的块面表现，可保留不均匀的涂抹痕迹。
-背景以留白为主，保持简洁、轻松、未完成感和设计感，可加入少量辅助性符号、箭头、记号。
+[Game name] in game screenshot, [additional description / mashup: mixed with [another game name]]
 ```
 
-### 极端透视排版海报
+### Doodle Sketch Style (Characters / Concepts)
 ```
-[场景：跨海大桥/高楼/隧道]的侧面，dramatic cinematic angle。
-巨型 bold sans-serif 文字「[文字内容]」painted onto the surface，从靠近镜头的前端开始，沿表面向远端 progressively foreshortens 逐渐透视压缩，letterforms conform to surface curvature。
-[前景遮挡物] occluded and hidden，形成 depth-layering 纵深穿插效果。
-Oversized bright [颜色] + sharp [轮廓颜色] outline，extreme perspective distortion aligned to vanishing point。
-Cinematic lighting, motion blur, poster-grade dynamic integrated typography, modern advertising aesthetics。
+Express [theme / subject] in a doodle sketch style, with the overall visual feeling of rapid sketching, free-form distortion, spontaneous hand-drawing, and a draft-like aesthetic.
+Lines are casual, exaggerated, varied in weight, slightly chaotic but rhythmic and expressive. Emphasize simplification, exaggeration, playfulness, and spontaneity rather than rigorous realism or fine rendering.
+Colors use rough, dry-brush block areas, with uneven smudges, brushstrokes, dry edges, and layering.
+Background is primarily negative space — clean, relaxed, unfinished yet design-forward — with minimal supporting symbols, arrows, marks, and doodle elements.
 ```
 
-### 科幻未来城市概念图
+### Extreme Perspective Typography Poster
 ```
-[风格：赛博朋克/蒸汽朋克/未来极简] futuristic city, [时间：夜晚/黄昏/清晨], [视角：鸟瞰/街道/仰视], [核心元素：霓虹灯/悬浮交通/巨型广告牌/积水反射], [光线：霓虹色调/冷蓝光/暖金光], cinematic, ultra-detailed, [比例]
+[Scene: suspension bridge / skyscraper / tunnel] from the side, dramatic cinematic angle.
+Giant bold sans-serif text "[text content]" painted onto the surface, starting from the near end closest to the lens and progressively foreshortening toward the far end, letterforms conform to surface curvature.
+[Foreground occluder] occluded and hidden, creating a depth-layering effect.
+Oversized bright [color] + sharp [outline color] outline, extreme perspective distortion aligned to vanishing point.
+Cinematic lighting, motion blur, poster-grade dynamic integrated typography, modern advertising aesthetics.
+```
+
+### Sci-Fi Futuristic City Concept Art
+```
+[Style: cyberpunk / steampunk / futuristic minimalist] futuristic city, [time: night / dusk / dawn], [viewpoint: aerial / street level / upward angle], [core elements: neon lights / hover traffic / giant billboards / puddle reflections], [lighting: neon tones / cold blue / warm gold], cinematic, ultra-detailed, [aspect ratio]
 ```
 
 ---
 
-## 常用修饰词速查
+## Quick Modifier Reference
 
-### 画质/风格
-- 摄影质感：`35mm film`, `film grain`, `photorealistic`, `8K`, `cinematic`
-- 插画质感：`masterpiece`, `high detail`, `professional illustration`, `painterly`
-- 胶片型号：`Fujifilm Pro 400H`, `Kodak Portra 400`, `Superia 400`
+### Quality / Style
+- Photographic: `35mm film`, `film grain`, `photorealistic`, `8K`, `cinematic`
+- Illustration: `masterpiece`, `high detail`, `professional illustration`, `painterly`
+- Film stocks: `Fujifilm Pro 400H`, `Kodak Portra 400`, `Superia 400`
 
-### 光线类型
-- `golden hour` 黄金时刻
-- `soft diffused natural light` 柔和散射自然光
-- `harsh flash` 强烈闪光灯
-- `neon glow` 霓虹灯光
-- `volumetric god rays` 体积光/耶稣光
-- `soft side light` 侧光
+### Lighting Types
+- `golden hour`
+- `soft diffused natural light`
+- `harsh flash`
+- `neon glow`
+- `volumetric god rays`
+- `soft side light`
 
-### 构图类型
-- S 型流动构图
-- 对角线/斜向构图
-- 中轴对称
-- 三分法
-- 低角度仰拍
-- 鸟瞰/俯视
+### Composition Types
+- S-curve flowing composition
+- Diagonal / oblique composition
+- Central axis symmetry
+- Rule of thirds
+- Low-angle upward shot
+- Aerial / bird's eye view
 
-### 比例
-- `9:16` 竖版（小红书/抖音/手机壁纸）
-- `16:9` 横版（PPT/电脑壁纸）
-- `1:1` 方形（Instagram）
-- `3:4` 标准竖版
+### Aspect Ratios
+- `9:16` — Portrait (Xiaohongshu / TikTok / mobile wallpaper)
+- `16:9` — Landscape (slides / desktop wallpaper)
+- `1:1` — Square (Instagram)
+- `3:4` — Standard portrait
