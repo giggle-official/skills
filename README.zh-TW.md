@@ -101,4 +101,9 @@ skills:
     description: "支援文字轉影片與圖片轉影片（首幀/尾幀）。適合需要將文字或圖片轉成影片的使用者。"
     category: video
     version: "0.0.1"
+  - name: "圖片生成 (gpt-image-2)"
+    value: "giggle-gpt-image-2"
+    description: "協助使用者產生適用於 GPT-Image-2 的高品質提示詞，並在生成提示詞後直接呼叫 Giggle API，使用 `gpt-image-2-fast` 產生圖片。"
+    category: image
+    version: "0.0.1"
 ```
