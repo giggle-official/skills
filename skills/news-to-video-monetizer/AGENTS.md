@@ -13,6 +13,8 @@
 | `dailyhot-api` | `https://github.com/giggle-official/skills@dailyhot-api` | 热点采集（40+平台热搜，本地服务 localhost:6688）|
 | `ai-director` | `https://github.com/giggle-official/skills@ai-director` | AI编剧 + 视频生产（X2C Cloud API）|
 | `x2c-publish` | `https://github.com/giggle-official/skills@x2c-publish` | 视频发布 + 钱包/收益管理（X2C Cloud API）|
+| `x2c-real-dashboard` | `https://github.com/giggle-official/skills@x2c-real-dashboard` | 实时 Dashboard 数据（总览、趋势、作品列表）|
+| `claw-dashboard-skill` | `https://github.com/yshi0730/claw-dashboard-skill` | Dashboard 可视化展示（Hub + Tunnel）|
 
 ---
 
@@ -141,6 +143,8 @@ cd ~/.openclaw/skills/dailyhot-api && bash scripts/ensure_running.sh
 > **⚙️ 账户**
 > 7️⃣ **绑定 X2C 账号** — 首次使用前必须完成
 > 8️⃣ **查看余额** — 积分 + X2C + USDC 余额
+> 9️⃣ **每日报告设置** — 订阅/取消每日运营数据邮件
+> 🔟 **查看 Dashboard** — 可视化数据面板（收益、趋势、作品）
 
 ---
 
@@ -326,3 +330,64 @@ workspace-news-to-video-monetizer/
 - 微博和快手的 DailyHot 接口偶尔返回 500（不影响整体采集）
 - 视频渲染在 shot 阶段偶尔失败，属于 X2C 上游问题，重试通常成功
 - 核心流程零 AI 模型依赖（不需要 OpenAI / Gemini / Claude API Key），视频生成由 X2C 云端处理
+
+---
+
+## Dashboard 可视化面板
+
+### 首次使用初始化
+
+当用户首次说 **「查看 Dashboard」** 或 **「10」** 时，执行 BOOTSTRAP.md 中的初始化流程：
+
+1. 安装 Dashboard skills（`x2c-real-dashboard`、`claw-dashboard-skill`）
+2. 初始化 Dashboard Hub（FastAPI + SQLite）
+3. 注册设备并启动 Cloudflared tunnel
+4. 注册当前 agent 模块
+5. 更新数据并返回 Dashboard URL
+
+详细步骤见 `BOOTSTRAP.md`。
+
+### 访问地址
+Dashboard 公共 URL 保存在 `~/.claw/config/tunnel.json` 中的 `public_url` 字段。
+
+查询方法：
+```bash
+python3 -c "import json,os; print(json.load(open(os.path.expanduser('~/.claw/config/tunnel.json')))['public_url'])"
+```
+
+### 数据更新
+Dashboard 使用 `x2c-real-dashboard` skill 获取实时数据，通过 SQLite 数据库（`~/.claw/shared/shared.db`）存储。
+
+#### 更新 Dashboard 数据
+使用 x2c-real-dashboard skill 提供的更新脚本：
+
+```bash
+python3 ~/.openclaw/skills/x2c-real-dashboard/scripts/update_dashboard.py
+```
+
+该脚本会：
+1. 从 X2C API 获取最新数据（总览、趋势、作品、交易）
+2. 更新所有 Dashboard 组件
+3. 返回 Dashboard 公共 URL
+
+### Dashboard 组件
+| 组件类型 | 标题 | 数据来源 |
+|---------|------|---------|
+| kpi_card | 总收入 | overview.revenue.historical_usd |
+| kpi_card | 今日收益 | overview.revenue.today_usd |
+| kpi_card | 总播放量 | overview.views.total |
+| kpi_card | 活跃项目 | overview.projects.active_earning |
+| line_chart | 7日收益趋势 | trend.trend[].revenue_usd |
+| table | 平台播放分布 | overview.views.{platform} |
+| table | 赚钱作品 Top 5 | projects.items[] |
+| activity_log | 最近活动 | 实时同步状态 |
+
+### 触发更新时机
+- 用户说 **「查看 Dashboard」** 或 **「10」** → 更新数据并返回 URL
+- 每次 Task 完成（Node 5: 审核通过）→ 自动更新 Dashboard
+- 用户说 **「刷新 Dashboard」** → 手动触发更新
+
+更新命令：
+```bash
+python3 ~/.openclaw/skills/x2c-real-dashboard/scripts/update_dashboard.py
+```

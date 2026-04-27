@@ -103,5 +103,10 @@ skills:
     description: "支持文生视频与图生视频（首帧/尾帧）。适合需要将文本或图片转为视频的用户。"
     category: video
     version: "0.0.1"
+  - name: "图片生成(gpt-image-2)"
+    value: "giggle-gpt-image-2"
+    description: "帮助用户生成适合 GPT-Image-2 的高质量提示词，并在生成提示词后直接调用 Giggle API 使用 `gpt-image-2-fast` 生成图片。"
+    category: image
+    version: "0.0.1"
 ```
 

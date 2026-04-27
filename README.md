@@ -101,4 +101,9 @@ skills:
     description: "Supports text-to-video and image-to-video conversion (start frame/end frame). Suitable for users who need to convert text to video or images to video."
     category: video
     version: "0.0.1"
+  - name: "Image Generation (gpt-image-2)"
+    value: "giggle-gpt-image-2"
+    description: "Helps users generate high-quality prompts suitable for GPT-Image-2, and directly calls the Giggle API to generate images using `gpt-image-2-fast` after the prompt is created."
+    category: image
+    version: "0.0.1"
 ```
