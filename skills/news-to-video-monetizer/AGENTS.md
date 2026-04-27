@@ -13,8 +13,10 @@
 | `dailyhot-api` | `https://github.com/giggle-official/skills@dailyhot-api` | 热点采集（40+平台热搜，本地服务 localhost:6688）|
 | `ai-director` | `https://github.com/giggle-official/skills@ai-director` | AI编剧 + 视频生产（X2C Cloud API）|
 | `x2c-publish` | `https://github.com/giggle-official/skills@x2c-publish` | 视频发布 + 钱包/收益管理（X2C Cloud API）|
-| `x2c-real-dashboard` | `https://github.com/giggle-official/skills@x2c-real-dashboard` | 实时 Dashboard 数据（总览、趋势、作品列表）|
-| `claw-dashboard-skill` | `https://github.com/yshi0730/claw-dashboard-skill` | Dashboard 可视化展示（Hub + Tunnel）|
+| `x2c-real-dashboard` | **workspace 内置** (`./skills/`) | 实时 Dashboard 数据（总览、趋势、作品列表）|
+| `x2c-dashboard-integration` | **workspace 内置** (`./skills/`) | Dashboard 可视化（自动安装 claw-dashboard-skill）|
+
+**注意**: Dashboard 相关 skills 内置在 workspace 的 `./skills/` 目录中，无需外部安装。
 
 ---
 
@@ -337,13 +339,17 @@ workspace-news-to-video-monetizer/
 
 ### 首次使用初始化
 
-当用户首次说 **「查看 Dashboard」** 或 **「10」** 时，执行 BOOTSTRAP.md 中的初始化流程：
+当用户首次说 **「查看 Dashboard」** 或 **「10」** 时，使用 workspace 内置的 skills 初始化：
 
-1. 安装 Dashboard skills（`x2c-real-dashboard`、`claw-dashboard-skill`）
-2. 初始化 Dashboard Hub（FastAPI + SQLite）
-3. 注册设备并启动 Cloudflared tunnel
-4. 注册当前 agent 模块
-5. 更新数据并返回 Dashboard URL
+```bash
+# 完整初始化流程（使用 workspace/skills/ 中的内置 skills）
+bash ~/.openclaw/workspace-news-to-video-monetizer/skills/x2c-dashboard-integration/scripts/install-dependencies.sh && \
+bash ~/.openclaw/workspace-news-to-video-monetizer/skills/x2c-dashboard-integration/scripts/initialize-dashboard.sh && \
+bash ~/.openclaw/workspace-news-to-video-monetizer/skills/x2c-dashboard-integration/scripts/register-module.sh \
+  news-to-video-monetizer "X2CReel 制作发行" "🎬" && \
+X2C_API_KEY="$API_KEY" python3 ~/.openclaw/workspace-news-to-video-monetizer/skills/x2c-dashboard-integration/scripts/update_dashboard.py && \
+bash ~/.openclaw/workspace-news-to-video-monetizer/skills/x2c-dashboard-integration/scripts/get-url.sh
+```
 
 详细步骤见 `BOOTSTRAP.md`。
 
@@ -352,22 +358,21 @@ Dashboard 公共 URL 保存在 `~/.claw/config/tunnel.json` 中的 `public_url` 
 
 查询方法：
 ```bash
-python3 -c "import json,os; print(json.load(open(os.path.expanduser('~/.claw/config/tunnel.json')))['public_url'])"
+bash ~/.openclaw/workspace-news-to-video-monetizer/skills/x2c-dashboard-integration/scripts/get-url.sh
 ```
 
 ### 数据更新
-Dashboard 使用 `x2c-real-dashboard` skill 获取实时数据，通过 SQLite 数据库（`~/.claw/shared/shared.db`）存储。
+Dashboard 使用 workspace 内置的 `x2c-real-dashboard` skill 获取实时数据，通过 SQLite 数据库（`~/.claw/shared/shared.db`）存储。
 
 #### 更新 Dashboard 数据
-使用 x2c-real-dashboard skill 提供的更新脚本：
 
 ```bash
-python3 ~/.openclaw/skills/x2c-real-dashboard/scripts/update_dashboard.py
+X2C_API_KEY="$API_KEY" python3 ~/.openclaw/workspace-news-to-video-monetizer/skills/x2c-dashboard-integration/scripts/update_dashboard.py
 ```
 
 该脚本会：
 1. 从 X2C API 获取最新数据（总览、趋势、作品、交易）
-2. 更新所有 Dashboard 组件
+2. 更新所有 Dashboard 组件（KPI、图表、表格）
 3. 返回 Dashboard 公共 URL
 
 ### Dashboard 组件
@@ -389,5 +394,100 @@ python3 ~/.openclaw/skills/x2c-real-dashboard/scripts/update_dashboard.py
 
 更新命令：
 ```bash
-python3 ~/.openclaw/skills/x2c-real-dashboard/scripts/update_dashboard.py
+X2C_API_KEY="$API_KEY" python3 ~/.openclaw/workspace-news-to-video-monetizer/skills/x2c-dashboard-integration/scripts/update_dashboard.py
 ```
+
+---
+
+## 自动化执行脚本
+
+### 一键制作（推荐）
+
+使用完整的自动化脚本，从采集到发布全自动执行：
+
+```bash
+bash ~/.openclaw/workspace-news-to-video-monetizer/scripts/one-click-production.sh
+```
+
+**流程**:
+1. Node 1: 采集热点（5秒）
+2. Node 2: 筛选话题（1秒）
+3. Node 3: 制作视频（10-20分钟，同步等待）
+4. Node 4: 发布到X2C（5秒）
+5. Node 5: 提交审核（自动）
+6. 保存 Task 记录
+7. 更新 Dashboard
+
+**特点**:
+- ✅ 全自动执行，无需人工干预
+- ✅ 同步等待视频完成，确保流程完整
+- ✅ 自动保存 Task 记录
+- ✅ 自动更新 Dashboard
+- ✅ 错误自动停止，报告详细信息
+
+### 手动分步执行（调试用）
+
+如果需要调试或查看每一步的详细输出，可以手动执行各个节点。但**不推荐在生产环境使用**。
+
+
+---
+
+## 文件交付规范
+
+### 规则：文件交付——webchat 优先，Giggle 补充
+
+发送任何文件给用户时，先用 `write` 工具写到 `~/.openclaw/shared/outputs/assistant/`，webchat 会自动显示为可下载附件。如果 Giggle Key 有效，再额外上传并附上链接。没有 Giggle Key 就只给 webchat 附件，不报错。
+
+#### 执行步骤
+
+1. **写入文件到 outputs 目录**
+   ```bash
+   # 使用 write 工具
+   write(
+     path="~/.openclaw/shared/outputs/assistant/filename.ext",
+     content="文件内容"
+   )
+   ```
+
+2. **通知用户**
+   ```
+   ✅ 文件已准备好：filename.ext
+   
+   📥 下载方式：
+   - 在对话界面点击附件下载
+   ```
+
+3. **（可选）上传到 Giggle**
+   如果有 Giggle Key，额外上传并提供链接：
+   ```bash
+   # 检查 Giggle Key
+   if [ -n "$GIGGLE_API_KEY" ]; then
+     # 上传到 Giggle
+     giggle upload ~/.openclaw/shared/outputs/assistant/filename.ext
+   fi
+   ```
+
+#### 注意事项
+
+- ✅ **必须**先写入 `~/.openclaw/shared/outputs/assistant/`
+- ✅ webchat 会自动检测该目录的文件并显示为附件
+- ✅ 文件名要清晰明确，包含扩展名
+- ✅ 没有 Giggle Key 时不报错，只提供 webchat 附件
+- ❌ 不要尝试启动 HTTP 服务器
+- ❌ 不要使用 transfer.sh、file.io 等外部服务（大多不可用）
+- ❌ 不要说"文件已作为附件提供"而实际没有写入文件
+
+#### 示例
+
+```python
+# 正确的文件交付方式
+write(
+  path="~/.openclaw/shared/outputs/assistant/x2c-skills-complete.tar.gz",
+  content=binary_content
+)
+
+# 通知用户
+print("✅ 文件已准备好：x2c-skills-complete.tar.gz")
+print("📥 在对话界面点击附件下载")
+```
+
