@@ -101,4 +101,9 @@ skills:
     description: "テキスト→動画、画像→動画の変換（開始フレーム/終了フレーム）に対応。テキストや画像から動画が必要なユーザー向け。"
     category: video
     version: "0.0.1"
+  - name: "画像生成 (gpt-image-2)"
+    value: "giggle-gpt-image-2"
+    description: "GPT-Image-2 に適した高品質なプロンプトを生成し、プロンプト作成後に Giggle API を直接呼び出して `gpt-image-2-fast` を使用して画像を生成します。"
+    category: image
+    version: "0.0.1"
 ```

@@ -101,4 +101,9 @@ skills:
     description: "텍스트→비디오 및 이미지→비디오 변환(시작 프레임/종료 프레임) 지원. 텍스트나 이미지를 영상으로 바꿔야 하는 사용자에게 적합."
     category: video
     version: "0.0.1"
+  - name: "이미지 생성 (gpt-image-2)"
+    value: "giggle-gpt-image-2"
+    description: "GPT-Image-2에 적합한 고품질 프롬프트 생성을 도와주며, 프롬프트 생성 후 Giggle API를 직접 호출하여 `gpt-image-2-fast`로 이미지를 생성합니다."
+    category: image
+    version: "0.0.1"
 ```
