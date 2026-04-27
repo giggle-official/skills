@@ -1,0 +1,46 @@
+# 配置文件（包含敏感信息）
+config.json
+persona_evolution.json
+comment_monitor.json
+
+# 输出文件
+outputs/videos/*.mp4
+outputs/logs/*.json
+outputs/pool/*.json
+outputs/briefs/*.md
+outputs/scripts/*.md
+
+# 保留 reports 目录结构但忽略内容
+outputs/reports/*.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.tmp
+*.bak
+*.log

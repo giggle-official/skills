@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Claw Dashboard{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script>
+        // Theme + language — load before render to prevent flash
+        (function() {
+            const theme = localStorage.getItem('claw-theme');
+            document.documentElement.classList.add(theme === 'light' ? 'light' : 'dark');
+
+            const lang = localStorage.getItem('claw-lang') ||
+                (navigator.language.startsWith('zh') ? 'zh' : 'en');
+            document.documentElement.setAttribute('data-lang', lang);
+        })();
+    </script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        // Dark mode tokens
+                        "dm-surface": "#10141a",
+                        "dm-surface-container": "#1c2026",
+                        "dm-on-surface": "#dfe2eb",
+                        "dm-outline": "#6c7b6d",
+                        "dm-primary-container": "#00ff85",
+                        "dm-on-primary": "#003919",
+                        // Light mode tokens
+                        "lm-surface": "#f3fcf0",
+                        "lm-surface-container": "#e7f1e5",
+                        "lm-on-surface": "#151e16",
+                        "lm-outline": "#6c7b6d",
+                        "lm-primary": "#006d37",
+                        "lm-primary-container": "#00d16f",
+                        // Shared
+                        "accent-red": "#ff6b6b",
+                        "accent-blue": "#79d1f8",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "mono": ["monospace"],
+                    },
+                    fontSize: {
+                        "label-caps": ["12px", { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "700" }],
+                        "data-mono": ["14px", { lineHeight: "1.4", letterSpacing: "0", fontWeight: "500" }],
+                        "h1": ["48px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "h2": ["32px", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "h3": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+                    },
+                },
+            },
+        }
+    </script>
+    <script>
+        // i18n labels — UI chrome only, not data content
+        const I18N = {
+            en: {
+                overview: "OVERVIEW",
+                agents: "Agents",
+                system_online: "System Online",
+                system_active: "System Active",
+                powered_by: "Powered by Claw Dashboard",
+                agent_dashboard: "AGENT DASHBOARD",
+                overview_title: "Overview",
+                overview_subtitle: "Your AI agents and their operational status.",
+                no_agents: "No agents registered yet",
+                no_agents_hint: "Start chatting with an agent that has dashboard support.",
+                no_widgets: "No widgets yet",
+                no_widgets_hint: "Your agent will add content here.",
+                active: "Active",
+                running: "RUNNING",
+                paused: "PAUSED",
+                live: "LIVE",
+                ai_reasoning: "AI REASONING",
+                no_data: "No data yet",
+                no_activity: "No activity yet",
+            },
+            zh: {
+                overview: "总览",
+                agents: "智能体",
+                system_online: "系统在线",
+                system_active: "系统运行中",
+                powered_by: "Claw Dashboard 驱动",
+                agent_dashboard: "智能体面板",
+                overview_title: "总览",
+                overview_subtitle: "你的 AI 智能体及其运行状态。",
+                no_agents: "暂无已注册的智能体",
+                no_agents_hint: "请先与支持 Dashboard 的智能体对话。",
+                no_widgets: "暂无组件",
+                no_widgets_hint: "你的智能体会在这里添加内容。",
+                active: "运行中",
+                running: "运行中",
+                paused: "已暂停",
+                live: "实盘",
+                ai_reasoning: "AI 决策逻辑",
+                no_data: "暂无数据",
+                no_activity: "暂无记录",
+            }
+        };
+        function t(key) {
+            const lang = document.documentElement.getAttribute('data-lang') || 'en';
+            return (I18N[lang] && I18N[lang][key]) || I18N.en[key] || key;
+        }
+        function applyI18n() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                el.textContent = t(el.getAttribute('data-i18n'));
+            });
+        }
+        document.addEventListener('DOMContentLoaded', applyI18n);
+    </script>
+    <style>
+        /* Dark mode card */
+        .dark .glass-card {
+            background: rgba(22, 27, 34, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top-color: rgba(255, 255, 255, 0.1);
+        }
+        /* Light mode card */
+        .light .glass-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+        }
+        .dark .neon-glow { box-shadow: 0 0 15px rgba(0, 255, 133, 0.15); }
+        .light .led-glow { box-shadow: 0 0 8px 2px rgba(0, 209, 111, 0.4); }
+        .light .grid-bg {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        .dark ::-webkit-scrollbar-thumb { background: #353940; border-radius: 3px; }
+        .light ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    </style>
+</head>
+<body class="font-body min-h-screen
+    dark:bg-dm-surface dark:text-dm-on-surface
+    bg-lm-surface text-lm-on-surface">
+
+<!-- Sidebar -->
+<nav class="flex flex-col w-64 h-screen fixed left-0 top-0 z-40
+    dark:bg-zinc-950/80 dark:backdrop-blur-2xl dark:border-r dark:border-white/5
+    bg-white border-r border-slate-200">
+
+    <div class="px-6 py-8">
+        <!-- Logo -->
+        <div class="flex items-center gap-3 mb-8">
+            <div class="w-10 h-10 rounded flex items-center justify-center
+                dark:bg-dm-primary-container dark:neon-glow
+                bg-lm-primary-container led-glow">
+                <span class="material-symbols-outlined dark:text-dm-on-primary text-white" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+            </div>
+            <div>
+                <h1 class="text-base font-bold font-display tracking-tight dark:text-white text-slate-900">DASHBOARD</h1>
+                <p class="text-[10px] font-display tracking-widest uppercase dark:text-dm-primary-container text-lm-primary">CLAW_SYSTEM</p>
+            </div>
+        </div>
+
+        <!-- Nav -->
+        <div class="space-y-1">
+            <a href="/" class="flex items-center gap-3 px-4 py-3 transition-all duration-200 font-display text-sm tracking-tight font-medium
+                {% if not module %}
+                dark:text-dm-primary-container dark:bg-dm-primary-container/5 dark:border-r-2 dark:border-dm-primary-container
+                text-lm-primary-container bg-emerald-50 border-l-4 border-lm-primary-container rounded-r-full
+                {% else %}
+                dark:text-zinc-500 dark:hover:bg-white/5 dark:hover:text-white
+                text-slate-500 hover:bg-slate-50 hover:text-slate-900
+                {% endif %}">
+                <span class="material-symbols-outlined text-lg">home</span>
+                <span data-i18n="overview">OVERVIEW</span>
+            </a>
+
+            {% for m in modules %}
+            <a href="/m/{{ m.id }}" class="flex items-center gap-3 px-4 py-3 transition-all duration-200 font-display text-sm tracking-tight font-medium
+                {% if module and module.id == m.id %}
+                dark:text-dm-primary-container dark:bg-dm-primary-container/5 dark:border-r-2 dark:border-dm-primary-container
+                text-lm-primary-container bg-emerald-50 border-l-4 border-lm-primary-container rounded-r-full
+                {% else %}
+                dark:text-zinc-500 dark:hover:bg-white/5 dark:hover:text-white
+                text-slate-500 hover:bg-slate-50 hover:text-slate-900
+                {% endif %}">
+                <span class="text-lg">{{ m.icon or '◎' }}</span>
+                {{ m.name | upper }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mt-auto px-6 py-6">
+        <div class="flex items-center gap-3 px-2">
+            <div class="w-2 h-2 rounded-full bg-lm-primary-container dark:bg-dm-primary-container
+                dark:shadow-[0_0_8px_#00FF85] led-glow
+                animate-pulse"></div>
+            <span class="text-[10px] font-display tracking-widest uppercase dark:text-zinc-500 text-slate-400" data-i18n="system_online">System Online</span>
+        </div>
+    </div>
+</nav>
+
+<!-- Top Bar (light mode only for parity, always show theme toggle) -->
+<header class="fixed top-0 right-0 z-50 flex justify-end items-center px-8 h-14
+    dark:bg-dm-surface/80 dark:backdrop-blur-xl dark:border-b dark:border-white/5
+    bg-white/80 backdrop-blur-xl border-b border-slate-200"
+    style="left: 256px;">
+    <div class="flex items-center gap-2">
+        <!-- Language Toggle -->
+        <button onclick="toggleLang()" class="px-3 py-1.5 rounded-full transition-colors text-xs font-display font-bold tracking-wider
+            dark:hover:bg-white/10 dark:text-zinc-400
+            hover:bg-slate-100 text-slate-500"
+            title="Switch language / 切换语言"
+            id="lang-toggle-btn">
+            EN
+        </button>
+        <!-- Theme Toggle -->
+        <button onclick="toggleTheme()" class="p-2 rounded-full transition-colors
+            dark:hover:bg-white/10 dark:text-zinc-400
+            hover:bg-slate-100 text-slate-500"
+            title="Toggle light/dark mode">
+            <span class="material-symbols-outlined text-xl dark:block hidden">light_mode</span>
+            <span class="material-symbols-outlined text-xl dark:hidden block">dark_mode</span>
+        </button>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="ml-64 pt-20 px-8 pb-12 max-w-7xl mx-auto w-full min-h-screen
+    dark:bg-dm-surface
+    grid-bg">
+    {% block content %}{% endblock %}
+</main>
+
+<script>
+function toggleTheme() {
+    const html = document.documentElement;
+    if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        localStorage.setItem('claw-theme', 'light');
+    } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        localStorage.setItem('claw-theme', 'dark');
+    }
+    location.reload();
+}
+function toggleLang() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-lang') || 'en';
+    const next = current === 'en' ? 'zh' : 'en';
+    html.setAttribute('data-lang', next);
+    localStorage.setItem('claw-lang', next);
+    // Update button label
+    document.getElementById('lang-toggle-btn').textContent = next === 'en' ? 'EN' : '中';
+    // Re-apply i18n
+    applyI18n();
+}
+// Set initial button label
+document.addEventListener('DOMContentLoaded', function() {
+    const lang = document.documentElement.getAttribute('data-lang') || 'en';
+    document.getElementById('lang-toggle-btn').textContent = lang === 'en' ? 'EN' : '中';
+});
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
