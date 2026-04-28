@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 自动首评配置向导
 """
@@ -11,8 +11,8 @@ def configure_auto_comment():
     print("🤖 自动首评功能配置")
     print("="*60)
     
-    print("\n视频发布到 TikTok 后，系统会自动发布第一条评论，帮助引导互动。")
-    print("\n⚠️  注意：由于 TikTok 发布规则，视频发布后需要等待 30 分钟才能获取真实视频 ID。")
+    print("\n视频发布到 YouTube 后，系统会自动发布第一条评论，帮助引导互动。")
+    print("\n⚠️  注意：由于 YouTube 发布规则，视频发布后需要等待 30 分钟才能获取真实视频 ID。")
     print("系统会在后台自动等待并完成首评，不影响其他流程。")
     
     print("\n是否启用自动首评功能？")

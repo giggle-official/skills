@@ -1,0 +1,40 @@
+﻿{
+  "skills": {
+    "dailyhot-api": {
+      "name": "dailyhot-api",
+      "description": "全网热榜聚合 API 服务",
+      "source": "github",
+      "url": "https://github.com/giggle-official/skills/tree/main/skills/dailyhot-api",
+      "clone_url": "https://github.com/giggle-official/skills.git",
+      "subdirectory": "skills/dailyhot-api",
+      "required": true
+    },
+    "giggle-generation-drama": {
+      "name": "giggle-generation-drama",
+      "description": "Giggle AI 视频生成",
+      "source": "github",
+      "url": "https://github.com/giggle-official/skills/tree/main/skills/giggle-generation-drama",
+      "clone_url": "https://github.com/giggle-official/skills.git",
+      "subdirectory": "skills/giggle-generation-drama",
+      "required": true
+    },
+    "x2c-socialposter": {
+      "name": "x2c-socialposter",
+      "description": "YouTube 视频发布",
+      "source": "github",
+      "url": "https://github.com/giggle-official/skills/tree/main/skills/x2c-socialposter",
+      "clone_url": "https://github.com/giggle-official/skills.git",
+      "subdirectory": "skills/x2c-socialposter",
+      "required": true
+    },
+    "claw-dashboard": {
+      "name": "claw-dashboard",
+      "description": "可视化数据面板",
+      "source": "github",
+      "url": "https://github.com/yshi0730/claw-dashboard-skill",
+      "clone_url": "https://github.com/yshi0730/claw-dashboard-skill.git",
+      "subdirectory": null,
+      "required": false
+    }
+  }
+}

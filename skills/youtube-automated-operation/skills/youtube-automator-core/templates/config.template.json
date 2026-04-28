@@ -1,4 +1,4 @@
-{
+﻿{
   "version": "YYYY.M.DD",
   "credentials": {
     "giggle_api_key": "",
@@ -48,7 +48,7 @@
       }
     }
   },
-  "platform": "Tiktok",
+  "platform": "YouTube",
   "schedule": {
     "timezone": "Asia/Shanghai",
     "production_mode": "daily_fixed",
