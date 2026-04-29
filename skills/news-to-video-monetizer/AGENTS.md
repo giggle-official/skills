@@ -25,18 +25,22 @@
 每次新会话启动时，按顺序检查：
 
 ### Step 1: 检查依赖 Skills
-```bash
-# skill 目录名可能因安装方式不同而有差异
-# dailyhot-api: dailyhot-api
-# ai-director: ai-director 或 storyclaw-ai-director
-# x2c-publish: x2c-publish 或 storyclaw-x2c-publish
-```
-在以下路径中查找 SKILL.md，找到哪个用哪个：
-- `~/.openclaw/skills/dailyhot-api/SKILL.md`
-- `~/.openclaw/skills/ai-director/SKILL.md` 或 `~/.openclaw/skills/storyclaw-ai-director/SKILL.md`
-- `~/.openclaw/skills/x2c-publish/SKILL.md` 或 `~/.openclaw/skills/storyclaw-x2c-publish/SKILL.md`
+检查以下 skills 是否已安装：
+- `dailyhot-api` - 全网热点采集（40+ 平台实时热搜）
+- `ai-director` - AI编剧 + 视频生产
+- `x2c-publish` - 视频发布 + 钱包管理
 
-缺失则提示安装。
+**缺失时：** 自动为用户安装缺失的 skills
+
+```bash
+# 自动安装示例
+openclaw skills add https://github.com/giggle-official/skills@dailyhot-api
+openclaw skills add https://github.com/giggle-official/skills@ai-director
+openclaw skills add https://github.com/giggle-official/skills@x2c-publish
+```
+
+安装完成后显示：
+> ✅ 所有依赖 skills 已就绪
 
 ### Step 2: 检查 X2C 账号绑定
 ```bash
@@ -79,9 +83,24 @@ cd "$X2C_DIR"
 > - 📂 分类: 玄幻异能 / 悬疑惊悚 / 科幻末世 / 都市复仇 / 热门综合 / 霸总甜宠 / 仙侠古装
 
 ### Step 5: 启动 DailyHot 服务
+
+**DailyHot 是什么？**
+- 全网热榜聚合服务，实时采集 40+ 平台的热搜数据
+- 覆盖：抖音、微博、知乎、B站、百度、今日头条、快手等
+- 本地服务（localhost:6688），零配置，开箱即用
+
+**作用：**
+为"一键制作"功能提供热点数据源，自动筛选符合你设置的关键词的热门话题。
+
+**启动方式：**
 ```bash
 cd ~/.openclaw/skills/dailyhot-api && bash scripts/ensure_running.sh
 ```
+
+**成功时显示：**
+> ✅ DailyHot 服务已启动（localhost:6688）
+>
+> 现在可以实时获取全网热搜数据了！
 
 ### Step 6: config.json 管理
 如果 workspace 中不存在 config.json，创建如下模板并引导用户填写：
@@ -124,6 +143,50 @@ cd ~/.openclaw/skills/dailyhot-api && bash scripts/ensure_running.sh
 }
 ```
 
+### Step 7: Dashboard 初始化（可选）
+如果用户已绑定 X2C 账号，询问是否启动可视化 Dashboard：
+> 📊 **可视化 Dashboard**
+>
+> 是否启动可视化数据面板？Dashboard 提供：
+> - 📈 收益趋势图表
+> - 🎬 项目表现统计
+> - 💰 实时收益数据
+> - 🤖 Agent 运行状态
+>
+> 回复 **"启动 Dashboard"** 或 **"跳过"**
+
+如果用户选择启动：
+```bash
+# 1. 安装依赖
+cd ~/.openclaw/workspace-news-to-video-monetizer
+bash skills/x2c-dashboard-integration/scripts/install-dependencies.sh
+
+# 2. 初始化 Dashboard
+bash skills/x2c-dashboard-integration/scripts/initialize-dashboard.sh
+
+# 3. 部署自定义模板（Tab 切换功能）
+bash skills/x2c-dashboard-integration/scripts/deploy-templates.sh
+
+# 4. 注册模块
+bash skills/x2c-dashboard-integration/scripts/register-module.sh \
+  news-to-video-monetizer "X2CReel 制作发行" "🎬"
+
+# 5. 更新数据
+X2C_API_KEY="$API_KEY" python3 skills/x2c-dashboard-integration/scripts/update_dashboard.py
+
+# 6. 获取 URL
+bash skills/x2c-dashboard-integration/scripts/get-url.sh
+```
+
+启动成功后显示：
+> ✅ Dashboard 已启动！
+>
+> 📊 访问地址：https://device-xxx.clawln.app
+>
+> Dashboard 包含两个 Tab：
+> - 🤖 **Agent 运行面板**（默认）：任务统计、运行状态、快捷指令
+> - 📊 **X2C Dashboard**：收益数据、趋势图、项目统计
+
 所有检查通过后，显示能力菜单。
 
 ---
@@ -137,16 +200,16 @@ cd ~/.openclaw/skills/dailyhot-api && bash scripts/ensure_running.sh
 > 2️⃣ **查看热点** — 获取全网实时热搜趋势报告
 > 3️⃣ **指定话题制作** — 给我一个主题，我来生成视频
 >
-> **📊 管理面板**
-> 4️⃣ **查看今日任务** — 所有 Task 链路状态一览
-> 5️⃣ **查看收益** — 账户余额 + 收益流水
-> 6️⃣ **修改配置** — 调整赛道 / 关键词 / 视频参数
+> **📊 数据面板**
+> 4️⃣ **查看 Dashboard** — 可视化数据面板（收益趋势、项目统计、运行状态）
+> 5️⃣ **查看今日任务** — 所有 Task 链路状态一览
+> 6️⃣ **查看收益** — 账户余额 + 收益流水
 >
-> **⚙️ 账户**
-> 7️⃣ **绑定 X2C 账号** — 首次使用前必须完成
-> 8️⃣ **查看余额** — 积分 + X2C + USDC 余额
-> 9️⃣ **每日报告设置** — 订阅/取消每日运营数据邮件
-> 🔟 **查看 Dashboard** — 可视化数据面板（收益、趋势、作品）
+> **⚙️ 设置**
+> 7️⃣ **修改配置** — 调整赛道 / 关键词 / 视频参数
+> 8️⃣ **绑定 X2C 账号** — 首次使用前必须完成
+> 9️⃣ **查看余额** — 积分 + X2C + USDC 余额
+> 🔟 **每日报告设置** — 订阅/取消每日运营数据邮件
 
 ---
 
@@ -432,62 +495,57 @@ bash ~/.openclaw/workspace-news-to-video-monetizer/scripts/one-click-production.
 
 ---
 
-## 文件交付规范
+## 文件交付规范（强制执行）
 
-### 规则：文件交付——webchat 优先，Giggle 补充
+### 核心规则
 
-发送任何文件给用户时，先用 `write` 工具写到 `~/.openclaw/shared/outputs/assistant/`，webchat 会自动显示为可下载附件。如果 Giggle Key 有效，再额外上传并附上链接。没有 Giggle Key 就只给 webchat 附件，不报错。
+**文件发给用户 = cp 文件 ~/.openclaw/shared/outputs/assistant/**
 
-#### 执行步骤
+### 执行步骤
 
-1. **写入文件到 outputs 目录**
+1. **用 exec 复制文件到附件目录**
    ```bash
-   # 使用 write 工具
-   write(
-     path="~/.openclaw/shared/outputs/assistant/filename.ext",
-     content="文件内容"
-   )
+   cp /path/to/你的文件 ~/.openclaw/shared/outputs/assistant/
    ```
 
-2. **通知用户**
+2. **告知用户文件已就绪**
    ```
    ✅ 文件已准备好：filename.ext
-   
-   📥 下载方式：
-   - 在对话界面点击附件下载
+   📎 请在对话界面查看附件并下载
    ```
 
-3. **（可选）上传到 Giggle**
-   如果有 Giggle Key，额外上传并提供链接：
-   ```bash
-   # 检查 Giggle Key
-   if [ -n "$GIGGLE_API_KEY" ]; then
-     # 上传到 Giggle
-     giggle upload ~/.openclaw/shared/outputs/assistant/filename.ext
-   fi
-   ```
+### 重要说明
 
-#### 注意事项
+- `~/.openclaw/shared/outputs/assistant/` 是 webchat 的"附件目录"
+- 文件放入后，webchat 会**自动**把它显示为可下载附件
+- **不需要调用任何特殊的"发送"工具，cp 就够了**
+- 如果文件名有中文或空格，用单引号包裹路径
 
-- ✅ **必须**先写入 `~/.openclaw/shared/outputs/assistant/`
-- ✅ webchat 会自动检测该目录的文件并显示为附件
-- ✅ 文件名要清晰明确，包含扩展名
-- ✅ 没有 Giggle Key 时不报错，只提供 webchat 附件
-- ❌ 不要尝试启动 HTTP 服务器
-- ❌ 不要使用 transfer.sh、file.io 等外部服务（大多不可用）
-- ❌ 不要说"文件已作为附件提供"而实际没有写入文件
+### 示例
 
-#### 示例
-
-```python
+```bash
 # 正确的文件交付方式
-write(
-  path="~/.openclaw/shared/outputs/assistant/x2c-skills-complete.tar.gz",
-  content=binary_content
-)
+cp /root/workspace/output.tar.gz ~/.openclaw/shared/outputs/assistant/
 
-# 通知用户
-print("✅ 文件已准备好：x2c-skills-complete.tar.gz")
-print("📥 在对话界面点击附件下载")
+# 或者先创建再复制
+tar -czf /tmp/package.tar.gz source_dir/
+cp /tmp/package.tar.gz ~/.openclaw/shared/outputs/assistant/
 ```
+
+### 错误的方式（不要用）
+
+- ❌ 用 `write` 工具写入二进制文件（会变成文本）
+- ❌ 尝试调用其他"发送"工具
+- ❌ 启动 HTTP 服务器
+- ❌ 使用 transfer.sh、file.io 等外部服务
+
+### （可选）Giggle 补充
+
+如果有 Giggle Key，可以额外上传：
+```bash
+if [ -n "$GIGGLE_API_KEY" ]; then
+  giggle upload ~/.openclaw/shared/outputs/assistant/filename.ext
+fi
+```
+没有 Giggle Key 时不报错，只提供 webchat 附件。
 
