@@ -1,0 +1,144 @@
+{% macro render_widget_content(w) %}
+    {% if w.widget_type == 'strategy_list' %}
+    <div class="col-span-12">
+        <h3 class="text-label-caps dark:text-zinc-400 text-slate-400 mb-6 font-display">{{ w.title | upper }}</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {% for s in w.data %}
+            <div class="glass-card p-6 rounded-xl border-l-4 {% if s.status == 'active' %}dark:border-l-dm-primary-container border-l-lm-primary-container{% else %}border-l-zinc-300 dark:border-l-zinc-700 opacity-60{% endif %}">
+                <div class="flex justify-between items-start mb-4">
+                    <h4 class="text-lg font-display font-semibold dark:text-white text-lm-on-surface">{{ s.name }}</h4>
+                    <div class="flex items-center gap-1.5 px-2 py-1 rounded
+                        {% if s.status == 'active' %}dark:bg-dm-primary-container/10 bg-emerald-50{% else %}dark:bg-zinc-800 bg-slate-100{% endif %}">
+                        <div class="w-1.5 h-1.5 rounded-full {% if s.status == 'active' %}dark:bg-dm-primary-container bg-lm-primary-container{% else %}dark:bg-zinc-500 bg-slate-400{% endif %}"></div>
+                        <span class="text-[9px] font-display tracking-widest uppercase
+                            {% if s.status == 'active' %}dark:text-dm-primary-container text-lm-primary{% else %}dark:text-zinc-400 text-slate-500{% endif %}">
+                            {% if s.status == 'active' %}RUNNING{% else %}PAUSED{% endif %}
+                        </span>
+                    </div>
+                </div>
+                <p class="text-sm dark:text-zinc-500 text-slate-500 leading-relaxed">{{ s.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% elif w.widget_type in ['line_chart', 'bar_chart'] %}
+    <div class="col-span-12 lg:col-span-8 glass-card rounded-xl p-8" style="min-height:400px;">
+        <div class="flex justify-between items-start mb-6">
+            <div>
+                <h3 class="text-label-caps dark:text-zinc-400 text-slate-400 mb-2 font-display">{{ w.title | upper }}</h3>
+                {% if w.data %}
+                <p class="text-h2 font-display dark:text-dm-primary-container text-lm-primary">
+                    {{ w.config.get('prefix', '') }}{{ w.data[-1] }}{{ w.config.get('suffix', '') }}
+                </p>
+                {% endif %}
+            </div>
+            <div class="flex gap-2">
+                <span class="px-3 py-1 rounded-sm text-label-caps font-display
+                    dark:bg-dm-primary-container/10 dark:text-dm-primary-container
+                    bg-emerald-50 text-lm-primary">LIVE</span>
+            </div>
+        </div>
+        <div style="position:relative;height:260px;">
+            <canvas id="chart-{{ w.id }}"></canvas>
+        </div>
+    </div>
+
+    {% elif w.widget_type == 'pie_chart' %}
+    <div class="col-span-12 lg:col-span-4 glass-card rounded-xl p-8" style="min-height:400px;">
+        <h3 class="text-label-caps dark:text-zinc-400 text-slate-400 mb-6 font-display">{{ w.title | upper }}</h3>
+        <div style="position:relative;height:300px;">
+            <canvas id="chart-{{ w.id }}"></canvas>
+        </div>
+    </div>
+
+    {% elif w.widget_type == 'stat_row' %}
+    <div class="col-span-12 lg:col-span-4 glass-card rounded-xl p-8">
+        <h3 class="text-label-caps dark:text-zinc-400 text-slate-400 mb-6 font-display">{{ w.title | upper }}</h3>
+        <div class="space-y-6">
+            {% for item in w.data %}
+            <div>
+                <div class="flex justify-between mb-2">
+                    <span class="text-[11px] font-display tracking-wider uppercase dark:text-zinc-500 text-slate-500">{{ item.label }}</span>
+                    <span class="text-data-mono font-mono dark:text-white text-lm-on-surface">{{ item.value }}</span>
+                </div>
+                {% if item.get('max') %}
+                <div class="w-full dark:bg-zinc-800 bg-slate-200 h-1 rounded-full overflow-hidden">
+                    {% set pct = (item.get('current', 0) / item.max * 100) | int %}
+                    <div class="dark:bg-dm-primary-container bg-lm-primary-container h-full dark:neon-glow" style="width:{{ pct }}%"></div>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% elif w.widget_type == 'activity_log' %}
+    <div class="col-span-12 glass-card rounded-xl overflow-hidden">
+        <div class="px-8 py-5 flex justify-between items-center
+            dark:border-b dark:border-white/5
+            border-b border-slate-200 bg-slate-50/50 dark:bg-transparent">
+            <h3 class="text-label-caps dark:text-zinc-400 text-slate-500 font-display">{{ w.title | upper }}</h3>
+        </div>
+        {% if w.data %}
+        <div class="dark:divide-y dark:divide-white/[0.03] divide-y divide-slate-100">
+            {% for item in w.data %}
+            <div class="px-8 py-6 dark:hover:bg-white/[0.02] hover:bg-slate-50 transition-colors">
+                <div class="flex items-center gap-4 mb-2 flex-wrap">
+                    <span class="text-data-mono font-mono dark:text-zinc-500 text-slate-400 text-[13px]">{{ item.time }}</span>
+                    <span class="text-[10px] font-display tracking-widest uppercase px-2 py-0.5 rounded
+                        {% if item.action in ['BUY', '买入'] %}
+                        dark:bg-dm-primary-container/10 dark:text-dm-primary-container
+                        bg-emerald-50 text-lm-primary
+                        {% else %}
+                        dark:bg-red-500/10 dark:text-accent-red
+                        bg-red-50 text-red-500
+                        {% endif %}">{{ item.action }}</span>
+                    <span class="font-semibold dark:text-white text-lm-on-surface">{{ item.symbol }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    {% elif w.widget_type == 'table' %}
+    <div class="col-span-12 glass-card rounded-xl overflow-hidden">
+        <div class="px-8 py-5
+            dark:border-b dark:border-white/5
+            border-b border-slate-200 bg-slate-50/50 dark:bg-transparent">
+            <h3 class="text-label-caps dark:text-zinc-400 text-slate-500 font-display">{{ w.title | upper }}</h3>
+        </div>
+        {% if w.data %}
+        <div class="overflow-x-auto">
+            <table class="w-full text-left font-mono">
+                <thead>
+                    <tr class="dark:bg-white/[0.02] bg-slate-50/80">
+                        {% for col in w.data[0].keys() %}
+                        <th class="px-8 py-4 text-label-caps text-[10px] dark:text-zinc-500 text-slate-400 font-display font-semibold">{{ col | upper }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody class="dark:divide-y dark:divide-white/[0.03] divide-y divide-slate-100">
+                    {% for row in w.data %}
+                    <tr class="dark:hover:bg-white/[0.03] hover:bg-slate-50 transition-colors">
+                        {% for key, val in row.items() %}
+                        <td class="px-8 py-5 text-data-mono text-[13px] dark:text-white text-lm-on-surface">
+                            {{ val }}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+
+    {% elif w.widget_type == 'text' %}
+    <div class="col-span-12 lg:col-span-8 glass-card rounded-xl p-8">
+        <h3 class="text-label-caps dark:text-zinc-400 text-slate-400 mb-4 font-display">{{ w.title | upper }}</h3>
+        <p class="text-base dark:text-zinc-300 text-slate-600 leading-relaxed">{{ w.data[0] if w.data else '' }}</p>
+    </div>
+    {% endif %}
+{% endmacro %}

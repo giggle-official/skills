@@ -495,62 +495,57 @@ bash ~/.openclaw/workspace-news-to-video-monetizer/scripts/one-click-production.
 
 ---
 
-## 文件交付规范
+## 文件交付规范（强制执行）
 
-### 规则：文件交付——webchat 优先，Giggle 补充
+### 核心规则
 
-发送任何文件给用户时，先用 `write` 工具写到 `~/.openclaw/shared/outputs/assistant/`，webchat 会自动显示为可下载附件。如果 Giggle Key 有效，再额外上传并附上链接。没有 Giggle Key 就只给 webchat 附件，不报错。
+**文件发给用户 = cp 文件 ~/.openclaw/shared/outputs/assistant/**
 
-#### 执行步骤
+### 执行步骤
 
-1. **写入文件到 outputs 目录**
+1. **用 exec 复制文件到附件目录**
    ```bash
-   # 使用 write 工具
-   write(
-     path="~/.openclaw/shared/outputs/assistant/filename.ext",
-     content="文件内容"
-   )
+   cp /path/to/你的文件 ~/.openclaw/shared/outputs/assistant/
    ```
 
-2. **通知用户**
+2. **告知用户文件已就绪**
    ```
    ✅ 文件已准备好：filename.ext
-   
-   📥 下载方式：
-   - 在对话界面点击附件下载
+   📎 请在对话界面查看附件并下载
    ```
 
-3. **（可选）上传到 Giggle**
-   如果有 Giggle Key，额外上传并提供链接：
-   ```bash
-   # 检查 Giggle Key
-   if [ -n "$GIGGLE_API_KEY" ]; then
-     # 上传到 Giggle
-     giggle upload ~/.openclaw/shared/outputs/assistant/filename.ext
-   fi
-   ```
+### 重要说明
 
-#### 注意事项
+- `~/.openclaw/shared/outputs/assistant/` 是 webchat 的"附件目录"
+- 文件放入后，webchat 会**自动**把它显示为可下载附件
+- **不需要调用任何特殊的"发送"工具，cp 就够了**
+- 如果文件名有中文或空格，用单引号包裹路径
 
-- ✅ **必须**先写入 `~/.openclaw/shared/outputs/assistant/`
-- ✅ webchat 会自动检测该目录的文件并显示为附件
-- ✅ 文件名要清晰明确，包含扩展名
-- ✅ 没有 Giggle Key 时不报错，只提供 webchat 附件
-- ❌ 不要尝试启动 HTTP 服务器
-- ❌ 不要使用 transfer.sh、file.io 等外部服务（大多不可用）
-- ❌ 不要说"文件已作为附件提供"而实际没有写入文件
+### 示例
 
-#### 示例
-
-```python
+```bash
 # 正确的文件交付方式
-write(
-  path="~/.openclaw/shared/outputs/assistant/x2c-skills-complete.tar.gz",
-  content=binary_content
-)
+cp /root/workspace/output.tar.gz ~/.openclaw/shared/outputs/assistant/
 
-# 通知用户
-print("✅ 文件已准备好：x2c-skills-complete.tar.gz")
-print("📥 在对话界面点击附件下载")
+# 或者先创建再复制
+tar -czf /tmp/package.tar.gz source_dir/
+cp /tmp/package.tar.gz ~/.openclaw/shared/outputs/assistant/
 ```
+
+### 错误的方式（不要用）
+
+- ❌ 用 `write` 工具写入二进制文件（会变成文本）
+- ❌ 尝试调用其他"发送"工具
+- ❌ 启动 HTTP 服务器
+- ❌ 使用 transfer.sh、file.io 等外部服务
+
+### （可选）Giggle 补充
+
+如果有 Giggle Key，可以额外上传：
+```bash
+if [ -n "$GIGGLE_API_KEY" ]; then
+  giggle upload ~/.openclaw/shared/outputs/assistant/filename.ext
+fi
+```
+没有 Giggle Key 时不报错，只提供 webchat 附件。
 

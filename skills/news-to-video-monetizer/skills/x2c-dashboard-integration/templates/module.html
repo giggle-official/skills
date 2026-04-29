@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+{% from 'widget_render.html' import render_widget_content %}
+{% block title %}{{ module.name }} — Claw Dashboard{% endblock %}
+{% block content %}
+
+<!-- Header -->
+<div class="mb-6 flex justify-between items-end">
+    <div>
+        <span class="text-label-caps dark:text-zinc-400 text-slate-400 mb-2 block font-display">{{ module.agent_id | upper }}</span>
+        <h1 class="text-h1 font-display uppercase dark:text-white text-lm-on-surface">{{ module.name }}</h1>
+    </div>
+</div>
+
+<!-- Tab Navigation -->
+{% set agent_widgets = [] %}
+{% set x2c_widgets = [] %}
+{% set x2c_titles = ['总收入', '今日收益', '总播放量', '活跃项目', '30日收益趋势', '收益对比', '平台播放分布', '挖矿状态', '成本与收益', '项目统计', '赚钱作品 (全部)'] %}
+{% for w in widgets %}
+    {% if w.title in x2c_titles %}
+        {% set _ = x2c_widgets.append(w) %}
+    {% else %}
+        {% set _ = agent_widgets.append(w) %}
+    {% endif %}
+{% endfor %}
+
+<div class="mb-8 border-b dark:border-zinc-700 border-slate-200">
+    <nav class="flex gap-1" aria-label="Tabs">
+        <button onclick="switchTab('agent')" id="tab-agent" 
+            class="tab-btn px-6 py-3 text-label-caps font-display tracking-wider transition-all
+            dark:text-dm-primary-container dark:border-b-2 dark:border-dm-primary-container
+            text-lm-primary border-b-2 border-lm-primary-container">
+            🤖 Agent 运行面板
+        </button>
+        <button onclick="switchTab('x2c')" id="tab-x2c"
+            class="tab-btn px-6 py-3 text-label-caps font-display tracking-wider transition-all
+            dark:text-zinc-500 dark:border-b-2 dark:border-transparent
+            text-slate-500 border-b-2 border-transparent hover:text-lm-primary dark:hover:text-dm-primary-container">
+            📊 X2C Dashboard
+        </button>
+    </nav>
+</div>
+
+<!-- Tab Content: Agent 运行面板 (default) -->
+<div id="content-agent" class="tab-content">
+    {% set header_kpis = agent_widgets | selectattr("widget_type", "equalto", "kpi_card") | list %}
+    {% if header_kpis %}
+    <div class="flex gap-4 mb-8">
+        {% for kpi in header_kpis[:4] %}
+        <div class="glass-card px-6 py-4 rounded-xl flex-1">
+            <p class="text-label-caps dark:text-zinc-500 text-slate-400 mb-1 font-display">{{ kpi.title | upper }}</p>
+            <p class="text-h3 font-display dark:text-white text-lm-on-surface">
+                {{ kpi.config.get('prefix', '') }}{{ kpi.data[0] if kpi.data else '—' }}{{ kpi.config.get('suffix', '') }}
+            </p>
+            {% if kpi.config.get('subtitle') %}
+            <div class="flex gap-4 mt-2">
+                <span class="text-[10px] font-display tracking-wider dark:text-zinc-500 text-slate-400">{{ kpi.config.subtitle }}</span>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <div class="grid grid-cols-12 gap-6">
+        {% for w in agent_widgets %}
+        {% if w.widget_type != 'kpi_card' %}
+        {{ render_widget_content(w) }}
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Tab Content: X2C Dashboard -->
+<div id="content-x2c" class="tab-content hidden">
+    {% set header_kpis = x2c_widgets | selectattr("widget_type", "equalto", "kpi_card") | list %}
+    {% if header_kpis %}
+    <div class="flex gap-4 mb-8">
+        {% for kpi in header_kpis[:4] %}
+        <div class="glass-card px-6 py-4 rounded-xl flex-1">
+            <p class="text-label-caps dark:text-zinc-500 text-slate-400 mb-1 font-display">{{ kpi.title | upper }}</p>
+            <p class="text-h3 font-display dark:text-white text-lm-on-surface">
+                {{ kpi.config.get('prefix', '') }}{{ kpi.data[0] if kpi.data else '—' }}{{ kpi.config.get('suffix', '') }}
+            </p>
+            {% if kpi.config.get('subtitle') %}
+            <div class="flex gap-4 mt-2">
+                <span class="text-[10px] font-display tracking-wider dark:text-zinc-500 text-slate-400">{{ kpi.config.subtitle }}</span>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <div class="grid grid-cols-12 gap-6">
+        {% for w in x2c_widgets %}
+        {% if w.widget_type != 'kpi_card' %}
+        {{ render_widget_content(w) }}
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="mt-12 mb-6 flex justify-between items-center px-2">
+    <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full dark:bg-dm-primary-container bg-lm-primary-container dark:shadow-[0_0_8px_#00FF85] led-glow"></span>
+        <span class="text-[10px] font-display tracking-widest uppercase dark:text-zinc-500 text-slate-400" data-i18n="system_active">System Active</span>
+    </div>
+    <span class="text-[10px] font-display tracking-widest uppercase dark:text-zinc-600 text-slate-400" data-i18n="powered_by">Powered by Claw Dashboard</span>
+</footer>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const isDark = document.documentElement.classList.contains('dark');
+    const gridColor = isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.05)';
+    const tickColor = isDark ? '#6c7b6d' : '#94a3b8';
+    const tooltipBg = isDark ? '#1c2026' : '#ffffff';
+    const tooltipTitle = isDark ? '#dfe2eb' : '#1e293b';
+    const tooltipBody = isDark ? '#b9cbb9' : '#64748b';
+    const tooltipBorder = isDark ? 'rgba(255,255,255,0.05)' : '#e2e8f0';
+    const primaryColor = isDark ? '#00ff85' : '#00d16f';
+
+    const chartOpts = {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { intersect: false, mode: 'index' },
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                backgroundColor: tooltipBg,
+                titleColor: tooltipTitle,
+                bodyColor: tooltipBody,
+                borderColor: tooltipBorder,
+                borderWidth: 1,
+                padding: 14,
+                cornerRadius: 8,
+                titleFont: { family: 'Space Grotesk', weight: '600', size: 12 },
+                bodyFont: { family: 'Inter', size: 13 },
+                displayColors: false,
+            }
+        },
+        scales: {
+            x: {
+                grid: { color: gridColor, drawBorder: false },
+                ticks: { color: tickColor, font: { family: 'Space Grotesk', size: 11, weight: '500' }, maxRotation: 0 },
+                border: { display: false },
+            },
+            y: {
+                grid: { color: gridColor, drawBorder: false },
+                ticks: { color: tickColor, font: { family: 'Inter', size: 12 }, padding: 8 },
+                border: { display: false },
+            }
+        }
+    };
+
+    {% for w in widgets %}
+    {% if w.widget_type in ['line_chart', 'bar_chart'] %}
+    (function() {
+        const ctx = document.getElementById('chart-{{ w.id }}');
+        if (!ctx) return;
+        const config = {{ w.config | tojson }};
+        const data = {{ w.data | tojson }};
+        const isLine = '{{ w.widget_type }}' === 'line_chart';
+
+        let bgColor;
+        if (isLine) {
+            const g = ctx.getContext('2d').createLinearGradient(0, 0, 0, 260);
+            g.addColorStop(0, primaryColor + (isDark ? '25' : '30'));
+            g.addColorStop(1, primaryColor + '00');
+            bgColor = g;
+        } else {
+            bgColor = primaryColor + (isDark ? '40' : '50');
+        }
+
+        new Chart(ctx, {
+            type: isLine ? 'line' : 'bar',
+            data: {
+                labels: config.labels || data.map((_, i) => i),
+                datasets: [{
+                    data: Array.isArray(data[0]) ? data[0] : data,
+                    borderColor: primaryColor,
+                    backgroundColor: bgColor,
+                    borderWidth: isLine ? 3 : 0,
+                    fill: isLine,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    pointHoverRadius: 6,
+                    pointHoverBackgroundColor: primaryColor,
+                    pointHoverBorderColor: isDark ? '#10141a' : '#ffffff',
+                    pointHoverBorderWidth: 3,
+                    borderRadius: isLine ? 0 : 6,
+                    barPercentage: 0.6,
+                }]
+            },
+            options: chartOpts
+        });
+    })();
+    {% elif w.widget_type == 'pie_chart' %}
+    (function() {
+        const ctx = document.getElementById('chart-{{ w.id }}');
+        if (!ctx) return;
+        const config = {{ w.config | tojson }};
+        const data = {{ w.data | tojson }};
+        const colors = config.colors || [primaryColor, '#79d1f8', '#fbbf24', '#ff6b6b', '#a78bfa', '#06b6d4'];
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: config.labels || data.map((_, i) => 'Item '+(i+1)),
+                datasets: [{ data, backgroundColor: colors.slice(0, data.length), borderWidth: 0, hoverOffset: 6, spacing: 2 }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, cutout: '65%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: tickColor, font: { family: 'Space Grotesk', size: 12 }, padding: 16, usePointStyle: true, pointStyleWidth: 8 }
+                    }
+                }
+            }
+        });
+    })();
+    {% endif %}
+    {% endfor %}
+});
+
+// Tab switching functionality
+function switchTab(tabName) {
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.add('hidden');
+    });
+    
+    // Show selected tab content
+    document.getElementById('content-' + tabName).classList.remove('hidden');
+    
+    // Update tab button styles
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('dark:text-dm-primary-container', 'dark:border-dm-primary-container', 'text-lm-primary', 'border-lm-primary-container');
+        btn.classList.add('dark:text-zinc-500', 'dark:border-transparent', 'text-slate-500', 'border-transparent');
+    });
+    
+    // Highlight active tab
+    const activeTab = document.getElementById('tab-' + tabName);
+    activeTab.classList.remove('dark:text-zinc-500', 'dark:border-transparent', 'text-slate-500', 'border-transparent');
+    activeTab.classList.add('dark:text-dm-primary-container', 'dark:border-dm-primary-container', 'text-lm-primary', 'border-lm-primary-container');
+}
+</script>
+{% endblock %}
