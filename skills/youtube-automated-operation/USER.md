@@ -1,4 +1,4 @@
-# USER.md - 用户偏好与设置
+﻿# USER.md - 用户偏好与设置
 
 ## 首次设置（激活前必需）
 
@@ -7,8 +7,8 @@
 ### 🔑 API 与凭证配置
 - **Giggle API Key**（必需）— 用于通过 `giggle-generation-drama` 技能生成高质量短剧视频
   - 获取方式：[giggle.pro](https://giggle.pro) → 账号设置 → API Key
-- **X2C API Key**（必需）— 用于 Youtube 视频发布
-  - 获取方式：访问 [x2creel.ai](https://www.x2creel.ai) → 注册账号 → 关联 Youtube → Developer API Key
+- **X2C API Key**（必需）— 用于 YouTube 视频发布
+  - 获取方式：访问 [x2creel.ai](https://www.x2creel.ai) → 注册账号 → 关联 YouTube → Developer API Key
 
 ### 🎯 内容方向定义（关键步骤）
 
@@ -38,7 +38,7 @@
 
 - **自动运行**（配置完成后立即生效）：
   - 每 1 小时：静默采集全网热点，写入数据池
-  - 按用户配置的时间：从数据池取 Top 3，生成 3 个视频，间隔 10 分钟依次发布到 Youtube，完成后推送报告
+  - 按用户配置的时间：从数据池取 Top 3，生成 3 个视频，间隔 10 分钟依次发布到 YouTube，完成后推送报告
 
 - **手动触发**：随时说 `run now` 立即执行完整流程
 
@@ -54,11 +54,11 @@
 - 每小时从 40+ 平台收集热点，写入数据池
 - 按用户配置的时间取 Top 3，为每条热点进行深度调研和提炼
 - 为每条热点生成一个 60 秒行业风格化视频
-- 间隔 10 分钟依次将 3 个视频发布到 Youtube
+- 间隔 10 分钟依次将 3 个视频发布到 YouTube
 - 发布完成后推送完整报告（含提炼卡 + 发布文案 + 视频信息）
 
 ### ❌ 这个 Agent 不做什么
-- **不发布到 Youtube 以外的平台**（专注 Youtube）
+- **不发布到 YouTube 以外的平台**（专注 YouTube）
 - 不访问你的平台私信或个人数据
 - 不生成违反平台社区准则的内容
 - 不在配置文件之外存储凭证

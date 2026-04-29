@@ -465,6 +465,18 @@ D1:告知用户:
     "auto_filter_spam": true,
     "spam_keywords": ["优惠", "点击", "领取", "加微信", "购买", "免费", "抽奖"]
   },
+  "auto_first_comment": {
+    "enabled": true,
+    "max_wait_minutes": 35,
+    "check_interval_minutes": 2,
+    "use_random_template": true,
+    "custom_comment": "",
+    "templates": [
+      "欢迎大家讨论！你怎么看这个话题？👇",
+      "这个观点你认同吗？评论区聊聊 💬",
+      "有不同看法的朋友可以在评论区交流 🤔"
+    ]
+  },
   "dashboard": {
     "enabled": false,
     "module_id": "",

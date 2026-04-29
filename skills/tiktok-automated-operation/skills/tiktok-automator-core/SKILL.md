@@ -1,3 +1,34 @@
+---
+name: tiktok-automator-core
+description: "TikTok automation core module for trend collection, auto first-comment posting, dashboard updates, comment failure checks, and installation verification."
+version: "1.0.1"
+license: MIT
+author: tiktok-drama-trend-automator
+homepage: https://github.com/storyclaw-official/skills
+repository: https://github.com/storyclaw-official/skills
+requires:
+  bins: [python3]
+  env: [GIGGLE_API_KEY, X2C_API_KEY]
+  pip: [requests]
+metadata:
+  {
+    "openclaw": {
+      "emoji": "📡",
+      "requires": {
+        "bins": ["python3"],
+        "env": ["GIGGLE_API_KEY", "X2C_API_KEY"],
+        "pip": ["requests"]
+      },
+      "primaryEnv": "X2C_API_KEY",
+      "installSpec": {
+        "bins": ["python3"],
+        "env": ["GIGGLE_API_KEY", "X2C_API_KEY"],
+        "pip": ["requests"]
+      }
+    }
+  }
+---
+
 # TikTok Automator Core Skill
 
 **Skill ID**: tiktok-automator-core  

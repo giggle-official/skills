@@ -1,0 +1,78 @@
+﻿{
+  "version": "2026.4.24",
+  "credentials": {
+    "giggle_api_key": "YOUR_GIGGLE_API_KEY",
+    "x2c_api_key": "YOUR_X2C_API_KEY"
+  },
+  "content": {
+    "user_persona": {
+      "raw_text": "",
+      "extracted": {}
+    },
+    "content_reference": {
+      "samples": [],
+      "style_analysis": {}
+    },
+    "target_audience": "",
+    "language": "zh-CN",
+    "content_focus": {
+      "niches": [],
+      "keywords": [],
+      "exclude_keywords": []
+    },
+    "video_style": {
+      "primary_niche": "",
+      "project_type": "narration",
+      "style_keywords": "",
+      "music_style": ""
+    }
+  },
+  "platform": "YouTube",
+  "schedule": {
+    "timezone": "Asia/Shanghai",
+    "production_mode": "daily_fixed",
+    "production_time": "16:00",
+    "production_interval_hours": null
+  },
+  "trend_sources": {
+    "primary": ["douyin", "weibo", "toutiao", "zhihu", "bilibili"],
+    "secondary": ["baidu", "kuaishou", "qq-news", "thepaper", "36kr"],
+    "top_per_platform": 10
+  },
+  "advanced": {
+    "min_trends": 10,
+    "top_n": 3,
+    "dedup_threshold": 0.7,
+    "retry_limit": 2,
+    "dailyhot_port": 6688,
+    "supplement_search": true,
+    "supplement_keywords": []
+  },
+  "comment_management": {
+    "enabled": false,
+    "check_interval_hours": 8,
+    "monitor_days": 7,
+    "auto_filter_spam": true,
+    "spam_keywords": ["优惠", "点击", "领取", "加微信", "购买", "免费", "抽奖", "私信", "代理", "兼职", "赚钱"]
+  },
+  "auto_first_comment": {
+    "enabled": false,
+    "max_wait_minutes": 35,
+    "check_interval_minutes": 2,
+    "use_random_template": true,
+    "custom_comment": "",
+    "templates": [
+      "欢迎大家讨论！你怎么看这个话题？👇",
+      "这个观点你认同吗？评论区聊聊 💬",
+      "有不同看法的朋友可以在评论区交流 🤔",
+      "你有类似的经历吗？分享一下 ✨",
+      "对这个话题感兴趣的朋友可以关注我，持续分享 📌"
+    ]
+  },
+  "dashboard": {
+    "enabled": false,
+    "module_id": "",
+    "public_url": "",
+    "widget_ids": {}
+  }
+}

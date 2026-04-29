@@ -57,6 +57,8 @@
   },
   "auto_first_comment": {
     "enabled": false,
+    "max_wait_minutes": 35,
+    "check_interval_minutes": 2,
     "use_random_template": true,
     "custom_comment": "",
     "templates": [

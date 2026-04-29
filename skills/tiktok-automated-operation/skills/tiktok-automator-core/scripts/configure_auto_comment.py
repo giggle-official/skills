@@ -25,10 +25,9 @@ def configure_auto_comment():
         print("\n✅ 已跳过自动首评配置")
         return {
             "enabled": False,
-            "wait_for_video_id_minutes": 30,
-            "retry_attempts": 3,
-            "retry_interval_minutes": 2,
-            "comment_templates": [
+            "max_wait_minutes": 35,
+            "check_interval_minutes": 2,
+            "templates": [
                 "欢迎大家讨论！你怎么看这个话题？👇",
                 "这个观点你认同吗？评论区聊聊 💬",
                 "有不同看法的朋友可以在评论区交流 🤔"
@@ -49,10 +48,9 @@ def configure_auto_comment():
     
     config = {
         "enabled": True,
-        "wait_for_video_id_minutes": 30,
-        "retry_attempts": 3,
-        "retry_interval_minutes": 2,
-        "comment_templates": [
+        "max_wait_minutes": 35,
+        "check_interval_minutes": 2,
+        "templates": [
             "欢迎大家讨论！你怎么看这个话题？👇",
             "这个观点你认同吗？评论区聊聊 💬",
             "有不同看法的朋友可以在评论区交流 🤔"
