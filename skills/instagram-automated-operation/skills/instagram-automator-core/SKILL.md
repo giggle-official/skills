@@ -1,9 +1,9 @@
 ---
-name: youtube-automator-core
-description: "YouTube automation core module for trend collection, auto first-comment posting, dashboard updates, comment failure checks, and installation verification."
-version: "1.0.1"
+name: instagram-automator-core
+description: "Instagram automation core module for trend collection, auto first-comment posting, dashboard updates, comment failure checks, and installation verification."
+version: "1.0.2"
 license: MIT
-author: youtube-drama-trend-automator
+author: instagram-drama-trend-automator
 homepage: https://github.com/storyclaw-official/skills
 repository: https://github.com/storyclaw-official/skills
 requires:
@@ -29,17 +29,11 @@ metadata:
   }
 ---
 
-# YouTube Automator Core Skill
-
-**Skill ID**: youtube-automator-core  
-**Version**: 1.0.0  
-**Description**: YouTube 自动化运营核心功能模块
-
----
+# Instagram Automator Core Skill
 
 ## 功能说明
 
-本 Skill 提供 YouTube 自动化运营的核心功能：
+本 Skill 提供 Instagram 自动化运营的核心功能：
 
 ### 1. 轻量采集
 - **脚本**: `scripts/lightweight_collect.py`
@@ -74,7 +68,7 @@ metadata:
 ### 外部技能
 - `dailyhot-api` - 全网热榜采集
 - `giggle-generation-drama` - AI 视频生成
-- `x2c-socialposter` - YouTube 发布
+- `x2c-socialposter` - Instagram 发布
 - `claw-dashboard` - 可视化数据面板
 
 ### Python 包
@@ -116,17 +110,17 @@ metadata:
 
 ### 验证安装
 ```bash
-python3 skills/youtube-automator-core/scripts/verify_installation.py
+python3 skills/instagram-automator-core/scripts/verify_installation.py
 ```
 
 ### 手动更新 Dashboard
 ```bash
-python3 skills/youtube-automator-core/scripts/dashboard_integration.py update
+python3 skills/instagram-automator-core/scripts/dashboard_integration.py update
 ```
 
 ### 手动补发首评
 ```bash
-python3 skills/youtube-automator-core/scripts/auto_first_comment.py \
+python3 skills/instagram-automator-core/scripts/auto_first_comment.py \
   "v_pub_url~xxx" "1" "视频标题" "2026-04-24T12:17:00+08:00"
 ```
 
