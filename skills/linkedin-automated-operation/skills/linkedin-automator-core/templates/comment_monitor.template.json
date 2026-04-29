@@ -1,0 +1,28 @@
+{
+  "monitored_posts": [
+    {
+      "post_id": "7631795103484480789",
+      "title": "",
+      "comment_ids": [],
+      "last_check": "2026-04-23T14:42:10.805143",
+      "new_comments_since_last": 0
+    },
+    {
+      "post_id": "7631790984803798292",
+      "title": "",
+      "comment_ids": [
+        "7631805908927021845"
+      ],
+      "last_check": "2026-04-23T14:42:18.912946",
+      "new_comments_since_last": 1
+    },
+    {
+      "post_id": "7631785018783747345",
+      "title": "",
+      "comment_ids": [],
+      "last_check": "2026-04-23T14:42:27.492873",
+      "new_comments_since_last": 0
+    }
+  ],
+  "last_check": "2026-04-23T14:42:27.492894"
+}

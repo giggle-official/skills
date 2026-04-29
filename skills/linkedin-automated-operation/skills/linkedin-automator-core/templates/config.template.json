@@ -1,0 +1,82 @@
+﻿{
+  "version": "YYYY.M.DD",
+  "credentials": {
+    "giggle_api_key": "",
+    "x2c_api_key": ""
+  },
+  "content": {
+    "target_audience": "",
+    "language": "zh-CN",
+    "content_focus": {
+      "niches": [],
+      "keywords": [],
+      "exclude_keywords": []
+    },
+    "visual_style": {
+      "primary_niche": "",
+      "image_prompt_style": "",
+      "image_model": "seedream45",
+      "aspect_ratio": "1:1",
+      "resolution": "2K"
+    },
+    "user_persona": {
+      "raw_text": "",
+      "extracted": {
+        "role": "",
+        "background": "",
+        "content_angle": "",
+        "tone": "",
+        "audience": {
+          "description": "",
+          "concerns": [],
+          "avoid": []
+        },
+        "inferred_niches": [],
+        "inferred_keywords": []
+      }
+    },
+    "content_reference": {
+      "samples": [],
+      "style_analysis": {
+        "opening_hook": "",
+        "structure": "",
+        "emoji_usage": "",
+        "hashtag_count": "",
+        "hashtag_style": "",
+        "tone": "",
+        "common_phrases": [],
+        "key_patterns": {}
+      }
+    }
+  },
+  "platform": "LinkedIn",
+  "schedule": {
+    "timezone": "Asia/Shanghai",
+    "production_mode": "daily_fixed",
+    "production_time": null,
+    "production_interval_hours": null
+  },
+  "comment_management": {
+    "enabled": false,
+    "check_interval_hours": 4,
+    "monitor_days": 7,
+    "auto_filter_spam": true,
+    "spam_keywords": ["优惠", "点击", "领取", "加微信", "私信", "代理", "兼职", "赚钱"]
+  },
+  "dashboard": {
+    "enabled": false,
+    "file": "outputs/dashboard/index.html"
+  },
+  "trend_sources": {
+    "primary": ["douyin", "weibo", "toutiao", "zhihu", "bilibili"],
+    "secondary": ["baidu", "kuaishou", "qq-news", "thepaper", "36kr"],
+    "top_per_platform": 10
+  },
+  "advanced": {
+    "min_trends": 10,
+    "top_n": 3,
+    "dedup_threshold": 0.7,
+    "retry_limit": 2,
+    "dailyhot_port": 6688
+  }
+}
