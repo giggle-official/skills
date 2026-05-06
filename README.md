@@ -104,9 +104,9 @@ skills:
     version: "0.0.1"
   - name: "Video generation (Seedance 2.0)"
     value: "giggle-seedance2-gen"
-    description: "Generate AI videos with Seedance 2.0 (Pro/Fast) via Giggle API: text-to-video, image-to-video, omni multi-modal. Optimize prompts in the user's language, then call the API. Triggers: generate video, AI video, seedance, image to video, text to video, video generation."
+    description: "Seedance 2.0 via giggle.pro plus prompt engineering (references/prompts). Optimize with Seedance patterns, submit only via API. Triggers: generate video, AI video, seedance, omni, short drama, ad video, first frame, character ref. (User may say 即梦; delivery stays giggle.pro.)"
     category: video
-    version: "1.0.0"
+    version: "1.1.0"
   - name: "Image Generation (gpt-image-2)"
     value: "giggle-gpt-image-2"
     description: "Helps users generate high-quality prompts suitable for GPT-Image-2, and directly calls the Giggle API to generate images using `gpt-image-2-fast` after the prompt is created."

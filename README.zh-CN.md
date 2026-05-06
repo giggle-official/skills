@@ -106,9 +106,9 @@ skills:
     version: "0.0.1"
   - name: "视频生成（Seedance 2.0）"
     value: "giggle-seedance2-gen"
-    description: "通过 Giggle API 使用 Seedance 2.0（Pro/Fast）生成视频：文生视频、图生视频、omni 多模态；按用户语种优化提示词后调用接口。触发词：生成视频、AI 视频、seedance、图生视频、文生视频、视频生成。"
+    description: "giggle.pro 上 Seedance 2.0 成片 + 提示词工程（references/prompts）。按 Seedance 范式优化提示词后仅走 API。触发词：生成视频、视频提示词、AI 视频、seedance、omni、多模态、短剧、广告视频、首帧图、角色参考。（用户口头的「即梦」习惯仍仅交付 giggle.pro。）"
     category: video
-    version: "1.0.0"
+    version: "1.1.0"
   - name: "图片生成(gpt-image-2)"
     value: "giggle-gpt-image-2"
     description: "帮助用户生成适合 GPT-Image-2 的高质量提示词，并在生成提示词后直接调用 Giggle API 使用 `gpt-image-2-fast` 生成图片。"

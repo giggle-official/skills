@@ -104,9 +104,9 @@ skills:
     version: "0.0.1"
   - name: "영상 생성 (Seedance 2.0)"
     value: "giggle-seedance2-gen"
-    description: "Giggle API로 Seedance 2.0(Pro/Fast) 영상 생성: 텍스트→영상, 이미지→영상, 옴니 멀티모달. 사용자 입력 언어에 맞게 프롬프트 최적화 후 API 호출. 트리거: 영상 생성, AI 영상, Seedance, 이미지→영상, 텍스트→영상, 비디오 생성."
+    description: "giggle.pro Seedance 2.0 영상 + 프롬프트 엔지니어링(references/prompts). Seedance 패턴으로 최적화 후 API로만 제출. 트리거: 영상 생성, 프롬프트, AI 영상, omni, 숏폼, 광고, 첫 프레임 등. (구두로 即梦이라 해도 giggle.pro로만 전달.)"
     category: video
-    version: "1.0.0"
+    version: "1.1.0"
   - name: "이미지 생성 (gpt-image-2)"
     value: "giggle-gpt-image-2"
     description: "GPT-Image-2에 적합한 고품질 프롬프트 생성을 도와주며, 프롬프트 생성 후 Giggle API를 직접 호출하여 `gpt-image-2-fast`로 이미지를 생성합니다."

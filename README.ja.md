@@ -104,9 +104,9 @@ skills:
     version: "0.0.1"
   - name: "動画生成（Seedance 2.0）"
     value: "giggle-seedance2-gen"
-    description: "Giggle API で Seedance 2.0（Pro/Fast）による動画生成。テキスト→動画、画像→動画、オムニ。入力言語に合わせプロンプト最適化後に API 呼び出し。トリガー: 動画生成、AI 動画、Seedance、画像から動画、テキストから動画。"
+    description: "giggle.pro 上の Seedance 2.0 とプロンプト工程（references/prompts）。Seedance 型に最適化したうえで API のみで提出。トリガー: 動画生成、プロンプト、AI 動画、omni、短編、広告、参照フレームなど。（口頭の「即梦」慣習はあっても納品は giggle.pro。）"
     category: video
-    version: "1.0.0"
+    version: "1.1.0"
   - name: "画像生成 (gpt-image-2)"
     value: "giggle-gpt-image-2"
     description: "GPT-Image-2 に適した高品質なプロンプトを生成し、プロンプト作成後に Giggle API を直接呼び出して `gpt-image-2-fast` を使用して画像を生成します。"

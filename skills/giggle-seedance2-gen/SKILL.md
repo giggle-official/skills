@@ -1,7 +1,10 @@
 ---
 name: giggle-seedance2-gen
-description: "Generate AI videos with Seedance 2.0 via Giggle API. Optimize user prompts using Seedance 2.0 prompt engineering, then call Giggle API to generate video. Triggers: generate video, AI video, seedance, giggle, image to video, text to video, video generation."
-version: "1.0.0"
+description: >
+  Seedance 2.0 video via giggle.pro API plus prompt engineering: optimize prompts with Seedance patterns, then call giggle.pro only.
+  Triggers: generate video, AI video, seedance, giggle, 视频提示词, image to video, text to video, omni, 多模态, 短剧, 广告视频, 首帧图, 角色参考.
+  (User may say 即梦 as generic Seedance habit; delivery stays giggle.pro.)
+version: "1.1.0"
 license: MIT
 author: giggle-official
 homepage: https://github.com/giggle-official/skills
@@ -29,9 +32,53 @@ metadata:
   }
 ---
 
-# Giggle Seedance 2.0 Video Generation
+# Giggle · Seedance 2.0 视频生成与提示词（合并版）
 
-**Source**: [giggle-official/skills](https://github.com/giggle-official/skills) · **API:** giggle.pro · **Model:** Seedance 2.0 Pro / Fast · **Script:** `scripts/generation_api.py`
+**Source**: [giggle-official/skills](https://github.com/giggle-official/skills) · **API:** [giggle.pro](https://giggle.pro/) · **Script:** `scripts/generation_api.py`
+
+本技能 = **Giggle API 成片**（`scripts/generation_api.py`）+ **Seedance 2.0 提示词工程资料库**（`references/`、`prompts/`）。
+
+- **主流程**：优化提示词 → API Key → 用 `text` / `image` / `omni` 提交并轮询结果。
+- **深度写法**：创意钩子、分镜模板、长视频流水线、词表与范例见资源索引。
+
+## 仓库内资源索引
+
+| 路径 | 用途 |
+|------|------|
+| [references/creative-strategy.md](references/creative-strategy.md) | 写什么、≤15s 与长片策略 |
+| [references/production-pipeline.md](references/production-pipeline.md) | 长视频前期流水线 |
+| [references/long-video-strategy.md](references/long-video-strategy.md) | 分段、延长、衔接 |
+| [references/examples.md](references/examples.md) | 场景与多模态示例 |
+| [references/vocabulary.md](references/vocabulary.md) | 运镜、画质、大气效果词库 |
+| [references/image-generation.md](references/image-generation.md) | 角色参考图 / 首帧图（前置生图提示词） |
+| [references/platform-specs.md](references/platform-specs.md) | Seedance 通用输入习惯（**API 与限额以 giggle.pro / SKILL 为准**） |
+| [prompts/](prompts/) | 主题扩展包、OpenClaw 全案短文 |
+| [references/seedance-prompt-skill-legacy-SKILL.md](references/seedance-prompt-skill-legacy-SKILL.md) | 原「纯提示词」技能全文备份 |
+
+---
+
+## ⚠️ 平台与 API 约束（以 Giggle 为准）
+
+资料库为通用 Seedance 提示词最佳实践；**视频与多模态成片仅通过 giggle.pro 提交**。实际调用本仓库脚本时遵守下表：
+
+| 项目 | Giggle（本脚本） |
+|------|------------------|
+| 语言 | 与**用户输入语言一致**（见下节 Language Rule）；资料里中文模板可套用结构 |
+| 时长 | **4–15** 秒整数，`--duration` |
+| 画幅 / 清晰度 | `--aspect-ratio`、`--resolution` |
+| omni 图片 | 最多 **9** 张，`url:` 或 `base64:` |
+| 参考音 / 视频 | 仅 `url:`，`--audios`、`--videos` |
+| 提示词里的 `@图片N` / `@视频N` | **仅编号习惯**；必须通过 CLI 传入**对应真实 URL**，且**全部**引用都要传 |
+
+若资料写「混合素材 ≤12 个」与 Giggle 限制冲突，**取更严一侧**（尤其图片 ≤9）。
+
+### `@引用` → Giggle CLI（omni）
+
+| 提示词习惯 | 映射到 |
+|------------|--------|
+| `@图片1` … `@图片N` | `--images "url:..."`（按编号顺序，可多参数或多次 `--images`，脚本会合并） |
+| `@视频1` … | `--videos "url:..."` |
+| `@音频1` … | `--audios "url:..."` |
 
 ---
 
@@ -39,19 +86,36 @@ metadata:
 
 **Match the user's input language exactly. Never translate. Never output a second language version.**
 
-- User writes in Chinese → optimize in Chinese → pass Chinese prompt to API
-- User writes in English → optimize in English → pass English prompt to API
-- Output ONE version of the optimized prompt. No bilingual display. No "API submission version".
+- User writes in Chinese → optimize in Chinese → pass Chinese prompt to API  
+- User writes in English → optimize in English → pass English prompt to API  
+- Output **ONE** version of the optimized prompt. No bilingual display. No "API submission version".
+
+（资料库中大量中文范例：仅借鉴**结构与章法**，输出语言仍以上述规则为准。）
 
 ---
 
 ## Step 1: Prompt Optimization
+
+### 1.1 快速公式（默认）
 
 Enhance the prompt in the **same language as user input**. Formula:
 
 ```
 [Subject] + [Scene] + [Action/Motion] + [Camera] + [Time-segments if 8s+] + [Audio] + [Style]
 ```
+
+需要更强钩子、时间戳分镜、史诗片头品质锚定、一镜到底、卡点等时，在**不违反 Language Rule** 前提下查阅 `references/` 中对应文档，把技法压缩进**一条**终稿提示词。
+
+### 1.2 深度模式（可选速查）
+
+| 需求 | 建议先读 |
+|------|----------|
+| 爆款短镜、前 2 秒 | [creative-strategy.md](references/creative-strategy.md) |
+| 长片、分镜、拆段 | [production-pipeline.md](references/production-pipeline.md)、[long-video-strategy.md](references/long-video-strategy.md) |
+| 运镜 / 画质词汇 | [vocabulary.md](references/vocabulary.md) |
+| 多模态叙事样板 | [examples.md](references/examples.md) |
+| 先要角色图 / 首帧 | [image-generation.md](references/image-generation.md) |
+| 主题脑洞扩展 | [prompts/](prompts/) |
 
 ### Chinese Examples (for Chinese user input)
 
@@ -114,7 +178,7 @@ Output: "Starting from the reference image, the subject slowly turns toward the 
 | 跟随镜头 | Follow shot | Camera tracks subject |
 | 希区柯克变焦 | Hitchcock zoom | Push+zoom for vertigo |
 | 低角度仰拍 | Low angle | Empowering perspective |
-| 鸟瞰 / 俯拍 | Bird's eye | Top-down overview |
+| 鸟瞰 / 俯拍 | Bird's-eye view | Top-down overview |
 
 ### Style Modifiers
 
@@ -129,6 +193,11 @@ Output: "Starting from the reference image, the subject slowly turns toward the 
 6–10s:  [climax or key moment]
 10–15s: [resolution, outro]
 ```
+
+### Step 1 交付物
+
+- **一条**已优化、与用户语言一致的 `prompt`。
+- Omni：提示词中提到的每条参考，均能在 CLI 找到对应 URL；编号习惯（`@图片N` 等）已由代理映射完毕。
 
 ---
 
@@ -197,3 +266,13 @@ python3 scripts/generation_api.py \
 | `--images` | — | **omni**：`url:` 或 `base64:`，可重复多个；最多 9 张 |
 | `--audios` | — | **omni**：仅 `url:`，可重复多个 |
 | `--videos` | — | **omni**：参考视频，仅 `url:`，可重复多个 |
+
+---
+
+## 质量自检（提交前）
+
+- [ ] 提示词语言与用户一致；仅一个版本
+- [ ] `duration ∈ [4,15]`
+- [ ] omni：图片 ≤9；每条音/视频以 `url:` 开头
+- [ ] 用户提供的参考 URL **全部**出现在 CLI 中
+- [ ] 超长叙事已按 [long-video-strategy.md](references/long-video-strategy.md) 思路拆段或多任务，未假定单次超出 API 时长
