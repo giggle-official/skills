@@ -34,6 +34,7 @@ npx skills add . --list --full-depth
 | ------------------------- | ---------------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | giggle-generation-image   | 文生图与图生图。支持 Seedream、Midjourney、Nano Banana。可自定义画幅比例与分辨率。   | [SKILL.md](./skills/giggle-generation-image/SKILL.md)   | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y`   |
 | giggle-generation-video   | 支持文生视频与图生视频（首帧/尾帧）。适合需要将文本或图片转为视频的用户。 | [SKILL.md](./skills/giggle-generation-video/SKILL.md)   | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y`   |
+| giggle-seedance2-gen      | 通过 Giggle API 使用 Seedance 2.0（Pro/Fast）：文生视频、图生视频、多模态 omni；含 Seedance 提示词优化流程。触发词：Seedance、AI 视频、文生视频、图生视频。 | [SKILL.md](./skills/giggle-seedance2-gen/SKILL.md)      | `npx skills add giggle-official/skills --full-depth --skill giggle-seedance2-gen -y`      |
 | giggle-generation-drama   | 适用于希望生成视频、拍摄短片或查看可用视频风格的用户。触发词：短片、制作视频、拍短片、AI 视频、根据故事生成视频、短剧、解说视频、电影感视频、可用视频风格 | [SKILL.md](./skills/giggle-generation-drama/SKILL.md)   | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y`   |
 | giggle-generation-aimv    | AI 音乐视频（MV）。根据文字描述或自定义歌词生成音乐，再结合参考图生成歌词视频。                 | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md)    | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y`    |
 | giggle-generation-music   | 根据文字描述、自定义歌词或纯乐器创建 AI 音乐。支持简化、自定义、纯音乐三种模式。                 | [SKILL.md](./skills/giggle-generation-music/SKILL.md)   | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y`   |
@@ -103,6 +104,11 @@ skills:
     description: "支持文生视频与图生视频（首帧/尾帧）。适合需要将文本或图片转为视频的用户。"
     category: video
     version: "0.0.1"
+  - name: "Seedance 2.0"
+    value: "giggle-seedance2-gen"
+    description: "通过 Giggle API 使用 Seedance 2.0（Pro/Fast）生成视频：文生视频、图生视频、omni 多模态；按用户语种优化提示词后调用接口。触发词：生成视频、AI 视频、seedance、图生视频、文生视频、视频生成。"
+    category: video
+    version: "1.0.0"
   - name: "图片生成(gpt-image-2)"
     value: "giggle-gpt-image-2"
     description: "帮助用户生成适合 GPT-Image-2 的高质量提示词，并在生成提示词后直接调用 Giggle API 使用 `gpt-image-2-fast` 生成图片。"

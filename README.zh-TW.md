@@ -33,6 +33,7 @@ npx skills add . --list --full-depth
 |------|------|------|----------|
 | giggle-generation-image | 文生圖與圖生圖。支援 Seedream、Midjourney、Nano Banana。可自訂畫幅比例與解析度。 | [SKILL.md](./skills/giggle-generation-image/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y` |
 | giggle-generation-video | 支援文字轉影片與圖片轉影片（首幀/尾幀）。適合需要將文字或圖片轉成影片的使用者。 | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y` |
+| giggle-seedance2-gen | 透過 Giggle API 使用 Seedance 2.0（Pro/Fast）：文生影片、圖生影片、多模態 omni；含 Seedance 提示詞優化流程。觸發詞：Seedance、AI 影片、文生影片、圖生影片。 | [SKILL.md](./skills/giggle-seedance2-gen/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-seedance2-gen -y` |
 | giggle-generation-drama | 適用於想生成影片、拍攝短片或查看可用影片風格的使用者。觸發詞：短片、製作影片、拍短片、AI 影片、依故事生成影片、短劇、旁白影片、電影感影片、可用影片風格 | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y` |
 | giggle-generation-aimv | AI 音樂影片（MV）。根據文字描述或自訂歌詞生成音樂，再結合參考圖生成歌詞影片。 | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y` |
 | giggle-generation-music | 根據文字描述、自訂歌詞或純樂器建立 AI 音樂。支援簡化、自訂、純音樂三種模式。 | [SKILL.md](./skills/giggle-generation-music/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y` |
@@ -101,6 +102,11 @@ skills:
     description: "支援文字轉影片與圖片轉影片（首幀/尾幀）。適合需要將文字或圖片轉成影片的使用者。"
     category: video
     version: "0.0.1"
+  - name: "Seedance 2.0"
+    value: "giggle-seedance2-gen"
+    description: "透過 Giggle API 使用 Seedance 2.0（Pro/Fast）生成影片：文生影片、圖生影片、omni 多模態；依使用者語種優化提示詞後呼叫介面。觸發詞：生成影片、AI 影片、seedance、圖生影片、文生影片、影片生成。"
+    category: video
+    version: "1.0.0"
   - name: "圖片生成 (gpt-image-2)"
     value: "giggle-gpt-image-2"
     description: "協助使用者產生適用於 GPT-Image-2 的高品質提示詞，並在生成提示詞後直接呼叫 Giggle API，使用 `gpt-image-2-fast` 產生圖片。"

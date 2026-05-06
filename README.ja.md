@@ -33,6 +33,7 @@ npx skills add . --list --full-depth
 |------|------|------|----------|
 | giggle-generation-image | 文生図と図生図。Seedream、Midjourney、Nano Banana に対応。アスペクト比と解像度をカスタマイズ可能。 | [SKILL.md](./skills/giggle-generation-image/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y` |
 | giggle-generation-video | テキスト→動画、画像→動画の変換（開始フレーム/終了フレーム）に対応。テキストや画像から動画が必要なユーザー向け。 | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y` |
+| giggle-seedance2-gen | Giggle API 経由で Seedance 2.0（Pro/Fast）による動画生成。テキスト→動画、画像→動画、オムニ（マルチモーダル）。プロンプト最適化手順を含む。トリガー: Seedance、AI 動画、文生動画、図生動画。 | [SKILL.md](./skills/giggle-seedance2-gen/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-seedance2-gen -y` |
 | giggle-generation-drama | 動画の生成、短編映画の撮影、利用可能な動画スタイルの確認などに使用。トリガー例：ショートフィルム、動画を作る、短編を撮る、AI 動画、ストーリーから動画、短編ドラマ、ナレーション動画、シネマティック動画、利用可能な動画スタイル | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y` |
 | giggle-generation-aimv | AI ミュージックビデオ（MV）。テキストプロンプトやカスタム歌詞から音楽を生成し、参考画像と組み合わせて歌詞動画を作成。 | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y` |
 | giggle-generation-music | テキスト説明、カスタム歌詞、またはインストゥルメンタルから AI 音楽を作成。簡易、カスタム、インストゥルメンタルの 3 モードに対応。 | [SKILL.md](./skills/giggle-generation-music/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y` |
@@ -101,6 +102,11 @@ skills:
     description: "テキスト→動画、画像→動画の変換（開始フレーム/終了フレーム）に対応。テキストや画像から動画が必要なユーザー向け。"
     category: video
     version: "0.0.1"
+  - name: "Seedance 2.0"
+    value: "giggle-seedance2-gen"
+    description: "Giggle API で Seedance 2.0（Pro/Fast）による動画生成。テキスト→動画、画像→動画、オムニ。入力言語に合わせプロンプト最適化後に API 呼び出し。トリガー: 動画生成、AI 動画、Seedance、画像から動画、テキストから動画。"
+    category: video
+    version: "1.0.0"
   - name: "画像生成 (gpt-image-2)"
     value: "giggle-gpt-image-2"
     description: "GPT-Image-2 に適した高品質なプロンプトを生成し、プロンプト作成後に Giggle API を直接呼び出して `gpt-image-2-fast` を使用して画像を生成します。"

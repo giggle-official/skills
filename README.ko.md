@@ -33,6 +33,7 @@ npx skills add . --list --full-depth
 |------|------|------|----------|
 | giggle-generation-image | 문생도와 도생도. Seedream, Midjourney, Nano Banana 지원. 화면 비율과 해상도 커스터마이즈 가능. | [SKILL.md](./skills/giggle-generation-image/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y` |
 | giggle-generation-video | 텍스트→비디오 및 이미지→비디오 변환(시작 프레임/종료 프레임) 지원. 텍스트나 이미지를 영상으로 바꿔야 하는 사용자에게 적합. | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y` |
+| giggle-seedance2-gen | Giggle API로 Seedance 2.0(Pro/Fast) 영상 생성. 텍스트→영상, 이미지→영상, 옴니(멀티모달). 프롬프트 최적화 가이드 포함. 트리거: Seedance, AI 영상, 문생영상, 도생영상. | [SKILL.md](./skills/giggle-seedance2-gen/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-seedance2-gen -y` |
 | giggle-generation-drama | 사용자가 영상을 만들고, 단편을 촬영하거나, 사용 가능한 영상 스타일을 볼 때 사용. 트리거: 단편 영화, 영상 만들기, 숏폼 촬영, AI 영상, 스토리로 영상 만들기, 단편 드라마, 나레이션 영상, 시네마틱 영상, 사용 가능한 영상 스타일 | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y` |
 | giggle-generation-aimv | AI 뮤직 비디오(MV). 텍스트 프롬프트나 사용자 정의 가사로 음악 생성 후 참조 이미지로 가사 비디오 제작. | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y` |
 | giggle-generation-music | 텍스트 설명, 사용자 정의 가사 또는 순수 악기로 AI 음악 생성. 간소화, 사용자 정의, 순수 악기 세 가지 모드 지원. | [SKILL.md](./skills/giggle-generation-music/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y` |
@@ -101,6 +102,11 @@ skills:
     description: "텍스트→비디오 및 이미지→비디오 변환(시작 프레임/종료 프레임) 지원. 텍스트나 이미지를 영상으로 바꿔야 하는 사용자에게 적합."
     category: video
     version: "0.0.1"
+  - name: "Seedance 2.0"
+    value: "giggle-seedance2-gen"
+    description: "Giggle API로 Seedance 2.0(Pro/Fast) 영상 생성: 텍스트→영상, 이미지→영상, 옴니 멀티모달. 사용자 입력 언어에 맞게 프롬프트 최적화 후 API 호출. 트리거: 영상 생성, AI 영상, Seedance, 이미지→영상, 텍스트→영상, 비디오 생성."
+    category: video
+    version: "1.0.0"
   - name: "이미지 생성 (gpt-image-2)"
     value: "giggle-gpt-image-2"
     description: "GPT-Image-2에 적합한 고품질 프롬프트 생성을 도와주며, 프롬프트 생성 후 Giggle API를 직접 호출하여 `gpt-image-2-fast`로 이미지를 생성합니다."
