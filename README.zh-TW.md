@@ -102,7 +102,7 @@ skills:
     description: "支援文字轉影片與圖片轉影片（首幀/尾幀）。適合需要將文字或圖片轉成影片的使用者。"
     category: video
     version: "0.0.1"
-  - name: "Seedance 2.0"
+  - name: "影片生成（Seedance 2.0）"
     value: "giggle-seedance2-gen"
     description: "透過 Giggle API 使用 Seedance 2.0（Pro/Fast）生成影片：文生影片、圖生影片、omni 多模態；依使用者語種優化提示詞後呼叫介面。觸發詞：生成影片、AI 影片、seedance、圖生影片、文生影片、影片生成。"
     category: video

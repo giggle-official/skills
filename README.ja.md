@@ -102,7 +102,7 @@ skills:
     description: "テキスト→動画、画像→動画の変換（開始フレーム/終了フレーム）に対応。テキストや画像から動画が必要なユーザー向け。"
     category: video
     version: "0.0.1"
-  - name: "Seedance 2.0"
+  - name: "動画生成（Seedance 2.0）"
     value: "giggle-seedance2-gen"
     description: "Giggle API で Seedance 2.0（Pro/Fast）による動画生成。テキスト→動画、画像→動画、オムニ。入力言語に合わせプロンプト最適化後に API 呼び出し。トリガー: 動画生成、AI 動画、Seedance、画像から動画、テキストから動画。"
     category: video

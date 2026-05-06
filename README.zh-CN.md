@@ -104,7 +104,7 @@ skills:
     description: "支持文生视频与图生视频（首帧/尾帧）。适合需要将文本或图片转为视频的用户。"
     category: video
     version: "0.0.1"
-  - name: "Seedance 2.0"
+  - name: "视频生成（Seedance 2.0）"
     value: "giggle-seedance2-gen"
     description: "通过 Giggle API 使用 Seedance 2.0（Pro/Fast）生成视频：文生视频、图生视频、omni 多模态；按用户语种优化提示词后调用接口。触发词：生成视频、AI 视频、seedance、图生视频、文生视频、视频生成。"
     category: video

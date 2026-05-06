@@ -102,7 +102,7 @@ skills:
     description: "텍스트→비디오 및 이미지→비디오 변환(시작 프레임/종료 프레임) 지원. 텍스트나 이미지를 영상으로 바꿔야 하는 사용자에게 적합."
     category: video
     version: "0.0.1"
-  - name: "Seedance 2.0"
+  - name: "영상 생성 (Seedance 2.0)"
     value: "giggle-seedance2-gen"
     description: "Giggle API로 Seedance 2.0(Pro/Fast) 영상 생성: 텍스트→영상, 이미지→영상, 옴니 멀티모달. 사용자 입력 언어에 맞게 프롬프트 최적화 후 API 호출. 트리거: 영상 생성, AI 영상, Seedance, 이미지→영상, 텍스트→영상, 비디오 생성."
     category: video

@@ -102,7 +102,7 @@ skills:
     description: "Supports text-to-video and image-to-video conversion (start frame/end frame). Suitable for users who need to convert text to video or images to video."
     category: video
     version: "0.0.1"
-  - name: "Seedance 2.0"
+  - name: "Video generation (Seedance 2.0)"
     value: "giggle-seedance2-gen"
     description: "Generate AI videos with Seedance 2.0 (Pro/Fast) via Giggle API: text-to-video, image-to-video, omni multi-modal. Optimize prompts in the user's language, then call the API. Triggers: generate video, AI video, seedance, image to video, text to video, video generation."
     category: video
