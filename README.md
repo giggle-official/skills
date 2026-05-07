@@ -33,7 +33,7 @@ npx skills add . --list --full-depth
 |------|-------------|---------------|-------------|
 | giggle-generation-image | Text-to-image and image-to-image. Supports Seedream, Midjourney, Nano Banana. Customize aspect ratio and resolution. | [SKILL.md](./skills/giggle-generation-image/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y` |
 | giggle-generation-video | Supports text-to-video and image-to-video conversion (start frame/end frame). Suitable for users who need to convert text to video or images to video. | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y` |
-| giggle-seedance2-gen | Seedance 2.0 Pro/Fast video via Giggle API: text-to-video, image-to-video, and omni (multi-modal), with prompt-optimization guidance. Triggers: Seedance, AI video, text/image to video. | [SKILL.md](./skills/giggle-seedance2-gen/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-seedance2-gen -y` |
+| giggle-seedance2-gen | AI video & Seedance 2.0 prompt engineering: text/image/omni via giggle.pro; full prompt pipeline (phase confirmation → API). Triggers: video prompts, omni, short drama, first frame. | [SKILL.md](./skills/giggle-seedance2-gen/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-seedance2-gen -y` |
 | giggle-generation-drama | Used when users want to generate videos, shoot short films, or view available video styles. Triggers: Short film, Make video, Shoot short film, AI video, Generate video from story, Short drama, Narrated video, Cinematic video, Available video styles | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y` |
 | giggle-generation-aimv | AI music videos (MV). Generate music from text prompts or custom lyrics, then create lyric videos with reference images. | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y` |
 | giggle-generation-music | Create AI music from text description, custom lyrics, or instrumental. Supports simplified, custom, and instrumental modes. | [SKILL.md](./skills/giggle-generation-music/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y` |
@@ -104,9 +104,9 @@ skills:
     version: "0.0.1"
   - name: "Video generation (Seedance 2.0)"
     value: "giggle-seedance2-gen"
-    description: "Seedance 2.0 via giggle.pro plus prompt engineering (references/prompts). Optimize with Seedance patterns, submit only via API. Triggers: generate video, AI video, seedance, omni, short drama, ad video, first frame, character ref. (User may say 即梦; delivery stays giggle.pro.)"
+    description: "Use when generating AI video or optimizing video prompts with Seedance 2.0. Text/image/omni via giggle.pro with built-in prompt engineering (references/prompt-engineering.md). Confirm prompt before API. Triggers: video prompts, omni, short drama, ads, first frame, character ref. (User may say 即梦; delivery stays giggle.pro.)"
     category: video
-    version: "1.1.0"
+    version: "1.3.0"
   - name: "Image Generation (gpt-image-2)"
     value: "giggle-gpt-image-2"
     description: "Helps users generate high-quality prompts suitable for GPT-Image-2, and directly calls the Giggle API to generate images using `gpt-image-2-fast` after the prompt is created."
