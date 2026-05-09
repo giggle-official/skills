@@ -1,0 +1,29 @@
+# Discord Bot 敏感信息
+discord-bot/.env
+discord-bot/node_modules/
+discord-bot/package-lock.json
+
+# 用户配置（安装后生成）
+outputs/bot_config.json
+outputs/user_profile.json
+outputs/dashboard_config.json
+outputs/temp-*.txt
+outputs/*.log
+
+# PM2 日志
+.pm2/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+.openclaw/
+
+# 备份文件
+*.bak
+*.backup
+
+# Dashboard 数据库（用户本地生成）
+.claw/
+
+# Node modules
+node_modules/
