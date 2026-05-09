@@ -1,6 +1,32 @@
 ---
 name: giggle-gpt-image-2
 description: Generates high-quality text-to-image and image-to-image prompts optimized for GPT-Image-2. Use when a user wants to create image generation prompts, write AI art prompts, or generate visual content with GPT-Image-2 / DALL-E — including product posters, portrait photography, city promotional images, character design, UI mockups, illustration style transfer, comics/stickers, social media covers, sci-fi concept art, advertising creatives, and any other image generation needs. Triggers on: "生成图片", "写提示词", "prompt", "AI 画图", "图生图", "write me a prompt", "generate an image", "create a poster", "text to image".
+version: "1.0.0"
+license: MIT
+author: giggle-official
+homepage: https://github.com/giggle-official/skills
+repository: https://github.com/giggle-official/skills
+requires:
+  bins: [python3]
+  env: [GIGGLE_API_KEY]
+  pip: [requests]
+metadata:
+  {
+    "openclaw": {
+      "emoji": "🎬",
+      "requires": {
+        "bins": ["python3"],
+        "env": ["GIGGLE_API_KEY"],
+        "pip": ["requests"]
+      },
+      "primaryEnv": "GIGGLE_API_KEY",
+      "installSpec": {
+        "bins": ["python3"],
+        "env": ["GIGGLE_API_KEY"],
+        "pip": ["requests"]
+      }
+    }
+  }
 ---
 
 # GPT-Image-2 Prompt & Generation Assistant
