@@ -1,7 +1,7 @@
 ---
 name: discord-auto-deploy
 description: "Auto-deploy a Discord AI bot connected to OpenClaw Gateway. Handles Node.js bot setup, PM2 process management, and Gateway API integration. Use when the user has completed Discord Bot onboarding and needs the bot deployed and running."
-version: "1.0.1"
+version: "1.0.2"
 author: discord-community-growth-expert
 license: MIT
 
