@@ -1,50 +1,50 @@
-# 错误处理
+# Error handling
 
-出错时先判断是否可重试，避免向终端用户抛出过长堆栈。
+Classify retries before surfacing failures to avoid dumping long stack traces.
 
-## HTTP 层
+## HTTP layer
 
-| 情况 | 建议 |
-|------|------|
-| 4xx / 5xx | 一句话说明「服务暂时不可用或请求被拒绝」；可稍后重试一次。 |
-| 超时 | 网络抖动时可重试提交；若任务已创建，用返回的 `task_id` 执行 `query` 续查，避免重复扣费。 |
+| Situation | Suggestion |
+|-----------|--------------|
+| 4xx / 5xx | One line: upstream unavailable or denied; optionally retry shortly. |
+| Timeouts | If nothing was created yet, retry submit; if `task_id` exists, **`query`** to avoid duplicate billable jobs. |
 
-## 业务信封 `code` / `msg`
+## Envelope fields `code` / `msg`
 
-封装接口共性形态：
+Typical envelope:
 
 ```json
 { "code": 200, "msg": "success", "data": { ... } }
 ```
 
-| code | 含义（概括） | 建议 |
-|------|----------------|------|
-| `200` | 成功 | 继续解析 `data`。 |
-| 非 200 | 失败 | 将 `msg` 转述给用户；根据文案判断是否为额度、参数或合规问题。 |
+| code | Meaning | Suggestion |
+|------|---------|------------|
+| `200` | OK | Continue parsing `data`. |
+| non-200 | Error | Relay `msg`; infer quota/param/compliance issues from wording. |
 
-具体错误码以网关文档为准。
+Exact codes belong in gateway docs.
 
-## 任务状态
+## Task status
 
-轮询 `task/query` 返回的 `data.status`：
+`data.status` from `task/query`:
 
-| status（示例） | 含义 | 建议 |
-|----------------|------|------|
-| （处理中） | 未完成 | 持续轮询直至超时或终态。 |
-| `completed` | 成功 | 取 `urls[0]` 作为成片。 |
-| `failed` / `fail` / `error` 或 `err_msg` 非空 | 失败 | 阅读 `err_msg`；修正素材 URL、文案或驱动参数后重新 `run`。 |
+| Example status | Meaning | Suggestion |
+|----------------|---------|-------------|
+| (in progress) | Not done | Poll until deadline or terminal state. |
+| `completed` | Success | Output is `urls[0]`. |
+| `failed` / `fail` / `error` or nonempty `err_msg` | Failure | Read `err_msg`; fix URLs / script / drives and `run` again. |
 
-## 超时恢复
+## After timeout
 
-`run` 或 `query` 在达到 `--timeout` 仍未 `completed` 时：
+If `run` or `query` hits `--timeout` before `completed`:
 
-1. **不要**默认重新提交同一任务（可能重复计费）。  
-2. 使用 **`query --task-id <已有 id>`** 延长超时继续轮询。  
+1. Do **not** blindly resubmit the same render (might double billing).  
+2. Use **`query --task-id <existing id>`** with a longer `--timeout`.
 
-## 输入常见问题
+## Common input pitfalls
 
-| 问题 | 建议 |
-|------|------|
-| 图片或音频 URL 不可访问 | 确认 HTTPS、防盗链与有效期（签名 URL 过期需换新）。 |
-| 三种驱动混用 | CLI 已互斥校验；手写 JSON 时勿同时填 TTS 字段与 `drive_audio`。 |
-| `clone_audio` 与 `voice_over_id` 同时存在 | 不符合网关约定；克隆模式勿填 `voice_over_id`。 |
+| Issue | Mitigation |
+|-------|-------------|
+| Image/audio URL inaccessible | HTTPS, referrer rules, expiry for signed URLs. |
+| Mixing drives | CLI rejects overlaps; handwritten JSON cannot mix `drive_audio` with TTS fields. |
+| `clone_audio` with `voice_over_id` both set | Against gateway rules—clone mode skips `voice_over_id`. |

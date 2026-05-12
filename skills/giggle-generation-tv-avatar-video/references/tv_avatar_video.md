@@ -1,72 +1,72 @@
-# 数字人口播视频 CLI（封装 API）
+# Talking-head CLI (wrapped API)
 
-使用人像图片 **URL** 与下列 **三种驱动之一** 创建口播视频。脚本：`scripts/tv_avatar_video.py`。
+Create a talking-head video from one portrait **URL** and **exactly one of three drives**. Script: `scripts/tv_avatar_video.py`.
 
-**说明**：以下 JSON 仅用于理解字段；实际调用建议使用 CLI，由脚本组装请求体并轮询。
+**Note**: JSON below explains fields—prefer the CLI so the script builds the body and polls.
 
 ---
 
-## 1）TTS + 已有 `voice_over_id`
+## 1) TTS + existing `voice_over_id`
 
-`drive_mode`: **1**。需提供 `tts_script` 与 `voice_over_id`，**不要**填 `clone_audio`。
+`drive_mode`: **1**. Provide `tts_script` and `voice_over_id`; **do not** set `clone_audio`.
 
-示例：
+Example:
 
 ```json
 {
   "drive_mode": 1,
   "image": { "url": "https://example.com/face.jpg" },
-  "tts_script": "欢迎使用，这是一条文案驱动的数字人口播示例。",
+  "tts_script": "Welcome. This sample uses script-driven talking-head with catalog voice.",
   "voice_over_id": "zeeTdrCqbhpVKOucLtOKdhytM7rbJx5t",
   "mode_type": "1"
 }
 ```
 
-CLI：
+CLI:
 
 ```bash
 python scripts/tv_avatar_video.py run \
   --image-url "https://example.com/face.jpg" \
-  --tts-script "欢迎使用，这是一条文案驱动的数字人口播示例。" \
+  --tts-script "Welcome. This sample uses script-driven talking-head with catalog voice." \
   --voice-over-id "zeeTdrCqbhpVKOucLtOKdhytM7rbJx5t"
 ```
 
 ---
 
-## 2）TTS + `clone_audio`（克隆/参考音色）
+## 2) TTS + `clone_audio` (reference / clone tone)
 
-`drive_mode`: **1**。需提供 `tts_script` 与 `clone_audio.url`，**不要**填 `voice_over_id`。可选 `voice_speed`（示例中为 `1`）。
+`drive_mode`: **1**. Provide `tts_script` and `clone_audio.url`; **do not** set `voice_over_id`. Optional `voice_speed` (example uses `1`).
 
-示例：
+Example:
 
 ```json
 {
   "drive_mode": 1,
   "image": { "url": "https://example.com/face.jpg" },
-  "tts_script": "欢迎使用，这是一条文案驱动的数字人口播示例。",
+  "tts_script": "Welcome. This sample uses script-driven talking-head with cloned reference audio.",
   "clone_audio": { "url": "https://example.com/reference_voice.mp3" },
   "voice_speed": 1,
   "mode_type": "1"
 }
 ```
 
-CLI：
+CLI:
 
 ```bash
 python scripts/tv_avatar_video.py run \
   --image-url "https://example.com/face.jpg" \
-  --tts-script "欢迎使用，这是一条文案驱动的数字人口播示例。" \
+  --tts-script "Welcome. This sample uses script-driven talking-head with cloned reference audio." \
   --clone-audio-url "https://example.com/reference_voice.mp3" \
   --voice-speed 1
 ```
 
 ---
 
-## 3）音频驱动（对口型）
+## 3) Full audio drive (lip-sync)
 
-`drive_mode`: **2**。使用 `drive_audio.url`，**不要**与 `tts_script` / `voice_over_id` / `clone_audio` 同时使用。
+`drive_mode`: **2**. Use `drive_audio.url`; **do not** combine with `tts_script` / `voice_over_id` / `clone_audio`.
 
-示例：
+Example:
 
 ```json
 {
@@ -77,7 +77,7 @@ python scripts/tv_avatar_video.py run \
 }
 ```
 
-CLI：
+CLI:
 
 ```bash
 python scripts/tv_avatar_video.py run \
@@ -87,9 +87,9 @@ python scripts/tv_avatar_video.py run \
 
 ---
 
-## 提交与查询
+## Submit and query
 
-**提交**（成功时示例）：
+**Submit** (successful example):
 
 ```json
 {
@@ -100,7 +100,7 @@ python scripts/tv_avatar_video.py run \
 }
 ```
 
-**查询**（进行中字段依网关为准；完成时）：
+**Query** (while running: fields depend on gateway; when finished):
 
 ```json
 {
@@ -116,29 +116,29 @@ python scripts/tv_avatar_video.py run \
 }
 ```
 
-成片链接：**`data.urls[0]`**。脚本在 `status == completed` 时默认将该 URL 打印到 stdout。
+Output URL: **`data.urls[0]`**. The script prints that URL on stdout once `status == completed`.
 
 ---
 
-## 子命令
+## Subcommands
 
-| 子命令 | 说明 |
-|--------|------|
-| `run` | 提交并轮询直至完成 |
-| `submit` | 仅提交，stdout 打印 `task_id` |
-| `query` | 对已有 `task_id` 继续轮询（超时恢复） |
+| Command | Meaning |
+|---------|---------|
+| `run` | Submit and poll to completion |
+| `submit` | Submit only; print `task_id` on stdout |
+| `query` | Resume polling by `task_id` (recovery after timeouts) |
 
-### 通用选项
+### Common flags
 
-| 选项 | 说明 |
-|------|------|
-| `--image-url` | 人像图 URL（必填） |
-| `--mode-type` | 默认 `"1"` |
-| `--timeout` / `--interval` | 轮询上限与间隔（秒） |
-| `--output PATH` | 将成片 URL 下载到本地 |
-| `--json` | 打印最后一次查询的完整响应 JSON |
-| `-q` | 静默进度 |
-| `--base-url` | 单次命令覆盖 `GIGGLE_API_BASE` |
+| Flag | Meaning |
+|------|---------|
+| `--image-url` | Portrait URL (required) |
+| `--mode-type` | Default `"1"` |
+| `--timeout` / `--interval` | Max poll time / interval (seconds) |
+| `--output PATH` | Download the rendered URL locally |
+| `--json` | Print last query response JSON in full |
+| `-q` | Quiet progress |
+| `--base-url` | Per-invocation override of `GIGGLE_API_BASE` |
 
 ### `query`
 
@@ -148,16 +148,16 @@ python scripts/tv_avatar_video.py query --task-id "<task_id>" --timeout 1200
 
 ---
 
-## 批量示例
+## Batch example
 
 ```bash
 T1=$(python scripts/tv_avatar_video.py submit \
   --image-url "https://example.com/a.jpg" \
-  --tts-script "第一段" \
+  --tts-script "Paragraph one" \
   --voice-over-id "<id>" -q)
 T2=$(python scripts/tv_avatar_video.py submit \
   --image-url "https://example.com/b.jpg" \
-  --tts-script "第二段" \
+  --tts-script "Paragraph two" \
   --voice-over-id "<id>" -q)
 
 python scripts/tv_avatar_video.py query --task-id "$T1"

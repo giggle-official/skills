@@ -1,48 +1,49 @@
-# 照片数字人口播视频技能（中文）
+# Photo-driven talking-head video (Giggle)
 
-基于 **Giggle** 侧封装的照片驱动数字人口播生成能力：人像图 URL + **TTS（音色 ID / 克隆音频）** 或 **整段音频驱动**，提交任务后轮询至完成，输出成片链接。
+Uses Giggle’s wrapped **photo-driven talking-head** flow: portrait image URL + **TTS (voice ID / clone audio)** or **full-drive audio**, submit job, poll to completion, return the output URL.
 
-遵循 [Agent Skills](https://agentskills.io/specification) 思路，可在 Cursor / Claude Code 等环境中加载 `SKILL.md`。
+Follows the [Agent Skills](https://agentskills.io/specification) idea—load `SKILL.md` in Cursor, Claude Code, etc.
 
-## 功能概要
+## Feature summary
 
-- 三种驱动（互斥）：**TTS + voice_over_id**、**TTS + clone_audio.url**、**drive_audio.url（对口型）**
-- 子命令：`run`（默认）、`submit`、`query`
-- 鉴权：请求头 **`x-auth`**，密钥来自环境变量 **`GIGGLE_API_KEY`**（在 [giggle.pro](https://giggle.pro/) 登录后，左侧栏 **API Key / API 密钥** 获取）
+- Three mutually exclusive drives: **TTS + voice_over_id**, **TTS + clone_audio.url**, **drive_audio.url (lip-sync)**
+- Subcommands: `run` (default), `submit`, `query`
+- Auth: **`x-auth`** header; secret from **`GIGGLE_API_KEY`** (sign in at [giggle.pro](https://giggle.pro/), sidebar **API Key**)
 
-## 快速开始
+## Quick start
 
-在本目录下：
+From this directory:
 
 ```bash
-export GIGGLE_API_KEY="<你的密钥>"
+export GIGGLE_API_KEY="<your-secret-key>"
 pip install -r scripts/requirements.txt
 
 python scripts/tv_avatar_video.py run \
   --image-url "https://example.com/portrait.jpg" \
-  --tts-script "欢迎使用。" \
+  --tts-script "Welcome." \
   --voice-over-id "<voice_over_id>"
 ```
 
-可选：自建或本地网关时覆盖地址：
+Optional override for self-hosted/local gateway:
 
 ```bash
 export GIGGLE_API_BASE="http://localhost:8090"
 ```
 
-详细请求体与参数说明见 [references/tv_avatar_video.md](references/tv_avatar_video.md)；助手流程见 [SKILL.md](SKILL.md)。
+Request payloads and CLI details live in [references/tv_avatar_video.md](references/tv_avatar_video.md); agent flow lives in [SKILL.md](SKILL.md).
 
-## 目录结构
+## Layout
 
 ```
-gen-avatar4-zh/
+giggle-generation-tv-avatar-video/
 ├── SKILL.md
 ├── README.md
 ├── LICENSE.txt
 ├── references/
 │   ├── tv_avatar_video.md
 │   ├── credentials.md
-│   └── error_handling.md
+│   ├── error_handling.md
+│   └── voices_catalog.md
 └── scripts/
     ├── tv_avatar_video.py
     ├── requirements.txt

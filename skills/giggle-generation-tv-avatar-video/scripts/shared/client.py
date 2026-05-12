@@ -1,4 +1,4 @@
-"""Giggle 封装生成接口：x-auth 鉴权与任务轮询。"""
+"""Giggle wrapped generation endpoints: x-auth authentication + task polling."""
 
 import sys
 import time
@@ -10,7 +10,7 @@ from .config import load_config
 
 
 class GiggleApiError(Exception):
-    """业务 code 非 200 时抛出。"""
+    """Raised whenever business code is not HTTP 200 success envelope."""
 
     def __init__(self, code: str, message: str):
         self.code = code
@@ -19,7 +19,7 @@ class GiggleApiError(Exception):
 
 
 class GiggleClient:
-    """照片数字人口播视频：提交任务并轮询查询。"""
+    """Talking-head renders: submit and poll."""
 
     SUBMIT_PATH = "/api/v1/generation/tv-avatar-video"
     QUERY_PATH = "/api/v1/generation/task/query"
@@ -46,13 +46,13 @@ class GiggleClient:
     def _unwrap(resp_json: dict[str, Any]) -> dict[str, Any]:
         code = resp_json.get("code")
         if code != 200:
-            msg = resp_json.get("msg", "未知错误")
+            msg = resp_json.get("msg", "Unknown error")
             raise GiggleApiError(str(code), str(msg))
         data = resp_json.get("data")
         if data is None:
             return {}
         if not isinstance(data, dict):
-            raise GiggleApiError("INVALID", f"响应 data 异常: {resp_json!r}")
+            raise GiggleApiError("INVALID", f"Unexpected data payload: {resp_json!r}")
         return data
 
     def submit_tv_avatar(self, body: dict[str, Any]) -> str:
@@ -67,11 +67,11 @@ class GiggleClient:
         data = self._unwrap(resp.json())
         task_id = data.get("task_id", "")
         if not task_id:
-            raise GiggleApiError("INVALID", f"提交响应缺少 task_id: {data!r}")
+            raise GiggleApiError("INVALID", f"Missing task_id in submit response: {data!r}")
         return task_id
 
     def query_task(self, task_id: str) -> tuple[dict[str, Any], dict[str, Any]]:
-        """返回 (data, 完整响应 JSON)。"""
+        """Return (data dict, full JSON envelope)."""
         url = f"{self._base}{self.QUERY_PATH}"
         resp = requests.get(
             url,
@@ -92,31 +92,31 @@ class GiggleClient:
         timeout: float = 600.0,
         verbose: bool = True,
     ) -> tuple[dict[str, Any], dict[str, Any]]:
-        """轮询直至 status 为 completed，或失败/超时。"""
+        """Poll until status is completed, failure, or timeout."""
         start = time.time()
         last_full: dict[str, Any] = {}
         while True:
             elapsed = time.time() - start
             if elapsed > timeout:
-                raise TimeoutError(f"任务 {task_id} 在 {timeout}s 内未完成")
+                raise TimeoutError(f"Task {task_id} did not finish within {timeout}s")
 
             data, last_full = self.query_task(task_id)
             status = str(data.get("status", "")).strip().lower()
             err_msg = (data.get("err_msg") or "").strip()
 
             if verbose:
-                print(f"  [{elapsed:.0f}s] 状态: {status}", file=sys.stderr)
+                print(f"  [{elapsed:.0f}s] status: {status}", file=sys.stderr)
 
             if status == "completed":
                 urls = data.get("urls") or []
                 if isinstance(urls, list) and urls:
                     return data, last_full
-                raise GiggleApiError("INVALID", "已完成但 urls 为空")
+                raise GiggleApiError("INVALID", "Completed but urls list empty")
 
             if status in ("failed", "fail", "error") or err_msg:
                 raise GiggleApiError(
                     "TASK_FAILED",
-                    err_msg or f"任务失败（status={status!r}）",
+                    err_msg or f"Task failed (status={status!r})",
                 )
 
             time.sleep(interval)

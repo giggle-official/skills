@@ -1,33 +1,33 @@
-# 认证与密钥
+# Credentials and API key
 
-封装接口使用请求头 **`x-auth`** 传递 API 密钥。
+The wrapped API expects an **`x-auth`** header carrying the secret.
 
-## API Key
+## API key
 
-1. 打开 [giggle.pro](https://giggle.pro/) 并登录。  
-2. 左侧边栏进入 **API Key**（界面亦可能显示为 **API 密钥**）。  
-3. 创建或复制密钥，在运行脚本前设置环境变量：
+1. Open [giggle.pro](https://giggle.pro/) and sign in.  
+2. In the left sidebar, open **API Key**.  
+3. Create or copy the key and export it before runs:
 
 ```bash
-export GIGGLE_API_KEY="<你的密钥>"
+export GIGGLE_API_KEY="<your-key>"
 ```
 
-若未设置，`tv_avatar_video.py` 会打印简短提示并退出。
+If unset, `tv_avatar_video.py` prints a short hint and exits.
 
-可选 **`python-dotenv`**：在项目目录放置 `.env`（勿提交到版本库），例如：
+Optional **`python-dotenv`**: add `.env` in the project folder (never commit secrets), for example:
 
 ```
 GIGGLE_API_KEY=...
 GIGGLE_API_BASE=https://giggle.pro
 ```
 
-## 网关地址
+## Gateway base URL
 
-| 变量 | 说明 |
-|------|------|
-| `GIGGLE_API_BASE` | 可选，默认 `https://giggle.pro`。本地或私有化网关联调时改为对应 origin（无末尾 `/`）。 |
+| Variable | Meaning |
+|----------|---------|
+| `GIGGLE_API_BASE` | Optional; defaults to `https://giggle.pro`. For private or local gateways use that origin (**no trailing slash**). |
 
-脚本会请求：
+The script hits:
 
 - `POST {GIGGLE_API_BASE}/api/v1/generation/tv-avatar-video`
 - `GET {GIGGLE_API_BASE}/api/v1/generation/task/query?task_id=...`
