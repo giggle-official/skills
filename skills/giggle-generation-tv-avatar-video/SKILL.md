@@ -3,28 +3,27 @@ name: giggle-generation-tv-avatar-video
 description: "Talking-head video from image + driving audio: submit tasks via the wrapped generation API and poll for results; requests go through the Giggle gateway."
 homepage: https://giggle.pro/
 repository: https://github.com/giggle-official/skills
-license: Apache-2.0
+requires:
+  bins: [python3]
+  env: [GIGGLE_API_KEY]
+  pip: [requests]
 metadata:
-  tags: talking-head, photo-avatar, lip-sync, tts, clone-voice, api, en, giggle
-  vendor: giggle
-  locale: en
-  requires:
-    bins: [python3]
-    python: ">=3.8"
-    pip:
-      - requests>=2.28.0
-      - python-dotenv>=1.0.0
-  primaryEnv: GIGGLE_API_KEY
-  envVars:
-    - name: GIGGLE_API_KEY
-      required: true
-      description: After signing in at giggle.pro → API Key in the left sidebar
-    - name: GIGGLE_API_BASE
-      required: false
-      description: Optional; default https://giggle.pro. Point at your own gateway for local integration.
-  endpoints:
-    - https://giggle.pro/api/v1/generation/tv-avatar-video
-    - https://giggle.pro/api/v1/generation/task/query
+  {
+    "openclaw": {
+      "emoji": "🎬",
+      "requires": {
+        "bins": ["python3"],
+        "env": ["GIGGLE_API_KEY"],
+        "pip": ["requests"]
+      },
+      "primaryEnv": "GIGGLE_API_KEY",
+      "installSpec": {
+        "bins": ["python3"],
+        "env": ["GIGGLE_API_KEY"],
+        "pip": ["requests"]
+      }
+    }
+  }
 ---
 
 # Photo-driven talking-head video
@@ -49,6 +48,11 @@ The UX guidance below is for conversational wording only—not a substitute for 
 5. **After submit**: These jobs commonly take **several minutes**, depending on copy/audio length.
 
 **Example line after submit**: “Your render is queued; it usually takes a few minutes. I’ll send the video link when it’s ready.”
+
+## Preset voice list（预设声音列表）
+
+- Refer to bundled voices as the **preset voice list**（预设声音列表）。Do **not** call them 「系统声音」or “system voices” in user-facing wording.
+- When the user asks to **view or list the preset voice list**（查看 / 罗列预设声音列表）: open [references/voices_catalog.md](references/voices_catalog.md) and **list the voices defined there**—each numbered block has display **name**, **`voiceoverId`** (pass as API `voice_over_id` where applicable), **tags**, and EN/ZH descriptions. Prefer showing **name + `voiceoverId`** for every entry when they want the full catalogue; shorten or filter only if they ask.
 
 ## Prerequisites
 
@@ -83,5 +87,6 @@ After timeout → tv_avatar_video.py query --task-id <task_id> [--timeout 1200]
 ## See also
 
 - [references/tv_avatar_video.md](references/tv_avatar_video.md) — three drive modes + JSON + CLI samples
+- [references/voices_catalog.md](references/voices_catalog.md) — preset voice list（预设声音列表）with `voiceoverId` values
 - [references/credentials.md](references/credentials.md) — API key / env vars
 - [references/error_handling.md](references/error_handling.md) — common failures and recovery
