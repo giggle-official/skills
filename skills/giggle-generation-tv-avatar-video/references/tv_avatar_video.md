@@ -17,8 +17,7 @@ Example:
   "drive_mode": 1,
   "image": { "url": "https://example.com/face.jpg" },
   "tts_script": "Welcome. This sample uses script-driven talking-head with catalog voice.",
-  "voice_over_id": "zeeTdrCqbhpVKOucLtOKdhytM7rbJx5t",
-  "mode_type": "1"
+  "voice_over_id": "zeeTdrCqbhpVKOucLtOKdhytM7rbJx5t"
 }
 ```
 
@@ -45,8 +44,7 @@ Example:
   "image": { "url": "https://example.com/face.jpg" },
   "tts_script": "Welcome. This sample uses script-driven talking-head with cloned reference audio.",
   "clone_audio": { "url": "https://example.com/reference_voice.mp3" },
-  "voice_speed": 1,
-  "mode_type": "1"
+  "voice_speed": 1
 }
 ```
 
@@ -72,8 +70,7 @@ Example:
 {
   "drive_mode": 2,
   "image": { "url": "https://example.com/face.jpg" },
-  "drive_audio": { "url": "https://example.com/speech.mp3" },
-  "mode_type": "1"
+  "drive_audio": { "url": "https://example.com/speech.mp3" }
 }
 ```
 
@@ -133,7 +130,6 @@ Output URL: **`data.urls[0]`**. The script prints that URL on stdout once `statu
 | Flag | Meaning |
 |------|---------|
 | `--image-url` | Portrait URL (required) |
-| `--mode-type` | Default `"1"` |
 | `--timeout` / `--interval` | Max poll time / interval (seconds) |
 | `--output PATH` | Download the rendered URL locally |
 | `--json` | Print last query response JSON in full |

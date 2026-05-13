@@ -42,7 +42,6 @@ def build_submit_body(args: argparse.Namespace) -> dict:
     """Build JSON body for POST /api/v1/generation/tv-avatar-video."""
     body: dict = {
         "image": {"url": args.image_url.strip()},
-        "mode_type": str(args.mode_type),
     }
 
     if args.drive_audio_url:
@@ -103,11 +102,6 @@ def add_submit_args(p: argparse.ArgumentParser) -> None:
         "--image-url",
         required=True,
         help="HTTPS portrait URL mapped to body image.url",
-    )
-    p.add_argument(
-        "--mode-type",
-        default="1",
-        help='Quality/mode preset, defaults to "1" as defined by gateway',
     )
     p.add_argument(
         "--tts-script",
