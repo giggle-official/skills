@@ -4,6 +4,26 @@ Create a talking-head video from one portrait **URL** and **exactly one of three
 
 **Note**: JSON below explains fields—prefer the CLI so the script builds the body and polls.
 
+## Gateway constraints
+
+These limits come from the generation gateway; the CLI checks **non-empty `tts_script`**, **character cap**, and **`<break>`** syntax only (not audio duration or TTS playback length).
+
+### `drive_mode = 1` (TTS)
+
+| Rule | Detail |
+|------|--------|
+| `tts_script` | Required; must be **non-empty** after trim. |
+| Voice source | Choose **exactly one**: **`voice_over_id`** (preset voice) **or** **`clone_audio.url`** (clone reference). Do **not** set both; do **not** use `drive_audio` in this mode (full clip lip-sync is **`drive_mode = 2`** only). |
+| Copy length | At most **2700** characters. |
+| Spoken duration | Total synthesized speech must be **≤ 180 seconds** (enforced server-side; trim copy or breaks if the job fails). |
+| Pause tags | Insert `<break time="Xs"/>` where `X` is **0.1–99.9** seconds with **at most one decimal place** (e.g. `1.0`, `10`). Example: `欢迎来到<break time="1.0s"/>giggle` — roughly **1 second** silence after “to”, then continue with “giggle”. |
+
+### `drive_mode = 2` (`drive_audio`)
+
+| Rule | Detail |
+|------|--------|
+| Clip duration | **`drive_audio`** URL must point to audio **≤ 120 seconds** long (confirm before submit; the CLI does not probe remote duration). |
+
 ---
 
 ## 1) TTS + existing `voice_over_id`

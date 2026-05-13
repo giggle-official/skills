@@ -28,6 +28,7 @@ from __future__ import annotations
 import argparse
 import json as json_mod
 import os
+import re
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
@@ -36,6 +37,39 @@ from shared.client import GiggleApiError, GiggleClient
 
 DEFAULT_TIMEOUT = 600
 DEFAULT_INTERVAL = 5
+
+TTS_SCRIPT_MAX_CHARS = 2700
+_BREAK_TAG_RE = re.compile(r'<break\s+time="([^"]+)"\s*/>', re.IGNORECASE)
+_BREAK_NUM_PART = re.compile(r"^(\d+(?:\.\d)?)$")
+
+
+def validate_tts_script_content(text: str, parser: argparse.ArgumentParser) -> None:
+    """Gateway-aligned checks for drive_mode=1 copy (chars + break tags)."""
+    if not text:
+        parser.error("drive_mode=1 requires non-empty --tts-script")
+    if len(text) > TTS_SCRIPT_MAX_CHARS:
+        parser.error(
+            f"--tts-script exceeds {TTS_SCRIPT_MAX_CHARS} characters (got {len(text)})"
+        )
+    for m in _BREAK_TAG_RE.finditer(text):
+        inner = m.group(1).strip()
+        low = inner.lower()
+        if not low.endswith("s"):
+            parser.error(
+                f'break tag value must end with s (e.g. time="1.0s"): {m.group(0)!r}'
+            )
+        num_part = inner[:-1].strip()
+        if not _BREAK_NUM_PART.fullmatch(num_part):
+            parser.error(
+                "break pause must look like N or N.D with at most one decimal "
+                f'(e.g. 1.0): {m.group(0)!r}'
+            )
+        sec = float(num_part)
+        if sec < 0.1 or sec > 99.9:
+            parser.error(
+                "break pause must be between 0.1 and 99.9 seconds inclusive "
+                f'(got {sec} in {m.group(0)!r})'
+            )
 
 
 def build_submit_body(args: argparse.Namespace) -> dict:
@@ -64,29 +98,35 @@ def build_submit_body(args: argparse.Namespace) -> dict:
 
 def validate_drive_args(args: argparse.Namespace, parser: argparse.ArgumentParser) -> None:
     """Ensure exactly one valid drive combination."""
-    has_tts = bool(args.tts_script)
+    tts_raw = args.tts_script
+    has_tts_nonempty = bool(tts_raw and tts_raw.strip())
     has_voice = bool(args.voice_over_id)
     has_clone = bool(args.clone_audio_url)
     has_drive_audio = bool(args.drive_audio_url)
 
     if has_drive_audio:
-        if has_tts or has_voice or has_clone:
+        if has_tts_nonempty or has_voice or has_clone:
             parser.error(
                 "Audio drive (--drive-audio-url) cannot be combined with "
                 "--tts-script / --voice-over-id / --clone-audio-url"
             )
         return
 
+    if tts_raw is not None and not str(tts_raw).strip():
+        parser.error("--tts-script cannot be empty for drive_mode=1")
+
     if has_clone:
-        if not has_tts:
-            parser.error("--clone-audio-url requires --tts-script")
+        if not has_tts_nonempty:
+            parser.error("--clone-audio-url requires non-empty --tts-script")
         if has_voice:
             parser.error("Do not combine --clone-audio-url with --voice-over-id")
+        validate_tts_script_content(tts_raw.strip(), parser)
         return
 
     if has_voice:
-        if not has_tts:
-            parser.error("--voice-over-id requires --tts-script")
+        if not has_tts_nonempty:
+            parser.error("--voice-over-id requires non-empty --tts-script")
+        validate_tts_script_content(tts_raw.strip(), parser)
         return
 
     parser.error(
@@ -106,7 +146,7 @@ def add_submit_args(p: argparse.ArgumentParser) -> None:
     p.add_argument(
         "--tts-script",
         default=None,
-        help="TTS copy (drive_mode=1 combos only)",
+        help=f"TTS copy for drive_mode=1 only; non-empty; max {TTS_SCRIPT_MAX_CHARS} chars",
     )
     p.add_argument(
         "--voice-over-id",

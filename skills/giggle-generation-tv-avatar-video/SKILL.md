@@ -54,6 +54,13 @@ The UX guidance below is for conversational wording only—not a substitute for 
 - Refer to bundled voices as the **preset voice list**（预设声音列表）。Do **not** call them 「系统声音」or “system voices” in user-facing wording.
 - When the user asks to **view or list the preset voice list**（查看 / 罗列预设声音列表）: open [references/voices_catalog.md](references/voices_catalog.md) and **list the voices defined there**—each numbered block has display **name**, **`voiceoverId`** (pass as API `voice_over_id` where applicable), **tags**, and EN/ZH descriptions. Prefer showing **name + `voiceoverId`** for every entry when they want the full catalogue; shorten or filter only if they ask.
 
+## Content limits (gateway)
+
+Summary — full tables in [references/tv_avatar_video.md](references/tv_avatar_video.md):
+
+- **`drive_mode = 1`**: Non-empty **`tts_script`**; exactly one of **`voice_over_id`** or **`clone_audio`** (preset vs clone—not **`drive_audio`**). Copy ≤ **2700** characters; synthesized speech ≤ **180** seconds (server-checked). Optional pauses: `<break time="Xs"/>` with **X ∈ [0.1, 99.9]** and one decimal max (example: `欢迎来到<break time="1.0s"/>giggle`).
+- **`drive_mode = 2`**: **`drive_audio`** clip ≤ **120** seconds.
+
 ## Prerequisites
 
 - Python 3.8+

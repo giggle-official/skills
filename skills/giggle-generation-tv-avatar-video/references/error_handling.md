@@ -48,3 +48,8 @@ If `run` or `query` hits `--timeout` before `completed`:
 | Image/audio URL inaccessible | HTTPS, referrer rules, expiry for signed URLs. |
 | Mixing drives | CLI rejects overlaps; handwritten JSON cannot mix `drive_audio` with TTS fields. |
 | `clone_audio` with `voice_over_id` both set | Against gateway rules—clone mode skips `voice_over_id`. |
+| `tts_script` empty / whitespace-only (`drive_mode=1`) | Non-empty copy required; CLI rejects before submit. |
+| `tts_script` over 2700 characters | Shorten copy; CLI rejects before submit. |
+| Invalid `<break time="…"/>` values | Pause must be 0.1–99.9 s with ≤1 decimal; fix markup or gateway may fail. |
+| TTS playback > ~180 s | Gateway may reject despite character limit; shorten script or reduce breaks. |
+| `drive_audio` longer than 120 s | Use a shorter clip; CLI cannot validate remote duration. |

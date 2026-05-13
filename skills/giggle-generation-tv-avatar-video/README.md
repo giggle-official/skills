@@ -6,7 +6,7 @@ Follows the [Agent Skills](https://agentskills.io/specification) idea—load `SK
 
 ## Feature summary
 
-- Three mutually exclusive drives: **TTS + voice_over_id**, **TTS + clone_audio.url**, **drive_audio.url (lip-sync)**
+- Three mutually exclusive drives: **TTS + voice_over_id**, **TTS + clone_audio.url**, **drive_audio.url (lip-sync)** — see [references/tv_avatar_video.md](references/tv_avatar_video.md) for **limits** (script length, `<break>` tags, audio duration caps).
 - Subcommands: `run` (default), `submit`, `query`
 - Auth: **`x-auth`** header; secret from **`GIGGLE_API_KEY`** (sign in at [giggle.pro](https://giggle.pro/), sidebar **API Key**)
 
