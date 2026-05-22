@@ -31,9 +31,16 @@ metadata:
 > **Capability**: One **portrait image URL** plus **one of three drives** yields a **lip-sync talking-head video**.  
 > **How it works**: The script calls the wrapped API (`x-auth` + `GIGGLE_API_KEY`), submits, then polls until `completed`; use `data.urls[0]` as the delivered video URL.
 
+## Voice clone（音色克隆）
+
+> **Capability**: Use one **TTS script** plus one **reference audio URL** to clone a voice and get a **voice_id** for later TTS tasks.  
+> **How it works**: The script submits to `/api/v1/generation/tv-voice-clone`, then polls `/api/v1/generation/task/query` for up to **5 minutes**. Success requires `data.status == "completed"` and a non-empty `data.voice_id`.
+
 ## How to run
 
 Prefer `scripts/tv_avatar_video.py` instead of raw HTTP calls; it builds JSON, headers, and polling.
+
+For voice cloning, prefer `scripts/tv_voice_clone.py`; it builds JSON, headers, and polling.
 
 ## For reviewers / auditors
 
@@ -89,6 +96,7 @@ After timeout → tv_avatar_video.py query --task-id <task_id> [--timeout 1200]
 | Script | Docs |
 |--------|------|
 | `scripts/tv_avatar_video.py` | [references/tv_avatar_video.md](references/tv_avatar_video.md) |
+| `scripts/tv_voice_clone.py` | (this file) |
 | `scripts/shared/` | HTTP client, reads `GIGGLE_API_KEY` |
 
 ## See also

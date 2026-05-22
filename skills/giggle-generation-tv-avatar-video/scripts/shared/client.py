@@ -22,6 +22,7 @@ class GiggleClient:
     """Talking-head renders: submit and poll."""
 
     SUBMIT_PATH = "/api/v1/generation/tv-avatar-video"
+    VOICE_CLONE_PATH = "/api/v1/generation/tv-voice-clone"
     QUERY_PATH = "/api/v1/generation/task/query"
 
     def __init__(
@@ -57,6 +58,21 @@ class GiggleClient:
 
     def submit_tv_avatar(self, body: dict[str, Any]) -> str:
         url = f"{self._base}{self.SUBMIT_PATH}"
+        resp = requests.post(
+            url,
+            headers=self._headers_json(),
+            json=body,
+            timeout=120,
+        )
+        resp.raise_for_status()
+        data = self._unwrap(resp.json())
+        task_id = data.get("task_id", "")
+        if not task_id:
+            raise GiggleApiError("INVALID", f"Missing task_id in submit response: {data!r}")
+        return task_id
+
+    def submit_tv_voice_clone(self, body: dict[str, Any]) -> str:
+        url = f"{self._base}{self.VOICE_CLONE_PATH}"
         resp = requests.post(
             url,
             headers=self._headers_json(),
@@ -112,6 +128,44 @@ class GiggleClient:
                 if isinstance(urls, list) and urls:
                     return data, last_full
                 raise GiggleApiError("INVALID", "Completed but urls list empty")
+
+            if status in ("failed", "fail", "error") or err_msg:
+                raise GiggleApiError(
+                    "TASK_FAILED",
+                    err_msg or f"Task failed (status={status!r})",
+                )
+
+            time.sleep(interval)
+
+    def poll_task_for_voice_clone(
+        self,
+        task_id: str,
+        *,
+        interval: float = 5.0,
+        timeout: float = 300.0,
+        verbose: bool = True,
+    ) -> tuple[dict[str, Any], dict[str, Any]]:
+        """Poll until status is completed with a non-empty voice_id, failure, or timeout."""
+        start = time.time()
+        last_full: dict[str, Any] = {}
+        while True:
+            elapsed = time.time() - start
+            if elapsed > timeout:
+                raise TimeoutError(f"Task {task_id} did not finish within {timeout}s")
+
+            data, last_full = self.query_task(task_id)
+            status = str(data.get("status", "")).strip().lower()
+            err_msg = (data.get("err_msg") or "").strip()
+            voice_id = str(data.get("voice_id") or "").strip()
+
+            if verbose:
+                extra = f", voice_id: {voice_id}" if voice_id else ""
+                print(f"  [{elapsed:.0f}s] status: {status}{extra}", file=sys.stderr)
+
+            if status == "completed":
+                if voice_id:
+                    return data, last_full
+                raise GiggleApiError("INVALID", "Completed but voice_id empty")
 
             if status in ("failed", "fail", "error") or err_msg:
                 raise GiggleApiError(
