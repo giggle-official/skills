@@ -1,0 +1,49 @@
+# 用户数据和敏感信息
+config.json
+persona_evolution.json
+comment_monitor.json
+
+# 输出目录
+outputs/
+
+# Skills 数据目录
+skills/*/node_modules/
+skills/*/.data/
+skills/*/__pycache__/
+skills/*/.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 日志
+*.log
+nohup.out
+
+# 临时文件
+*.tmp
+*.bak
+*.swp
+*~
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# 备份文件
+*.backup
+AGENTS.md.backup

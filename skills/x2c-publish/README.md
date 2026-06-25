@@ -85,7 +85,7 @@ node scripts/x2c-publish.js transactions
 }
 ```
 
-API Key 获取：https://storyclaw.com/
+API Key 获取：https://www.x2creel.ai
 
 ## 凭证路径
 

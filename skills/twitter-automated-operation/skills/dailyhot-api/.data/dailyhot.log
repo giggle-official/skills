@@ -1,0 +1,77 @@
+◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+serveStatic: root path './public' is not found, are you sure it's correct?
+ INFO  [2026-04-24 09:15:38] 🔥 DailyHot API successfully runs on port 6688
+ INFO  [2026-04-24 09:15:38] 🔗 Local: 👉 http://localhost:6688
+ INFO  [2026-04-24 09:15:39] 🌐 [GET] https://www.douyin.com/passport/general/login_guiding_strategy/?aid=6383
+ ERROR  [2026-04-24 09:15:39] 📦 [Redis] connection failed: connect ECONNREFUSED 127.0.0.1:6379
+ ERROR  [2026-04-24 09:15:39] 📦 [Redis] connection failed: Connection is closed.
+ INFO  [2026-04-24 09:15:39] 💾 [NodeCache] https://www.douyin.com/passport/general/login_guiding_strategy/?aid=6383 has been cached
+ INFO  [2026-04-24 09:15:39] ✅ [200] request was successful
+获取抖音 Cookie 出错TypeError: Cannot read properties of null (reading '1')
+ INFO  [2026-04-24 09:15:39] 🌐 [GET] https://www.douyin.com/aweme/v1/web/hot/search/list/?device_platform=webapp&aid=6383&channel=channel_pc_web&detail_list=1
+ INFO  [2026-04-24 09:15:39] 💾 [NodeCache] https://www.douyin.com/aweme/v1/web/hot/search/list/?device_platform=webapp&aid=6383&channel=channel_pc_web&detail_list=1 has been cached
+ INFO  [2026-04-24 09:15:39] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:39] 🌐 [GET] https://m.weibo.cn/api/container/getIndex?containerid=106003type%3D25%26t%3D3%26disable_hot%3D1%26filter_type%3Drealtimehot&title=%E5%BE%AE%E5%8D%9A%E7%83%AD%E6%90%9C&extparam=filter_type%3Drealtimehot%26mi_cid%3D100103%26pos%3D0_0%26c_type%3D30%26display_time%3D1540538388&luicode=10000011&lfid=231583
+ ERROR  [2026-04-24 09:15:40] ❌ [ERROR] request failed
+ ERROR  [2026-04-24 09:15:40] ❌ [ERROR] Request failed with status code 432
+ INFO  [2026-04-24 09:15:40] 🌐 [GET] https://www.toutiao.com/hot-event/hot-board/?origin=toutiao_pc
+ INFO  [2026-04-24 09:15:40] 💾 [NodeCache] https://www.toutiao.com/hot-event/hot-board/?origin=toutiao_pc has been cached
+ INFO  [2026-04-24 09:15:40] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:40] 🌐 [GET] https://api.zhihu.com/topstory/hot-lists/total?limit=50
+ INFO  [2026-04-24 09:15:40] 💾 [NodeCache] https://api.zhihu.com/topstory/hot-lists/total?limit=50 has been cached
+ INFO  [2026-04-24 09:15:40] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:40] 🌐 [GET] https://api.bilibili.com/x/web-interface/nav
+ INFO  [2026-04-24 09:15:40] 💾 [NodeCache] https://api.bilibili.com/x/web-interface/nav has been cached
+ INFO  [2026-04-24 09:15:40] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:40] 💾 [NodeCache] bilibili-wbi has been cached
+ INFO  [2026-04-24 09:15:40] 🌐 [GET] https://api.bilibili.com/x/web-interface/ranking/v2?rid=0&type=all&bar=514&baz=1919810&foo=114&wts=1776993341&w_rid=a1469551c27df9e374d2d9bb21b3aa56
+ INFO  [2026-04-24 09:15:40] 💾 [NodeCache] https://api.bilibili.com/x/web-interface/ranking/v2?rid=0&type=all&bar=514&baz=1919810&foo=114&wts=1776993341&w_rid=a1469551c27df9e374d2d9bb21b3aa56 has been cached
+ INFO  [2026-04-24 09:15:40] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:40] bilibili 备用接口
+ INFO  [2026-04-24 09:15:40] 🌐 [GET] https://api.bilibili.com/x/web-interface/ranking?jsonp=jsonp?rid=0&type=all&callback=__jp0
+ INFO  [2026-04-24 09:15:40] 💾 [NodeCache] https://api.bilibili.com/x/web-interface/ranking?jsonp=jsonp?rid=0&type=all&callback=__jp0 has been cached
+ INFO  [2026-04-24 09:15:40] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:40] 🌐 [GET] https://top.baidu.com/board?tab=realtime
+ INFO  [2026-04-24 09:15:40] 💾 [NodeCache] https://top.baidu.com/board?tab=realtime has been cached
+ INFO  [2026-04-24 09:15:40] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:41] 🌐 [GET] https://www.kuaishou.com/?isHome=1
+ INFO  [2026-04-24 09:15:41] 💾 [NodeCache] https://www.kuaishou.com/?isHome=1 has been cached
+ INFO  [2026-04-24 09:15:41] ✅ [200] request was successful
+ ERROR  [2026-04-24 09:15:41] ❌ [ERROR] result.data?.match is not a function
+ INFO  [2026-04-24 09:15:41] 🌐 [GET] https://r.inews.qq.com/gw/event/hot_ranking_list?page_size=50
+ INFO  [2026-04-24 09:15:41] 💾 [NodeCache] https://r.inews.qq.com/gw/event/hot_ranking_list?page_size=50 has been cached
+ INFO  [2026-04-24 09:15:41] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:41] 🌐 [GET] https://cache.thepaper.cn/contentapi/wwwIndex/rightSidebar
+ INFO  [2026-04-24 09:15:41] 💾 [NodeCache] https://cache.thepaper.cn/contentapi/wwwIndex/rightSidebar has been cached
+ INFO  [2026-04-24 09:15:41] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:41] 🌐 [POST] https://gateway.36kr.com/api/mis/nav/home/nav/rank/hot
+ INFO  [2026-04-24 09:15:42] 💾 [NodeCache] https://gateway.36kr.com/api/mis/nav/home/nav/rank/hot has been cached
+ INFO  [2026-04-24 09:15:42] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:42] 🌐 [GET] https://www.huxiu.com/moment/
+ INFO  [2026-04-24 09:15:42] 💾 [NodeCache] https://www.huxiu.com/moment/ has been cached
+ INFO  [2026-04-24 09:15:42] ✅ [200] request was successful
+ ERROR  [2026-04-24 09:15:42] ❌ [ERROR] Cannot read properties of null (reading '1')
+ INFO  [2026-04-24 09:15:42] 🌐 [GET] https://m.ithome.com/rankm/
+ INFO  [2026-04-24 09:15:42] 💾 [NodeCache] https://m.ithome.com/rankm/ has been cached
+ INFO  [2026-04-24 09:15:42] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:42] 🌐 [GET] https://sspai.com/api/v1/article/tag/page/get?limit=40&tag=热门文章
+ INFO  [2026-04-24 09:15:44] 💾 [NodeCache] https://sspai.com/api/v1/article/tag/page/get?limit=40&tag=热门文章 has been cached
+ INFO  [2026-04-24 09:15:44] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:44] 🌐 [GET] https://api.juejin.cn/content_api/v1/content/article_rank?category_id=1&type=hot
+ INFO  [2026-04-24 09:15:44] 💾 [NodeCache] https://api.juejin.cn/content_api/v1/content/article_rank?category_id=1&type=hot has been cached
+ INFO  [2026-04-24 09:15:44] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:44] 🌐 [GET] https://api.juejin.cn/tag_api/v1/query_category_briefs
+ INFO  [2026-04-24 09:15:44] 💾 [NodeCache] https://api.juejin.cn/tag_api/v1/query_category_briefs has been cached
+ INFO  [2026-04-24 09:15:44] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:44] 🌐 [GET] https://movie.douban.com/chart/
+ INFO  [2026-04-24 09:15:45] 💾 [NodeCache] https://movie.douban.com/chart/ has been cached
+ INFO  [2026-04-24 09:15:45] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:45] 🌐 [GET] https://tieba.baidu.com/hottopic/browse/topicList
+ INFO  [2026-04-24 09:15:45] 💾 [NodeCache] https://tieba.baidu.com/hottopic/browse/topicList has been cached
+ INFO  [2026-04-24 09:15:45] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:45] 🌐 [GET] https://top.news.sina.com.cn/ws/GetTopDataList.php?top_type=day&top_cat=www_www_all_suda_suda&top_time=20260424&top_show_num=50
+ INFO  [2026-04-24 09:15:45] 💾 [NodeCache] https://top.news.sina.com.cn/ws/GetTopDataList.php?top_type=day&top_cat=www_www_all_suda_suda&top_time=20260424&top_show_num=50 has been cached
+ INFO  [2026-04-24 09:15:45] ✅ [200] request was successful
+ INFO  [2026-04-24 09:15:45] 🌐 [GET] https://m.163.com/fe/api/hot/news/flow
+ INFO  [2026-04-24 09:15:45] 💾 [NodeCache] https://m.163.com/fe/api/hot/news/flow has been cached
+ INFO  [2026-04-24 09:15:45] ✅ [200] request was successful
