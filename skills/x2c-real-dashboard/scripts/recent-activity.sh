@@ -3,7 +3,7 @@
 # Usage: bash recent-activity.sh [LIMIT]  LIMIT: 1–50, default 5
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-API_URL="https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api"
+API_URL="https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api"
 API_KEY="${X2C_API_KEY:-}"
 LIMIT="${1:-5}"
 [ -z "$API_KEY" ] && bash "$SCRIPT_DIR/setup-guide.sh"

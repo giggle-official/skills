@@ -25,7 +25,7 @@ const path = require('path');
 const accountManager = require('./ad-account-manager.js');
 
 // Configuration
-const X2C_API_BASE = 'https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api';
+const X2C_API_BASE = 'https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api';
 
 // HTTP Request helper
 function request(action, data = {}, apiKey) {

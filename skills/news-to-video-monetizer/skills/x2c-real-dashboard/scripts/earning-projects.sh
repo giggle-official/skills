@@ -4,7 +4,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-API_URL="https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api"
+API_URL="https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api"
 PAGE="${1:-1}"
 PAGE_SIZE="${2:-10}"
 

@@ -22,7 +22,7 @@ except ImportError:
     print(json.dumps({"success": False, "error": "Missing dependency: requests. Run: pip install requests"}))
     sys.exit(1)
 
-BASE_URL = "https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api"
+BASE_URL = "https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api"
 
 SUPPORTED_ACTIONS = [
     "check-key", "status", "publish", "posts", "delete-post",

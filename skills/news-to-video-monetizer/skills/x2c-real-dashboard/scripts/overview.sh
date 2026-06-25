@@ -4,7 +4,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-API_URL="https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api"
+API_URL="https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api"
 
 # Auto-load API key from workspace config if not set
 if [ -z "${X2C_API_KEY:-}" ]; then

@@ -365,7 +365,7 @@ node scripts/ad-account-manager.js send-code your@email.com
 
 ## 📊 X2C Open API
 
-Base URL: `https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api`
+Base URL: `https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api`
 
 ### 接口列表
 

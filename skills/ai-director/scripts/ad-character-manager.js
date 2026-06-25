@@ -25,7 +25,7 @@ const path = require('path');
 const configLoader = require('./config-loader');
 
 // Configuration
-const X2C_API_BASE = 'https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api';
+const X2C_API_BASE = 'https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api';
 
 // Load config (multi-user aware)
 function loadConfig() {

@@ -261,7 +261,7 @@ curl -m 60 -X POST "$X2C_API_BASE_URL" \
     "enable_prediction": false
   }'
 ```
-- X2C API Base URL: `https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api`
+- X2C API Base URL: `https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api`
 
 ### Node 5: 审核
 - 用 `distribution/query` 查询审核状态

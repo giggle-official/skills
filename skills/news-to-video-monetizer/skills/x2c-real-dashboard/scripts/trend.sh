@@ -4,7 +4,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-API_URL="https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api"
+API_URL="https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api"
 DAYS="${1:-7}"
 
 # Validate days

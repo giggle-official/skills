@@ -4,7 +4,7 @@
 
 The X2C Open API provides a unified interface for third-party developers to integrate AI video generation capabilities into their applications.
 
-**Base URL:** `https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api`
+**Base URL:** `https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api`
 
 **Method:** All requests use `POST`
 
@@ -353,41 +353,41 @@ Headers: { "X-API-Key": "x2c_sk_<REDACTED>xxxx" }
 
 ```bash
 # Step 1: Send verification code
-curl -X POST https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api \
+curl -X POST https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api \
   -H "Content-Type: application/json" \
   -d '{"action": "auth/send-code", "email": "dev@example.com"}'
 
 # Step 2: Verify and get API key
-curl -X POST https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api \
+curl -X POST https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api \
   -H "Content-Type: application/json" \
   -d '{"action": "auth/verify", "email": "dev@example.com", "code": "123456"}'
 
 # Step 3: Generate script
-curl -X POST https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api \
+curl -X POST https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api \
   -H "Content-Type: application/json" \
   -H "X-API-Key: x2c_sk_<REDACTED>xxxx" \
   -d '{"action": "script/generate", "prompt": "A love story in ancient China", "mode": "short_video", "duration": "120"}'
 
 # Step 4: Check script status
-curl -X POST https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api \
+curl -X POST https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api \
   -H "Content-Type: application/json" \
   -H "X-API-Key: x2c_sk_<REDACTED>xxxx" \
   -d '{"action": "script/query", "project_id": "workspace-uuid"}'
 
 # Step 5: Start video production
-curl -X POST https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api \
+curl -X POST https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api \
   -H "Content-Type: application/json" \
   -H "X-API-Key: x2c_sk_<REDACTED>xxxx" \
   -d '{"action": "video/produce", "project_id": "workspace-uuid", "episode_number": 1}'
 
 # Step 6: Check video progress
-curl -X POST https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api \
+curl -X POST https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api \
   -H "Content-Type: application/json" \
   -H "X-API-Key: x2c_sk_<REDACTED>xxxx" \
   -d '{"action": "video/query", "project_id": "workspace-uuid", "episode_number": 1}'
 
 # Step 7: Publish
-curl -X POST https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api \
+curl -X POST https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api \
   -H "Content-Type: application/json" \
   -H "X-API-Key: x2c_sk_<REDACTED>xxxx" \
   -d '{"action": "project/publish", "project_id": "workspace-uuid", "episode_number": 1}'

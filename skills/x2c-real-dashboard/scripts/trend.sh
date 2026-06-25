@@ -3,7 +3,7 @@
 # Usage: bash trend.sh [DAYS]  DAYS: 1–90, default 7
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-API_URL="https://eumfmgwxwjyagsvqloac.supabase.co/functions/v1/open-api"
+API_URL="https://ukbyfmmerxhlghlhbxtz.supabase.co/functions/v1/open-api"
 API_KEY="${X2C_API_KEY:-}"
 DAYS="${1:-7}"
 [ -z "$API_KEY" ] && bash "$SCRIPT_DIR/setup-guide.sh"
