@@ -305,10 +305,10 @@ python3 scripts/generation_api.py \
 |-----------|---------|---------|
 | `--mode` | required | `text` / `image` / `omni` |
 | `--prompt` | required | Max 10,000 chars — use user's input language |
-| `--model` | `seedance-2.0-pro` | `seedance-2.0-pro` / `seedance-2.0-fast` |
+| `--model` | `seedance-2.0-pro` | `seedance-2.0-pro` / `seedance-2.0-fast` / `seedance-2.0-mini` |
 | `--duration` | `5` | 4–15 seconds |
 | `--aspect-ratio` | `16:9` | `16:9` / `9:16` / `1:1` / `3:4` / `4:3` |
-| `--resolution` | `720p` | `480p` / `720p` |
+| `--resolution` | `720p` | `480p` / `720p`/ `1080p`/ `4k` |
 | `--generating-count` | `1` | 1–4 |
 | `--images` | — | **omni**：`url:` 或 `base64:`，可重复多个；最多 9 张 |
 | `--audios` | — | **omni**：仅 `url:`，可重复多个 |
