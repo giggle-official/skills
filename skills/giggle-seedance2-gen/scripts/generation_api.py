@@ -23,10 +23,10 @@ class TaskStatus(str, Enum):
     PENDING    = "pending"
 
 
-SUPPORTED_MODELS    = ("seedance-2.0-pro", "seedance-2.0-fast")
+SUPPORTED_MODELS    = ("seedance-2.0-pro", "seedance-2.0-fast", "seedance-2.0-mini")
 SUPPORTED_DURATIONS = list(range(4, 16))   # 4–15 秒
 SUPPORTED_RATIOS    = ("16:9", "9:16", "1:1", "3:4", "4:3")
-SUPPORTED_RESOLUTIONS = ("480p", "720p")
+SUPPORTED_RESOLUTIONS = ("480p", "720p", "1080p", "4k")
 DEFAULT_MODEL       = "seedance-2.0-pro"
 DEFAULT_DURATION    = 5
 BASE_URL            = "https://giggle.pro"
