@@ -34,6 +34,7 @@ npx skills add . --list --full-depth
 | giggle-generation-image | 文生圖與圖生圖。支援 Seedream、Midjourney、Nano Banana。可自訂畫幅比例與解析度。 | [SKILL.md](./skills/giggle-generation-image/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y` |
 | giggle-generation-video | 支援文字轉影片與圖片轉影片（首幀/尾幀）。適合需要將文字或圖片轉成影片的使用者。 | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y` |
 | giggle-seedance2-gen | 生成 AI 影片／優化影片提示詞／Seedance 2.0；giggle.pro 文生·圖生·omni，含完整提示詞工程，使用者確認後再呼叫 API。觸發：提示詞、多模態、短劇、首幀等。 | [SKILL.md](./skills/giggle-seedance2-gen/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-seedance2-gen -y` |
+| giggle-minimax-h3-gen | 透過 giggle.pro 生成 MiniMax-H3 影片並最佳化提示詞；支援文字、圖片、omni，支援 480p/768p、3–15 秒與五種比例，預設 480p、16:9、4 秒。 | [SKILL.md](./skills/giggle-minimax-h3-gen/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-minimax-h3-gen -y` |
 | giggle-generation-drama | 適用於想生成影片、拍攝短片或查看可用影片風格的使用者。觸發詞：短片、製作影片、拍短片、AI 影片、依故事生成影片、短劇、旁白影片、電影感影片、可用影片風格 | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y` |
 | giggle-generation-aimv | AI 音樂影片（MV）。根據文字描述或自訂歌詞生成音樂，再結合參考圖生成歌詞影片。 | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y` |
 | giggle-generation-music | 根據文字描述、自訂歌詞或純樂器建立 AI 音樂。支援簡化、自訂、純音樂三種模式。 | [SKILL.md](./skills/giggle-generation-music/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-music -y` |
@@ -107,6 +108,11 @@ skills:
     description: "用於生成 AI 影片、優化影片提示詞或使用 Seedance 2.0。giggle.pro 上文生、圖生、omni，含完整提示詞工程（prompt-engineering.md 等），使用者確認後再提交 API。觸發詞：影片提示詞、多模態、短劇、廣告、首幀、角色參考。（口頭即夢習慣仍僅交付 giggle.pro。）"
     category: video
     version: "1.3.0"
+  - name: "影片生成（MiniMax-H3）"
+    value: "giggle-minimax-h3-gen"
+    description: "透過 giggle.pro 生成 AI 影片並最佳化 MiniMax-H3 提示詞；支援文字、圖片、omni，支援 480p/768p、3–15 秒及 1:1、9:16、16:9、4:3、3:4，預設 480p、16:9、4 秒。"
+    category: video
+    version: "1.0.0"
   - name: "圖片生成 (gpt-image-2)"
     value: "giggle-gpt-image-2"
     description: "協助使用者產生適用於 GPT-Image-2 的高品質提示詞，並在生成提示詞後直接呼叫 Giggle API，使用 `gpt-image-2-fast` 產生圖片。"
