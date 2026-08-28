@@ -353,17 +353,17 @@ def handle_submit(client: MiniMaxH3Client, args) -> None:
     mode  = args.mode
     model = args.model
     dur   = args.duration
-    ratio = args.aspect_ratio
+    aspect_ratio = args.aspect_ratio
     res   = args.resolution
     count = args.generating_count
 
-    print(f"提交任务 [模式: {mode} | 模型: {model} | 时长: {dur}s | 比例: {ratio}]...",
+    print(f"提交任务 [模式: {mode} | 模型: {model} | 时长: {dur}s | 比例: {aspect_ratio}]...",
           file=sys.stderr)
 
     if mode == "text":
         result = client.text_to_video(
             prompt=args.prompt, model=model, duration=dur,
-            aspect_ratio=ratio, resolution=res, generating_count=count,
+            aspect_ratio=aspect_ratio, resolution=res, generating_count=count,
         )
     elif mode == "image":
         if not args.start_frame:
@@ -374,7 +374,7 @@ def handle_submit(client: MiniMaxH3Client, args) -> None:
         result = client.image_to_video(
             prompt=args.prompt, start_frame=start, end_frame=end,
             model=model, duration=dur,
-            aspect_ratio=ratio, resolution=res, generating_count=count,
+            aspect_ratio=aspect_ratio, resolution=res, generating_count=count,
         )
     else:  # omni
         images = [parse_media(s) for s in args.images] if args.images else None
@@ -399,7 +399,7 @@ def handle_submit(client: MiniMaxH3Client, args) -> None:
         result = client.omni_video(
             prompt=args.prompt, images=images, audios=audios, videos=videos,
             model=model, duration=dur,
-            aspect_ratio=ratio, resolution=res, generating_count=count,
+            aspect_ratio=aspect_ratio, resolution=res, generating_count=count,
         )
 
     task_id = result.get("data", {}).get("task_id", "")
