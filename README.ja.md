@@ -34,7 +34,7 @@ npx skills add . --list --full-depth
 | giggle-generation-image | 文生図と図生図。Seedream、Midjourney、Nano Banana に対応。アスペクト比と解像度をカスタマイズ可能。 | [SKILL.md](./skills/giggle-generation-image/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y` |
 | giggle-generation-video | テキスト→動画、画像→動画の変換（開始フレーム/終了フレーム）に対応。テキストや画像から動画が必要なユーザー向け。 | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y` |
 | giggle-seedance2-gen | AI 動画・Seedance 2.0 プロンプト工程。giggle.pro でテキスト/画像/omni、prompt-engineering.md 等のフル手順、確定後に API。トリガー: プロンプト、omni、短編など。 | [SKILL.md](./skills/giggle-seedance2-gen/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-seedance2-gen -y` |
-| giggle-minimax-h3-gen | giggle.pro で MiniMax-H3 動画生成とプロンプト最適化。テキスト/画像/omni、480p/768p、3～15秒、5種類の比率に対応。既定値は480p・16:9・4秒。 | [SKILL.md](./skills/giggle-minimax-h3-gen/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-minimax-h3-gen -y` |
+| giggle-minimax-h3-gen | giggle.pro の MiniMax-H3（課金はゲートウェイ準拠）。テキスト/画像・首尾帧/omni、480p・768p（既定 768p）、4～15秒（既定 5）。 | [SKILL.md](./skills/giggle-minimax-h3-gen/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-minimax-h3-gen -y` |
 | hopsapi-minimax-h3 | HopsAPI Router（`/v1/router`）経由の MiniMax-H3。テキスト/画像（1～2枚）/omni、480p・768p（既定 768p）、4～15秒（既定 5）。`HOPSAPI_API_KEY` 必須。 | [SKILL.md](./skills/hopsapi-minimax-h3/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill hopsapi-minimax-h3 -y` |
 | giggle-generation-drama | 動画の生成、短編映画の撮影、利用可能な動画スタイルの確認などに使用。トリガー例：ショートフィルム、動画を作る、短編を撮る、AI 動画、ストーリーから動画、短編ドラマ、ナレーション動画、シネマティック動画、利用可能な動画スタイル | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y` |
 | giggle-generation-aimv | AI ミュージックビデオ（MV）。テキストプロンプトやカスタム歌詞から音楽を生成し、参考画像と組み合わせて歌詞動画を作成。 | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y` |
@@ -111,9 +111,9 @@ skills:
     version: "1.3.0"
   - name: "動画生成（MiniMax-H3）"
     value: "giggle-minimax-h3-gen"
-    description: "giggle.pro で AI 動画を生成し、MiniMax-H3 プロンプトを最適化します。テキスト/画像/omni、480p/768p、3～15秒、1:1・9:16・16:9・4:3・3:4に対応し、既定値は480p・16:9・4秒です。"
+    description: "giggle.pro の MiniMax-H3（課金はゲートウェイ準拠）。テキスト/画像・首尾帧/omni、480p または 768p（既定 768p）、4～15秒（既定 5）。"
     category: video
-    version: "1.0.0"
+    version: "2.0.0"
   - name: "画像生成 (gpt-image-2)"
     value: "giggle-gpt-image-2"
     description: "GPT-Image-2 に適した高品質なプロンプトを生成し、プロンプト作成後に Giggle API を直接呼び出して `gpt-image-2-fast` を使用して画像を生成します。"

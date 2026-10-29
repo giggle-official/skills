@@ -34,7 +34,7 @@ npx skills add . --list --full-depth
 | giggle-generation-image | 문생도와 도생도. Seedream, Midjourney, Nano Banana 지원. 화면 비율과 해상도 커스터마이즈 가능. | [SKILL.md](./skills/giggle-generation-image/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-image -y` |
 | giggle-generation-video | 텍스트→비디오 및 이미지→비디오 변환(시작 프레임/종료 프레임) 지원. 텍스트나 이미지를 영상으로 바꿔야 하는 사용자에게 적합. | [SKILL.md](./skills/giggle-generation-video/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-video -y` |
 | giggle-seedance2-gen | AI 영상·Seedance 2.0 프롬프트 엔지니어링. giggle.pro 텍스트/이미지/omni, prompt-engineering.md 등 전체 흐름, 확정 후 API. | [SKILL.md](./skills/giggle-seedance2-gen/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-seedance2-gen -y` |
-| giggle-minimax-h3-gen | giggle.pro에서 MiniMax-H3 영상 생성 및 프롬프트 최적화. 텍스트/이미지/omni, 480p/768p, 3~15초, 5가지 비율을 지원하며 기본값은 480p, 16:9, 4초입니다. | [SKILL.md](./skills/giggle-minimax-h3-gen/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-minimax-h3-gen -y` |
+| giggle-minimax-h3-gen | giggle.pro MiniMax-H3(과금은 게이트웨이 정렬). 텍스트/이미지·첫끝프레임/omni, 480p·768p(기본 768p), 4~15초(기본 5). | [SKILL.md](./skills/giggle-minimax-h3-gen/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-minimax-h3-gen -y` |
 | hopsapi-minimax-h3 | HopsAPI Router(`/v1/router`)로 MiniMax-H3 호출. 텍스트/이미지(1~2장)/omni, 480p·768p(기본 768p), 4~15초(기본 5). `HOPSAPI_API_KEY` 필요. | [SKILL.md](./skills/hopsapi-minimax-h3/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill hopsapi-minimax-h3 -y` |
 | giggle-generation-drama | 사용자가 영상을 만들고, 단편을 촬영하거나, 사용 가능한 영상 스타일을 볼 때 사용. 트리거: 단편 영화, 영상 만들기, 숏폼 촬영, AI 영상, 스토리로 영상 만들기, 단편 드라마, 나레이션 영상, 시네마틱 영상, 사용 가능한 영상 스타일 | [SKILL.md](./skills/giggle-generation-drama/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-drama -y` |
 | giggle-generation-aimv | AI 뮤직 비디오(MV). 텍스트 프롬프트나 사용자 정의 가사로 음악 생성 후 참조 이미지로 가사 비디오 제작. | [SKILL.md](./skills/giggle-generation-aimv/SKILL.md) | `npx skills add giggle-official/skills --full-depth --skill giggle-generation-aimv -y` |
@@ -111,9 +111,9 @@ skills:
     version: "1.3.0"
   - name: "영상 생성 (MiniMax-H3)"
     value: "giggle-minimax-h3-gen"
-    description: "giggle.pro에서 AI 영상을 생성하고 MiniMax-H3 프롬프트를 최적화합니다. 텍스트/이미지/omni, 480p/768p, 3~15초, 1:1·9:16·16:9·4:3·3:4를 지원하며 기본값은 480p, 16:9, 4초입니다."
+    description: "giggle.pro MiniMax-H3(과금은 게이트웨이 정렬). 텍스트/이미지·첫끝프레임/omni, 480p 또는 768p(기본 768p), 4~15초(기본 5)."
     category: video
-    version: "1.0.0"
+    version: "2.0.0"
   - name: "이미지 생성 (gpt-image-2)"
     value: "giggle-gpt-image-2"
     description: "GPT-Image-2에 적합한 고품질 프롬프트 생성을 도와주며, 프롬프트 생성 후 Giggle API를 직접 호출하여 `gpt-image-2-fast`로 이미지를 생성합니다."

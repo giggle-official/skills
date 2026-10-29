@@ -1,10 +1,15 @@
 ---
 name: giggle-minimax-h3-gen
 description: >
-  Use when the user wants to generate AI video, optimize video prompts, or work with MiniMax-H3.
-  Covers text-to-video, image-to-video, omni multi-modal via giggle.pro API with built-in prompt engineering.
-  Triggers: generate video, AI video, minimax-h3, giggle, 视频提示词, image to video, text to video, omni, 多模态, 短剧, 广告视频, 首帧图, 角色参考.
+  Use when the user wants to generate AI video, optimize video prompts, or work with MiniMax-H3 on giggle.pro.
+  Txt2Video / Img2Video (1–2 frames) / OmniVideo; billing aligned with gateway MiniMax-H3; host remains giggle.pro.
+  480p/768p (default 768p), duration 4–15s (default 5). Triggers: MiniMax-H3, giggle, 文生视频, 首尾帧, 全能参考, omni.
+version: "2.0.0"
 license: MIT
+requires:
+  bins: [python3]
+  env: [GIGGLE_API_KEY]
+  pip: [requests]
 metadata:
   {
     "openclaw": {
@@ -26,50 +31,257 @@ metadata:
 
 # Giggle · MiniMax-H3 视频生成与提示词（合并版）
 
-**Source**: [giggle-official/skills](https://github.com/giggle-official/skills) · **API:** [giggle.pro](https://giggle.pro/) · **Script:** `scripts/generation_api.py`
+**Source**: [giggle-official/skills](https://github.com/giggle-official/skills) · **上游:** [giggle.pro](https://giggle.pro/) · **Script:** `scripts/generation_api.py`
 
-本技能 = **Giggle API 成片**（`scripts/generation_api.py`）+ **MiniMax-H3 提示词工程资料库**（`references/`、`prompts/`）。
+本技能 = **giggle.pro 成片**（新计费/生成逻辑）+ **提示词工程资料库**（`references/`、`prompts/`）。
 
-- **主流程**：优化提示词 → API Key → 用 `text` / `image` / `omni` 提交并轮询结果。
-- **深度写法**：创意钩子、分镜模板、长视频流水线、词表与范例见资源索引。
+- **主流程**：优化提示词 → API Key → `Txt2Video` / `Img2Video` / `OmniVideo` 提交并轮询。
+- **计费细则**：[references/billing.md](references/billing.md)
+- **平台规格**：[references/platform-specs.md](references/platform-specs.md)
+
+> 请求体与计价对齐 storyclaw-token-gateway MiniMax-H3；**HTTP 上游仍是 giggle.pro**（`x-auth` + `GIGGLE_API_KEY`），不是 hopsapi.com。
 
 ## 仓库内资源索引
 
 | 路径 | 用途 |
 |------|------|
-| [references/prompt-engineering.md](references/prompt-engineering.md) | **提示词工程规范**：10 大能力、4 种结构模板、交互流程、质量自检 |
-| [references/creative-strategy.md](references/creative-strategy.md) | 写什么、≤15s 与长片创意策略 |
-| [references/production-pipeline.md](references/production-pipeline.md) | 长视频前期流水线（角色→分镜→生成→拼接） |
-| [references/long-video-strategy.md](references/long-video-strategy.md) | 分段、延长、衔接、锁定语句、输出模板 |
-| [references/examples.md](references/examples.md) | 场景与多模态示例（10 大能力分类） |
-| [references/vocabulary.md](references/vocabulary.md) | 运镜、画质、大气效果词库 |
-| [references/image-generation.md](references/image-generation.md) | 角色参考图 / 首帧图前置生图规范 |
-| [prompts/](prompts/) | 主题扩展包、OpenClaw 全案短文 |
+| [references/billing.md](references/billing.md) | 成片费 / 参考图附加 / 参考视频附加 |
+| [references/platform-specs.md](references/platform-specs.md) | 输入输出与模式限制 |
+| [references/prompt-engineering.md](references/prompt-engineering.md) | 提示词工程规范 |
+| [references/creative-strategy.md](references/creative-strategy.md) | 创意策略 |
+| [references/production-pipeline.md](references/production-pipeline.md) | 长视频流水线 |
+| [references/long-video-strategy.md](references/long-video-strategy.md) | 分段与衔接 |
+| [references/examples.md](references/examples.md) | 场景示例 |
+| [references/vocabulary.md](references/vocabulary.md) | 运镜词库 |
+| [references/image-generation.md](references/image-generation.md) | 首帧 / 角色图 |
+| [prompts/](prompts/) | 主题扩展包 |
 
 ---
 
-## ⚠️ 平台与 API 约束（以 Giggle 为准）
+## Base URL 与接口
 
-资料库为通用 MiniMax-H3 提示词最佳实践；**视频与多模态成片仅通过 giggle.pro 提交**。实际调用本仓库脚本时遵守下表：
+| 用途 | 环境变量 | 默认值 |
+|------|----------|--------|
+| API Base URL | `GIGGLE_BASE_URL` | `https://giggle.pro/v1` |
+| 站点根（上传等） | `GIGGLE_CONSOLE_URL` | `https://giggle.pro` |
 
-| 项目 | Giggle（本脚本） |
-|------|------------------|
-| 语言 | 与**用户输入语言一致**（见下节 Language Rule）；资料里中文模板可套用结构 |
-| 时长 | **3–15** 秒整数，`--duration` |
-| 画幅 / 清晰度 | `--aspect-ratio`、`--resolution` |
-| omni 图片 | 最多 **9** 张，`url:` 或 `base64:` |
-| 参考音 / 视频 | 仅 `url:`，`--audios`、`--videos` |
-| 提示词里的 `@图片N` / `@视频N` | **仅编号习惯**；必须通过 CLI 传入**对应真实 URL**，且**全部**引用都要传 |
+鉴权：`x-auth: <GIGGLE_API_KEY>`（脚本同时带 `Authorization: Bearer` 兼容）。
 
-若资料写「混合素材 ≤12 个」与 Giggle 限制冲突，**取更严一侧**（尤其图片 ≤9）。
+| 操作 | 方法 | 完整 URL（默认） |
+|------|------|------------------|
+| 创建视频任务 | `POST` | `https://giggle.pro/v1/router/task/create` |
+| 查询任务 | `GET` | `https://giggle.pro/v1/router/tasks/{task_id}` |
+| 停止任务 | `POST` | `https://giggle.pro/v1/router/task/stop` |
 
-### `@引用` → Giggle CLI（omni）
+### 请求示例（HTTP）
 
-| 提示词习惯 | 映射到 |
-|------------|--------|
-| `@图片1` … `@图片N` | `--images "url:..."`（按编号顺序，可多参数或多次 `--images`，脚本会合并） |
-| `@视频1` … | `--videos "url:..."` |
-| `@音频1` … | `--audios "url:..."` |
+以下均为 `POST https://giggle.pro/v1/router/task/create`。`duration` **4–15**；省略 `resolution`/`duration` 时按 **768p / 5**。
+
+**公共请求头：**
+
+```http
+x-auth: 你的GIGGLE_API_KEY
+Content-Type: application/json
+```
+
+#### 1. 文生视频（Txt2Video）
+
+```bash
+curl -s https://giggle.pro/v1/router/task/create \
+  -H "x-auth: 你的GIGGLE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "task": "Txt2Video",
+    "model": "MiniMax-H3",
+    "input": {
+      "prompt": "电影感的山间日出，云海缓慢流动",
+      "duration": 5,
+      "resolution": "768p"
+    }
+  }'
+```
+
+```json
+{
+  "task": "Txt2Video",
+  "model": "MiniMax-H3",
+  "input": {
+    "prompt": "电影感的山间日出，云海缓慢流动",
+    "duration": 5,
+    "resolution": "768p"
+  }
+}
+```
+
+#### 2. 图生视频（Img2Video，恰好 1 张图）
+
+```bash
+curl -s https://giggle.pro/v1/router/task/create \
+  -H "x-auth: 你的GIGGLE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "task": "Img2Video",
+    "model": "MiniMax-H3",
+    "input": {
+      "prompt": "让画面中的云层缓慢流动，镜头平稳向前推进",
+      "images": ["https://assets.example.com/input.png"],
+      "duration": 5,
+      "resolution": "480p"
+    }
+  }'
+```
+
+```json
+{
+  "task": "Img2Video",
+  "model": "MiniMax-H3",
+  "input": {
+    "prompt": "让画面中的云层缓慢流动，镜头平稳向前推进",
+    "images": ["https://assets.example.com/input.png"],
+    "duration": 5,
+    "resolution": "480p"
+  }
+}
+```
+
+#### 3. 首尾帧（Img2Video，恰好 2 张：首 → 尾）
+
+```bash
+curl -s https://giggle.pro/v1/router/task/create \
+  -H "x-auth: 你的GIGGLE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "task": "Img2Video",
+    "model": "MiniMax-H3",
+    "input": {
+      "prompt": "镜头从清晨自然过渡到黄昏",
+      "images": [
+        "https://assets.example.com/first.png",
+        "https://assets.example.com/last.png"
+      ],
+      "duration": 10,
+      "resolution": "768p",
+      "aspect_ratio": "16:9",
+      "generate_audio": true
+    }
+  }'
+```
+
+```json
+{
+  "task": "Img2Video",
+  "model": "MiniMax-H3",
+  "input": {
+    "prompt": "镜头从清晨自然过渡到黄昏",
+    "images": [
+      "https://assets.example.com/first.png",
+      "https://assets.example.com/last.png"
+    ],
+    "duration": 10,
+    "resolution": "768p",
+    "aspect_ratio": "16:9",
+    "generate_audio": true
+  }
+}
+```
+
+#### 4. 全能参考 · 仅图片（参考图计价）
+
+```bash
+curl -s https://giggle.pro/v1/router/task/create \
+  -H "x-auth: 你的GIGGLE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "task": "OmniVideo",
+    "model": "MiniMax-H3",
+    "input": {
+      "prompt": "保持参考图片中人物的外观与服装",
+      "images": [
+        "https://assets.example.com/character-1.png",
+        "https://assets.example.com/character-2.png"
+      ],
+      "duration": 8,
+      "resolution": "480p"
+    }
+  }'
+```
+
+#### 5. 全能参考 · 含视频（参考视频计价，更贵；勿传 video_durations）
+
+```bash
+curl -s https://giggle.pro/v1/router/task/create \
+  -H "x-auth: 你的GIGGLE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "task": "OmniVideo",
+    "model": "MiniMax-H3",
+    "input": {
+      "prompt": "保持参考图片中人物的外观，沿用参考视频的运镜",
+      "images": ["https://assets.example.com/character.png"],
+      "videos": ["https://assets.example.com/camera-motion.mp4"],
+      "duration": 15,
+      "resolution": "768p"
+    }
+  }'
+```
+
+#### 6. 全能参考 · 含音频（音频不加价）
+
+```json
+{
+  "task": "OmniVideo",
+  "model": "MiniMax-H3",
+  "input": {
+    "prompt": "人物对口型演唱，节奏跟随参考音频",
+    "images": ["https://assets.example.com/singer.png"],
+    "audios": ["https://assets.example.com/vocal.mp3"],
+    "duration": 8,
+    "resolution": "768p"
+  }
+}
+```
+
+#### 7. 创建成功 / 查询
+
+```json
+{ "code": 200, "message": "success", "task_id": "tsk_0f3c9a72b1e04d5f" }
+```
+
+```bash
+curl -s https://giggle.pro/v1/router/tasks/tsk_0f3c9a72b1e04d5f \
+  -H "x-auth: 你的GIGGLE_API_KEY"
+```
+
+| status | 含义 |
+|--------|------|
+| `0` | 排队 |
+| `1` | 处理中 |
+| `2` | 成功（已结算） |
+| `3` | 失败（不扣费） |
+| `4` | 已取消（不扣费） |
+
+---
+
+## ⚠️ 平台与 API 约束
+
+| 项目 | 规则 |
+|------|------|
+| 上游 | **giggle.pro**（非 hopsapi.com） |
+| 模型 | 固定 `MiniMax-H3` |
+| 时长 | **4–15** 秒，默认 **5** |
+| 分辨率 | **480p** / **768p**，默认 **768p** |
+| 画幅 | `16:9` / `9:16` / `1:1` / `4:3` / `3:4` / `21:9` / `auto`；省略则不传 |
+| 素材 | **仅公网 HTTPS URL**（可用 `url:` 前缀；勿再传 base64） |
+| 参考视频 | **不要**传 `video_durations` |
+| omni | 图 ≤9、视频 ≤3、音频 ≤3 |
+
+### `@引用` → CLI
+
+| 提示词 | CLI |
+|--------|-----|
+| `@图片N` | `--images "https://..."` |
+| `@视频N` | `--videos "https://..."` |
+| `@音频N` | `--audios "https://..."` |
 
 ---
 
@@ -125,7 +337,7 @@ metadata:
 
 ### Phase 2：确认关键参数（已明确可跳过）
 
-1. **时长**：短片 3–8s / 中 9–12s / 长 13–15s / 超长 >15s
+1. **时长**：短片 4–8s / 中 9–12s / 长 13–15s / 超长 >15s（单次 API 仅 4–15）
 2. **比例**：横 16:9 / 竖 9:16 / 方 1:1
 3. **素材**：纯文本 / 有图片 / 有图+视频 / 全模态
 4. **补充偏好**（可选）：情绪氛围、镜头风格、用途场景
@@ -226,7 +438,7 @@ metadata:
 ### Giggle 覆盖规则（优先于 prompt-engineering.md）
 
 1. **语言**：严格遵守 Language Rule。用户中文 → 中文 prompt；用户英文 → 英文 prompt。"Output ONE version" 指禁止双语对照输出，不限制版本数量。
-2. **平台**：references 中的通用提示词方法，以本文件 MiniMax-H3 的 Giggle 约束（时长 3–15s、图片 ≤9 张、@引用命名等）为准。
+2. **平台**：references 中的通用提示词方法，以本文件 MiniMax-H3 的 Giggle 约束（时长 4–15s、图片 ≤9 张、仅公网 URL、@引用命名等）为准。
 3. **多模态引用**：若用户提供了多张图片/视频/音频，优化提示词时须逐条说明各参考用途，Step 3 提交时必须全部传入 CLI，不能只取第一条。
 
 ---
@@ -251,42 +463,51 @@ python3 scripts/generation_api.py --check-key
 python3 scripts/generation_api.py --setup --api-key <key>
 ```
 
+环境变量：`GIGGLE_API_KEY`。可选：`GIGGLE_BASE_URL`（默认 `https://giggle.pro/v1`）。
+
 ---
 
 ## Step 3: Generate Video
 
-**Text-to-Video:**
+提交后脚本默认轮询；完成后**主动**回传视频链接与费用。出错勿盲目重试。
+
+**文生：**
 ```bash
 python3 scripts/generation_api.py \
   --mode text --prompt "<optimized_prompt>" \
-  --model MiniMax-H3 --duration 4 --aspect-ratio 16:9 --resolution 480p
+  --duration 5 --resolution 768p
 ```
 
-**Image-to-Video:**
+**图生：**
 ```bash
 python3 scripts/generation_api.py \
   --mode image --prompt "<optimized_prompt>" \
-  --start-frame "url:<URL>" --model MiniMax-H3 --duration 4
+  --images "https://example.com/input.png" --duration 5 --resolution 480p
 ```
 
-**Omni:**
+**首尾帧：**
+```bash
+python3 scripts/generation_api.py \
+  --mode image --prompt "<optimized_prompt>" \
+  --start-frame "https://example.com/first.png" \
+  --end-frame "https://example.com/last.png" \
+  --duration 10 --aspect-ratio 16:9
+```
 
-- **多参考资源：** 从对话中 **收集用户给出的全部** 参考图 / 参考视频 / 参考音频 URL（含 `url:` 前缀），再一次性调用 CLI。同一选项后可跟 **多个** 空格分隔的参数（如 `--images "url:a" "url:b"`）；也可 **多次** 写同一选项（如两行 `--images`），脚本会合并为完整列表。禁止只取第一个链接就提交。
-- **数量：** 图片总计最多 9 张（接口校验）；音视频按对话实际条数全部传入。
+**全能参考：** 收集用户给出的**全部**参考 URL 再提交；图 ≤9、视频 ≤3、音频 ≤3。
 
 ```bash
-# 示例：多图 + 多音频 + 多参考视频（按实际数量增删参数）
 python3 scripts/generation_api.py \
   --mode omni --prompt "<optimized_prompt>" \
-  --images "url:<img1>" "url:<img2>" \
-  --audios "url:<audio1>" "url:<audio2>" \
-  --videos "url:<ref_video1>" "url:<ref_video2>" \
-  --model MiniMax-H3 --duration 4
+  --images "https://example.com/char.png" \
+  --videos "https://example.com/motion.mp4" \
+  --duration 15 --resolution 768p
 ```
 
-若某类参考未提供，可省略对应选项（但至少保留 `--images`、`--audios`、`--videos` 之一）。
-
-**提交后：** 脚本默认每约 10 秒轮询一次（最长约 10 分钟）；任务完成后**主动**将结果（含链接）推送给用户，无需等用户追问。
+```bash
+python3 scripts/generation_api.py --query --task-id tsk_xxx
+python3 scripts/generation_api.py --wait --task-id tsk_xxx
+```
 
 ---
 
@@ -294,16 +515,14 @@ python3 scripts/generation_api.py \
 
 | Parameter | Default | Options |
 |-----------|---------|---------|
-| `--mode` | required | `text` / `image` / `omni` |
-| `--prompt` | required | Max 10,000 chars — use user's input language |
-| `--model` | `MiniMax-H3` | `MiniMax-H3` |
-| `--duration` | `4` | `3` / `4` / `5` / `6` / `7` / `8` / `9` / `10` / `11` / `12` / `13` / `14` / `15` seconds |
-| `--aspect-ratio` | `16:9` | `1:1` / `9:16` / `16:9` / `4:3` / `3:4` |
-| `--resolution` | `480p` | `480p` / `768p` |
-| `--generating-count` | `1` | 1–4 |
-| `--images` | — | **omni**：`url:` 或 `base64:`，可重复多个；最多 9 张 |
-| `--audios` | — | **omni**：仅 `url:`，可重复多个 |
-| `--videos` | — | **omni**：参考视频，仅 `url:`，可重复多个 |
+| `--mode` | required | `text` / `image` / `omni` → `Txt2Video` / `Img2Video` / `OmniVideo` |
+| `--prompt` | 文生必填 | 与用户语言一致 |
+| `--model` | `MiniMax-H3` | 仅此值 |
+| `--duration` | `5` | 4–15 |
+| `--resolution` | `768p` | `480p` / `768p` |
+| `--aspect-ratio` | 省略不传 | `16:9` / `9:16` / `1:1` / `4:3` / `3:4` / `21:9` / `auto` |
+| `--images` / `--videos` / `--audios` | — | 公网 URL（可带 `url:`） |
+| `--start-frame` / `--end-frame` | — | image 模式首/尾帧 |
 
 ---
 
@@ -312,34 +531,28 @@ python3 scripts/generation_api.py \
 ### 提示词质量（Phase 3 生成后检查）
 
 - [ ] @引用编号与素材清单一一对应，公共素材优先编号
-- [ ] 总文件数 ≤ 12（图片+视频+音频合计）；omni 图片 ≤ 9
+- [ ] 总文件数 ≤ 12；omni 图片 ≤ 9
 - [ ] 未包含写实真人面部素材
-- [ ] 13–15秒视频已使用时间戳分镜，覆盖完整时长无遗漏
+- [ ] 13–15秒视频已使用时间戳分镜
 - [ ] 台词已用引号包裹并标注角色和情绪
-- [ ] 音效描述与画面描述分开写
-- [ ] 超长视频每段均含风格锁定、角色锁定、场景锁定语句
-- [ ] 超长视频延长段开头已安排桥接镜头或尾帧延续微动
-- [ ] 统一负面提示词已覆盖风格漂移、角色变脸、偏色、光线突变、水印
-- [ ] 角色参考图画幅比为 9:16 竖版；首帧图画幅比与视频一致
 
 ### API 提交（Step 3 执行前检查）
 
-- [ ] 提示词语言与用户输入语言一致；无双语对照
-- [ ] `duration ∈ [3,15]`（整数）
-- [ ] omni：每条音频 / 视频以 `url:` 开头，base64 仅限图片
-- [ ] 用户提供的参考 URL **全部**出现在 CLI 中，无遗漏
-- [ ] 超长叙事已按 [long-video-strategy.md](references/long-video-strategy.md) 拆段，未假定单次超出 15s
+- [ ] 提示词语言与用户输入语言一致
+- [ ] `duration ∈ [4,15]`
+- [ ] `resolution ∈ {480p,768p}`
+- [ ] 素材均为公网 URL；未传 `video_durations` / base64
+- [ ] 用户提供的参考 URL **全部**出现在 CLI 中
 
 ---
 
 ## 常见错误排查
 
-| 错误 / 现象 | 原因 | 解决方法 |
-|------------|------|---------|
-| `401 Unauthorized` | API Key 无效或已过期 | 重新执行 `--setup --api-key <新key>` |
-| `422 images 超限` | omni 模式图片总数超过 9 张 | 减少 `--images` 数量至 ≤9 |
-| `duration 不合法` | 传入了非 3–15 的整数（如 2、16、5.5） | 确认 `--duration` 为 3–15 整数 |
-| 音频 / 视频参数报错 | `--audios` / `--videos` 传入了 `base64:` 前缀 | 音视频仅接受 `url:` 前缀，图片才可用 base64 |
-| 轮询超时（>10 分钟） | 平台队列繁忙或网络异常 | 等待后重新提交；检查网络连通性 |
-| Key 文件找不到 | 首次使用未配置 | 先执行 Step 2 配置流程 |
-| 生成结果与提示词差异大 | 提示词过长或信息过载 | 精简提示词至核心要素；参考 references/examples.md |
+| 错误 / 现象 | 解决方法 |
+|------------|---------|
+| `401` / Key 无效 | `--setup --api-key <新key>` |
+| images 超限 / 数量不对 | Img2Video 须 1 或 2 张；omni ≤9 |
+| `duration` 不合法 | 使用 4–15 整数 |
+| 参考视频探测失败 | 换可访问的公网 mp4/mov，勿自报时长 |
+| 720p 等分辨率 | 只用 480p / 768p |
+| 生成与提示词差异大 | 精简提示词；见 references/examples.md |
