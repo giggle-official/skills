@@ -3,22 +3,7 @@
   "mcpServers": {
     "giggle-director": {
       "type": "streamable-http",
-      "url": "https://director.ggltest.com/mcp",
-      "extensions": {
-        "com.openai": {
-          "auth": {
-            "type": "oauth",
-            "client": {
-              "mode": "provided",
-              "clientId": "director-chatgpt",
-              "tokenEndpointAuthMethod": "none"
-            },
-            "baseScopes": [
-              "director:mcp"
-            ]
-          }
-        }
-      }
+      "url": "https://director.ggltest.com/mcp"
     }
   }
 }
