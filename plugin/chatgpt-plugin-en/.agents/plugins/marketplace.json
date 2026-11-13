@@ -1,0 +1,20 @@
+{
+  "name": "giggle-chatgpt-en",
+  "interface": {
+    "displayName": "AI Director English"
+  },
+  "plugins": [
+    {
+      "name": "ai-director-en",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ai-director"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Creativity"
+    }
+  ]
+}

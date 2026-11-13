@@ -1,0 +1,29 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ai-director-en",
+  "version": "0.1.0",
+  "description": "Create images, videos, and audio with Giggle and save the results to your AI Director canvas.",
+  "author": {
+    "name": "Giggle"
+  },
+  "homepage": "https://giggle.pro",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "AI Director English",
+        "shortDescription": "Create with AI Director",
+        "longDescription": "Create images, videos, and audio with Giggle and save the results to your AI Director canvas.",
+        "developerName": "Giggle",
+        "category": "Creativity",
+        "capabilities": [
+          "Interactive",
+          "Read",
+          "Write"
+        ],
+        "logo": "./assets/logo.svg",
+        "composerIcon": "./assets/logo.svg",
+        "defaultPrompt": "List my available models and canvases without generating content."
+      }
+    }
+  }
+}

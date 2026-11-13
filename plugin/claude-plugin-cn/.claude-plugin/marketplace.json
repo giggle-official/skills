@@ -1,0 +1,14 @@
+{
+  "name": "giggle-claude-cn",
+  "description": "通过 Giggle 生成图片、视频和音频，并将结果保存到 AI Director 画布。",
+  "owner": {
+    "name": "Giggle"
+  },
+  "plugins": [
+    {
+      "name": "ai-director-cn",
+      "source": "./",
+      "description": "通过 Giggle 生成图片、视频和音频，并将结果保存到 AI Director 画布。"
+    }
+  ]
+}

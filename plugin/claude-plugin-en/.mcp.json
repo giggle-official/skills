@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "giggle-director": {
+      "type": "http",
+      "url": "https://director.ggltest.com/mcp",
+      "oauth": {
+        "clientId": "director-claude-code",
+        "callbackPort": 8766,
+        "scopes": "director:mcp"
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "ai-director-cn",
+  "version": "0.1.0",
+  "description": "通过 Giggle 生成图片、视频和音频，并将结果保存到 AI Director 画布。",
+  "author": {
+    "name": "Giggle"
+  },
+  "homepage": "https://giggle.pro",
+  "mcpServers": "./.mcp.json",
+  "skills": "./skills/"
+}

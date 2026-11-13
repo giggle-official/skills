@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "giggle-director": {
+      "type": "http",
+      "url": "https://director.ggltest.com/mcp",
+      "scopes": [
+        "director:mcp"
+      ],
+      "oauth": {
+        "clientId": "director-local",
+        "callbackUrl": "http://127.0.0.1:8765/callback",
+        "callbackPort": 8765
+      }
+    }
+  }
+}

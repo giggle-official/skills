@@ -1,0 +1,14 @@
+{
+  "name": "giggle-claude-en",
+  "description": "Create images, videos, and audio with Giggle and save the results to your AI Director canvas.",
+  "owner": {
+    "name": "Giggle"
+  },
+  "plugins": [
+    {
+      "name": "ai-director-en",
+      "source": "./",
+      "description": "Create images, videos, and audio with Giggle and save the results to your AI Director canvas."
+    }
+  ]
+}
