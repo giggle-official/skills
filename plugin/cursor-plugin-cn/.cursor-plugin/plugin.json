@@ -1,0 +1,16 @@
+{
+  "$schema": "https://cursor.com/schemas/cursor-plugin/plugin.json",
+  "name": "giggle-ai-director-cn",
+  "displayName": "Giggle AI Director 中文版",
+  "description": "使用 Giggle 生成图片、视频和音频，并将结果保存到 AI Director 画布。",
+  "version": "0.1.0",
+  "author": {
+    "name": "Giggle"
+  },
+  "homepage": "https://giggle.pro",
+  "repository": "https://github.com/giggle-official/skills",
+  "logo": "assets/logo.svg",
+  "skills": "skills",
+  "mcpServers": "mcp.json",
+  "keywords": ["giggle", "mcp", "image-generation", "video-generation"]
+}

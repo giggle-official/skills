@@ -1,0 +1,3 @@
+- insert:
+    - id: giggle-ai-director
+      name: '@giggle-ai/dsh-ai-director'

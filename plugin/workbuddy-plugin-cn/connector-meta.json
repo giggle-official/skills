@@ -1,0 +1,31 @@
+{
+  "name": "Giggle AI Director",
+  "name_zh": "Giggle AI 导演",
+  "name_en": "Giggle AI Director",
+  "description": "通过 Giggle 生成图片、视频和音频，并把结果保存到 AI Director 画布。",
+  "description_zh": "通过 Giggle 生成图片、视频和音频，并把结果保存到 AI Director 画布。",
+  "description_en": "Generate images, video and audio with Giggle, and save the results to your AI Director canvas.",
+  "source": "giggle-director",
+  "type": "mcp",
+  "auth_mode": "server-side",
+  "minWorkbuddyVersion": "4.24.0",
+  "server_auth": {
+    "auth_type": "mcp_oauth",
+    "data": {
+      "mcp_oauth": {
+        "server_url": "https://director.ggltest.com/mcp",
+        "scopes": "director:mcp"
+      }
+    }
+  },
+  "examples_zh": [
+    "查询我可用的模型和当前团队的画布，只查询，不执行生成。",
+    "用 Giggle AI Director 在选定画布里画一只坐在霓虹屋顶上的猫，先预估费用。",
+    "用 Giggle AI Director 制作一段雨夜城市的短视频，先选一个支持的时长并预估费用。"
+  ],
+  "examples_en": [
+    "List the available models and the current team's canvases without generating anything.",
+    "Draw a cat sitting on a neon-lit rooftop on the selected canvas. Estimate the cost first.",
+    "Create a short video of a city on a rainy night. Choose a supported duration and estimate the cost first."
+  ]
+}

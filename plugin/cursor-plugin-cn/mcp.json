@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "giggle-director": {
+      "type": "http",
+      "url": "https://director.ggltest.com/mcp"
+    }
+  }
+}

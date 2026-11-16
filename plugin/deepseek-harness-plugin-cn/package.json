@@ -1,0 +1,25 @@
+{
+  "name": "@giggle-ai/dsh-ai-director",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Connect Giggle AI Director to DeepSeek Harness.",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "oauth.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "skills/"
+  ],
+  "icon": "./icon.svg",
+  "engines": { "dsh": ">=0.2.1-rc.5" },
+  "dependencies": { "@modelcontextprotocol/client": "2.4.0" },
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+}
