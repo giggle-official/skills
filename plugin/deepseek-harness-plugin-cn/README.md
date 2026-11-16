@@ -14,10 +14,12 @@
 
 ## 授权和验证
 
-1. 在新会话中用 `giggle_connection_status` 的 `authorize=true` 获取授权链接，在浏览器登录 Giggle 并确认。OAuth 使用本机回环回调，凭证由 Harness 的凭证存储保管。
+1. 在新会话中用 `giggle_connection_status` 的 `authorize=true` 发起授权，插件会尝试打开默认浏览器。在浏览器登录 Giggle 并确认；若页面未打开，使用会话中返回的授权链接。OAuth 使用本机回环回调，凭证由 Harness 的凭证存储保管。
 2. 新开会话运行 `giggle_connection_status`，再让 Agent 调用 `mcp__giggle_director__list_models` 和 `mcp__giggle_director__list_canvases`。这两个工具只读。
 3. 确认连接后，可以用自然语言提出生成需求。生成前先估价并确认，随后用原任务 ID 查询结果。
 
 如需连接其他部署，在插件行配置设置 `mcpUrl` 为该环境的 HTTPS MCP 地址。该部署需启用 OAuth 动态注册并公开发现元数据。
 
 建议提交信息为 `feat(plugins): add DeepSeek Harness bundle for Giggle AI Director`。
+
+变更记录：显式发起授权时自动打开浏览器，并保留手动授权链接。建议提交信息为 `fix(plugins): open the DeepSeek Harness OAuth page automatically`。

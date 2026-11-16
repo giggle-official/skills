@@ -123,7 +123,7 @@ export async function apply(ctx, config = {}) {
     output: textOutput,
     async execute({ authorize = false } = {}) {
       if (ctx.authorization.describe(oauth.key)?.inFlight) {
-        return "Giggle 授权正在进行。请在已打开的授权页面完成确认，再查询连接状态。"
+        return "Giggle 授权正在进行。请在浏览器中确认授权；若未看到页面，请使用之前返回的授权链接。"
       }
       if (authorize) {
         const { promise, resolve, reject } = Promise.withResolvers()
@@ -132,7 +132,7 @@ export async function apply(ctx, config = {}) {
           method: "oauth",
           signal: lifetime.signal,
           interaction: {
-            notify: ({ url }) => resolve(`请在浏览器中打开此链接并确认 Giggle 授权：${url}`),
+            notify: ({ message, url }) => resolve(`${message}\n授权链接：${url}`),
             prompt: async () => { throw new Error("Giggle uses a browser callback") },
           },
         }).then(

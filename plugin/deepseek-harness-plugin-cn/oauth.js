@@ -1,3 +1,4 @@
+import { execFile } from "node:child_process"
 import { randomBytes } from "node:crypto"
 import { once } from "node:events"
 import { createServer } from "node:http"
@@ -5,6 +6,22 @@ import { auth, UnauthorizedError } from "@modelcontextprotocol/client"
 
 const scope = "director:mcp"
 const key = "giggle-ai-director/account"
+
+async function openAuthorizationPage(url, signal) {
+  const commands = {
+    darwin: ["/usr/bin/open", []],
+    win32: ["rundll32.exe", ["url.dll,FileProtocolHandler"]],
+    linux: ["xdg-open", []],
+  }
+  const command = commands[process.platform]
+  if (!command || signal.aborted) return false
+  const [file, args] = command
+  return new Promise((resolve) => {
+    execFile(file, [...args, url.href], { signal, timeout: 3_000, windowsHide: true }, (error) => {
+      resolve(!error)
+    })
+  })
+}
 
 function sameOriginFetch(origin, signal) {
   return (input, init = {}) => {
@@ -99,9 +116,17 @@ export function createGiggleOAuth(credentials, endpoint) {
         response.end("Giggle authorization received. Return to DeepSeek Harness to see the result.")
         resolve({ authorizationCode: code, iss: url.searchParams.get("iss") ?? undefined })
       })
-      const provider = createProvider(callback.href, state, undefined, (authorizationUrl) => {
-        if (authorizationUrl.origin !== origin) throw new Error("Unexpected Giggle authorization origin")
-        session.notify({ message: "在浏览器中登录 Giggle 并确认授权。", url: authorizationUrl.href })
+      const provider = createProvider(callback.href, state, undefined, async (authorizationUrl) => {
+        if (authorizationUrl.protocol !== "https:" || authorizationUrl.origin !== origin ||
+            authorizationUrl.username || authorizationUrl.password) {
+          throw new Error("Unexpected Giggle authorization origin")
+        }
+        const opened = await openAuthorizationPage(authorizationUrl, signal)
+        signal.throwIfAborted()
+        const message = opened
+          ? "已请求默认浏览器打开 Giggle 授权页。若未看到页面，请手动打开授权链接。"
+          : "无法自动打开浏览器，请手动打开链接并确认 Giggle 授权。"
+        session.notify({ message, url: authorizationUrl.href })
       })
       const options = { serverUrl, scope, fetchFn: sameOriginFetch(origin, signal) }
       if (await auth(provider, options) !== "REDIRECT") throw new Error("Giggle did not request authorization")
