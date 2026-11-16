@@ -1,6 +1,15 @@
 # AI Director 中文版
 
-从 skills 仓库根目录执行。
+在 Claude 的「自定义 → 插件 → 添加市场 → 从仓库添加」中输入 [Giggle Skills 仓库地址](https://github.com/giggle-official/skills)，同步后安装 AI Director 中文版。
+
+也可以在 Claude Code 中执行：
+
+```sh
+claude plugin marketplace add giggle-official/skills
+claude plugin install ai-director-cn@giggle-claude
+```
+
+从本地检出的 skills 仓库测试时，可以直接登记插件子目录：
 
 ```sh
 claude plugin marketplace add "$PWD/plugin/claude-plugin-cn"

@@ -1,6 +1,15 @@
 # AI Director English
 
-Run these commands from the skills repository root.
+In Claude, go to Customize → Plugins → Add marketplace → Add from a repository. Enter the [Giggle Skills repository URL](https://github.com/giggle-official/skills), sync the marketplace, and install AI Director English.
+
+You can also install it from Claude Code:
+
+```sh
+claude plugin marketplace add giggle-official/skills
+claude plugin install ai-director-en@giggle-claude
+```
+
+When testing from the root of a local skills checkout, you can add the plugin subdirectory directly:
 
 ```sh
 claude plugin marketplace add "$PWD/plugin/claude-plugin-en"

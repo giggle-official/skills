@@ -1,0 +1,19 @@
+{
+  "name": "giggle-claude",
+  "description": "Giggle AI Director plugins for Claude",
+  "owner": {
+    "name": "Giggle"
+  },
+  "plugins": [
+    {
+      "name": "ai-director-cn",
+      "source": "./plugin/claude-plugin-cn",
+      "description": "通过 Giggle 生成图片、视频和音频，并将结果保存到 AI Director 画布。"
+    },
+    {
+      "name": "ai-director-en",
+      "source": "./plugin/claude-plugin-en",
+      "description": "Generate images, video, and audio with Giggle and save the results to your AI Director canvas."
+    }
+  ]
+}
