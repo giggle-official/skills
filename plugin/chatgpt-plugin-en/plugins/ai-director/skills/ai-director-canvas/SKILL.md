@@ -5,7 +5,7 @@ description: Use when the user wants to pick or create an AI Director canvas, in
 
 Use the connected AI Director MCP tools. If authorization is needed, guide the user through Giggle sign-in in the client.
 
-1. Use `list_models` to find currently available models and their parameter constraints. Use only models allowed for the user. Use the current tool schema to construct arguments.
+1. Pass the generation tool’s `model_type` to `list_models`: `Txt2Img`, `Img2Img`, `Txt2Video`, `Img2Video`, or `OmniVideo` for all-reference video. Select a model with `allowed_use=true`. Map catalog `ratio` to request `aspect_ratio` and choose `duration` in seconds from `durations`. Follow the tool’s own parameters when its model is fixed. If a requested value is unsupported, show the supported options and let the user choose before estimating the price.
 2. Use `list_canvases` to find editable canvases in the current team. Reuse the user's selected canvas or ask where the result should go. Use `create_canvas` when the user wants a new canvas. Supply the selected `canvas_id` for canvas-bound generation.
 3. Before submitting a billable operation, call `estimate_price` using the model and generation parameters. Tell the user the estimate and wait for confirmation. If the cost cannot be determined, report that and pause. For a read-only connection check, call `list_models` and `list_canvases` only.
 4. Supply a unique `request_id` where the tool schema requires it. The caller does not need to supply a generation callback URL. Save the returned `task_id` and `canvas_id`. If the submission outcome is unknown and no task ID was received, reuse the original `request_id` and arguments on retry.
