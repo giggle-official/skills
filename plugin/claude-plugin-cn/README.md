@@ -7,7 +7,7 @@ claude plugin marketplace add "$PWD/plugin/claude-plugin-cn"
 claude plugin install ai-director-cn@giggle-claude-cn
 ```
 
-Claude Code 在 `/mcp` 完成连接。后端需预注册 `director-claude-code`，默认回调为 `http://localhost:8766/callback`，以客户端实际值为准。Claude Desktop/Cowork 使用客户端插件和连接器入口，云端连接器需单独登记实际回调。
+Claude Code 在 `/mcp` 中选择 `giggle-director` 并连接。客户端会发现 OAuth 动态注册端点、自动注册并选择本机回调端口，再打开浏览器完成 Giggle 授权。已安装旧版时，请先更新插件，再重新连接。Claude 网页端、Desktop 和 Cowork 的远程连接器可单独添加下方 MCP 地址，并在 OAuth 客户端设置中选择自动注册。
 
 在客户端打开 AI Director，按连接提示登录 Giggle。先让它「列出我可用的模型和可编辑画布，不生成内容」。付费生成先选画布和报价，确认后提交，通过原任务 ID 查询结果。
 
