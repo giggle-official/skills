@@ -1,6 +1,6 @@
 # Giggle AI 导演 · DeepSeek Harness
 
-将 Giggle AI Director 接到 DeepSeek Harness，复用同一套模型目录、画布、积分预估和生成工具。插件默认连接测试环境的 `https://director.ggltest.com/mcp`，支持 DeepSeek Harness `0.2.1-rc.5` 及其兼容版本。
+将 Giggle AI Director 接到 DeepSeek Harness，复用同一套模型目录、画布、积分预估和生成工具。插件默认连接生产环境的 `https://giggle.pro/mcp`，支持 DeepSeek Harness `0.2.1-rc.5` 及其兼容版本。
 
 ## 安装
 

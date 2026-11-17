@@ -6,7 +6,7 @@ import { createGiggleOAuth } from "./oauth.js"
 export const name = "giggle-ai-director"
 export const inject = ["authorization", "credentials", "skills", "tools"]
 
-const defaultEndpoint = "https://director.ggltest.com/mcp"
+const defaultEndpoint = "https://giggle.pro/mcp"
 const textOutput = {
   schema: { type: "string" },
   render: (_args, value) => [{ type: "text", text: value }],

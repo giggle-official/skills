@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ai-director-cn",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "通过 Giggle 生成图片、视频和音频，并将结果保存到 AI Director 画布。",
   "author": {
     "name": "Giggle"

@@ -20,4 +20,4 @@ In Claude Code, open `/mcp` and connect `giggle-director`. Claude Code discovers
 
 Open AI Director in the client and follow its Giggle OAuth prompt. Start by asking it to list available models and editable canvases without generating anything. For paid generation, select a canvas, review the estimate, confirm, then track the returned task ID.
 
-Both language editions use the same staging MCP at `https://director.ggltest.com/mcp`. Enable one edition per client.
+Both language editions use the same production MCP at `https://giggle.pro/mcp`. Enable one edition per client.

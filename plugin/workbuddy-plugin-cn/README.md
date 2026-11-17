@@ -15,7 +15,7 @@ zip -X /tmp/giggle-director-workbuddy.zip connector-meta.json mcp.json icon.svg 
 2. 确认 Giggle 后端开放 OAuth 发现、`/oauth/register`、`/oauth/authorize`、`/oauth/token` 和 `/mcp`，并已部署支持 WorkBuddy 回调的版本。测试端点需要能从 WorkBuddy 云端通过 HTTPS 访问。
 3. 审核通过并发布后，将 WorkBuddy 提供的安装页 HTTPS 地址填入 Web 的 `MCP_WORKBUDDY_PLUGIN_URL`。
 
-默认端点是测试环境的 `https://director.ggltest.com/mcp`。部署到其他环境时，同时替换 `mcp.json` 中的 `url` 和 `connector-meta.json` 中的 `server_url`。WorkBuddy 动态生成 OAuth 客户端信息，插件包无需填写客户端 ID、密钥或回调地址。
+默认端点是生产环境的 `https://giggle.pro/mcp`。部署到其他环境时，同时替换 `mcp.json` 中的 `url` 和 `connector-meta.json` 中的 `server_url`。WorkBuddy 动态生成 OAuth 客户端信息，插件包无需填写客户端 ID、密钥或回调地址。
 
 ## 验收
 

@@ -20,4 +20,4 @@ Claude Code 在 `/mcp` 中选择 `giggle-director` 并连接。客户端会发�
 
 在客户端打开 AI Director，按连接提示登录 Giggle。先让它「列出我可用的模型和可编辑画布，不生成内容」。付费生成先选画布和报价，确认后提交，通过原任务 ID 查询结果。
 
-MCP 地址为 `https://director.ggltest.com/mcp`。中英文版本共用该测试环境，同一客户端启用一个版本即可。
+MCP 地址为 `https://giggle.pro/mcp`。中英文版本共用该生产环境，同一客户端启用一个版本即可。

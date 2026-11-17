@@ -14,6 +14,6 @@
 
 ## 服务地址与授权
 
-默认的 MCP 地址是测试环境的 `https://director.ggltest.com/mcp`。使用其他环境时，修改本地插件副本中的 `mcp.json` 并重载 Cursor。
+默认的 MCP 地址是生产环境的 `https://giggle.pro/mcp`。使用其他环境时，修改本地插件副本中的 `mcp.json` 并重载 Cursor。
 
 Cursor 使用服务端公布的 OAuth 动态注册地址完成授权。部署方需要启用 MCP，确保 `/oauth/register` 可达，并运行支持 Cursor 回调的后端版本。

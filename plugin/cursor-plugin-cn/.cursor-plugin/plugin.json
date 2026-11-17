@@ -3,7 +3,7 @@
   "name": "giggle-ai-director-cn",
   "displayName": "Giggle AI Director 中文版",
   "description": "使用 Giggle 生成图片、视频和音频，并将结果保存到 AI Director 画布。",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "Giggle"
   },
