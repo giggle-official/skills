@@ -1,6 +1,6 @@
 {
   "name": "ai-director-en",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Create images, videos, and audio with Giggle and save the results to your AI Director canvas.",
   "author": {
     "name": "Giggle"

@@ -13,7 +13,7 @@
     "auth_type": "mcp_oauth",
     "data": {
       "mcp_oauth": {
-        "server_url": "https://director.ggltest.com/mcp",
+        "server_url": "https://giggle.pro/mcp",
         "scopes": "director:mcp"
       }
     }

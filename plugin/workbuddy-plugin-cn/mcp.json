@@ -2,7 +2,7 @@
   "mcpServers": {
     "giggle-director": {
       "type": "streamableHttp",
-      "url": "https://director.ggltest.com/mcp",
+      "url": "https://giggle.pro/mcp",
       "timeout": 30000
     }
   }
